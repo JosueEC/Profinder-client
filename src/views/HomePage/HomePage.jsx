@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import TopPro from '../../components/TopPro/TopPro';
-// import FeaturesGrid from '../../components/FeaturesGrid/FeaturesGrid'
+import FeaturesGrid from '../../components/FeaturesGrid/FeaturesGrid'
 import TestimonialCarrousel from '../../components/TestimonialCarrousel/TestimonialCarrousel';
 import HowItWorks from '../../components/HowItWorks/HowItWorks';
 import styles from './HomePage.module.css';
@@ -76,10 +76,15 @@ const HomePage = () => {
 
         <p>Esta sección es clave, ya que invita al usuario a usar la plataforma</p> */}
       </section>
+      <section>
 
+      </section>
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
+        <FeaturesGrid/>
+        
+         
         <TestimonialCarrousel/>
-        {/* <FeaturesGrid/> */}
+          
       </section>
     
 
