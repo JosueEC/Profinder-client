@@ -82,10 +82,10 @@ const TestimonialAvatar = ({ src, name, title }) => {
 export default function TestimonialCarrousel() {
   return (
     <Box bg={useColorModeValue()} h="100vh">
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}w="100%" maxW="100%" >
+      <Container  py={16} as={Stack} spacing={12}w="100%" maxW="100%" >
         <Stack spacing={0} align={'center'}>
-          <Heading>Our Clients Speak</Heading>
-          <Text>We have been working with clients around the world</Text>
+          <Heading>Nuestros usuarios opinan!</Heading>
+          <Text>Tenemos usuarios al rededor de todo el mundo</Text>
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
@@ -93,10 +93,11 @@ export default function TestimonialCarrousel() {
         >
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+              <TestimonialHeading>Un cambio significativo en mi vida!</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                Esta aplicacion ha podido contactarme con muchas soluciones a los conflictos de la vida cotideana.
+                
+                
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar

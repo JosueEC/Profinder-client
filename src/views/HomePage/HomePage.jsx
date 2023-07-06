@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
-
+import TopPro from '../../components/TopPro/TopPro';
+// import FeaturesGrid from '../../components/FeaturesGrid/FeaturesGrid'
 import TestimonialCarrousel from '../../components/TestimonialCarrousel/TestimonialCarrousel';
-import HowItWorksCarousel from '../../components/HowItWorksCarousel/HowItWorksCarousel';
+import HowItWorks from '../../components/HowItWorks/HowItWorks';
 import styles from './HomePage.module.css';
 import logoCarpintero from '../../assets/categoriesIcons/carpintero.png';
 import logoElectricista from '../../assets/categoriesIcons/electricista.png';
@@ -38,7 +39,7 @@ const HomePage = () => {
   return (
     <div>
       <section className={`${styles.howItWorks} ${styles.fullHeight}`}>
-        <HowItWorksCarousel/>
+        <HowItWorks/>
         {/* <div className={styles.howItWorksHeader}>
           
           <h2 className={styles.howItWorksTitle}>Cómo funciona?</h2>
@@ -78,7 +79,9 @@ const HomePage = () => {
 
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
         <TestimonialCarrousel/>
+        {/* <FeaturesGrid/> */}
       </section>
+    
 
       <section className={`${styles.Categories} ${styles.fullHeight}`}>
         <h2>CATEGORIAS</h2>
@@ -99,6 +102,7 @@ const HomePage = () => {
       </section>
 
       <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
+        <TopPro/>
         <h2>Render de profesionales recomendados a modo de introducción.</h2>
         <p>Card con nombre, breve descripción que el servicio ofrece</p>
       </section>
