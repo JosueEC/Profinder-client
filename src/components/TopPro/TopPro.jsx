@@ -69,42 +69,42 @@ import {
         <Container maxW={'5xl'} mt={12}>
           <Flex flexWrap="wrap" gridGap={6} justify="center">
             <Card
-              heading={'Heading'}
+              heading={'George Plumber'}
               icon={<Icon as={FcAssistant} w={10} h={10} />}
               description={
-                'Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+                'Plomeria en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinamica de trabajo'
               }
               href={'#'}
             />
             <Card
-              heading={'Heading'}
+              heading={'Marcus Truction'}
               icon={<Icon as={FcCollaboration} w={10} h={10} />}
               description={
-                'Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+                'Gran albañil destacado en la construccion de asadores y galerias. Ideal para refactorizacion de zonas'
               }
               href={'#'}
             />
             <Card
-              heading={'Heading'}
+              heading={'Meque Trefe'}
               icon={<Icon as={FcDonate} w={10} h={10} />}
               description={
-                'Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+                'Electricista matriculado de la ciudad de Zimbague. Super ordenado y atenido a la norma'
               }
               href={'#'}
             />
             <Card
-              heading={'Heading'}
+              heading={'Susana Oria'}
               icon={<Icon as={FcManager} w={10} h={10} />}
               description={
-                'Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+                'Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalacion'
               }
               href={'#'}
             />
             <Card
-              heading={'Heading'}
+              heading={'Marciana Pazos'}
               icon={<Icon as={FcAbout} w={10} h={10} />}
               description={
-                'Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+                'Gasista matriculada. Conexion de estufas y hornos '
               }
               href={'#'}
             />

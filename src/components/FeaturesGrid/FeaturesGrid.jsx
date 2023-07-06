@@ -15,23 +15,23 @@ import { CheckIcon } from '@chakra-ui/icons';
 const features = [
   {
     id: 1,
-    title: 'Feature 1',
-    text: 'Description of feature 1',
+    title: 'No salgas de tu casa',
+    text: 'Nuestro sitio permite ubicar los servicios que esten dentro de tu zona',
   },
   {
     id: 2,
-    title: 'Feature 2',
-    text: 'Description of feature 2',
+    title: 'Transaccion segura',
+    text: 'Somos garantía del servicio que ofrecen las personas del sitio',
   },
   {
     id: 3,
-    title: 'Feature 3',
-    text: 'Description of feature 3',
+    title: 'Busqueda focalizada',
+    text: 'Navega entre nuestras categorias para dar exactamente con lo que estas buscando',
   },
   {
     id: 4,
-    title: 'Feature 4',
-    text: 'Description of feature 4',
+    title: 'Tu opinion importa',
+    text: 'Nuestro sitio es una experiencia basada en el usuario. Por lo que tu interaccion es muy valiosa para nosotros',
   },
 ];
 
@@ -39,11 +39,9 @@ export default function GFeaturesGrid() {
   return (
     <Box p={4}>
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-        <Heading fontSize={'3xl'}>This is the headline</Heading>
+        <Heading fontSize={'3xl'}>Una solucion para cada necesidad. </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua.
+          Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
         </Text>
       </Stack>
 

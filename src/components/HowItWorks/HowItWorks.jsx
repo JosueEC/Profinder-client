@@ -43,13 +43,15 @@ export default function HowItWorks() {
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             
             <Button
+              as={Link}
+              to='/login'
               rounded={'full'}
               bg={'blue.400'}
               color={'white'}
               _hover={{
                 bg: 'blue.500',
               }}>
-              Súmate como cliente!
+              Registrate!
             </Button>
             
             <Button as={Link} to="/comofunciona" rounded={'full'}>Como funciona?</Button>
