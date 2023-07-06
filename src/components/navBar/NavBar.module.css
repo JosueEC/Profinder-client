@@ -1,0 +1,115 @@
+/*estilos para el contenedor general de la navbar*/
+nav {
+  display: flex;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/*estilos para el logo*/
+.logoContainer {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 30px;
+  
+}
+.comoFunciona {
+  font-size: 25px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+
+.logo {
+  font-size: 35px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/*estilos para como funciona*/
+.comoFuncionaContainer {
+  display: flex;
+  margin-top: 20px;
+  margin-left: auto;
+}
+
+/*estilos para el contenedor de Registrate*/
+.menuContainer {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+}
+
+/*estilos para el menu de registrate*/
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+
+.dropdownToggle {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: none;
+}
+
+.dropdownItem {
+  margin-bottom: 5px;
+}
+
+.dropdownMenu.visible {
+  display: block;
+
+}
+
+.loginContainer {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+
+}
+
+/*estilos para el login*/
+.loginLink {
+  text-decoration: none;
+  color: #333;
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 30px;
+
+}
+
+/*estilos para las letras del desplegable*/
+.liDropdown {
+  font-size: 24px;
+  list-style: none;
+  color: black;
+}
+
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .logoContainer {
+    margin-bottom: 10px;
+  }
+
+  .menuContainer {
+    margin-top: 10px;
+    justify-content: space-between;
+  }
+}
