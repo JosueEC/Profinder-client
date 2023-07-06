@@ -1,4 +1,7 @@
 import { NavLink } from 'react-router-dom';
+
+import TestimonialCarrousel from '../../components/TestimonialCarrousel/TestimonialCarrousel';
+import HowItWorksCarousel from '../../components/HowItWorksCarousel/HowItWorksCarousel';
 import styles from './HomePage.module.css';
 import logoCarpintero from '../../assets/categoriesIcons/carpintero.png';
 import logoElectricista from '../../assets/categoriesIcons/electricista.png';
@@ -35,7 +38,9 @@ const HomePage = () => {
   return (
     <div>
       <section className={`${styles.howItWorks} ${styles.fullHeight}`}>
-        <div className={styles.howItWorksHeader}>
+        <HowItWorksCarousel/>
+        {/* <div className={styles.howItWorksHeader}>
+          
           <h2 className={styles.howItWorksTitle}>Cómo funciona?</h2>
           <p className={styles.howItWorksText}>Este sitio es un nexo entre problemas y soluciones. Tienes una necesidad, contactas con quien pueda solucionar y listo! Problema resuelto!!</p>
           <p className={styles.howItWorksText}>Muchos profesionales nos eligen para postular sus servicios, al igual que muchos clientes satisfechos por el uso de nuestra plataforma.</p>
@@ -68,12 +73,11 @@ const HomePage = () => {
         <p>Introducción al sitio. Qué ofrece y para qué sirve</p>
         <br />
 
-        <p>Esta sección es clave, ya que invita al usuario a usar la plataforma</p>
+        <p>Esta sección es clave, ya que invita al usuario a usar la plataforma</p> */}
       </section>
 
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
-        <h2>OPINION CLIENTES</h2>
-        <p>Brevesopiniones sobre usuarios que recomiendan el sitio, cómo fue su experiencia en él, etc.</p>
+        <TestimonialCarrousel/>
       </section>
 
       <section className={`${styles.Categories} ${styles.fullHeight}`}>
@@ -85,7 +89,7 @@ const HomePage = () => {
               to={`#`} // Reemplaza la ruta con la ruta correcta ///category/${category}
               key={index}
               className={styles.categoryItem}
-              activeclassname={styles.active} // Agrega estilos para el enlace activo si lo deseas
+              activeClassName={styles.active} // Agrega estilos para el enlace activo si lo deseas
             >
               <img src={categoryLogos[index]} alt={category} className={styles.logo} />
               <p>{category}</p>
