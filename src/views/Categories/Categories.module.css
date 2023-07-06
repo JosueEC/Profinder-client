@@ -1,0 +1,39 @@
+.categoryContainer {
+    text-align: center;
+  }
+  
+  .categoryh2 {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+    margin-bottom: 20px; /* Ajusta el valor según sea necesario */
+  }
+  
+  .categoryDescription {
+    font-size: 16px; /* Ajusta el tamaño de fuente según sea necesario */
+    margin-bottom: 20px; /* Ajusta el valor según sea necesario */
+  }
+  
+  .categoryLabels {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  
+  .categoryLabels p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .categoryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .categoryItem p {
+    margin-top: 10px;
+  }

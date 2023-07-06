@@ -76,11 +76,11 @@ const HomePage = () => {
 
         <p>Esta sección es clave, ya que invita al usuario a usar la plataforma</p> */}
       </section>
-      <section>
-
+      <section className={`${styles.featuresGrid} ${styles.fullHeight}`}>
+        <FeaturesGrid/>
       </section>
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
-        <FeaturesGrid/>
+        
         
          
         <TestimonialCarrousel/>
@@ -94,7 +94,7 @@ const HomePage = () => {
         <div className={styles.categoryLabels}>
           {categoryNames.map((category, index) => (
             <NavLink
-              to={`#`} // Reemplaza la ruta con la ruta correcta ///category/${category}
+              to={`/categories`} // Reemplaza la ruta con la ruta correcta ///category/${category}
               key={index}
               className={styles.categoryItem}
               activeClassName={styles.active} // Agrega estilos para el enlace activo si lo deseas

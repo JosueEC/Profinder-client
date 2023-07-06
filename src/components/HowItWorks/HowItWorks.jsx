@@ -7,7 +7,7 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function HowItWorks() {
   return (
@@ -28,11 +28,11 @@ export default function HowItWorks() {
                 bg: 'blue.400',
                 zIndex: -1,
               }}>
-              Cómo funciona?
+              ProFinder
             </Text>
             <br />{' '}
             <Text color={'blue.400'} as={'span'}>
-              Super fácil!
+              Ante una necesidad hay una solucion!
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
@@ -41,7 +41,7 @@ export default function HowItWorks() {
             Muchos profesionales nos eligen para postular sus servicios, al igual que muchos clientes satisfechos por el uso de nuestra plataforma.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <NavLink to="#">
+            
             <Button
               rounded={'full'}
               bg={'blue.400'}
@@ -51,8 +51,8 @@ export default function HowItWorks() {
               }}>
               Súmate como cliente!
             </Button>
-            </NavLink>
-            <Button to="/comofunciona" rounded={'full'}>Como funciona?</Button>
+            
+            <Button as={Link} to="/comofunciona" rounded={'full'}>Como funciona?</Button>
           </Stack>
         </Stack>
       </Flex>
