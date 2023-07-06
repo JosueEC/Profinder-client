@@ -52,7 +52,7 @@ export default function HowItWorks() {
               Súmate como cliente!
             </Button>
             </NavLink>
-            <Button rounded={'full'}>Ofrece tus servicios!</Button>
+            <Button to="/comofunciona" rounded={'full'}>Como funciona?</Button>
           </Stack>
         </Stack>
       </Flex>
