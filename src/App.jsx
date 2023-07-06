@@ -4,6 +4,7 @@ import Footer from "./components/footer/Footer.jsx";
 import HomePage from "../src/views/HomePage/HomePage"
 import { Routes, Route } from "react-router-dom";
 import FromProvider from "./views/FromProvider/FromProvider";
+import HowDoesItWork from "../src/components/HowDoesItWork/HowDoesItWork"
 
 function App() {
   return (
