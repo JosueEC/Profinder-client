@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-export default function HowItWorksCarousel() {
+export default function HowItWorks() {
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
