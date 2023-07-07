@@ -6,11 +6,12 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Link,
+
   Flex,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import Styles from "./NavBar.module.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // Estado para controlar la visibilidad

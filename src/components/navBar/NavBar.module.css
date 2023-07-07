@@ -1,54 +1,52 @@
-estilos para el contenedor general de la navbar
+/* Estilos para el contenedor general de la navbar */
 nav {
   display: flex;
   background-color: #f2f2f2;
   padding: 10px;
 }
 
-/*estilos para el logo*/
+/* Estilos para el logo */
 .logoContainer {
   display: flex;
   margin-top: 10px;
   margin-left: 30px;
-  
 }
-.comoFunciona {
-  font-size: 25px;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
 
 .logo {
   font-size: 35px;
   margin-right: 10px;
   font-weight: bold;
   text-decoration: none;
+
 }
 
-/*estilos para como funciona*/
+/* Estilos para "¿Cómo funciona?" */
+.comoFunciona {
+  font-size: 25px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
 .comoFuncionaContainer {
   display: flex;
   margin-top: 20px;
   margin-left: auto;
 }
 
-/*estilos para el contenedor de Registrate*/
+/* Estilos para el contenedor de "Registrate" */
 .menuContainer {
   display: flex;
   align-items: center;
   margin-left: auto;
-
 }
 
-/*estilos para el menu de registrate*/
+/* Estilos para el menú de "Registrate" */
 .menu {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
 }
-
 
 .dropdownToggle {
   font-size: 25px;
@@ -71,45 +69,81 @@ nav {
 
 .dropdownMenu.visible {
   display: block;
-
 }
 
 .loginContainer {
   margin-left: auto;
   display: flex;
   align-items: center;
-
 }
 
-/*estilos para el login*/
+/* Estilos para el enlace de "Login" */
 .loginLink {
   text-decoration: none;
   color: #333;
   font-size: 25px;
   font-weight: bold;
   margin-right: 30px;
-
 }
 
-/*estilos para las letras del desplegable*/
+/* Estilos para las opciones del desplegable */
 .liDropdown {
   font-size: 24px;
   list-style: none;
   color: black;
 }
 
-
-@media screen and (max-width: 768px) {
-  .navbar {
+/* Estilos para pantallas con un ancho máximo de 768px */
+@media (max-width: 768px) {
+  .logoContainer {
     flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
   }
 
-  .logoContainer {
-    margin-bottom: 10px;
+  .comoFuncionaContainer {
+    display: none;
   }
 
   .menuContainer {
-    margin-top: 10px;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .liDropdown {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+
+}
+
+/* Estilos para pantallas con un ancho mínimo de 769px */
+@media (min-width: 769px) {
+  .logoContainer {
+    flex: 1;
+    text-align: left;
+  }
+
+  .comoFuncionaContainer {
+    flex: 1;
+    text-align: center;
+  }
+
+  .menuContainer {
+    flex: 1;
+    display: flex;  
+    justify-content: flex-end;
+  }
+
+  .liDropdown {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  .loginContainer {
+    flex: 1;
+    text-align: right;
   }
 }
