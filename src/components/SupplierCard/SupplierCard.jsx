@@ -5,10 +5,10 @@ import {
   Text,
   Stack,
   Button,
-  Badge,
   useColorModeValue
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons'
+import Tag from '../../singleComponents/Tag/Tag'
 
 export default function SocialProfileSimple() {
   return (
@@ -57,27 +57,9 @@ export default function SocialProfileSimple() {
           justify='center'
           direction='row'
           mt={6}>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('teal.300', 'gray.800')}
-            fontWeight='400'>
-            Electricista
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('teal.300', 'gray.800')}
-            fontWeight='400'>
-            Plomero
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('teal.300', 'gray.800')}
-            fontWeight='400'>
-            Pintor
-          </Badge>
+          <Tag textTag='Electricista' />
+          <Tag textTag='Plomero' />
+          <Tag textTag='Pintor' />
         </Stack>
 
         <Stack mt={8} direction='row' spacing={4}>
