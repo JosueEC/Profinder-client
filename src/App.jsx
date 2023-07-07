@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./components/navBar/Navbar.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage"
 import { Routes, Route } from "react-router-dom";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/login" element={<FromProvider />} />
       </Routes>
