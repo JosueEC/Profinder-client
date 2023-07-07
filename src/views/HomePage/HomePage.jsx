@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import TopPro from "../../components/TopPro/TopPro";
-import FeaturesGrid from "../../components/FeaturesGrid/FeaturesGrid";
-import TestimonialCarrousel from "../../components/TestimonialCarrousel/TestimonialCarrousel";
-import HowItWorks from "../../components/HowItWorks/HowItWorks";
+import TopPro from "../../components/Home/TopPro/TopPro";
+import FeaturesGrid from "../../components/Home/FeaturesGrid/FeaturesGrid";
+import TestimonialCarrousel from "../../components/Home/TestimonialCarrousel/TestimonialCarrousel";
+import HowItWorks from "../../components/Home/HowItWorks/HowItWorks";
 import styles from "./HomePage.module.css";
 import educacionIcon from "../../assets/categoriesIcons/educación.png";
 import saludIcon from "../../assets/categoriesIcons/salud.png";
@@ -10,7 +10,7 @@ import desarrolloSoftwareIcon from "../../assets/categoriesIcons/desarrollo-de-s
 import comercioIcon from "../../assets/categoriesIcons/comercio.png";
 import hobbieIcon from "../../assets/categoriesIcons/hobbie.png";
 import ingenieriaIcon from "../../assets/categoriesIcons/ingeniería.png";
-import Footer from "../../components/Footer/Footer";
+
 
 const HomePage = () => {
   const categories = [
