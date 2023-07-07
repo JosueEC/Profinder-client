@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "../../assets/categoriesIcons/logo.png";
 import {
   Box,
   IconButton,
@@ -6,124 +7,151 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-
   Flex,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import Styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  // Estado para controlar la visibilidad
+  // Estado para controlar la visibilidad del menú desplegable
   const [isOpen, setIsOpen] = useState(false);
 
-  // Función para alternar la visibilidad del desplegable
+  // Función para alternar la visibilidad del menú desplegable
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  // Función para manejar el clic en una opción
+  // Función para manejar el clic en una opción del menú desplegable
   const handleOptionClick = (option) => {
     console.log("Selected option:", option);
-    setIsOpen(false); // Cerrar el desplegable al seleccionar una opción
+    setIsOpen(false); // Cerrar el menú desplegable al seleccionar una opción
   };
 
   return (
     <nav>
+     
       <Flex
-        justifyContent={{ base: "center", md: "space-between" }}
-        alignItems="center"
+        justifyContent="space-between" 
+        alignItems="center" e
+        padding={4} 
+        bg="gray.200"
+        flexWrap="wrap" 
       >
-        <Box className={Styles.logoContainer}>
-          <Link to="/" className={Styles.logo} textDecor="none">
-            Logo
+        {/* Logo */}
+        <Box flex={{ base: "0 0 100%", md: "0 0 30%" }}>
+         
+          <Link to="/" textDecoration="none">
+            <Image src={logo} alt="Logo" width="70%" height="auto" />
           </Link>
         </Box>
 
+     
+        <Box display={{ base: "none", md: "block" }}>
+         
+          <Link
+            to="/comofunciona"
+            textDecoration="none"
+            ml={4}
+            fontSize="lg" 
+          >
+            ¿Cómo funciona?
+          </Link>
+        </Box>
+
+      
         <Box display={{ base: "block", md: "none" }}>
+  
           <Menu>
             <MenuButton
               as={IconButton}
               icon={<HamburgerIcon />}
               variant="ghost"
+              textDecoration="none"
             />
             <MenuList>
-              <MenuItem>
+            
+              <MenuItem fontSize="lg"> 
                 <Link to="/comofunciona" textDecoration="none">
                   ¿Cómo funciona?
                 </Link>
               </MenuItem>
-              <MenuItem onClick={() => handleOptionClick("cliente")}>
+
+              
+              <MenuItem
+                onClick={() => handleOptionClick("cliente")}
+                fontSize="lg" 
+              >
                 Soy Cliente
               </MenuItem>
+
+              
               <MenuItem
                 as="a"
                 href="/login"
                 onClick={() => handleOptionClick("profesional")}
+                fontSize="lg" 
               >
                 Soy Profesional
               </MenuItem>
             </MenuList>
           </Menu>
         </Box>
-      </Flex>
 
-      <Box
-        display={{ base: "none", md: "block" }}
-        className={Styles.comoFuncionaContainer}
-      >
-        <Link className={Styles.comoFunciona} to="/comofunciona">
-          ¿Cómo funciona?
-        </Link>
-      </Box>
-
-      <Box
-        display={{ base: "none", md: "block" }}
-        className={Styles.menuContainer}
-      >
-        <ul className={Styles.menu}>
-          <li>
-            <a
-              href="#"
-              onClick={toggleDropdown}
-              className={Styles.dropdownToggle}
-              textDecoration="none"
-            >
-              Registrate ▼
-            </a>
-            {isOpen && (
-              <ul>
-                <li className={Styles.liDropdown}>
-                  <a href="#" onClick={() => handleOptionClick("cliente")}>
-                    Soy Cliente
-                  </a>
-                </li>
-                <li className={Styles.liDropdown}>
-                  <a
-                    href="/login"
-                    onClick={() => handleOptionClick("profesional")}
-                  >
-                    Soy Profesional
-                  </a>
-                </li>
-              </ul>
-            )}
-          </li>
-        </ul>
-      </Box>
-
-      <Box
-        display={{ base: "none", md: "block" }}
-        className={Styles.loginContainer}
-      >
-        <Link
-          to="/selectlogin"
-          className={Styles.loginLink}
-          textDecoration="none"
+        
+        <Box
+          display={{ base: isOpen ? "block" : "none", md: "block" }} 
+          mt={{ base: 4, md: 0 }} 
         >
-          Login
-        </Link>
-      </Box>
+          <ul>
+            <li>
+              <a href="#" onClick={toggleDropdown} textDecoration="none">
+                Registrate ▼
+              </a>
+              {isOpen && (
+                <ul>
+                  {/* Opción: Soy Cliente */}
+                  <li>
+                    <a
+                      href="#"
+                      onClick={() => handleOptionClick("cliente")}
+                      textDecoration="none"
+                      fontSize="lg" 
+                    >
+                      Soy Cliente
+                    </a>
+                  </li>
+
+                 
+                  <li>
+                    <a
+                      href="/login"
+                      onClick={() => handleOptionClick("profesional")}
+                      textDecoration="none"
+                      fontSize="lg" 
+                    >
+                      Soy Profesional
+                    </a>
+                  </li>
+                </ul>
+              )}
+            </li>
+          </ul>
+        </Box>
+
+        {/* Elemento: Login */}
+        <Box display={{ base: "none", md: "block" }}>
+          
+          <Link
+            to="/selectlogin"
+            textDecoration="none"
+            ml={4}
+            fontSize="lg" 
+          >
+            Login
+          </Link>
+        </Box>
+      </Flex>
     </nav>
   );
 };
