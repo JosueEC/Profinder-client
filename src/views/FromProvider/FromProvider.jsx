@@ -23,6 +23,8 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
+import Paginado from "../../components/Paginator/Paginator";
+
 function FormProvider() {
   const {
     register,
@@ -50,6 +52,7 @@ function FormProvider() {
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
+      width={"100%"}
     >
       <Box
         rounded={"lg"}
@@ -193,6 +196,9 @@ function FormProvider() {
               Sign up
             </Button>
           </form>
+        </Stack>
+        <Stack>
+          <Paginado/>
         </Stack>
       </Box>
     </Flex>

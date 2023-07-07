@@ -1,11 +1,11 @@
 import "./App.css";
 import Navbar from "./components/navBar/Navbar.jsx";
-import Footer from "./components/footer/Footer.jsx";
 import Categories from "./views/Categories/Categories";
-import HomePage from "../src/views/HomePage/HomePage"
+import HomePage from "../src/views/HomePage/HomePage";
 import { Routes, Route } from "react-router-dom";
 import FromProvider from "./views/FromProvider/FromProvider";
-import HowDoesItWork from "../src/components/HowDoesItWork/HowDoesItWork"
+import HowDoesItWork from "../src/components/HowDoesItWork/HowDoesItWork";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
