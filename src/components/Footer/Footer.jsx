@@ -3,12 +3,12 @@ import {
   Container,
   Stack,
   SimpleGrid,
-  Link,
+ 
   useColorModeValue,
   Heading,
   Text,
 } from "@chakra-ui/react";
-
+import { Link } from "react-router-dom";
 const footerStyles = {
   minH: "100vh",
   left: 0,
@@ -35,20 +35,20 @@ function Footer() {
             <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.500">
               Información
             </Heading>
-            <Link href={"#"}>Sobre nosotros</Link>
-            <Link href={"#"}>Contáctanos</Link>
-            <Link href={"#"}>Cómo funciona</Link>
-            <Link href={"#"}>Home</Link>
+            <Link to={"./"}>Sobre nosotros</Link>
+            <Link to={"./"}>Contáctanos</Link>
+            <Link to={"./comofunciona"}>Cómo funciona</Link>
+            <Link to={"./"}>Home</Link>
           </Stack>
 
           <Stack align={"center"} justify="flex-end">
             <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.500">
               Ingresos
             </Heading>
-            <Link href={"#"}>Registro usuario</Link>
-            <Link href={"#"}>Registro Profesional</Link>
-            <Link href={"#"}>Inicia sesión</Link>
-            <Link href={"#"}>Categorías</Link>
+            <Link to={"./"}>Registro usuario</Link>
+            <Link to={"./login"}>Registro Profesional</Link>
+            <Link to={"./"}>Inicia sesión</Link>
+            <Link to={"./categories"}>Categorías</Link>
           </Stack>
         </SimpleGrid>
         <Stack align={"center"} mt={8}>
