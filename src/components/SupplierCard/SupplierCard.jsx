@@ -16,7 +16,7 @@ export default function SocialProfileSimple() {
         maxW='320px'
         w='full'
         colorMode
-        bg={useColorModeValue('gray.900', 'gray.900')}
+        bg={useColorModeValue('blackAlpha.500', 'gray.900')}
         boxShadow='2xl'
         rounded='lg'
         p={6}
