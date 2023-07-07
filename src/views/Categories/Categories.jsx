@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Categories.module.css';
+import SupplierCardsContainer from '../../components/SupplierCardsContainer/SupplierCardsContainer';
+import { Heading } from '@chakra-ui/layout';
 
 
 const Categories = () => {
@@ -112,7 +114,12 @@ const Categories = () => {
  
    return (
      <div className={styles.categoryContainer}>
-       <h2 className={styles.categoryh2}>CATEGORIAS</h2>
+      <Heading
+        className={styles.categoryh2}
+        fontSize='4xl'
+        bgGradient='linear(to-l, teal.300, green.400)' bgClip='text'>
+        CATEGORIAS
+      </Heading>
        <p className={styles.categoryDescription}>
          Aquí se renderizarán las categorías y sus filtros y ordenamientos. Habrá posibilidad de filtrar por categoría, por profesión, por género, por puntuación.
        </p>
@@ -126,11 +133,11 @@ const Categories = () => {
                  //alt={category.name}
                  //className={styles.logo}
                />
-               <p>{category.name}</p>
+               <p className={styles.categoryLabel}>{category.name}</p>
              </div>
  
              {/* Menú desplegable de ocupaciones */}
-             <select value={selectedOccupation} onChange={handleOccupationChange}>
+             <select value={selectedOccupation} onChange={handleOccupationChange} className={styles.categorySelect}>
                <option value="">Seleccione una ocupación</option>
                {category.Ocupations.map((occupation) => (
                  <option key={occupation.id} value={occupation.name}>
@@ -141,6 +148,7 @@ const Categories = () => {
            </div>
          ))}
        </div>
+       <SupplierCardsContainer />
      </div>
    );
  };
