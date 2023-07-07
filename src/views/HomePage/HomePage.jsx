@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import { useEffect } from 'react';
+ import { useDispatch } from 'react-redux';
+ import get_all from '../../services/redux/actions/actions'
 import TopPro from "../../components/Home/TopPro/TopPro";
 import FeaturesGrid from "../../components/Home/FeaturesGrid/FeaturesGrid";
 import TestimonialCarrousel from "../../components/Home/TestimonialCarrousel/TestimonialCarrousel";
@@ -10,9 +13,17 @@ import desarrolloSoftwareIcon from "../../assets/categoriesIcons/desarrollo-de-s
 import comercioIcon from "../../assets/categoriesIcons/comercio.png";
 import hobbieIcon from "../../assets/categoriesIcons/hobbie.png";
 import ingenieriaIcon from "../../assets/categoriesIcons/ingeniería.png";
-
-
+import { useSelector } from 'react-redux';
 const HomePage = () => {
+ const profesiones = useSelector((state) => state.profesiones);
+  console.log(profesiones);
+   const dispatch = useDispatch();
+   useEffect(() => {
+    dispatch(get_all());
+   }, [dispatch]);
+  
+  
+ // console.log(data);
   const categories = [
     {
       id: 1,
