@@ -1,7 +1,8 @@
-//import { GET_ALL, GET_ALL_FAILURE } from "../actionsTypes/actionsType";
+import { GET_ALL_SUPPLIERS } from "../actionsTypes/actionsType";
 
 const initialState = {
   //este estado es solo una prueba para iniciar redux, puede modificarse cuando se desee los amu <3
+  suppliers: [],
   profesiones: [
     { id: 1, name: "Programador" },
     { id: 2, name: "Diseñador web" },
@@ -516,6 +517,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_SUPPLIERS:
+      return {
+        ...state,
+        suppliers: action.payload
+      }
     default:
       return { ...state };
   }

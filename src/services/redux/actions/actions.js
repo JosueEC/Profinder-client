@@ -1,7 +1,7 @@
 //aca vienen todas las actions
-
+import { API } from '../../../utils/API/constants'
 import axios from 'axios'
-import { GET_ALL, GET_ALL_FAILURE } from '../actionsTypes/actionsType'
+import { GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS } from '../actionsTypes/actionsType'
 
 const get_all = () => {
     return async (dispatch) => {
@@ -21,8 +21,26 @@ const get_all = () => {
       }
     };
   };
+
+//! Action para obtener a todos lo Proveedores/Profesionales
+const getAllSuppliers = () => {
+  const URL = API.DOMAIN
+
+  return function (dispatch) {
+    fetch(URL)
+      .then(response => response.json())
+      .then(results => {
+        console.info('fetching-all-suppliers')
+        dispatch({ type: GET_ALL_SUPPLIERS, payload: results.data[2].profesionales })
+      })
+      .catch(error => console.error(error.message))
+  }
+}
   
-  export default get_all;
+  export {
+    get_all,
+    getAllSuppliers
+  };
   
   
   

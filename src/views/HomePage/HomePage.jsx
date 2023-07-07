@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useEffect } from 'react';
- import { useDispatch } from 'react-redux';
- import get_all from '../../services/redux/actions/actions'
+import { useDispatch } from 'react-redux';
+import { get_all } from '../../services/redux/actions/actions'
 import TopPro from "../../components/Home/TopPro/TopPro";
 import FeaturesGrid from "../../components/Home/FeaturesGrid/FeaturesGrid";
 import TestimonialCarrousel from "../../components/Home/TestimonialCarrousel/TestimonialCarrousel";
