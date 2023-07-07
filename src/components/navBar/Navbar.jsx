@@ -117,7 +117,7 @@ const Navbar = () => {
         className={Styles.loginContainer}
       >
         <Link
-          to="/selectlogin"
+          to="/userLogin"
           className={Styles.loginLink}
           textDecoration="none"
         >
