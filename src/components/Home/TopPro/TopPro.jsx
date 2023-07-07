@@ -74,7 +74,7 @@ import {
               description={
                 'Plomeria en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinamica de trabajo'
               }
-              href={'#'}
+              href={'/detail'}
             />
             <Card
               heading={'Marcus Truction'}
@@ -82,7 +82,7 @@ import {
               description={
                 'Gran albañil destacado en la construccion de asadores y galerias. Ideal para refactorizacion de zonas'
               }
-              href={'#'}
+              href={'/detail'}
             />
             <Card
               heading={'Meque Trefe'}
@@ -90,7 +90,7 @@ import {
               description={
                 'Electricista matriculado de la ciudad de Zimbague. Super ordenado y atenido a la norma'
               }
-              href={'#'}
+              href={'/detail'}
             />
             <Card
               heading={'Susana Oria'}
@@ -98,7 +98,7 @@ import {
               description={
                 'Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalacion'
               }
-              href={'#'}
+              href={'/detail'}
             />
             <Card
               heading={'Marciana Pazos'}
@@ -106,7 +106,7 @@ import {
               description={
                 'Gasista matriculada. Conexion de estufas y hornos '
               }
-              href={'#'}
+              href={'/detail'}
             />
           </Flex>
         </Container>

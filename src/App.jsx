@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import FromProvider from "./views/FromProvider/FromProvider";
 import HowDoesItWork from "../src/components/HowDoesItWork/HowDoesItWork";
 import Footer from "./components/Footer/Footer";
+import DetailSupplier from "./views/DetailsSupplier/DetailsSupplier";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/login" element={<FromProvider />} />
+        <Route path="/detail" element={<DetailSupplier/>}/>
       </Routes>
       <Footer />
     </div>
