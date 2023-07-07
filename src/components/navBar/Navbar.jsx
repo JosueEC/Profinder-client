@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import Styles from "./Navbar.module.css";
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Link,
+  Flex,
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import Styles from "./NavBar.module.css";
 
 const Navbar = () => {
-  // Estado para controlar la visibilidad del desplegable
+  // Estado para controlar la visibilidad
   const [isOpen, setIsOpen] = useState(false);
 
   // Función para alternar la visibilidad del desplegable
@@ -19,27 +29,64 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className={Styles.logoContainer}>
-        <Link to="/" className={Styles.logo}>
-          Logo
-        </Link>
-      </div>
-      {/* <span className={Styles.textContainer}>Tu Solucion a un Click</span> */}
+      <Flex
+        justifyContent={{ base: "center", md: "space-between" }}
+        alignItems="center"
+      >
+        <Box className={Styles.logoContainer}>
+          <Link to="/" className={Styles.logo} textDecor="none">
+            Logo
+          </Link>
+        </Box>
 
-      <div className={Styles.comoFuncionaContainer}>
+        <Box display={{ base: "block", md: "none" }}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              icon={<HamburgerIcon />}
+              variant="ghost"
+            />
+            <MenuList>
+              <MenuItem>
+                <Link to="/comofunciona" textDecoration="none">
+                  ¿Cómo funciona?
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={() => handleOptionClick("cliente")}>
+                Soy Cliente
+              </MenuItem>
+              <MenuItem
+                as="a"
+                href="/login"
+                onClick={() => handleOptionClick("profesional")}
+              >
+                Soy Profesional
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+      </Flex>
+
+      <Box
+        display={{ base: "none", md: "block" }}
+        className={Styles.comoFuncionaContainer}
+      >
         <Link className={Styles.comoFunciona} to="/comofunciona">
-          {" "}
-          ¿ Cómo funciona ?
+          ¿Cómo funciona?
         </Link>
-      </div>
+      </Box>
 
-      <div className={Styles.menuContainer}>
+      <Box
+        display={{ base: "none", md: "block" }}
+        className={Styles.menuContainer}
+      >
         <ul className={Styles.menu}>
           <li>
             <a
               href="#"
               onClick={toggleDropdown}
               className={Styles.dropdownToggle}
+              textDecoration="none"
             >
               Registrate ▼
             </a>
@@ -51,7 +98,10 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li className={Styles.liDropdown}>
-                  <a href="#" onClick={() => handleOptionClick("profesional")}>
+                  <a
+                    href="/login"
+                    onClick={() => handleOptionClick("profesional")}
+                  >
                     Soy Profesional
                   </a>
                 </li>
@@ -59,13 +109,20 @@ const Navbar = () => {
             )}
           </li>
         </ul>
-      </div>
+      </Box>
 
-      <div className={Styles.loginContainer}>
-        <Link to="/selectlogin" className={Styles.loginLink}>
+      <Box
+        display={{ base: "none", md: "block" }}
+        className={Styles.loginContainer}
+      >
+        <Link
+          to="/selectlogin"
+          className={Styles.loginLink}
+          textDecoration="none"
+        >
           Login
         </Link>
-      </div>
+      </Box>
     </nav>
   );
 };
