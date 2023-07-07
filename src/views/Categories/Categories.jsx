@@ -1,15 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Categories.module.css';
-import { useLocation } from 'react-router-dom';
 
-// Importa las imágenes de ocupación
-import educacionIcon from '../../assets/categoriesIcons/educación.png';
-import saludIcon from '../../assets/categoriesIcons/salud.png';
-import desarrolloSoftwareIcon from '../../assets/categoriesIcons/desarrollo-de-software.png';
-import comercioIcon from '../../assets/categoriesIcons/comercio.png';
-import hobbieIcon from '../../assets/categoriesIcons/hobbie.png';
-import ingenieriaIcon from '../../assets/categoriesIcons/ingeniería.png';
-// ... importa otras imágenes de ocupación según sea necesario ...
 
 const Categories = () => {
   const categories = [
@@ -111,103 +102,47 @@ const Categories = () => {
     }
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const location = useLocation();
+   // Estado para almacenar la ocupación seleccionada
+   const [selectedOccupation, setSelectedOccupation] = useState('');
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const handleCategoryLinkClick = (categoryId) => {
-    // Actualiza la ubicación actual sin redirigir
-    const newLocation = {
-      ...location,
-      pathname: `/category/${categoryId}`,
-    };
-    window.history.pushState(null, '', newLocation.pathname);
-  };
-
-  return (
-    <div className={styles.categoryContainer}>
-      <h2 className={styles.categoryh2}>CATEGORIAS</h2>
-      <p className={styles.categoryDescription}>
-        Aquí se renderizarán las categorías y sus filtros y ordenamientos. Habrá posibilidad de filtrar por categoría, por profesión, por género, por puntuación.
-      </p>
-
-      <div className={styles.categoryLabels}>
-        {categories.map((category) => (
-          <div key={category.id} className={styles.categoryItem}>
-            <div
-              className={styles.categoryItem}
-              onClick={() => handleCategoryClick(category)}
-            >
-              {category.name === 'Educación' && (
-                <img
-                  src={educacionIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {category.name === 'Salud' && (
-                <img
-                  src={saludIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {category.name === 'Desarrollo de software' && (
-                <img
-                  src={desarrolloSoftwareIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {category.name === 'Comercio' && (
-                <img
-                  src={comercioIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {category.name === 'Hobbie' && (
-                <img
-                  src={hobbieIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {category.name === 'Ingeniería' && (
-                <img
-                  src={ingenieriaIcon}
-                  alt={category.name}
-                  className={styles.logo}
-                />
-              )}
-              {/* ... renderiza otras imágenes de ocupación según sea necesario ... */}
-
-              <p>{category.name}</p>
-            </div>
-
-            {selectedCategory && selectedCategory.id === category.id && (
-              <div className={styles.categoryBox}>
-                <h3>Ocupaciones:</h3>
-                <div className={styles.categoryLabels}>
-                  {category.Ocupations.map((occupation) => (
-                    <div key={occupation.id} className="occupationCard">
-                      {occupation.name}
-                    </div>
-                  ))}
-                </div>
-                <button onClick={() => handleCategoryLinkClick(category.id)}>
-                  Ver más
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Categories;
+   // Manejador de cambio de selección de ocupación
+   const handleOccupationChange = (event) => {
+     setSelectedOccupation(event.target.value);
+   };
+ 
+   return (
+     <div className={styles.categoryContainer}>
+       <h2 className={styles.categoryh2}>CATEGORIAS</h2>
+       <p className={styles.categoryDescription}>
+         Aquí se renderizarán las categorías y sus filtros y ordenamientos. Habrá posibilidad de filtrar por categoría, por profesión, por género, por puntuación.
+       </p>
+ 
+       <div className={styles.categoryLabels}>
+         {categories.map((category) => (
+           <div key={category.id}>
+             <div className={styles.categoryItem}>
+               <img
+                 //src={`../../assets/categoriesIcons/${category.name.toLowerCase()}.png`}
+                 //alt={category.name}
+                 //className={styles.logo}
+               />
+               <p>{category.name}</p>
+             </div>
+ 
+             {/* Menú desplegable de ocupaciones */}
+             <select value={selectedOccupation} onChange={handleOccupationChange}>
+               <option value="">Seleccione una ocupación</option>
+               {category.Ocupations.map((occupation) => (
+                 <option key={occupation.id} value={occupation.name}>
+                   {occupation.name}
+                 </option>
+               ))}
+             </select>
+           </div>
+         ))}
+       </div>
+     </div>
+   );
+ };
+ 
+ export default Categories;
