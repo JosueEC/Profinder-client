@@ -43,7 +43,6 @@ export default function SocialProfileSimple() {
           <StarIcon color='yellow'/>
           <StarIcon color='white'/>
           <StarIcon color='white'/>
-
         </Stack>
         <Text
           textAlign='center'
