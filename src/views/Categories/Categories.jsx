@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Categories.module.css';
+import SupplierCardsContainer from '../../components/SupplierCardsContainer/SupplierCardsContainer';
 
 
 const Categories = () => {
@@ -141,6 +142,7 @@ const Categories = () => {
            </div>
          ))}
        </div>
+       <SupplierCardsContainer />
      </div>
    );
  };
