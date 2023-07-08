@@ -24,7 +24,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Paginator from "../../components/Paginator/Paginator";
+
 
 function FormProvider() {
   const {
@@ -39,6 +39,8 @@ function FormProvider() {
       description: "Agregue una descripcion",
       genre: "",
       years_exp: "",
+      phone:"",
+      ubicacion:"",
     },
   });
 
@@ -91,7 +93,26 @@ function FormProvider() {
               />
               {errors.email && <p>{errors.email.message}</p>}
             </FormControl>
-
+            <FormControl>
+              <FormLabel>Telefono</FormLabel>
+              <Input
+                type="number"
+                {...register("phone", {
+                  required: "El campo telefono es requerido",
+                })}
+              />
+              {errors.phone && <p>{errors.phone.message}</p>}
+            </FormControl>
+            <FormControl>
+              <FormLabel>Tu ubicacion</FormLabel>
+              <Input
+                type="text"
+                {...register("ubicacion", {
+                  required: "El campo ubicacion es requerido",
+                })}
+              />
+              {errors.phone && <p>{errors.phone.message}</p>}
+            </FormControl>
             <FormControl>
               <FormLabel>Password</FormLabel>
 
@@ -206,7 +227,7 @@ function FormProvider() {
               </Button>
             </FormControl>
           </form>
-          <Paginator/>
+       
         </Stack>
       </Box>
     </Flex>
