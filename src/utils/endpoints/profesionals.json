@@ -1,5 +1,4 @@
 // json para crear un profesional
-
 const json = {
   "name": "Elisa Blanco",
   "email": "lys1a@example.com",
@@ -8,11 +7,10 @@ const json = {
   "years_exp": "5",
   "description": "Soy una profesional con experiencia en mi campo.",
 	"categories": ["Hobbie", "Desarrollo de software"],
-	"ocupations": ["Niñero/a","Programador back-end mongodb","Programador front-end angular tailwindcss","Peluquerias"]
+	"ocupations": ["Niñero/a","Programador","Peluquero"]
 }
 
 // Estructura del get all profesionals
-
 const profesionals = [
 	{
 		"id": 78,
@@ -470,7 +468,6 @@ const profesionals = [
 ];
 
 // Estrucutra del get by id (para el detail) tienen el id para el map (React suele dar problemas si al realizar un map tiene una key con el id)
-
 const profesionalId = [
 	{
 		"id": 79,

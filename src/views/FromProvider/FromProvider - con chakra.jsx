@@ -1,6 +1,4 @@
 import { useForm } from "react-hook-form";
-import React from "react";
-import { useSelector } from "react-redux";
 
 import {
   Flex,
@@ -24,7 +22,6 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Paginator from "../../components/Paginator/Paginator";
 
 function FormProvider() {
   const {
@@ -33,18 +30,15 @@ function FormProvider() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      image: "", //chequear
+      name: "Nombre y apellido",
+      email: "email",
+      image: "Imagen Url", //chequear
       description: "Agregue una descripcion",
       genre: "",
       years_exp: "",
+      // categories: [],
     },
   });
-
-  const categorias = useSelector((state) => state.categorias);
-  const profesiones = useSelector((state) => state.profesiones);
-
   const [value, setValue] = useState("1");
   const onSubmit = (data) => {
     console.log(data);
@@ -56,13 +50,13 @@ function FormProvider() {
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
-      width={"100%"}
     >
       <Box
         rounded={"lg"}
         bg={useColorModeValue("white", "gray.700")}
         boxShadow={"lg"}
         p={8}
+       
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -152,14 +146,12 @@ function FormProvider() {
               <FormLabel>Categorías</FormLabel>
               <Select
                 placeholder="Select option"
-                defaultValue={1}
+                selectedValues={[1, 2]}
                 {...register("categories")}
               >
-                {categorias?.map((c) => (
-                  <option value={c.id} key={c.id}>
-                    {c.nombre}
-                  </option>
-                ))}
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
               </Select>
             </FormControl>
             <FormControl>
@@ -171,11 +163,9 @@ function FormProvider() {
                   validate: (value) => value.length > 0,
                 })}
               >
-                {profesiones?.map((c) => (
-                  <option value={c.name} key={c.id}>
-                    {c.name}
-                  </option>
-                ))}
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
               </Select>
             </FormControl>
 
@@ -190,23 +180,19 @@ function FormProvider() {
                 })}
               />
             </FormControl>
-            <FormControl>
-              <FormLabel></FormLabel>
-              <Button
-                type="submit"
-                loadingText="Submitting"
-                size="lg"
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Registrarme
-              </Button>
-            </FormControl>
+            <Button
+              type="submit"
+              loadingText="Submitting"
+              size="lg"
+              bg={"blue.400"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}
+            >
+              Sign up
+            </Button>
           </form>
-          <Paginator/>
         </Stack>
       </Box>
     </Flex>
