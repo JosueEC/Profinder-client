@@ -22,6 +22,7 @@ import ingenieriaIcon from "../../assets/categoriesIcons/ingeniería.png";
 const HomePage = () => {
  const profesiones = useSelector((state) => state.profesiones);
  const categories = useSelector(state => state.categories);
+ console.log(categories);
  const dispatch = useDispatch();
  
   useEffect(() => {
@@ -96,7 +97,7 @@ const HomePage = () => {
       
 
       <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
-        <TopPro />
+        <TopPro />gi
         <h2>Render de profesionales recomendados a modo de introducción.</h2>
         <p>Card con nombre, breve descripción que el servicio ofrece</p>
       </section>
