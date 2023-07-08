@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
-import React from "react";
-import { useSelector } from "react-redux";
+import React ,{useEffect}from "react";
+import { useSelector , useDispatch} from "react-redux";
 
+// Agegar importaciones
+// import { connect } from "react-redux"
+// import updateAction from "./actions"
 import {
   Flex,
   Box,
@@ -24,9 +27,9 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
-
+// agregar props
 function FormProvider() {
+ 
   const {
     register,
     formState: { errors },
@@ -36,20 +39,21 @@ function FormProvider() {
       name: "",
       email: "",
       image: "", //chequear
-      description: "Agregue una descripcion",
       genre: "",
       years_exp: "",
-      phone:"",
-      ubicacion:"",
+      description: "Agregue una descripcion",
+      ubicacion: "",
+      phone: "",
     },
   });
 
-  const categorias = useSelector((state) => state.categorias);
+  const categorias = useSelector((state) => state.categories);
   const profesiones = useSelector((state) => state.profesiones);
 
   const [value, setValue] = useState("1");
   const onSubmit = (data) => {
     console.log(data);
+    // props.postProveedor(data)
   };
 
   return (
@@ -138,7 +142,7 @@ function FormProvider() {
                     {...register("genre", {
                       required: "Seleccione una opción de género",
                     })}
-                    value="Femenino"
+                    value="female"
                   >
                     Femenino
                   </Radio>
@@ -146,7 +150,7 @@ function FormProvider() {
                     {...register("genre", {
                       required: "Seleccione una opción de género",
                     })}
-                    value="Masculino"
+                    value="male"
                   >
                     Masculino
                   </Radio>
@@ -177,7 +181,7 @@ function FormProvider() {
                 {...register("categories")}
               >
                 {categorias?.map((c) => (
-                  <option value={c.id} key={c.id}>
+                  <option value={c.idcategoria} key={c.idcategoria}>
                     {c.nombre}
                   </option>
                 ))}
@@ -227,7 +231,6 @@ function FormProvider() {
               </Button>
             </FormControl>
           </form>
-       
         </Stack>
       </Box>
     </Flex>
@@ -235,3 +238,38 @@ function FormProvider() {
 }
 
 export default FormProvider;
+
+// //Agregar conectar con redux
+// connect(
+//   ({ name,email,image,genre, years_exp,description,profesiones,categorias ,ubicacion,phone }),
+//   postProveedor
+// )(FormProvider)
+
+// //agregar en actions
+
+// export const postProveedor = (info) => {
+//   return async function (dispatch) {
+//     try {
+//       // Verificación
+//       if (
+//         info.name === "" ||
+//         info.email === "" ||
+//         info.image === "" ||
+//         info.genre === "" ||
+//         info.years_exp === "" ||
+//         info.description === "" ||
+//         info.ubicacion === "" ||
+//         info.phone === "" ||
+//         info.profesiones === "" ||
+//         info.categorias === 0
+//       ) {
+//         throw new Error("Faltan datos");
+//       }
+
+//       const response = await axios.post("link a base de datos", info);
+//       alert("Corredor creado");
+//     } catch (error) {
+//       alert(error.message);
+//     }
+//   };
+// };

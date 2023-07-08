@@ -1,5 +1,7 @@
 import { useState } from "react";
-import SearchBar from '../SearchBar/SearchBar'
+import SearchBar from "../SearchBar/SearchBar";
+import FilterByCategoria from "../Filteres/FilterByCategories";
+
 import logo from "../../assets/categoriesIcons/logo.png";
 import {
   Box,
@@ -14,9 +16,7 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
-
 const Navbar = () => {
-
   // Estado para controlar la visibilidad del menú desplegable
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +38,12 @@ const Navbar = () => {
         alignItems="center"
         padding={4}
         bg="gray.200"
-        flexWrap="wrap"
+        as="div"
+        textTransform="uppercase"
+        fontWeight="bold"
+        fontSize="2xl"
+        fontFamily="body"
+        color="gray.700"
       >
         {/* Logo */}
         <Box flex={{ base: "0 0 100%", md: "0 0 30%" }}>
@@ -48,16 +53,12 @@ const Navbar = () => {
         </Box>
 
         <Box display={{ base: "none", md: "block" }}>
-          <Link
-            to="/comofunciona"
-            textDecoration="none"
-            ml={4}
-            fontSize="lg"
-          >
+          <Link to="/comofunciona" textDecoration="none" ml={4} fontSize="lg">
             ¿Cómo funciona?
           </Link>
         </Box>
-        <SearchBar/>
+        <SearchBar />
+        <FilterByCategoria />
 
         <Box display={{ base: "block", md: "none" }}>
           <Menu>
@@ -74,7 +75,10 @@ const Navbar = () => {
                 </Link>
               </MenuItem>
 
-              <MenuItem onClick={() => handleOptionClick("cliente")} fontSize="lg">
+              <MenuItem
+                onClick={() => handleOptionClick("cliente")}
+                fontSize="lg"
+              >
                 Soy Cliente
               </MenuItem>
 
