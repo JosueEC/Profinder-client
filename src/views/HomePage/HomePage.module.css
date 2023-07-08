@@ -151,9 +151,8 @@ body, html {
   }
   
   .divider {
-    height: 10px;
-    color: blue;
+    height: 2.5px;
     background-color: white;
-    width: 50%;
-    margin: 0 auto;
+    width: 40%;
+    margin: 0;
   }
