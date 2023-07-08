@@ -10,8 +10,9 @@ import {
 } from '@chakra-ui/react'
 import { AtSignIcon, CheckCircleIcon } from '@chakra-ui/icons'
 import Tag from '../../singleComponents/Tag/Tag'
+import { Link } from 'react-router-dom'
 
-export default function SocialProfileSimple ({ name, email, image, profesiones, description, ubicacion }) {
+export default function SocialProfileSimple ({ id, name, email, image, profesiones, description, ubicacion }) {
   return (
     <Box
       maxW='350px'
@@ -76,7 +77,8 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
         }
       </Stack>
 
-      <Stack mt={8} direction='row' spacing={4}>
+      <Stack mt={8} direction='row' spacing={4} align='center' justify='center'>
+      <Link to={`/detail/${id}`}>
         <Button
           flex={1}
           fontSize='sm'
@@ -85,7 +87,8 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
         >
           Ver detalles
         </Button>
-        <Button
+        </Link>
+        {/* <Button
           flex={1}
           fontSize='sm'
           rounded='lg'
@@ -96,7 +99,7 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
           }}
         >
           Enviar mensaje
-        </Button>
+        </Button> */}
       </Stack>
     </Box>
   )
