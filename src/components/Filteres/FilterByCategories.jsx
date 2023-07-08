@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, filterByCategory } from "../../services/redux/actions/actions";
+import { getAllCategories, filterByCategory } from "../../services/redux/actions/actions";
 import { Select, Box, Text } from "@chakra-ui/react";
 
 const FilterByCategoria = () => {
   const categories = useSelector((state) => state.categories);
+  console.log( categories);
   const filteredCategories = useSelector((state) => state.filteredCategories);
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -12,7 +13,7 @@ const FilterByCategoria = () => {
   const [filteredProfessions, setFilteredProfessions] = useState([]);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getAllCategories());
   }, [dispatch]);
 
   const handleCategoryChange = (event) => {
