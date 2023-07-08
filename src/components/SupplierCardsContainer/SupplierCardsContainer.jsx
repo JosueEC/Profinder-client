@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Flex, Stack } from '@chakra-ui/layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllSuppliers } from '../../services/redux/actions/actions';
 import { useEffect, useState } from 'react';
 import SupplierCard from '../../components/SupplierCard/SupplierCard';
 import Paginator from '../Paginator/Paginator';
+import FilterByRating from '../Filteres/FilterByRating'
 
 export default function SupplierCardsContainer() {
   //cambios para el paginado
@@ -25,6 +27,7 @@ export default function SupplierCardsContainer() {
 
   return (
     <Stack mt={12} align='center' justify='center'>
+    <FilterByRating />
       <Paginator
         cards={suppliers}
         currentPage={currentPage}

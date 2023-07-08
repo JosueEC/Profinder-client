@@ -5,7 +5,7 @@ import { Select, Box, Text } from "@chakra-ui/react";
 
 const FilterByCategoria = () => {
   const categories = useSelector((state) => state.categories);
-  console.log( categories);
+  //console.log( categories);
   const filteredCategories = useSelector((state) => state.filteredCategories);
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -18,6 +18,7 @@ const FilterByCategoria = () => {
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
+    console.log(category);
     setSelectedCategory(category);
     const selectedCategoryObj = categories.find((cat) => cat.nombre === category);
     setFilteredProfessions(selectedCategoryObj?.profesiones || []);

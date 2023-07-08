@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SearchBar from "../SearchBar/SearchBar";
-import FilterByCategoria from "../Filteres/FilterByCategories";
+import SearchBar from '../SearchBar/SearchBar'
+import FilterByCategoria  from "../Filteres/FilterByCategories";
 
 import logo from "../../assets/categoriesIcons/logo.png";
 import {
@@ -16,7 +16,9 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
+
 const Navbar = () => {
+
   // Estado para controlar la visibilidad del menú desplegable
   const [isOpen, setIsOpen] = useState(false);
 
@@ -57,8 +59,8 @@ const Navbar = () => {
             ¿Cómo funciona?
           </Link>
         </Box>
-        <SearchBar />
-        <FilterByCategoria />
+        <SearchBar/>
+        <FilterByCategoria/>
 
         <Box display={{ base: "block", md: "none" }}>
           <Menu>
