@@ -10,7 +10,7 @@ import {
   useColorModeValue,
   Container,
   Stack,
-  Button
+  // Button
 } from '@chakra-ui/react';
 import Tag from '../../singleComponents/Tag/Tag';
 import { StarIcon, AtSignIcon, TimeIcon, InfoOutlineIcon } from '@chakra-ui/icons';
@@ -19,13 +19,13 @@ const ArticleList = () => {
   return (
     <Container // Contenedor principal
       color='gray.300'
-      bg={useColorModeValue('gray.900', 'gray.800')}
+      bg={useColorModeValue('gray.800', 'gray.800')}
       maxW={'7xl'}
       p="12">
       <Heading as="h1">Trevor Aquino</Heading>
       <Box // Card Principal
       p={7}
-      bg={useColorModeValue('blackAlpha.500', 'gray.800')}
+      bg={useColorModeValue('blackAlpha.800', 'gray.800')}
         marginTop={{ base: '1', sm: '5' }}
         display="flex"
         flexDirection={{ base: 'column', sm: 'row' }}
@@ -119,14 +119,7 @@ const ArticleList = () => {
             fontSize='lg'><InfoOutlineIcon mr={2} color='teal.400'/>
             Masculino
           </Text>
-          <Stack mt={8} direction='row' spacing={4}>
-          <Button
-            flex={1}
-            fontSize='sm'
-            rounded='lg'
-            _hover={{ bg: 'gray.300' }}>
-            Ver detalles
-          </Button>
+          {/* <Stack mt={8} direction='row' spacing={4}>
           <Button
             flex={1}
             fontSize='sm'
@@ -138,7 +131,7 @@ const ArticleList = () => {
             }}>
             Enviar mensaje
           </Button>
-        </Stack>
+        </Stack> */}
         </Box>
       </Box>
       <Heading as="h2" marginTop="5">
@@ -151,7 +144,9 @@ const ArticleList = () => {
         justify='center'>
         <WrapItem // item del contenedor
           width={{ base: '100%', sm: '45%', md: '45%', lg: '30%' }}>
-          <Box w="100%">
+          <Box
+            w="100%"
+            >
             <Box borderRadius="lg" overflow="hidden">
               <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
                 <Image // imagen de la publicacion
