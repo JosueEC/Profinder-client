@@ -126,7 +126,7 @@ const Navbar = () => {
         </Box>
 
         <Box display={{ base: "none", md: "block" }}>
-          <Link to="/selectlogin" textDecoration="none">
+          <Link to="/userLogin" textDecoration="none">
             Login
           </Link>
         </Box>
