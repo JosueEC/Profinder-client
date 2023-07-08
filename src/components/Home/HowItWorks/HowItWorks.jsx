@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import styles from './HowItWorks.module.css';
 
 export default function HowItWorks() {
   return (
@@ -19,21 +20,23 @@ export default function HowItWorks() {
               as={'span'}
               position={'relative'}
               _after={{
-                content: "''",
-                width: 'full',
-                height: useBreakpointValue({ base: '20%', md: '30%' }),
-                position: 'absolute',
-                bottom: 1,
-                left: 0,
-                bg: 'blue.400',
-                zIndex: -1,
-              }}>
+              content: "''",
+              width: 'full',
+              height: useBreakpointValue({ base: '20%', md: '30%' }),
+              position: 'absolute',
+              bottom: 1,
+              left: 0,
+              bg: 'blue.400',
+              zIndex: -1,
+              }}
+              className={styles['tracking-in-contract']} 
+            >
               ProFinder
             </Text>
-            <br />{' '}
-            <Text color={'blue.400'} as={'span'}>
+            <br />
+          <Text color={'blue.400'} as={'span'}>
               Ante una necesidad hay una solucion!
-            </Text>{' '}
+          </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
             Este sitio es un nexo entre problemas y soluciones. Tienes una necesidad, contactas con quien pueda solucionar y listo! Problema resuelto!!
@@ -42,19 +45,28 @@ export default function HowItWorks() {
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             
-            <Button
-              as={Link}
-              to='/login'
-              rounded={'full'}
-              bg={'blue.400'}
-              color={'white'}
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              Registrate!
-            </Button>
-            
-            <Button as={Link} to="/comofunciona" rounded={'full'}>Como funciona?</Button>
+          <Button
+  as={Link}
+  to='/login'
+  rounded={'full'}
+  bg={'blue.400'}
+  color={'white'}
+  _hover={{
+    bg: 'blue.500',
+  }}
+  className={`${styles['bounce-top']} ${styles.boton}`} // Agrega esta línea
+>
+  Registrate!
+</Button>
+
+<Button
+  as={Link}
+  to="/comofunciona"
+  rounded={'full'}
+  className={styles['bounce-top']} // Agrega esta línea
+>
+  Como funciona?
+</Button>
           </Stack>
         </Stack>
       </Flex>
