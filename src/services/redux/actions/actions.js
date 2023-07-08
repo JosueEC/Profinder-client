@@ -1,7 +1,7 @@
 //aca vienen todas las actions
 import { API } from '../../../utils/API/constants'
 import axios from 'axios'
-import { GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS } from '../actionsTypes/actionsType'
+import { GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORY } from '../actionsTypes/actionsType'
 
 const get_all = () => {
     return async (dispatch) => {
@@ -36,10 +36,28 @@ const getAllSuppliers = () => {
       .catch(error => console.error(error.message))
   }
 }
+
+const getCategory = (categoryId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`https://raw.githubusercontent.com/johpaz/ApiProfinder/master/src/db.json/${categoryId}`);
+      dispatch({
+        type: GET_CATEGORY,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_FAILURE,
+        payload: error.message
+      });
+    }
+  };
+};
   
   export {
     get_all,
-    getAllSuppliers
+    getAllSuppliers,
+    getCategory
   };
   
   
