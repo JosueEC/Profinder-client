@@ -3,7 +3,6 @@ import {
   Container,
   Stack,
   SimpleGrid,
- 
   useColorModeValue,
   Heading,
   Text,
@@ -24,7 +23,7 @@ const footerStyles = {
 };
 
 function Footer() {
-  const bgColor = useColorModeValue("gray.50", "gray.900");
+  const bgColor = useColorModeValue("gray.900", "gray.800");
   const textColor = useColorModeValue("gray.700", "gray.200");
 
   return (
@@ -32,27 +31,27 @@ function Footer() {
       <Container maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }} spacing={8}>
           <Stack align={"center"} justify="flex-end">
-            <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.500">
+            <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.400">
               Información
             </Heading>
-            <Link to={"./"}>Sobre nosotros</Link>
-            <Link to={"./"}>Contáctanos</Link>
-            <Link to={"./comofunciona"}>Cómo funciona</Link>
-            <Link to={"./"}>Home</Link>
+            <Link to={"./"}><Text color='gray.400'>Sobre nosotros</Text></Link>
+            <Link to={"./"}><Text color='gray.400'>Contáctanos</Text></Link>
+            <Link to={"./comofunciona"}><Text color='gray.400'>Cómo funciona</Text></Link>
+            <Link to={"./"}><Text color='gray.400'>Home</Text></Link>
           </Stack>
 
           <Stack align={"center"} justify="flex-end">
             <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.500">
               Ingresos
             </Heading>
-            <Link to={"./"}>Registro usuario</Link>
-            <Link to={"./login"}>Registro Profesional</Link>
-            <Link to={"./"}>Inicia sesión</Link>
-            <Link to={"./categories"}>Categorías</Link>
+            <Link to={"./"}><Text color='gray.400'>Registro Usuario</Text></Link>
+            <Link to={"./login"}><Text color='gray.400'>Registro Profesional</Text></Link>
+            <Link to={"./userLogin"}><Text color='gray.400'>Inicia Sesion</Text></Link>
+            <Link to={"./categories"}><Text color='gray.400'>Categorias</Text></Link>
           </Stack>
         </SimpleGrid>
         <Stack align={"center"} mt={8}>
-          <Text fontSize={"sm"} textAlign="center">
+          <Text fontSize={"sm"} textAlign="center" color='gray.300'>
             © 2023 Profinder create. All rights reserved
           </Text>
         </Stack>
