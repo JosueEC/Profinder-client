@@ -19,19 +19,20 @@ export default function SupplierCardsContainer () {
     <Stack
       mt={12}
       align='center'
-      justify='center'>
-    <Paginator cards={suppliers}/>
-    <Flex
-      position='relative'
-      align='center'
       justify='center'
-      mb='3rem'
-      wrap='wrap'
-      gap={8}
-      px={4}
-      py={12}
     >
-      {
+      <Paginator cards={suppliers} />
+      <Flex
+        position='relative'
+        align='center'
+        justify='center'
+        mb='3rem'
+        wrap='wrap'
+        gap={8}
+        px={4}
+        py={12}
+      >
+        {
         (suppliers)
           ? (
               suppliers.map(({ id, name, email, image, genre, years_exp, description, categorias, profesiones, rating, ubicacion, phone }) => {
@@ -57,7 +58,7 @@ export default function SupplierCardsContainer () {
             <h2 />
             )
       }
-    </Flex>
+      </Flex>
     </Stack>
   )
 }

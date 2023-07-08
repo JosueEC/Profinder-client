@@ -14,7 +14,8 @@ import Tag from '../../singleComponents/Tag/Tag'
 export default function SocialProfileSimple ({ name, email, image, profesiones, description, ubicacion }) {
   return (
     <Box
-      maxW='320px'
+      maxW='350px'
+      height='460px'
       w='full'
       colorMode
       bg={useColorModeValue('blackAlpha.500', 'gray.900')}
@@ -33,7 +34,7 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
       <Heading fontSize='2xl' fontFamily='body' color='gray.300'>
         {name}
       </Heading>
-      <Text fontWeight={600} color='gray.500' mb={4}>
+      <Text fontWeight={600} color='gray.500' noOfLines={1}>
         <AtSignIcon mr={2} color='teal.400' />
         {email}
       </Text>
@@ -54,9 +55,11 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
         <StarIcon color='white' />
       </Stack> */}
       <Text
+        height='76px'
         textAlign='center'
         color={useColorModeValue('gray.500', 'gray.400')}
         px={3}
+        noOfLines={3}
       >
         {description}
       </Text>
