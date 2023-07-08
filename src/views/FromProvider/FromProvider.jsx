@@ -61,14 +61,15 @@ function FormProvider() {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={useColorModeValue("gray.800", "gray.800")}
       width={"100%"}
     >
       <Box
         rounded={"lg"}
-        bg={useColorModeValue("white", "gray.700")}
+        bg={useColorModeValue("blackAlpha.800", "gray800")}
         boxShadow={"lg"}
         p={8}
+        color="gray.300"
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +85,7 @@ function FormProvider() {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Email </FormLabel>
               <Input
                 type="email"
                 {...register("email", {
@@ -108,7 +109,7 @@ function FormProvider() {
               {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
             <FormControl>
-              <FormLabel>Tu ubicacion</FormLabel>
+              <FormLabel>Ubicacion</FormLabel>
               <Input
                 type="text"
                 {...register("ubicacion", {
@@ -118,7 +119,7 @@ function FormProvider() {
               {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
             <FormControl>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Contraseña</FormLabel>
 
               <Input type="password" />
             </FormControl>
@@ -207,7 +208,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Descripción</FormLabel>
               <Textarea
-                isInvalid
+             
                 type="description"
                 isRequired
                 {...register("description", {
