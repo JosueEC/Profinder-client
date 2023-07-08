@@ -1,20 +1,15 @@
-import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import "./Paginator.css";
 import ReactPaginate from "react-paginate";
 
-function Paginator() {
-  const postprovider = useSelector((state) => state.postprovider);
-  const [users, setUsers] = useState(postprovider.slice(0, 50));
-  const [pageNumber, setPageNumber] = useState(0);
-console.log(users)
-  const usersPerPage = 10;
-  const pagesVisited = pageNumber * usersPerPage;
-  const pageCount = Math.ceil(users.length / usersPerPage);
+function Paginator({ cards, currentPage, setCurrentPage }) {
+  const itemsPerPage = 10;
+  const pageCount = Math.ceil(cards.length / itemsPerPage);
 
   const changePage = ({ selected }) => {
-    setPageNumber(selected);
+    setCurrentPage(selected);
   };
+
   return (
     <div className="Paginator">
       <ReactPaginate
@@ -26,6 +21,7 @@ console.log(users)
         previousLinkClassName={"previousBttn"}
         nextLinkClassName={"nextBttn"}
         activeClassName={"paginationActive"}
+        forcePage={currentPage} 
       />
     </div>
   );
