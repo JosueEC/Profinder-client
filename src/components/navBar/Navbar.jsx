@@ -30,38 +30,32 @@ const Navbar = () => {
 
   return (
     <nav>
-     
       <Flex
-        justifyContent="space-between" 
-        alignItems="center" e
-        padding={4} 
+        justifyContent="space-between"
+        alignItems="center"
+        padding={4}
         bg="gray.200"
-        flexWrap="wrap" 
+        flexWrap="wrap"
       >
         {/* Logo */}
         <Box flex={{ base: "0 0 100%", md: "0 0 30%" }}>
-         
           <Link to="/" textDecoration="none">
             <Image src={logo} alt="Logo" width="70%" height="auto" />
           </Link>
         </Box>
 
-     
         <Box display={{ base: "none", md: "block" }}>
-         
           <Link
             to="/comofunciona"
             textDecoration="none"
             ml={4}
-            fontSize="lg" 
+            fontSize="lg"
           >
             ¿Cómo funciona?
           </Link>
         </Box>
 
-      
         <Box display={{ base: "block", md: "none" }}>
-  
           <Menu>
             <MenuButton
               as={IconButton}
@@ -70,27 +64,21 @@ const Navbar = () => {
               textDecoration="none"
             />
             <MenuList>
-            
-              <MenuItem fontSize="lg"> 
+              <MenuItem fontSize="lg">
                 <Link to="/comofunciona" textDecoration="none">
                   ¿Cómo funciona?
                 </Link>
               </MenuItem>
 
-              
-              <MenuItem
-                onClick={() => handleOptionClick("cliente")}
-                fontSize="lg" 
-              >
+              <MenuItem onClick={() => handleOptionClick("cliente")} fontSize="lg">
                 Soy Cliente
               </MenuItem>
 
-              
               <MenuItem
                 as="a"
                 href="/login"
                 onClick={() => handleOptionClick("profesional")}
-                fontSize="lg" 
+                fontSize="lg"
               >
                 Soy Profesional
               </MenuItem>
@@ -98,10 +86,9 @@ const Navbar = () => {
           </Menu>
         </Box>
 
-        
         <Box
-          display={{ base: isOpen ? "block" : "none", md: "block" }} 
-          mt={{ base: 4, md: 0 }} 
+          display={{ base: isOpen ? "block" : "none", md: "block" }}
+          mt={{ base: 4, md: 0 }}
         >
           <ul>
             <li>
@@ -116,19 +103,18 @@ const Navbar = () => {
                       href="#"
                       onClick={() => handleOptionClick("cliente")}
                       textDecoration="none"
-                      fontSize="lg" 
+                      fontSize="lg"
                     >
                       Soy Cliente
                     </a>
                   </li>
 
-                 
                   <li>
                     <a
                       href="/login"
                       onClick={() => handleOptionClick("profesional")}
                       textDecoration="none"
-                      fontSize="lg" 
+                      fontSize="lg"
                     >
                       Soy Profesional
                     </a>
@@ -139,18 +125,12 @@ const Navbar = () => {
           </ul>
         </Box>
 
-      <Box
-        display={{ base: "none", md: "block" }}
-        className={Styles.loginContainer}
-      >
-        <Link
-          to="/userLogin"
-          className={Styles.loginLink}
-          textDecoration="none"
-        >
-          Login
-        </Link>
-      </Box>
+        <Box display={{ base: "none", md: "block" }}>
+          <Link to="/selectlogin" textDecoration="none">
+            Login
+          </Link>
+        </Box>
+      </Flex>
     </nav>
   );
 };
