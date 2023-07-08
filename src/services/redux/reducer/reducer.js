@@ -2228,7 +2228,7 @@ const reducer = (state = initialState, action) => {
       
         return {
           ...state,
-          profesionales: sortedProfessionals,
+          suppliers: sortedProfessionals,
         };
       }
       
