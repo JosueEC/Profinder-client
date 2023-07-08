@@ -24,6 +24,7 @@ export default function SocialProfileSimple ({ name, email, image, profesiones, 
       p={6}
       textAlign='center'
     >
+      
       <Avatar
         size='xl'
         src={image}

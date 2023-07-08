@@ -1,7 +1,7 @@
 //aca vienen todas las actions
 import { API } from '../../../utils/API/constants'
 import axios from 'axios'
-import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS } from '../actionsTypes/actionsType'
+import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS, ORDER_BY_RATING } from '../actionsTypes/actionsType'
 
 //! toda la data de la api, paque? por si la necesitas jajaja
 const get_all = () => {
@@ -56,9 +56,10 @@ const getAllSuppliers = () => {
 // };
 
 //! action para traer las categorias
+
+//! Todas las categorias con su ID
 const getAllCategories = () => {
   const URL = API.DOMAIN;
-
   return function (dispatch) {
     fetch(URL)
       .then((response) => response.json())
@@ -68,7 +69,7 @@ const getAllCategories = () => {
           type: GET_CATEGORIES,
           payload: results.data[0].categorias,
         });
-         console.log(results.data[0].categorias);
+       //  console.log(results.data[0].categorias);
       })
       .catch((error) => console.error(error.message));
   };
@@ -108,13 +109,24 @@ export const searchProfessionals = (searchTerm) => {
   };
 };
 
+//!
+const orderByRating = (payload) => {
+  return {
+    type: ORDER_BY_RATING,
+    payload,
+  };
+};
+
+
+
 
   export {
     get_all,
     getAllSuppliers,
     getAllCategories,
     filterByCategory,
-    resetCategoryFilter
+    resetCategoryFilter,
+    orderByRating,
     //getCategory
   };
   
