@@ -20,7 +20,7 @@ export default function SupplierCardsContainer () {
       mt={12}
       align='center'
       justify='center'>
-    <Paginator />
+    <Paginator cards={suppliers}/>
     <Flex
       position='relative'
       align='center'
