@@ -12,6 +12,9 @@ import { FcAbout, FcAssistant, FcCollaboration, FcDonate, FcManager } from 'reac
 import { Link } from 'react-router-dom';
 
 const Card = ({ heading, description, icon, to }) => {
+  const cardColor = useColorModeValue('gray.300', 'blackAlpha.500');
+  const linkColor = useColorModeValue('teal.400', 'teal.400');
+
   return (
     <Box
       maxW={{ base: 'full', md: '275px' }}
@@ -20,6 +23,8 @@ const Card = ({ heading, description, icon, to }) => {
       borderRadius="lg"
       overflow="hidden"
       p={5}
+      bg={cardColor}
+      
     >
       <Stack align={'start'} spacing={2}>
         <Flex
@@ -29,7 +34,7 @@ const Card = ({ heading, description, icon, to }) => {
           justify={'center'}
           color={'white'}
           rounded={'full'}
-          bg={useColorModeValue('gray.100', 'gray.700')}
+          bg={useColorModeValue('gray.900', 'blackAlpha.500')}
         >
           {icon}
         </Flex>
@@ -39,7 +44,7 @@ const Card = ({ heading, description, icon, to }) => {
             {description}
           </Text>
         </Box>
-        <Link to={to} variant={'link'} colorScheme={'blue'} size={'sm'}>
+        <Link to={to} variant={'link'} color={linkColor} size={'sm'}>
           Learn more
         </Link>
       </Stack>
@@ -48,14 +53,16 @@ const Card = ({ heading, description, icon, to }) => {
 };
 
 export default function TopPro() {
+  const backgroundColor = useColorModeValue('gray.900', 'gray.900');
+
   return (
-    <Box p={4}>
+    <Box p={4} bg={backgroundColor} h="100vh" width="100%">
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-        <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight={'bold'}>
+        <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight={'bold'} color={'gray.300'}>
           PROFESIONALES RECOMENDADOS
         </Heading>
-        <Text color={'gray.600'} fontSize={{ base: 'sm', sm: 'lg' }}>
-          Aqui veras los servicios mas utilizados y mejor puntuados por nuestros usuarios.
+        <Text color={'gray.300'} fontSize={{ base: 'sm', sm: 'lg' }}>
+          Aquí verás los servicios más utilizados y mejor puntuados por nuestros usuarios.
         </Text>
       </Stack>
 
@@ -65,7 +72,7 @@ export default function TopPro() {
             heading={'George Plumber'}
             icon={<Icon as={FcAssistant} w={10} h={10} />}
             description={
-              'Plomeria en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinamica de trabajo'
+              'Plomería en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinámica de trabajo'
             }
             to={'/detail'}
           />
@@ -73,7 +80,7 @@ export default function TopPro() {
             heading={'Marcus Truction'}
             icon={<Icon as={FcCollaboration} w={10} h={10} />}
             description={
-              'Gran albañil destacado en la construccion de asadores y galerias. Ideal para refactorizacion de zonas'
+              'Gran albañil destacado en la construcción de asadores y galerías. Ideal para refactorización de zonas'
             }
             to={'/detail'}
           />
@@ -81,7 +88,7 @@ export default function TopPro() {
             heading={'Meque Trefe'}
             icon={<Icon as={FcDonate} w={10} h={10} />}
             description={
-              'Electricista matriculado de la ciudad de Zimbague. Super ordenado y atenido a la norma'
+              'Electricista matriculado de la ciudad de Zimbague. Súper ordenado y atenido a la norma'
             }
             to={'/detail'}
           />
@@ -89,14 +96,14 @@ export default function TopPro() {
             heading={'Susana Oria'}
             icon={<Icon as={FcManager} w={10} h={10} />}
             description={
-              'Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalacion'
+              'Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalación'
             }
             to={'/detail'}
           />
           <Card
             heading={'Marciana Pazos'}
             icon={<Icon as={FcAbout} w={10} h={10} />}
-            description={'Gasista matriculada. Conexion de estufas y hornos '}
+            description={'Gasista matriculada. Conexión de estufas y hornos'}
             to={'/detail'}
           />
         </Flex>

@@ -1,4 +1,3 @@
-
 import {
   Box,
   Flex,
@@ -8,6 +7,7 @@ import {
   Container,
   Avatar,
   useColorModeValue,
+  useColorMode,
 } from '@chakra-ui/react';
 
 const Testimonial = ({ children }) => {
@@ -15,10 +15,15 @@ const Testimonial = ({ children }) => {
 };
 
 const TestimonialContent = ({ children }) => {
+  const { colorMode } = useColorMode();
+  const gradientStart = useColorModeValue('gray.200', 'gray.600');
+  const gradientEnd = useColorModeValue('gray.300', 'gray.700');
+  const gradient = `linear(to-r, ${gradientStart}, ${gradientEnd})`;
+
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      boxShadow={'lg'}
+      bgGradient={gradient}
+      boxShadow={'2xl'}
       p={8}
       rounded={'xl'}
       align={'center'}
@@ -33,7 +38,7 @@ const TestimonialContent = ({ children }) => {
         borderRightWidth: 16,
         borderTop: 'solid',
         borderTopWidth: 16,
-        borderTopColor: useColorModeValue('white', 'gray.800'),
+        borderTopColor: gradientStart,
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',
@@ -81,11 +86,15 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function TestimonialCarrousel() {
   return (
-    <Box bg={useColorModeValue()} h="100vh">
-      <Container  py={16} as={Stack} spacing={12}w="100%" maxW="100%" >
+    <Box bg={useColorModeValue('gray.900', 'gray.800')} h="100vh">
+      <Container py={16} as={Stack} spacing={12} w="100%" maxW="100%">
         <Stack spacing={0} align={'center'}>
-          <Heading>Nuestros usuarios opinan!</Heading>
-          <Text>Tenemos usuarios al rededor de todo el mundo</Text>
+          <Heading color={useColorModeValue('gray.800', 'white')}>
+            Nuestros usuarios opinan!
+          </Heading>
+          <Text color={useColorModeValue('gray.600', 'gray.400')}>
+            Tenemos usuarios alrededor de todo el mundo
+          </Text>
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
@@ -93,11 +102,11 @@ export default function TestimonialCarrousel() {
         >
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Un cambio significativo en mi vida!</TestimonialHeading>
+              <TestimonialHeading>
+                Un cambio significativo en mi vida!
+              </TestimonialHeading>
               <TestimonialText>
-                Esta aplicacion ha podido contactarme con muchas soluciones a los conflictos de la vida cotideana.
-                
-                
+                Esta aplicación ha podido contactarme con muchas soluciones a los conflictos de la vida cotidiana.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar

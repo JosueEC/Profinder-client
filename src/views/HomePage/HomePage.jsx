@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import { get_all, getAllCategories } from '../../services/redux/actions/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { get_all, getAllCategories } from '../../services/redux/actions/actions';
 
 import TopPro from "../../components/Home/TopPro/TopPro";
 import FeaturesGrid from "../../components/Home/FeaturesGrid/FeaturesGrid";
@@ -18,90 +18,87 @@ import ingenieriaIcon from "../../assets/categoriesIcons/ingeniería.png";
 
 
 
-
 const HomePage = () => {
- const profesiones = useSelector((state) => state.profesiones);
- const categories = useSelector(state => state.categories);
- console.log(categories);
- const dispatch = useDispatch();
- 
-  useEffect(() => {
-   dispatch(getAllCategories());
- }, [dispatch]);
+  const profesiones = useSelector((state) => state.profesiones);
+  const categories = useSelector(state => state.categories);
+  const dispatch = useDispatch();
 
-   
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(get_all());
-   }, [dispatch]);
-  
-  
-
+  }, [dispatch]);
 
   return (
     <div>
       <section className={`${styles.howItWorks} ${styles.fullHeight}`}>
         <HowItWorks />
+        
       </section>
+      <div className={styles.divider} />
       <section className={`${styles.featuresGrid} ${styles.fullHeight}`}>
         <FeaturesGrid />
+        
       </section>
+
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
         <TestimonialCarrousel />
+        
       </section>
+
       <section className={`${styles.Categories} ${styles.fullHeight}`}>
-  <h2>CATEGORIAS</h2>
+        <h2>CATEGORIAS</h2>
+        <div className={styles.categoryLabels}>
+          {categories.map((category, index) => {
+            let categoryIcon;
+            switch (category.nombre) {
+              case "Tecnología":
+                categoryIcon = tecnologiaIcon;
+                break;
+              case "Arte y Diseño":
+                categoryIcon = arteDiseñoIcon;
+                break;
+              case "Consultoría":
+                categoryIcon = consultoriaIcon;
+                break;
+              case "Servicios":
+                categoryIcon = serviciosIcon;
+                break;
+              case "Manualidades":
+                categoryIcon = manualidadesIcon;
+                break;
+              default:
+                categoryIcon = null;
+            }
 
-  <div className={styles.categoryLabels}>
-    {categories.map((category, index) => {
-      let categoryIcon;
-      switch (category.nombre) {
-        case "Tecnología":
-          categoryIcon = tecnologiaIcon;
-          break;
-        case "Arte y Diseño":
-          categoryIcon = arteDiseñoIcon;
-          break;
-        case "Consultoría":
-          categoryIcon = consultoriaIcon;
-          break;
-        case "Servicios":
-          categoryIcon = serviciosIcon;
-          break;
-        case "Manualidades":
-          categoryIcon = manualidadesIcon;
-          break;
-        default:
-          categoryIcon = null;
-      }
-
-      return (
-        <NavLink
-          to={`/categories`} // Reemplaza la ruta con la ruta correcta
-          key={index}
-          className={styles.categoryItem}
-          activeClassName={styles.active}
-        >
-          {categoryIcon && (
-            <img
-              src={categoryIcon}
-              alt={category.nombre}
-              className={styles.logo}
-            />
-          )}
-          <p>{category.nombre}</p>
-        </NavLink>
-      );
-    })}
-  </div>
-</section>
-      
+            return (
+              <NavLink
+                to={`/categories`} // Reemplaza la ruta con la ruta correcta
+                key={index}
+                className={styles.categoryItem}
+                activeClassName={styles.active}
+              >
+                {categoryIcon && (
+                  <img
+                    src={categoryIcon}
+                    alt={category.nombre}
+                    className={styles.logo}
+                  />
+                )}
+                <p>{category.nombre}</p>
+              </NavLink>
+            );
+          })}
+        </div>
+        
+      </section>
 
       <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
-        <TopPro />gi
-        <h2>Render de profesionales recomendados a modo de introducción.</h2>
-        <p>Card con nombre, breve descripción que el servicio ofrece</p>
+        <TopPro />
+        
       </section>
-      
     </div>
   );
 };
