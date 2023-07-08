@@ -11,6 +11,7 @@ export default function SupplierCardsContainer() {
   const itemsPerPage = 10;
 
   const suppliers = useSelector(state => state.suppliers);
+  console.log(suppliers)
   const dispatch = useDispatch();
 
   useEffect(() => {
