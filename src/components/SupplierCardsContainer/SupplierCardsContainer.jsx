@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Flex } from '@chakra-ui/layout'
+import { Flex, Stack } from '@chakra-ui/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllSuppliers } from '../../services/redux/actions/actions'
-import SupplierCard from '../../components/SupplierCard/SupplierCard'
 import { useEffect } from 'react'
+import SupplierCard from '../../components/SupplierCard/SupplierCard'
+import Paginator from '../Paginator/Paginator'
 
 export default function SupplierCardsContainer () {
   const suppliers = useSelector(state => state.suppliers)
@@ -15,6 +16,11 @@ export default function SupplierCardsContainer () {
   }, [])
 
   return (
+    <Stack
+      mt={12}
+      align='center'
+      justify='center'>
+    <Paginator />
     <Flex
       position='relative'
       align='center'
@@ -28,7 +34,7 @@ export default function SupplierCardsContainer () {
       {
         (suppliers)
           ? (
-              suppliers.map(({ id, name, email, image, genre, years_exp, categorias, profesiones, rating, ubicacion, phone }) => {
+              suppliers.map(({ id, name, email, image, genre, years_exp, description, categorias, profesiones, rating, ubicacion, phone }) => {
                 return (
                   <SupplierCard
                     key={id}
@@ -37,10 +43,12 @@ export default function SupplierCardsContainer () {
                     image={image}
                     genre={genre}
                     experience={years_exp}
+                    description={description}
                     categorias={categorias}
                     profesiones={profesiones}
                     rating={rating}
                     ubicacion={ubicacion}
+                    phone={phone}
                   />
                 )
               })
@@ -50,5 +58,6 @@ export default function SupplierCardsContainer () {
             )
       }
     </Flex>
+    </Stack>
   )
 }
