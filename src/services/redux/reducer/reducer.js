@@ -1,8 +1,15 @@
-import { GET_ALL_SUPPLIERS } from "../actionsTypes/actionsType";
+import {
+  GET_ALL_SUPPLIERS,
+  GET_CATEGORIES,
+  FILTER_BY_CATEGORY,
+  SEARCH_PROFESSIONALS,
+} from "../actionsTypes/actionsType";
 
 const initialState = {
   //este estado es solo una prueba para iniciar redux, puede modificarse cuando se desee los amu <3
   suppliers: [],
+  categories: [],
+  filteredCategories: [],
   profesiones: [
     { id: 1, name: "Programador" },
     { id: 2, name: "Diseñador web" },
@@ -271,247 +278,251 @@ const initialState = {
   ],
   categorias: [
     {
-      "idcategoria": 1,
-      "nombre": "Tecnología",
-      "profesiones": [
-        { "id": 1, "name": "Programador" },
-        { "id": 2, "name": "Diseñador web" },
-        { "id": 3, "name": "Especialista en SEO" },
-        { "id": 4, "name": "Ingeniero de software" },
-        { "id": 5, "name": "Analista de datos" },
-        { "id": 6, "name": "Desarrollador de aplicaciones móviles" },
-        { "id": 7, "name": "Administrador de sistemas" },
-        { "id": 8, "name": "Ingeniero de redes" },
-        { "id": 9, "name": "Experto en ciberseguridad" },
-        { "id": 10, "name": "Especialista en inteligencia artificial" }
-      ]
+      idcategoria: 1,
+      nombre: "Tecnología",
+      profesiones: [
+        { id: 1, name: "Programador" },
+        { id: 2, name: "Diseñador web" },
+        { id: 3, name: "Especialista en SEO" },
+        { id: 4, name: "Ingeniero de software" },
+        { id: 5, name: "Analista de datos" },
+        { id: 6, name: "Desarrollador de aplicaciones móviles" },
+        { id: 7, name: "Administrador de sistemas" },
+        { id: 8, name: "Ingeniero de redes" },
+        { id: 9, name: "Experto en ciberseguridad" },
+        { id: 10, name: "Especialista en inteligencia artificial" },
+      ],
     },
     {
-      "idcategoria": 2,
-      "nombre": "Arte y Diseño",
-      "profesiones": [
-        { "id": 11, "name": "Diseñador gráfico" },
-        { "id": 12, "name": "Ilustrador" },
-        { "id": 13, "name": "Fotógrafo" },
-        { "id": 14, "name": "Animador 3D" },
-        { "id": 15, "name": "Diseñador de moda" },
-        { "id": 16, "name": "Artista digital" },
-        { "id": 17, "name": "Escenógrafo" },
-        { "id": 18, "name": "Maquetista" },
-        { "id": 19, "name": "Diseñador de interiores" },
-        { "id": 20, "name": "Diseñador de logotipos" }
-      ]
+      idcategoria: 2,
+      nombre: "Arte y Diseño",
+      profesiones: [
+        { id: 11, name: "Diseñador gráfico" },
+        { id: 12, name: "Ilustrador" },
+        { id: 13, name: "Fotógrafo" },
+        { id: 14, name: "Animador 3D" },
+        { id: 15, name: "Diseñador de moda" },
+        { id: 16, name: "Artista digital" },
+        { id: 17, name: "Escenógrafo" },
+        { id: 18, name: "Maquetista" },
+        { id: 19, name: "Diseñador de interiores" },
+        { id: 20, name: "Diseñador de logotipos" },
+      ],
     },
     {
-      "idcategoria": 3,
-      "nombre": "Consultoría",
-      "profesiones": [
-        { "id": 21, "name": "Consultor de marketing" },
-        { "id": 22, "name": "Consultor financiero" },
-        { "id": 23, "name": "Consultor de recursos humanos" },
-        { "id": 24, "name": "Consultor de negocios" },
-        { "id": 25, "name": "Consultor de estrategia" },
-        { "id": 26, "name": "Consultor de ventas" },
-        { "id": 27, "name": "Consultor de gestión" },
-        { "id": 28, "name": "Consultor de calidad" },
-        { "id": 29, "name": "Consultor de logística" },
-        { "id": 30, "name": "Consultor de transformación digital" }
-      ]
+      idcategoria: 3,
+      nombre: "Consultoría",
+      profesiones: [
+        { id: 21, name: "Consultor de marketing" },
+        { id: 22, name: "Consultor financiero" },
+        { id: 23, name: "Consultor de recursos humanos" },
+        { id: 24, name: "Consultor de negocios" },
+        { id: 25, name: "Consultor de estrategia" },
+        { id: 26, name: "Consultor de ventas" },
+        { id: 27, name: "Consultor de gestión" },
+        { id: 28, name: "Consultor de calidad" },
+        { id: 29, name: "Consultor de logística" },
+        { id: 30, name: "Consultor de transformación digital" },
+      ],
     },
     {
-      "idcategoria": 4,
-      "nombre": "Servicios",
-      "profesiones": [
-        { "id": 31, "name": "Asistente virtual" },
-        { "id": 32, "name": "Redactor de contenido" },
-        { "id": 33, "name": "Traductor" },
-        { "id": 34, "name": "Community Manager" },
-        { "id": 35, "name": "Nutricionista" },
-        { "id": 36, "name": "Entrenador personal" },
-        { "id": 37, "name": "Terapeuta" },
-        { "id": 38, "name": "Consejero financiero" },
-        { "id": 39, "name": "Gestor de redes sociales" },
-        { "id": 40, "name": "Especialista en marketing digital" }
-      ]
+      idcategoria: 4,
+      nombre: "Servicios",
+      profesiones: [
+        { id: 31, name: "Asistente virtual" },
+        { id: 32, name: "Redactor de contenido" },
+        { id: 33, name: "Traductor" },
+        { id: 34, name: "Community Manager" },
+        { id: 35, name: "Nutricionista" },
+        { id: 36, name: "Entrenador personal" },
+        { id: 37, name: "Terapeuta" },
+        { id: 38, name: "Consejero financiero" },
+        { id: 39, name: "Gestor de redes sociales" },
+        { id: 40, name: "Especialista en marketing digital" },
+      ],
     },
     {
-      "idcategoria": 5,
-      "nombre": "Manualidades",
-      "profesiones": [
-        { "id": 41, "name": "Pastelero" },
-        { "id": 42, "name": "Ceramista" },
-        { "id": 43, "name": "Sastrería" },
-        { "id": 44, "name": "Joyería artesanal" },
-        { "id": 45, "name": "Escultor" },
-        { "id": 46, "name": "Bisutería" },
-        { "id": 47, "name": "Elaboración de velas" },
-        { "id": 48, "name": "Arreglos florales" },
-        { "id": 49, "name": "Decorador de eventos" },
-        { "id": 50, "name": "Origamista" }
-      ]
-    }
+      idcategoria: 5,
+      nombre: "Manualidades",
+      profesiones: [
+        { id: 41, name: "Pastelero" },
+        { id: 42, name: "Ceramista" },
+        { id: 43, name: "Sastrería" },
+        { id: 44, name: "Joyería artesanal" },
+        { id: 45, name: "Escultor" },
+        { id: 46, name: "Bisutería" },
+        { id: 47, name: "Elaboración de velas" },
+        { id: 48, name: "Arreglos florales" },
+        { id: 49, name: "Decorador de eventos" },
+        { id: 50, name: "Origamista" },
+      ],
+    },
   ],
   clients: [
     {
-      "name": "John Smith",
-      "email": "john.smith@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente en busca de servicios freelance de calidad",
-      "rating": 0
+      name: "John Smith",
+      email: "john.smith@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente en busca de servicios freelance de calidad",
+      rating: 0,
     },
     {
-      "name": "Emily Johnson",
-      "email": "emily.johnson@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente interesado en proyectos creativos y originales",
-      "rating": 0
+      name: "Emily Johnson",
+      email: "emily.johnson@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente interesado en proyectos creativos y originales",
+      rating: 0,
     },
     {
-      "name": "Michael Davis",
-      "email": "michael.davis@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente en busca de soluciones tecnológicas innovadoras",
-      "rating": 0
+      name: "Michael Davis",
+      email: "michael.davis@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente en busca de soluciones tecnológicas innovadoras",
+      rating: 0,
     },
     {
-      "name": "Jessica Brown",
-      "email": "jessica.brown@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente que necesita servicios de diseño gráfico",
-      "rating": 0
+      name: "Jessica Brown",
+      email: "jessica.brown@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente que necesita servicios de diseño gráfico",
+      rating: 0,
     },
     {
-      "name": "David Johnson",
-      "email": "david.johnson@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente buscando asesoramiento financiero",
-      "rating": 0
+      name: "David Johnson",
+      email: "david.johnson@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente buscando asesoramiento financiero",
+      rating: 0,
     },
     {
-      "name": "Sarah Wilson",
-      "email": "sarah.wilson@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente interesada en servicios de marketing digital",
-      "rating": 0
+      name: "Sarah Wilson",
+      email: "sarah.wilson@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente interesada en servicios de marketing digital",
+      rating: 0,
     },
     {
-      "name": "Robert Taylor",
-      "email": "robert.taylor@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente en busca de desarrollo web",
-      "rating": 0
+      name: "Robert Taylor",
+      email: "robert.taylor@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente en busca de desarrollo web",
+      rating: 0,
     },
     {
-      "name": "Jennifer Martinez",
-      "email": "jennifer.martinez@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente que necesita servicios de traducción",
-      "rating": 0
+      name: "Jennifer Martinez",
+      email: "jennifer.martinez@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente que necesita servicios de traducción",
+      rating: 0,
     },
     {
-      "name": "Matthew Clark",
-      "email": "matthew.clark@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente en busca de servicios de consultoría empresarial",
-      "rating": 0
+      name: "Matthew Clark",
+      email: "matthew.clark@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente en busca de servicios de consultoría empresarial",
+      rating: 0,
     },
     {
-      "name": "Sophia Turner",
-      "email": "sophia.turner@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente interesada en servicios de redacción de contenido",
-      "rating": 0
+      name: "Sophia Turner",
+      email: "sophia.turner@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente interesada en servicios de redacción de contenido",
+      rating: 0,
     },
     {
-      "name": "Daniel Rodriguez",
-      "email": "daniel.rodriguez@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente buscando servicios de fotografía",
-      "rating": 0
+      name: "Daniel Rodriguez",
+      email: "daniel.rodriguez@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente buscando servicios de fotografía",
+      rating: 0,
     },
     {
-      "name": "Olivia Walker",
-      "email": "olivia.walker@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente en busca de servicios de diseño de logotipos",
-      "rating": 0
+      name: "Olivia Walker",
+      email: "olivia.walker@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description: "Cliente en busca de servicios de diseño de logotipos",
+      rating: 0,
     },
     {
-      "name": "Christopher Green",
-      "email": "christopher.green@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente interesado en servicios de edición de video",
-      "rating": 0
+      name: "Christopher Green",
+      email: "christopher.green@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente interesado en servicios de edición de video",
+      rating: 0,
     },
     {
-      "name": "Ava Hill",
-      "email": "ava.hill@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente buscando servicios de desarrollo de aplicaciones móviles",
-      "rating": 0
+      name: "Ava Hill",
+      email: "ava.hill@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description:
+        "Cliente buscando servicios de desarrollo de aplicaciones móviles",
+      rating: 0,
     },
     {
-      "name": "Andrew Turner",
-      "email": "andrew.turner@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente en busca de servicios de diseño de sitios web",
-      "rating": 0
+      name: "Andrew Turner",
+      email: "andrew.turner@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente en busca de servicios de diseño de sitios web",
+      rating: 0,
     },
     {
-      "name": "Mia Adams",
-      "email": "mia.adams@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente interesada en servicios de gestión de redes sociales",
-      "rating": 0
+      name: "Mia Adams",
+      email: "mia.adams@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description:
+        "Cliente interesada en servicios de gestión de redes sociales",
+      rating: 0,
     },
     {
-      "name": "Ethan Cooper",
-      "email": "ethan.cooper@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente buscando servicios de consultoría de marketing",
-      "rating": 0
+      name: "Ethan Cooper",
+      email: "ethan.cooper@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente buscando servicios de consultoría de marketing",
+      rating: 0,
     },
     {
-      "name": "Isabella Reed",
-      "email": "isabella.reed@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente en busca de servicios de optimización de motores de búsqueda",
-      "rating": 0
+      name: "Isabella Reed",
+      email: "isabella.reed@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description:
+        "Cliente en busca de servicios de optimización de motores de búsqueda",
+      rating: 0,
     },
     {
-      "name": "William Baker",
-      "email": "william.baker@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "male",
-      "description": "Cliente interesado en servicios de diseño de folletos",
-      "rating": 0
+      name: "William Baker",
+      email: "william.baker@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "male",
+      description: "Cliente interesado en servicios de diseño de folletos",
+      rating: 0,
     },
     {
-      "name": "Chloe Gray",
-      "email": "chloe.gray@example.com",
-      "image": "http://placeimg.com/640/480/people",
-      "genre": "female",
-      "description": "Cliente buscando servicios de diseño de tarjetas de presentación",
-      "rating": 0
-    }
+      name: "Chloe Gray",
+      email: "chloe.gray@example.com",
+      image: "http://placeimg.com/640/480/people",
+      genre: "female",
+      description:
+        "Cliente buscando servicios de diseño de tarjetas de presentación",
+      rating: 0,
+    },
   ],
 };
 
@@ -520,8 +531,32 @@ const reducer = (state = initialState, action) => {
     case GET_ALL_SUPPLIERS:
       return {
         ...state,
-        suppliers: action.payload
-      }
+        suppliers: action.payload,
+      };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case FILTER_BY_CATEGORY: {
+      const filteredCategories = state.categories.filter(
+        (category) => category.nombre === action.payload
+      );
+      return {
+        ...state,
+        filteredCategories: filteredCategories,
+      };
+    }
+    case "RESET_CATEGORY_FILTER":
+      return {
+        ...state,
+        filteredCategories: [],
+      };
+    case SEARCH_PROFESSIONALS:
+      return {
+        ...state,
+        professionals: action.payload,
+      };
     default:
       return { ...state };
   }

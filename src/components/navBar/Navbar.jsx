@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SearchBar from '../SearchBar/SearchBar'
+
 import logo from "../../assets/categoriesIcons/logo.png";
 import {
   Box,
@@ -54,6 +56,7 @@ const Navbar = () => {
             ¿Cómo funciona?
           </Link>
         </Box>
+        <SearchBar/>
 
         <Box display={{ base: "block", md: "none" }}>
           <Menu>

@@ -1,8 +1,9 @@
 //aca vienen todas las actions
 import { API } from '../../../utils/API/constants'
 import axios from 'axios'
-import { GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, } from '../actionsTypes/actionsType'
+import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS } from '../actionsTypes/actionsType'
 
+//! toda la data de la api, paque? por si la necesitas jajaja
 const get_all = () => {
     return async (dispatch) => {
       try {
@@ -53,10 +54,67 @@ const getAllSuppliers = () => {
 //     }
 //   };
 // };
+
+//! action para traer las categorias
+const getAllCategories = () => {
+  const URL = API.DOMAIN;
+
+  return function (dispatch) {
+    fetch(URL)
+      .then((response) => response.json())
+      .then((results) => {
+ 
+        dispatch({
+          type: GET_CATEGORIES,
+          payload: results.data[0].categorias,
+        });
+         console.log(results.data[0].categorias);
+      })
+      .catch((error) => console.error(error.message));
+  };
+};
+
+
+//! Filtrar por categoria
+const filterByCategory = (category) => {
+  return {
+    type: FILTER_BY_CATEGORY,
+    payload: category,
+  };
+};
+
+const resetCategoryFilter = () => {
+  return {
+    type: "RESET_CATEGORY_FILTER",
+  };
+};
   
+
+//! action para buscar por nombre de profesion
+export const searchProfessionals = (searchTerm) => {
+  const URL = API.DOMAIN;
+
+  return function (dispatch) {
+    fetch(`${URL}/professionals?name=${searchTerm}`)
+      .then((response) => response.json())
+      .then((results) => {
+        console.log(results); 
+        dispatch({
+          type: SEARCH_PROFESSIONALS,
+          payload: results.data,
+        });
+      })
+      .catch((error) => console.error(error.message));
+  };
+};
+
+
   export {
     get_all,
     getAllSuppliers,
+    getAllCategories,
+    filterByCategory,
+    resetCategoryFilter
     //getCategory
   };
   
