@@ -11,7 +11,7 @@ import {
 import { AtSignIcon, CheckCircleIcon } from '@chakra-ui/icons'
 import Tag from '../../singleComponents/Tag/Tag'
 
-export default function SocialProfileSimple ({ id, name, email, image, profesiones, ubicacion }) {
+export default function SocialProfileSimple ({ name, email, image, profesiones, description, ubicacion }) {
   return (
     <Box
       maxW='320px'
@@ -25,8 +25,8 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
     >
       <Avatar
         size='xl'
-        src='https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280.jpg'
-        alt='Avatar Alt'
+        src={image}
+        alt='Avatar'
         mb={4}
         pos='relative'
       />
@@ -58,7 +58,7 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
         color={useColorModeValue('gray.500', 'gray.400')}
         px={3}
       >
-        Servicio de cerrajeria a domicilio 24hs. Aperturas, cambios de combinacion, copias de llaves, reparacion de cerraduras, venta y colocacion de cerraduras nuevas.
+        {description}
       </Text>
       <Stack
         align='center'
@@ -68,12 +68,8 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
         mt={6}
       >
         {
-        profesiones && profesiones.map(({ id, name }) => {
-          return (
-            <Tag key={id} textTag={name} />
-          )
-        })
-      }
+          profesiones && <Tag textTag={profesiones[0].name} />
+        }
       </Stack>
 
       <Stack mt={8} direction='row' spacing={4}>
