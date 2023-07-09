@@ -13,7 +13,7 @@ import {
 import { AtSignIcon } from '@chakra-ui/icons'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import Tag from '../../singleComponents/Tag/Tag'
+import Tag from '../../singleComponents/Tag'
 import NoAvatar from '../../assets/defaultImages/sinfoto.jpg'
 
 export default function SocialProfileSimple ({ id, name, email, image, ubication, description, professions }) {

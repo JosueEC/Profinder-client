@@ -9,7 +9,8 @@ export default function Tag ({ textTag }) {
       px={2}
       py={1}
       bg={useColorModeValue('teal.300', 'gray.800')}
-      fontWeight='400'>
+      fontWeight='400'
+    >
       {textTag}
     </Badge>
   )
