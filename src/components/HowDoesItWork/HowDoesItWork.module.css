@@ -1,4 +1,5 @@
 /* Estilos base */
+/* //! RESTAURAR */
 .container {
   display: flex;
   flex-direction: row;
@@ -12,6 +13,7 @@
   align-items: center;
 }
 .profesionalContainer {
+  border: solid 2px red;
     position: relative;
 }
 
