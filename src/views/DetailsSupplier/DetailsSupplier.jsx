@@ -14,8 +14,11 @@ import NoAvatar from '../../assets/defaultImages/sinfoto.jpg'
 import Tag from '../../singleComponents/Tag'
 import InfoLabel from '../../singleComponents/InfoLabel'
 import SupplierPost from '../../components/SupplierPost/SupplierPost'
+import mockupSupplier from '../../utils/Mockups/id-profesional.json'
 
 const ArticleList = () => {
+  const supplierData = mockupSupplier[0]
+
   return (
     // ! Contenedor principal
     <Container
@@ -24,7 +27,7 @@ const ArticleList = () => {
       maxW='7xl'
       p='12'
     >
-      <Heading as='h1'>Trevor Aquino</Heading>
+      <Heading as='h1'>{supplierData.name || 'Sin nombre'}</Heading>
       {/* //! Card Principal */}
       <Box
         p={7}
@@ -51,7 +54,8 @@ const ArticleList = () => {
           >
             <Image
               borderRadius='50%'
-              src={NoAvatar}
+              boxSize='300px'
+              src={supplierData.image || NoAvatar}
               alt='avatar supplier'
               objectFit='contain'
             />
@@ -89,9 +93,19 @@ const ArticleList = () => {
             direction='row'
             my={4}
           >
-            <Tag textTag='Electricista' />
+            {
+            supplierData.professions &&
+            supplierData.professions.map(({ ocupations }) => {
+              return ocupations.map(({ id, name }) => {
+                return (
+                  <Tag key={id} textTag={name} />
+                )
+              })
+            })
+          }
+            {/* <Tag textTag='Electricista' />
             <Tag textTag='Plomero' />
-            <Tag textTag='Pintor' />
+            <Tag textTag='Pintor' /> */}
           </Stack>
           {/* //! Descripcion del profesional */}
           <Text
@@ -101,13 +115,14 @@ const ArticleList = () => {
             fontSize='lg'
             mb={5}
           >
-            Servicio de cerrajeria a domicilio 24hs. Aperturas, cambios de combinacion, copias de llaves, reparacion de cerraduras, venta y colocacion de cerraduras nuevas.
+            {supplierData.description}
           </Text>
-          <InfoLabel textLabel='Masculino' iconLabel={FaMale} />
-          <InfoLabel textLabel='7 Años de experiencia' iconLabel={FaRegPaperPlane} />
-          <InfoLabel textLabel='aquinotrevor@gmail.com' iconLabel={FaMailBulk} />
-          <InfoLabel textLabel='589018310' iconLabel={FaPhone} />
-          <InfoLabel textLabel='LeonorHaven' iconLabel={FaMapMarkerAlt} />
+          {/* //! Etiquetas de informacion del profesional */}
+          <InfoLabel textLabel={supplierData.genre} iconLabel={FaMale} />
+          <InfoLabel textLabel={supplierData.years_exp} iconLabel={FaRegPaperPlane} />
+          <InfoLabel textLabel={supplierData.email} iconLabel={FaMailBulk} />
+          <InfoLabel textLabel={supplierData.phone} iconLabel={FaPhone} />
+          <InfoLabel textLabel={supplierData.ubication} iconLabel={FaMapMarkerAlt} />
         </Box>
       </Box>
       {/* //! Titular del contendor de items post */}
@@ -121,7 +136,25 @@ const ArticleList = () => {
         marginTop='5'
         justify='center'
       >
-        <SupplierPost
+        {
+        (supplierData.jobimages)
+          ? (
+              supplierData.jobimages.map(({ image, description }) => {
+                return (
+                  <SupplierPost
+                    key={description}
+                    imagePost={image[0]}
+                    titularPost={description}
+                    descriptionPost={description}
+                  />
+                )
+              })
+            )
+          : (
+            <Heading>No hay ninguna publicacion</Heading>
+            )
+      }
+        {/* <SupplierPost
           imagePost=''
           titularPost='Mantenimiento de Tuberias'
           descriptionPost='Se realizo mantenimiento del sistema de tuberias de drenaje de una casa habitacion, el trabajo duro 1 semana,etc, etc'
@@ -135,7 +168,7 @@ const ArticleList = () => {
           imagePost='https://irp.cdn-website.com/f259aba7/MOBILE/jpg/720.jpg'
           titularPost='Reparacion del sistema de tuberias para tinaco'
           descriptionPost='Se realizo la reparacion del sistema de tuberias para el llenado de un tinaco ubicado en la parte alta de una casa habitacion'
-        />
+        /> */}
       </Wrap>
     </Container>
   )
