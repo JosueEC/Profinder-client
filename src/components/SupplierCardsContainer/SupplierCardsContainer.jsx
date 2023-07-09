@@ -5,7 +5,7 @@ import { getAllSuppliers } from "../../services/redux/actions/actions";
 import { useEffect, useState } from "react";
 import SupplierCard from "../../components/SupplierCard/SupplierCard";
 import Paginator from "../Paginator/Paginator";
-import FilterByRating from "../Filteres/FilterByRating";
+// import FilterByRating from "../Filteres/FilterByRating";
 import FilterByGenres from "../Filteres/FilterByGenres";
 
 export default function SupplierCardsContainer() {
@@ -28,7 +28,7 @@ export default function SupplierCardsContainer() {
   return (
     <Stack mt={12} align="center" justify="center">
       <FilterByGenres />
-      <FilterByRating />
+      {/* <FilterByRating /> */}
       <Paginator
         cards={suppliers}
         currentPage={currentPage}
