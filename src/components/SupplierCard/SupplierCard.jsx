@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import {
   Heading,
@@ -6,13 +7,16 @@ import {
   Text,
   Stack,
   Button,
-  useColorModeValue
+  useColorModeValue,
+  Icon
 } from '@chakra-ui/react'
-import { AtSignIcon, CheckCircleIcon } from '@chakra-ui/icons'
-import Tag from '../../singleComponents/Tag/Tag'
+import { AtSignIcon } from '@chakra-ui/icons'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import Tag from '../../singleComponents/Tag/Tag'
+import NoAvatar from '../../assets/defaultImages/sinfoto.jpg'
 
-export default function SocialProfileSimple ({ id, name, email, image, profesiones, description, ubicacion }) {
+export default function SocialProfileSimple ({ id, name, email, image, ubication, description, professions }) {
   return (
     <Box
       maxW='350px'
@@ -25,10 +29,9 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
       p={6}
       textAlign='center'
     >
-      
       <Avatar
         size='xl'
-        src={image}
+        src={image || NoAvatar}
         alt='Avatar'
         mb={4}
         pos='relative'
@@ -41,8 +44,8 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
         {email}
       </Text>
       <Text fontWeight={600} color='gray.500' mb={4}>
-        <CheckCircleIcon mr={2} color='teal.400' />
-        {ubicacion}
+        <Icon as={FaMapMarkerAlt} mr={2} color='teal.400' />
+        {ubication || 'Sin ubicacion'}
       </Text>
       {/* <Stack
         align='center'
@@ -68,25 +71,33 @@ export default function SocialProfileSimple ({ id, name, email, image, profesion
       <Stack
         align='center'
         justify='center'
-        direction='row'
+        direction='column'
         wrap='wrap'
         mt={6}
       >
         {
-          profesiones && <Tag textTag={profesiones[0].name} />
+          (professions && professions.ocupations)
+            ? (
+                professions.ocupations.map(({ id, name }) => {
+                  return (
+                    <Tag key={id} textTag={name} />
+                  )
+                })
+              )
+            : (<Tag textTag='No definida' />)
         }
       </Stack>
 
       <Stack mt={8} direction='row' spacing={4} align='center' justify='center'>
-      <Link to={`/detail/${id}`}>
-        <Button
-          flex={1}
-          fontSize='sm'
-          rounded='lg'
-          _hover={{ bg: 'gray.300' }}
-        >
-          Ver detalles
-        </Button>
+        <Link to={`/detail/${id}`}>
+          <Button
+            flex={1}
+            fontSize='sm'
+            rounded='lg'
+            _hover={{ bg: 'gray.300' }}
+          >
+            Ver detalles
+          </Button>
         </Link>
         {/* <Button
           flex={1}
