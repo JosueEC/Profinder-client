@@ -20,7 +20,7 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
   return (
     <Box
       maxW='350px'
-      height='460px'
+      height='500px'
       w='full'
       colorMode
       bg={useColorModeValue('blackAlpha.800', 'gray.800')}
@@ -47,18 +47,6 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
         <Icon as={FaMapMarkerAlt} mr={2} color='teal.400' />
         {ubication || 'Sin ubicacion'}
       </Text>
-      {/* <Stack
-        align='center'
-        justify='center'
-        direction='row'
-        mb={2}
-      >
-        <StarIcon color='yellow' />
-        <StarIcon color='yellow' />
-        <StarIcon color='yellow' />
-        <StarIcon color='white' />
-        <StarIcon color='white' />
-      </Stack> */}
       <Text
         height='76px'
         textAlign='center'
@@ -76,15 +64,21 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
         mt={6}
       >
         {
-          (professions && professions.ocupations)
+          (professions)
             ? (
-                professions.ocupations.map(({ id, name }) => {
-                  return (
-                    <Tag key={id} textTag={name} />
-                  )
+                professions.map(({ ocupations }) => {
+                  return (ocupations)
+                    ? (
+                        ocupations.map(({ id, name }) => {
+                          return (
+                            <Tag key={id} textTag={name} />
+                          )
+                        })
+                      )
+                    : (<Tag textTag='Sin definir' />)
                 })
               )
-            : (<Tag textTag='No definida' />)
+            : (<Tag textTag='Sin definir' />)
         }
       </Stack>
 

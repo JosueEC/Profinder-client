@@ -51,28 +51,19 @@ export default function SupplierCardsContainer() {
               name,
               email,
               image,
-              genre,
-              years_exp,
+              ubication,
               description,
-              categorias,
-              profesiones,
-              rating,
-              ubicacion,
-              phone,
+              professions
             }) => (
               <SupplierCard
                 key={id}
+                id={id}
                 name={name}
                 email={email}
                 image={image}
-                genre={genre}
-                experience={years_exp}
+                ubication={ubication}
                 description={description}
-                categorias={categorias}
-                profesiones={profesiones}
-                rating={rating}
-                ubicacion={ubicacion}
-                phone={phone}
+                professions={professions}
               />
             )
           )

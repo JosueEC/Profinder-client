@@ -1,4 +1,4 @@
-//aca vienen todas las actions
+import allProfesionals from '../../../utils/Mockups/all-profesionals.json'
 import { API } from '../../../utils/API/constants'
 import axios from 'axios'
 import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS, ORDER_BY_RATING, FILTER_BY_GENRES} from '../actionsTypes/actionsType'
@@ -24,15 +24,16 @@ const get_all = () => {
   };
 
 //! Action para obtener a todos lo Proveedores/Profesionales
+//TODO: Por ahora consume de forma local para no acabarse las 500 peticiones de la API.
 const getAllSuppliers = () => {
   const URL = API.DOMAIN
 
   return function (dispatch) {
     fetch(URL)
       .then(response => response.json())
-      .then(results => {
+      .then(() => {
         console.info('fetching-all-suppliers')
-        dispatch({ type: GET_ALL_SUPPLIERS, payload: results.data[2].profesionales })
+        dispatch({ type: GET_ALL_SUPPLIERS, payload: allProfesionals })
       })
       .catch(error => console.error(error.message))
   }
