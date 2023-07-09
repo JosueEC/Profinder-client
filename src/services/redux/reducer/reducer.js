@@ -3,6 +3,7 @@ import {
   GET_CATEGORIES,
   FILTER_BY_CATEGORY,
   SEARCH_PROFESSIONALS,
+  FILTER_BY_GENRES,
 } from "../actionsTypes/actionsType";
 
 const initialState = {
@@ -2231,11 +2232,20 @@ const reducer = (state = initialState, action) => {
           suppliers: sortedProfessionals,
         };
       }
-      
+      case FILTER_BY_GENRES: {
+        return {...state,
+        suppliers: funtion( action.payload, state.suppliers),}
+      }
+       
       
     default:
       return { ...state };
   }
 };
+
+const funtion = (payload, state)=> {
+  if(payload === "All") return {...state}
+  return state.filter((user)=> { user.genre === payload})
+}
 
 export default reducer;

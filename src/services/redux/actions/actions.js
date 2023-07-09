@@ -1,7 +1,7 @@
 //aca vienen todas las actions
 import { API } from '../../../utils/API/constants'
 import axios from 'axios'
-import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS, ORDER_BY_RATING } from '../actionsTypes/actionsType'
+import {FILTER_BY_CATEGORY, GET_ALL, GET_ALL_FAILURE, GET_ALL_SUPPLIERS, GET_CATEGORIES, SEARCH_PROFESSIONALS, ORDER_BY_RATING, FILTER_BY_GENRES} from '../actionsTypes/actionsType'
 
 //! toda la data de la api, paque? por si la necesitas jajaja
 const get_all = () => {
@@ -55,7 +55,7 @@ const getAllSuppliers = () => {
 //   };
 // };
 
-//! action para traer las categorias
+
 
 //! Todas las categorias con su ID
 const getAllCategories = () => {
@@ -117,6 +117,16 @@ const orderByRating = (payload) => {
   };
 };
 
+//! Filter by Genres
+const filterByGenres = (payload) => {
+  return {
+    type: FILTER_BY_GENRES,
+    payload,
+  };
+};
+
+
+
 
 
 
@@ -127,6 +137,7 @@ const orderByRating = (payload) => {
     filterByCategory,
     resetCategoryFilter,
     orderByRating,
+    filterByGenres
     //getCategory
   };
   
