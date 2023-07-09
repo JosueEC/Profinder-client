@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { get_all, getAllCategories } from '../../services/redux/actions/actions';
 
 import TopPro from "../../components/Home/TopPro/TopPro";
@@ -31,11 +31,11 @@ const HomePage = () => {
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
         <TestimonialCarrousel />
       </section>
-      <div className={styles.divider} />
-      <section >
+      <div className={styles.dividerLine} /> {/* Agregamos la clase dividerLine sin la concatenación */}
+      <section className={`${styles.Categories} ${styles.fullHeight}`}>
         <CategoriesSection />
       </section>
-      <div className={styles.divider} />
+      <div className={styles.dividerLine} /> {/* Agregamos la clase dividerLine sin la concatenación */}
       <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
         <TopPro />
       </section>
