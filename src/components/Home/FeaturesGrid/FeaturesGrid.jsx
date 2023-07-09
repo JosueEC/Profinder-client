@@ -37,9 +37,9 @@ const features = [
 
 export default function GFeaturesGrid() {
   return (
-    <Box p={4}>
+    <Box p={4} bg="gray.900" color="gray.300" h="100vh" width="100%">
       <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-        <Heading fontSize={'3xl'}>Una solucion para cada necesidad. </Heading>
+        <Heading fontSize={'3xl'}>Una solucion para cada necesidad.</Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
           Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
         </Text>
@@ -49,12 +49,14 @@ export default function GFeaturesGrid() {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
           {features.map((feature) => (
             <HStack key={feature.id} align={'top'}>
-              <Box color={'green.400'} px={2}>
+              <Box color={'teal.400'} px={2}>
                 <Icon as={CheckIcon} />
               </Box>
               <VStack align={'start'}>
-                <Text fontWeight={600}>{feature.title}</Text>
-                <Text color={'gray.600'}>{feature.text}</Text>
+                <Text fontWeight={600} color="gray.300">
+                  {feature.title}
+                </Text>
+                <Text color={'gray.300'}>{feature.text}</Text>
               </VStack>
             </HStack>
           ))}
