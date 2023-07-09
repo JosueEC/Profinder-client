@@ -75,7 +75,11 @@ const TestimonialAvatar = ({ src, name, title }) => {
     <Flex align={'center'} mt={8} direction={'column'}>
       <Avatar src={src} alt={name} mb={2} />
       <Stack spacing={-1} align={'center'}>
-        <Text fontWeight={600}>{name}</Text>
+        <Text fontWeight={600}>
+          <Text as="span" color="gray.300">
+            {name}
+          </Text>
+        </Text>
         <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
           {title}
         </Text>
@@ -86,10 +90,10 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function TestimonialCarrousel() {
   return (
-    <Box bg={useColorModeValue('gray.900', 'gray.800')} h="100vh">
+    <Box bg="gray.900" h="100vh">
       <Container py={16} as={Stack} spacing={12} w="100%" maxW="100%">
         <Stack spacing={0} align={'center'}>
-          <Heading color={useColorModeValue('gray.800', 'white')}>
+          <Heading color={useColorModeValue('gray.300', 'white')}>
             Nuestros usuarios opinan!
           </Heading>
           <Text color={useColorModeValue('gray.600', 'gray.400')}>
@@ -105,7 +109,7 @@ export default function TestimonialCarrousel() {
               <TestimonialHeading>
                 Un cambio significativo en mi vida!
               </TestimonialHeading>
-              <TestimonialText>
+              <TestimonialText color="gray.300">
                 Esta aplicación ha podido contactarme con muchas soluciones a los conflictos de la vida cotidiana.
               </TestimonialText>
             </TestimonialContent>
@@ -119,7 +123,7 @@ export default function TestimonialCarrousel() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Intuitive Design</TestimonialHeading>
+              <TestimonialHeading color="gray.300">Intuitive Design</TestimonialHeading>
               <TestimonialText>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
                 neque sed imperdiet nibh lectus feugiat nunc sem.
@@ -135,7 +139,7 @@ export default function TestimonialCarrousel() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Mindblowing Service</TestimonialHeading>
+              <TestimonialHeading color="gray.300">Mindblowing Service</TestimonialHeading>
               <TestimonialText>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
                 neque sed imperdiet nibh lectus feugiat nunc sem.

@@ -1,0 +1,55 @@
+.Categories {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(22,28,36); /* Actualizar el color de fondo */
+    color: rgb(51, 51, 51);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .Categories h2 {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+    margin-bottom: 250px;
+    color: #FF0000;
+  }
+  
+  .categoryLogos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .logo {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .categoryLabels {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  
+  .categoryLabels p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+    color: rgb(30, 144, 255);
+  }
+  
+  .categoryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .categoryItem p {
+    margin-top: 10px;
+  }

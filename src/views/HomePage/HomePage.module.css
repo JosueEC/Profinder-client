@@ -41,22 +41,7 @@ body, html {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
-  .Categories {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(180deg, #D4D4D4, #C0C0C0);
-    color: #333333;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  .Categories h2 {
-    font-size: 36px;
-    font-weight: bold;
-    font-family: "Arial", sans-serif;
-    margin-bottom: 250px;
-  }
+  
   .serviceOffers {
     height: 100vh;
     display: flex;
@@ -68,41 +53,18 @@ body, html {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
-  .categoryLogos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .logo {
-    max-width: 100px;
-    height: auto;
-  }
-
-  .categoryLabels {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 10px;
-  }
-
-  .categoryLabels p {
-    font-size: 12px;
-    text-align: center;
-    margin: 0;
-  }
-
-  .categoryItem {
+ .Categories {
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    
+    color: #333333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+
   
-  .categoryItem p {
-    margin-top: 10px;
-  }
 
   .howItWorks {
     display: flex;
@@ -154,5 +116,5 @@ body, html {
     height: 2.5px;
     background-color: white;
     width: 40%;
-    margin: 0;
+    margin: 0 auto;
   }
