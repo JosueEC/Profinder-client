@@ -15,7 +15,7 @@ html {
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, #333333, #333333) !important;
-  background-image: URL("../../assets/img-home-1.png")  !important ;
+  /* background-image: URL("../../assets/img-home-1.png")  !important ; */
   color: #000000;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }

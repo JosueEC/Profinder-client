@@ -22,7 +22,6 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
       maxW='350px'
       height='500px'
       w='full'
-      colorMode
       bg={useColorModeValue('blackAlpha.800', 'gray.800')}
       boxShadow='2xl'
       rounded='lg'

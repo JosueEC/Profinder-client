@@ -1,8 +1,5 @@
-import { useState } from "react";
-import SearchBar from "../SearchBar/SearchBar";
-import styles from "./Navbar.module.css";
-
-import logo from "../../assets/categoriesIcons/logo.png";
+import { useState } from 'react'
+import logo from '../../assets/categoriesIcons/logo.png'
 import {
   Box,
   IconButton,
@@ -11,80 +8,79 @@ import {
   MenuList,
   MenuItem,
   Flex,
-  Image,
-} from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+  Image
+} from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   // Estado para controlar la visibilidad del menú desplegable
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   // Función para alternar la visibilidad del menú desplegable
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   // Función para manejar el clic en una opción del menú desplegable
   const handleOptionClick = (option) => {
-    console.log("Selected option:", option);
-    setIsOpen(false); // Cerrar el menú desplegable al seleccionar una opción
-  };
+    setIsOpen(false) // Cerrar el menú desplegable al seleccionar una opción
+  }
 
   return (
     <nav>
       <Flex
-        justifyContent="space-between"
-        alignItems="center"
+        justifyContent='space-between'
+        alignItems='center'
         padding={4}
-        bg="gray.200"
-        as="div"
-        textTransform="uppercase"
-        fontWeight="bold"
-        fontSize="2xl"
-        fontFamily="body"
-        color="gray.700"
+        bg='gray.200'
+        as='div'
+        textTransform='uppercase'
+        fontWeight='bold'
+        fontSize='2xl'
+        fontFamily='body'
+        color='gray.700'
       >
         {/* Logo */}
-        <Box flex={{ base: "0 0 100%", md: "0 0 20%" }}>
-          <Link to="/" textDecoration="none">
-            <Image src={logo} alt="Logo" width="70%" height="auto" />
+        <Box flex={{ base: '0 0 100%', md: '0 0 20%' }}>
+          <Link to='/' textDecoration='none'>
+            <Image src={logo} alt='Logo' width='70%' height='auto' />
           </Link>
         </Box>
 
-        <Box display={{ base: "none", md: "block" }}>
-          <Link to="/comofunciona"    style={{ fontSize: "20px" }} textDecoration="none" ml={4} fontSize="lg">
+        <Box display={{ base: 'none', md: 'block' }}>
+          <Link to='/comofunciona' style={{ fontSize: '20px' }} textDecoration='none' ml={4} fontSize='lg'>
             ¿Cómo funciona?
           </Link>
         </Box>
 
-        <Box display={{ base: "block", md: "none" }}>
+        <Box display={{ base: 'block', md: 'none' }}>
           <Menu>
             <MenuButton
               as={IconButton}
               icon={<HamburgerIcon />}
-              variant="ghost"
-              textDecoration="none"
+              variant='ghost'
+              textDecoration='none'
             />
             <MenuList>
-              <MenuItem fontSize="lg">
-                <Link to="/comofunciona" textDecoration="none" >
+              <MenuItem fontSize='lg'>
+                <Link to='/comofunciona' textDecoration='none'>
                   ¿Cómo funciona?
                 </Link>
               </MenuItem>
 
               <MenuItem
-                onClick={() => handleOptionClick("cliente")}
-                fontSize="lg"
+                onClick={() => handleOptionClick('cliente')}
+                fontSize='lg'
               >
                 Soy Cliente
               </MenuItem>
 
               <MenuItem
-                as="a"
-                href="/login"
-                onClick={() => handleOptionClick("profesional")}
-                fontSize="lg"
+                as='a'
+                href='/login'
+                onClick={() => handleOptionClick('profesional')}
+                fontSize='lg'
               >
                 Soy Profesional
               </MenuItem>
@@ -93,12 +89,12 @@ const Navbar = () => {
         </Box>
 
         <Box
-          display={{ base: isOpen ? "block" : "none", md: "block" }}
+          display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
           mt={{ base: 4, md: 0 }}
         >
           <ul>
             <li>
-              <a  style={{ fontSize: "20px" }} href="#" onClick={toggleDropdown} textDecoration="none">
+              <a style={{ fontSize: '20px' }} href='#' onClick={toggleDropdown} textDecoration='none'>
                 Registrate ▼
               </a>
               {isOpen && (
@@ -106,10 +102,10 @@ const Navbar = () => {
                   {/* Opción: Soy Cliente */}
                   <li>
                     <a
-                      href="#"
-                      onClick={() => handleOptionClick("cliente")}
-                      textDecoration="none"
-                      style={{ fontSize: "12px" }}
+                      href='#'
+                      onClick={() => handleOptionClick('cliente')}
+                      textDecoration='none'
+                      style={{ fontSize: '12px' }}
                     >
                       Soy Cliente
                     </a>
@@ -118,10 +114,10 @@ const Navbar = () => {
                   {/* Opción: Soy Profesional */}
                   <li>
                     <a
-                      href="/login"
-                      onClick={() => handleOptionClick("profesional")}
-                      textDecoration="none"
-                      style={{ fontSize: "12px" }}
+                      href='/registerProvider'
+                      onClick={() => handleOptionClick('profesional')}
+                      textDecoration='none'
+                      style={{ fontSize: '12px' }}
                     >
                       Soy Profesional
                     </a>
@@ -132,14 +128,14 @@ const Navbar = () => {
           </ul>
         </Box>
 
-        <Box display={{ base: "none", md: "block" }}>
-          <Link to="/userLogin" textDecoration="none"  style={{ fontSize: "20px" }}>
+        <Box display={{ base: 'none', md: 'block' }}>
+          <Link to='/userLogin' textDecoration='none' style={{ fontSize: '20px' }}>
             Login
           </Link>
         </Box>
       </Flex>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
