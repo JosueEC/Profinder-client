@@ -14,7 +14,7 @@ import {
   ScaleFade
 } from '@chakra-ui/react'
 import { FaUserAlt, FaRegPaperPlane, FaMailBulk, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
-import NoAvatar from '../../assets/defaultImages/sinfoto.jpg'
+import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
 import Tag from '../../singleComponents/Tag'
 import InfoLabel from '../../singleComponents/InfoLabel'
 import SupplierPost from '../../components/SupplierPost/SupplierPost'
@@ -63,7 +63,9 @@ const ArticleList = () => {
               <Image
                 borderRadius='50%'
                 boxSize='300px'
-                src={supplierData.image || NoAvatar}
+                src={supplierData.image}
+                fallback={NoAvatar}
+                loading='lazy'
                 alt='avatar supplier'
                 objectFit='contain'
               />

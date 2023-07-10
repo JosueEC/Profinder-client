@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Image } from '@chakra-ui/image'
 import { Box, Heading, Text, WrapItem } from '@chakra-ui/layout'
-import SinImagen from '../../assets/defaultImages/sinImagen.jpg'
+import SinImagen from '../../assets/defaultImages/sinImagen.webp'
 
 export default function SupplierPost ({ imagePost, titularPost, descriptionPost }) {
   const responsiveWidth = {
@@ -26,7 +26,9 @@ export default function SupplierPost ({ imagePost, titularPost, descriptionPost 
         >
           <Image
             transform='scale(1.0)'
-            src={imagePost || SinImagen}
+            src={imagePost}
+            fallbackSrc={SinImagen}
+            loading='lazy'
             alt='image Post'
             objectFit='cover'
             width='100%'
