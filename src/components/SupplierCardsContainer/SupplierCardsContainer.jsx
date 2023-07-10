@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, lazy, Suspense } from 'react'
-import { Flex, Stack } from '@chakra-ui/layout'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllSuppliers } from '../../services/redux/actions/actions'
-import Paginator from '../Paginator/Paginator'
+import { useEffect, useState, lazy, Suspense } from "react";
+import { Flex, Stack } from "@chakra-ui/layout";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSuppliers } from "../../services/redux/actions/actions";
+import Paginator from "../Paginator/Paginator";
 import FilterByRating from "../Filteres/FilterByRating";
-import FilterByGenres from '../Filteres/FilterByGenres'
-import { Skeleton } from '@chakra-ui/skeleton'
-import SearchBar from '../SearchBar/SearchBar'
+import FilterByGenres from "../Filteres/FilterByGenres";
+import { Skeleton } from "@chakra-ui/skeleton";
+import SearchBar from "../SearchBar/SearchBar";
 import { Box } from "@chakra-ui/react";
-const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
+const SupplierCard = lazy(() => import("../SupplierCard/SupplierCard"));
 
 export default function SupplierCardsContainer() {
   //! cambios para el paginado
-  const [currentPage, setCurrentPage] = useState(0)
-  const itemsPerPage = 10
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
   const [searchTerm, setSearchTerm] = useState("");
 
   const suppliers = useSelector((state) => state.suppliers);
@@ -26,7 +26,7 @@ export default function SupplierCardsContainer() {
 
   //! Calcular el índice inicial y final de los elementos a mostrar
   const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage
+  const endIndex = startIndex + itemsPerPage;
   // Filtrar los proveedores según el término de búsqueda
   const filteredSuppliers = suppliers.filter((supplier) =>
     supplier.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -38,10 +38,12 @@ export default function SupplierCardsContainer() {
     <Stack mt={12} align="center" justify="center">
       <FilterByGenres />
       <FilterByRating />
-    </Box>
- 
 
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={suppliers} />
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        cards={suppliers}
+      />
       <Paginator
         cards={filteredSuppliers}
         currentPage={currentPage}
