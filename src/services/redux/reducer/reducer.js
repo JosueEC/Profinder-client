@@ -2303,6 +2303,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         professionals: action.payload,
       };
+      //!filtro por rating
     case ORDER_BY_RATING: {
       const sortedProfessionals = [...state.profesionales].sort((a, b) => {
         if (action.payload === "lower") {

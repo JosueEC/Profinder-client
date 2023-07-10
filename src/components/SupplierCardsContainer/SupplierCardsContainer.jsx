@@ -8,6 +8,7 @@ import FilterByRating from "../Filteres/FilterByRating";
 import FilterByGenres from '../Filteres/FilterByGenres'
 import { Skeleton } from '@chakra-ui/skeleton'
 import SearchBar from '../SearchBar/SearchBar'
+import { Box } from "@chakra-ui/react";
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
 
 export default function SupplierCardsContainer () {
@@ -30,8 +31,13 @@ export default function SupplierCardsContainer () {
 
   return (
     <Stack mt={12} align='center' justify='center'>
+ 
+ <Box display="flex" justifyContent="center" alignItems="center">
       <FilterByGenres />
       <FilterByRating />
+    </Box>
+ 
+
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={suppliers} />
       <Paginator
         cards={suppliers}
