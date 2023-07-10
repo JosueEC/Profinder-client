@@ -116,6 +116,7 @@ export const searchProfessionals = (name) => {
 
 //!
 const orderByRating = (payload) => {
+  console.log(payload);
   return {
     type: ORDER_BY_RATING,
     payload

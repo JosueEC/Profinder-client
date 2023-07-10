@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { orderByRating } from "../../services/redux/actions/actions";
 import { useState } from "react";
-import { Select, FormControl, FormLabel } from "@chakra-ui/react";
 
 const FilterByRating = () => {
-  const allProfesionales = useSelector((state) => state.profesionales);
+  const allProfesionales = useSelector(state => state.profesionales);
+ // console.log(allProfesionales);
   const dispatch = useDispatch();
   const [orderRating, setOrderByRating] = useState("");
 
@@ -15,20 +15,14 @@ const FilterByRating = () => {
   };
 
   return (
-    <FormControl>
-      <Select
-        onChange={handlerByRating}
-        value={orderRating}
-        variant="filled"
-        width="200px"
-        borderRadius="md"
-        boxShadow="md"
-        _focus={{ boxShadow: "outline" }}
-      >
+    <div>
+      <select onChange={handlerByRating}>
+     
+        <label value="">RATING</label>
         <option value="lower">Lower</option>
         <option value="higher">Higher</option>
-      </Select>
-    </FormControl>
+      </select>
+    </div>
   );
 };
 
