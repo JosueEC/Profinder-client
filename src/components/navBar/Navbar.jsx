@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import logo from '../../assets/categoriesIcons/logo.png'
+import logo from '../../assets/categoriesIcons/Logo.png'
 import {
   Box,
   IconButton,
@@ -23,7 +23,7 @@ const Navbar = () => {
   }
 
   // Función para manejar el clic en una opción del menú desplegable
-  const handleOptionClick = (option) => {
+  const handleOptionClick = () => {
     setIsOpen(false) // Cerrar el menú desplegable al seleccionar una opción
   }
 
