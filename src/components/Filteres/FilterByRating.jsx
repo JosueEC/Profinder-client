@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const FilterByRating = () => {
   const allProfesionales = useSelector(state => state.profesionales);
-  console.log(allProfesionales);
+ // console.log(allProfesionales);
   const dispatch = useDispatch();
   const [orderRating, setOrderByRating] = useState("");
 

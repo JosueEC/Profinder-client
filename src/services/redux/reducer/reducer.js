@@ -2317,7 +2317,7 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        suppliers: sortedProfessionals,
+        suppliers: [...sortedProfessionals],
       };
     }
     //! filtro de busqueda por generos

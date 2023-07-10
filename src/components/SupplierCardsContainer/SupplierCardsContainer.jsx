@@ -4,7 +4,7 @@ import { Flex, Stack } from '@chakra-ui/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllSuppliers } from '../../services/redux/actions/actions'
 import Paginator from '../Paginator/Paginator'
-// import FilterByRating from "../Filteres/FilterByRating";
+import FilterByRating from "../Filteres/FilterByRating";
 import FilterByGenres from '../Filteres/FilterByGenres'
 import { Skeleton } from '@chakra-ui/skeleton'
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
@@ -29,7 +29,7 @@ export default function SupplierCardsContainer () {
   return (
     <Stack mt={12} align='center' justify='center'>
       <FilterByGenres />
-      {/* <FilterByRating /> */}
+      <FilterByRating />
       <Paginator
         cards={suppliers}
         currentPage={currentPage}
