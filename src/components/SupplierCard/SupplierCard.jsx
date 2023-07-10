@@ -14,7 +14,7 @@ import { AtSignIcon } from '@chakra-ui/icons'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Tag from '../../singleComponents/Tag'
-import NoAvatar from '../../assets/defaultImages/sinfoto.jpg'
+import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
 
 export default function SocialProfileSimple ({ id, name, email, image, ubication, description, professions }) {
   return (
@@ -32,6 +32,7 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
       <Avatar
         size='xl'
         src={image || NoAvatar}
+        loading='lazy'
         alt='Avatar'
         mb={4}
         pos='relative'
@@ -93,18 +94,6 @@ export default function SocialProfileSimple ({ id, name, email, image, ubication
             Ver detalles
           </Button>
         </Link>
-        {/* <Button
-          flex={1}
-          fontSize='sm'
-          rounded='lg'
-          bg='teal.400'
-          color='white'
-          _hover={{
-            bg: 'teal.500'
-          }}
-        >
-          Enviar mensaje
-        </Button> */}
       </Stack>
     </Box>
   )
