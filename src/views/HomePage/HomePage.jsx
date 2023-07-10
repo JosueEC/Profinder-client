@@ -30,7 +30,7 @@ const HomePage = () => {
       </section>
       
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
-      <div className={styles.divider} />
+        <div className={styles.divider} />
         <TestimonialCarrousel />
       </section>
       

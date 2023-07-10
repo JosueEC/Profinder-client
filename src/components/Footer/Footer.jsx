@@ -23,8 +23,8 @@ const footerStyles = {
 };
 
 function Footer() {
-  const bgColor = useColorModeValue("gray.900", "gray.800");
-  const textColor = useColorModeValue("gray.700", "gray.200");
+  const bgColor = useColorModeValue("gray.200", "gray.800");
+  const textColor = useColorModeValue("gray.900", "gray.600");
 
   return (
     <Box bg={bgColor} color={textColor} style={footerStyles}>
@@ -51,7 +51,7 @@ function Footer() {
           </Stack>
         </SimpleGrid>
         <Stack align={"center"} mt={8}>
-          <Text fontSize={"sm"} textAlign="center" color='gray.300'>
+          <Text fontSize={"sm"} textAlign="center" color='gray.600'>
             © 2023 Profinder create. All rights reserved
           </Text>
         </Stack>
