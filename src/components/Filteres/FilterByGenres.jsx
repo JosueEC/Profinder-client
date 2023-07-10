@@ -1,19 +1,24 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterByGenres } from "../../services/redux/actions/actions";
 import { useEffect, useState } from "react";
 
 const FilterByGenres = () => {
+  const backup = useSelector((state) => state.suppliers);
+  console.log(backup);
   const [filterGenre, setFilterGenre] = useState("");
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const response = dispatch(filterByGenres());
-    console.log(response);
-  }, [dispatch]);
+    dispatch(filterByGenres(filterGenre)); 
+  }, [dispatch, filterGenre]);
+  
+
   const handlerByGenres = (event) => {
     const { value } = event.target;
     dispatch(filterByGenres(value));
-    setFilterGenre(`Order ${value}`);
+    setFilterGenre(value); 
   };
+  
 
   return (
     <div>
