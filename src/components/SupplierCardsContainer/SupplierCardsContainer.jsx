@@ -10,7 +10,7 @@ import { Skeleton } from '@chakra-ui/skeleton'
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
 
 export default function SupplierCardsContainer () {
-  // cambios para el paginado
+  //! cambios para el paginado
   const [currentPage, setCurrentPage] = useState(0)
   const itemsPerPage = 10
 
@@ -21,7 +21,7 @@ export default function SupplierCardsContainer () {
     dispatch(getAllSuppliers())
   }, [])
 
-  // Calcular el índice inicial y final de los elementos a mostrar
+  //! Calcular el índice inicial y final de los elementos a mostrar
   const startIndex = currentPage * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const visibleSuppliers = suppliers.slice(startIndex, endIndex)

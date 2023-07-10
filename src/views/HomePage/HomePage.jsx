@@ -24,13 +24,12 @@ const HomePage = () => {
         <HowItWorks />
       </section>
       
-      <section className={`${styles.featuresGrid} ${styles.fullHeight}`}>
+     
       <div className={styles.divider} />
-        <FeaturesGrid />
-      </section>
-      
       <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
+      <FeaturesGrid />
         <div className={styles.divider} />
+
         <TestimonialCarrousel />
       </section>
       
