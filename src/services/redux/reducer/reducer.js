@@ -2297,14 +2297,11 @@ const reducer = (state = initialState, action) => {
         filteredCategories: filteredCategories,
       };
     }
-
     case SEARCH_PROFESSIONALS:
       return {
         ...state,
         professionals: action.payload,
       };
-
-    //! filtro de ordenamiento por rating
     case ORDER_BY_RATING: {
       const sortedProfessionals = [...state.profesionales].sort((a, b) => {
         if (action.payload === "lower") {

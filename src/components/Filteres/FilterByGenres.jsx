@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 const FilterByGenres = () => {
   const backup = useSelector((state) => state.suppliers);
-  console.log(backup);
   const [filterGenre, setFilterGenre] = useState("");
   const dispatch = useDispatch();
 
