@@ -221,6 +221,11 @@ function FormProvider(props) {
               <FormLabel>Categorías</FormLabel>
               <Select
                 placeholder="Seleccione una categoría"
+                value={
+                  selectedCategory && selectedCategory.nombre
+                    ? selectedCategory.nombre
+                    : ""
+                }
                 {...register("categories")}
                 onChange={envioCategoria}
               >
