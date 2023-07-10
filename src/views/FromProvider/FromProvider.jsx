@@ -50,7 +50,7 @@ function FormProvider(props) {
   });
 
   const categorias = useSelector((state) => state.categories);
- 
+  console.log(categorias);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,10 +66,17 @@ function FormProvider(props) {
     setSelectedCategory([value]);
   };
 
+  // const envioOcupaciones = (event) => {
+  //   const value = event.target.value;
+  //   setSelectedOccupations([value]);
+
+  // };
   const envioOcupaciones = (event) => {
-    const value = event.target.value;
-    setSelectedOccupations([value]);
-   
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOccupations(selectedOptions);
   };
 
   const onSubmit = (data) => {
@@ -87,7 +94,6 @@ function FormProvider(props) {
       categories: selectedCategory,
     };
 
-   
     dispatch(postProveedor(newData));
   };
 
@@ -164,7 +170,7 @@ function FormProvider(props) {
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
-                type="text"
+                type="url"
                 {...register("image", {
                   required: "El campo imagen es requerido",
                 })}
@@ -230,6 +236,7 @@ function FormProvider(props) {
                 ))}
               </Select>
             </FormControl>
+
             <FormControl>
               <FormLabel>Ocupación</FormLabel>
               <Select
@@ -240,13 +247,19 @@ function FormProvider(props) {
                 onChange={envioOcupaciones}
               >
                 {categorias &&
-                  categorias[0]?.profesiones?.map((c, index) => (
-                    <option value={c.name} key={index}>
-                      {c.name}
-                    </option>
-                  ))}
+                  selectedCategory.length > 0 &&
+                  categorias
+                    .find(
+                      (categoria) => categoria.nombre === selectedCategory[0]
+                    )
+                    ?.profesiones?.map((profesion, index) => (
+                      <option value={profesion.name} key={index}>
+                        {profesion.name}
+                      </option>
+                    ))}
               </Select>
             </FormControl>
+
             <FormControl>
               <FormLabel>Descripción</FormLabel>
 
