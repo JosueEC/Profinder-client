@@ -57,7 +57,6 @@ const Navbar = () => {
             ¿Cómo funciona?
           </Link>
         </Box>
-        <SearchBar />
 
         <Box display={{ base: "block", md: "none" }}>
           <Menu>

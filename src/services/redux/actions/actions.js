@@ -98,22 +98,21 @@ const resetCategoryFilter = () => {
 }
 
 //! action para buscar por nombre de profesion
-export const searchProfessionals = (searchTerm) => {
-  const URL = API.DOMAIN
-
+export const searchProfessionals = (name) => {
   return function (dispatch) {
-    fetch(`${URL}/professionals?name=${searchTerm}`)
+    fetch(`https://backprofinder-production.up.railway.app/ocupations?name=${name}`)
       .then((response) => response.json())
       .then((results) => {
-        console.log(results)
+        console.log(results);
         dispatch({
           type: SEARCH_PROFESSIONALS,
-          payload: results.data
-        })
+          payload: results,
+        });
       })
-      .catch((error) => console.error(error.message))
-  }
-}
+      .catch((error) => console.error(error.message));
+  };
+};
+
 
 //!
 const orderByRating = (payload) => {

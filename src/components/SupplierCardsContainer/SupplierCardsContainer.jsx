@@ -7,12 +7,14 @@ import Paginator from '../Paginator/Paginator'
 import FilterByRating from "../Filteres/FilterByRating";
 import FilterByGenres from '../Filteres/FilterByGenres'
 import { Skeleton } from '@chakra-ui/skeleton'
+import SearchBar from '../SearchBar/SearchBar'
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
 
 export default function SupplierCardsContainer () {
   //! cambios para el paginado
   const [currentPage, setCurrentPage] = useState(0)
   const itemsPerPage = 10
+  const [searchTerm, setSearchTerm] = useState("");
 
   const suppliers = useSelector((state) => state.suppliers)
   const dispatch = useDispatch()
@@ -30,6 +32,7 @@ export default function SupplierCardsContainer () {
     <Stack mt={12} align='center' justify='center'>
       <FilterByGenres />
       <FilterByRating />
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={suppliers} />
       <Paginator
         cards={suppliers}
         currentPage={currentPage}

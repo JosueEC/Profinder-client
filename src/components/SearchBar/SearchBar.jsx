@@ -1,23 +1,32 @@
-import { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchProfessionals } from "../../services/redux/actions/actions";
 import { Input, Button, Flex } from "@chakra-ui/react";
 
-const SearchBar = () => {
+const SearchBar = ({ searchTerm, setSearchTerm, cards }) => {
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState("");
+ 
 
-  const handleSearch = () => {
-   const response = dispatch(searchProfessionals(searchTerm));
-   console.log(response);
+  useEffect(() => {
+    dispatch(searchProfessionals());
+  }, [dispatch]);
+
+  const handleSearch = async () => {
+    try {
+      const response = await dispatch(searchProfessionals(searchTerm));
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  
   return (
-    <Flex alignItems="center" justifyContent="center" mb={4}>
+    <Flex alignItems="center" justifyContent="center" mb={4} color="gray.500">
       <Input
         type="text"
         placeholder="Search professionals"

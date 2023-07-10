@@ -15,6 +15,7 @@ const initialState = {
   filteredCategories: [],
   suppliers2: [],
   filteredSuppliers: [],
+  professionals:[],
 
   profesiones: [
     { id: 1, name: "Programador" },
