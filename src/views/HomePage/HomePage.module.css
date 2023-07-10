@@ -14,30 +14,21 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #F4F4F4, #E0E0E0);
+  background: linear-gradient(180deg, #333333, #333333) !important;
   background-image: URL("../../assets/img-home-1.png")  !important ;
-  color: #333333;
+  color: #000000;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.featuresGrid {
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, #E8E8E8, #D0D0D0);
-  color: #333333;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+
 
 .publicOpinion {
-  height: 50vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #E8E8E8, #D0D0D0);
+  background: linear-gradient(180deg, #161c24 , #161c24);
   color: #333333;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -48,7 +39,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #C8C8C8, #B0B0B0);
+  background: linear-gradient(180deg, #161c24, #161c24);
   color: #333333;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -59,7 +50,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #D4D4D4, #C0C0C0);
+  background: linear-gradient(180deg, #161c24, #161c24);
   color: #333333;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
