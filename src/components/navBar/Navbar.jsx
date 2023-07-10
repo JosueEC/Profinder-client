@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
+import styles from "./Navbar.module.css";
 
 import logo from "../../assets/categoriesIcons/logo.png";
 import {
@@ -45,19 +46,18 @@ const Navbar = () => {
         color="gray.700"
       >
         {/* Logo */}
-        <Box flex={{ base: "0 0 100%", md: "0 0 30%" }}>
+        <Box flex={{ base: "0 0 100%", md: "0 0 20%" }}>
           <Link to="/" textDecoration="none">
             <Image src={logo} alt="Logo" width="70%" height="auto" />
           </Link>
         </Box>
 
         <Box display={{ base: "none", md: "block" }}>
-          <Link to="/comofunciona" textDecoration="none" ml={4} fontSize="lg">
+          <Link to="/comofunciona"    style={{ fontSize: "20px" }} textDecoration="none" ml={4} fontSize="lg">
             ¿Cómo funciona?
           </Link>
         </Box>
         <SearchBar />
-  
 
         <Box display={{ base: "block", md: "none" }}>
           <Menu>
@@ -69,7 +69,7 @@ const Navbar = () => {
             />
             <MenuList>
               <MenuItem fontSize="lg">
-                <Link to="/comofunciona" textDecoration="none">
+                <Link to="/comofunciona" textDecoration="none" >
                   ¿Cómo funciona?
                 </Link>
               </MenuItem>
@@ -99,7 +99,7 @@ const Navbar = () => {
         >
           <ul>
             <li>
-              <a href="#" onClick={toggleDropdown} textDecoration="none">
+              <a  style={{ fontSize: "20px" }} href="#" onClick={toggleDropdown} textDecoration="none">
                 Registrate ▼
               </a>
               {isOpen && (
@@ -110,18 +110,19 @@ const Navbar = () => {
                       href="#"
                       onClick={() => handleOptionClick("cliente")}
                       textDecoration="none"
-                      fontSize="lg"
+                      style={{ fontSize: "12px" }}
                     >
                       Soy Cliente
                     </a>
                   </li>
 
+                  {/* Opción: Soy Profesional */}
                   <li>
                     <a
                       href="/login"
                       onClick={() => handleOptionClick("profesional")}
                       textDecoration="none"
-                      fontSize="lg"
+                      style={{ fontSize: "12px" }}
                     >
                       Soy Profesional
                     </a>
@@ -133,7 +134,7 @@ const Navbar = () => {
         </Box>
 
         <Box display={{ base: "none", md: "block" }}>
-          <Link to="/userLogin" textDecoration="none">
+          <Link to="/userLogin" textDecoration="none"  style={{ fontSize: "20px" }}>
             Login
           </Link>
         </Box>
