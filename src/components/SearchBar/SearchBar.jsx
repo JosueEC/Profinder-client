@@ -1,16 +1,10 @@
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { searchProfessionals } from "../../services/redux/actions/actions";
 import { Input, Button, Flex } from "@chakra-ui/react";
 
-const SearchBar = ({ searchTerm, setSearchTerm, cards }) => {
+const SearchBar = ({ searchTerm, setSearchTerm }) => {
   const dispatch = useDispatch();
- 
-
-  useEffect(() => {
-    dispatch(searchProfessionals());
-  }, [dispatch]);
 
   const handleSearch = async () => {
     try {
