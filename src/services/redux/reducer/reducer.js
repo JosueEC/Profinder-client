@@ -4,6 +4,7 @@ import {
   FILTER_BY_CATEGORY,
   SEARCH_PROFESSIONALS,
   FILTER_BY_GENRES,
+  ORDER_BY_RATING,
 } from "../actionsTypes/actionsType";
 
 const initialState = {
@@ -2296,17 +2297,15 @@ const reducer = (state = initialState, action) => {
         filteredCategories: filteredCategories,
       };
     }
-    case "RESET_CATEGORY_FILTER":
-      return {
-        ...state,
-        filteredCategories: [],
-      };
+
     case SEARCH_PROFESSIONALS:
       return {
         ...state,
         professionals: action.payload,
       };
-    case "ORDER_BY_RATING": {
+
+    //! filtro de ordenamiento por rating
+    case ORDER_BY_RATING: {
       const sortedProfessionals = [...state.profesionales].sort((a, b) => {
         if (action.payload === "lower") {
           return a.rating - b.rating;
@@ -2321,6 +2320,7 @@ const reducer = (state = initialState, action) => {
         suppliers: sortedProfessionals,
       };
     }
+    //! filtro de busqueda por generos
     case FILTER_BY_GENRES: {
       const backup = state.backup;
       const filteredSuppliers =
@@ -2333,7 +2333,7 @@ const reducer = (state = initialState, action) => {
         suppliers: filteredSuppliers,
       };
     }
-
+    //! caso por default
     default:
       return { ...state };
   }
