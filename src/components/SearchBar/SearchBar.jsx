@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchProfessionals } from "../../services/redux/actions/actions";

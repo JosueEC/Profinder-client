@@ -113,7 +113,6 @@ export const searchProfessionals = (name) => {
   };
 };
 
-
 //!
 const orderByRating = (payload) => {
   return {
