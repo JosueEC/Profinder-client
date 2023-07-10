@@ -135,53 +135,33 @@ const filterByGenres = (payload) => {
 
 //! Postear porveerdore
 //! Postear proveedor
-const postProveedor = (info) => {
-  return async function (dispatch) {
-    try {
-      // Verificación
-      if (
-        info.name === "" ||
-        info.email === "" ||
-        info.image === "" ||
-        info.genre === "" ||
-        info.years_exp === "" ||
-        info.description === "" ||
-        info.ubication === "" ||
-        info.phone === "" ||
-        info.professions.length === 0 ||
-        info.category === ""
-      ) {
-        throw new Error("Faltan datos");
+ const postProveedor = (info) => {
+   console.log(info)
+    return async function (dispatch) {
+      try {
+        // Verificación
+        if (
+          info.name === "" ||
+          info.email === "" ||
+          info.image === "" ||
+          info.genre === "" ||
+          info.years_exp === "" ||
+          info.description === "" ||
+          info.ubicacion === "" ||
+          info.phone === "" ||
+          info.ocupations === "" ||
+          info.categories === 0
+        ) {
+          throw new Error("Faltan datos");
+        }
+  
+        const response = await axios.post("https://backprofinder-production.up.railway.app/profesional/", info);
+        alert("Corredor creado");
+      } catch (error) {
+        alert(`${error.response.data.error}`)
       }
-
-      const formattedProfessions = info.professions.map((profession) => ({
-        id: profession.id,
-        category: profession.category,
-        occupations: profession.occupations.map((occupation) => ({
-          id: occupation.id,
-          name: occupation.name,
-        })),
-      }));
-
-      const formattedInfo = {
-        ...info,
-        professions: formattedProfessions,
-      };
-
-      console.log(formattedInfo); // Mostrar los datos formateados en la consola
-
-      await axios.post(
-        "https://backprofinder-production.up.railway.app/profesional/",
-        formattedInfo
-      );
-
-      alert("Proveedor creado");
-    } catch (error) {
-      alert(error.message);
-    }
+    };
   };
-};
-
 
 export {
   get_all,

@@ -41,10 +41,11 @@ function FormProvider(props) {
       image: "",
       genre: "",
       years_exp: "",
-      description: "Agregue una descripcion",
+      description: "",
       ubicacion: "",
       phone: "",
-      occupations: [],
+      ocupations: [],
+      categories: [],
     },
   });
 
@@ -54,23 +55,32 @@ function FormProvider(props) {
 
   useEffect(() => {
     dispatch(getAllCategories());
-   
   }, [dispatch]);
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedOccupations, setSelectedOccupations] = useState(
-    getValues("occupations") || [] // Initialize selectedOccupations with form default values
-  );
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedOccupations, setSelectedOccupations] = useState([]);
   const [value, setValue] = useState("");
 
+  const envioCategoria = (event) => {
+    const value = event.target.value;
+    setSelectedCategory([value]);
+  };
+
+  // const envioOcupaciones = (event) => {
+  //   const value = event.target.value;
+  //   setSelectedOccupations([value]);
+
+  // };
+  const envioOcupaciones = (event) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOccupations(selectedOptions);
+  };
+
   const onSubmit = (data) => {
-    const newOccupations = selectedOccupations.map((occupation) => ({
-      id: occupation.id,
-      name: occupation.name,
-    }));
-  
     const newData = {
-     
       name: data.name,
       email: data.email,
       image: data.image,
@@ -79,19 +89,13 @@ function FormProvider(props) {
       phone: data.phone,
       ubication: data.ubicacion,
       description: data.description,
-      professions: [
-        {
-          id: selectedCategory ? selectedCategory.idcategoria : null, // Obtener el id de la categoría seleccionada
-          category: selectedCategory ? selectedCategory.nombre : "",
-          occupations: newOccupations,
-        },
-      ],
+      ocupations: selectedOccupations,
+
+      categories: selectedCategory,
     };
-  
-    console.log(newData);
+
     dispatch(postProveedor(newData));
   };
-  
 
   return (
     <Flex
@@ -217,41 +221,19 @@ function FormProvider(props) {
               <FormLabel>Categorías</FormLabel>
               <Select
                 placeholder="Seleccione una categoría"
-                defaultValue={
+                value={
                   selectedCategory && selectedCategory.nombre
                     ? selectedCategory.nombre
                     : ""
                 }
-                {...register("category")}
-                onChange={(e) => {
-                  const selectedCategory = categorias.find(
-                    (categoria) => categoria.nombre === e.target.value
-                  );
-                  setSelectedCategory(selectedCategory);
-
-                  // Encuentra las ocupaciones correspondientes a la categoría seleccionada
-                  const selectedOccupations = categorias.find(
-                    (categoria) => categoria.nombre === e.target.value
-                  ).profesiones;
-
-                  setSelectedOccupations(selectedOccupations);
-                  setFormValue("occupations", selectedOccupations);
-                }}
+                {...register("categories")}
+                onChange={envioCategoria}
               >
-                {categorias && categorias.length > 0 ? (
-                  categorias.map((categoria) => (
-                    <option
-                      value={categoria.nombre}
-                      key={categoria.idcategoria}
-                    >
-                      {categoria.nombre}
-                    </option>
-                  ))
-                ) : (
-                  <option value="" disabled>
-                    Cargando categorías...
+                {categorias?.map((categoria, index) => (
+                  <option value={categoria.nombre} key={index}>
+                    {categoria.nombre}
                   </option>
-                )}
+                ))}
               </Select>
             </FormControl>
 
@@ -259,33 +241,22 @@ function FormProvider(props) {
               <FormLabel>Ocupación</FormLabel>
               <Select
                 placeholder="Seleccione una ocupación"
-                value={getValues('occupations')}
-
                 {...register("occupations", {
                   validate: (value) => value.length > 0,
                 })}
-                onChange={(e) => {
-                  const selectedOptions = Array.from(
-                    e.target.selectedOptions,
-                    (option) => option.value
-                  );
-                  const selectedOccupations = selectedOptions.map(
-                    (selectedOption) =>
-                      selectedCategory.profesiones.find(
-                        (profesion) => profesion.name === selectedOption
-                      )
-                  );
-                  setSelectedOccupations(selectedOccupations);
-                  setFormValue('occupations', selectedOptions); // Actualizar el valor del formulario
-                }}
-                
+                onChange={envioOcupaciones}
               >
-                {selectedCategory &&
-                  selectedCategory.profesiones?.map((c) => (
-                    <option value={c.name} key={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
+                {categorias &&
+                  selectedCategory.length > 0 &&
+                  categorias
+                    .find(
+                      (categoria) => categoria.nombre === selectedCategory[0]
+                    )
+                    ?.profesiones?.map((profesion, index) => (
+                      <option value={profesion.name} key={index}>
+                        {profesion.name}
+                      </option>
+                    ))}
               </Select>
             </FormControl>
 
