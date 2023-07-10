@@ -17,7 +17,7 @@ export default function SupplierCardsContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllSuppliers());
+    dispatch(geAllSuppliers());
   }, []);
 
   // Calcular el índice inicial y final de los elementos a mostrar

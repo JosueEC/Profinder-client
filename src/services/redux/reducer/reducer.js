@@ -2281,8 +2281,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         backup: action.payload,
-        suppliers: action.payload,
+        suppliers: [...action.payload],
       };
+    
     case GET_CATEGORIES:
       return {
         ...state,

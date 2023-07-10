@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import React ,{useEffect}from "react";
-import { useSelector , useDispatch} from "react-redux";
-
-// Agegar importaciones
-// import { connect } from "react-redux"
-// import updateAction from "./actions"
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllCategories,
+  postProveedor,
+} from "../../services/redux/actions/actions";
 import {
   Flex,
   Box,
@@ -26,35 +26,72 @@ import {
   RadioGroup,
   Select,
 } from "@chakra-ui/react";
-import { useState } from "react";
-// agregar props
-function FormProvider() {
- 
+
+function FormProvider(props) {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue: setFormValue, // Rename setValue from useForm to setFormValue
+    getValues, // Get form values from useForm
   } = useForm({
     defaultValues: {
       name: "",
       email: "",
-      image: "", //chequear
+      image: "",
       genre: "",
       years_exp: "",
       description: "Agregue una descripcion",
       ubicacion: "",
       phone: "",
+      occupations: [],
     },
   });
 
   const categorias = useSelector((state) => state.categories);
-  const profesiones = useSelector((state) => state.profesiones);
+  console.log(categorias);
+  const dispatch = useDispatch();
 
-  const [value, setValue] = useState("1");
+  useEffect(() => {
+    dispatch(getAllCategories());
+   
+  }, [dispatch]);
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedOccupations, setSelectedOccupations] = useState(
+    getValues("occupations") || [] // Initialize selectedOccupations with form default values
+  );
+  const [value, setValue] = useState("");
+
   const onSubmit = (data) => {
-    console.log(data);
-    // props.postProveedor(data)
+    const newOccupations = selectedOccupations.map((occupation) => ({
+      id: occupation.id,
+      name: occupation.name,
+    }));
+  
+    const newData = {
+     
+      name: data.name,
+      email: data.email,
+      image: data.image,
+      genre: data.genre,
+      years_exp: data.years_exp,
+      phone: data.phone,
+      ubication: data.ubicacion,
+      description: data.description,
+      professions: [
+        {
+          id: selectedCategory ? selectedCategory.idcategoria : null, // Obtener el id de la categoría seleccionada
+          category: selectedCategory ? selectedCategory.nombre : "",
+          occupations: newOccupations,
+        },
+      ],
+    };
+  
+    console.log(newData);
+    dispatch(postProveedor(newData));
   };
+  
 
   return (
     <Flex
@@ -85,7 +122,7 @@ function FormProvider() {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Email </FormLabel>
+              <FormLabel>Email</FormLabel>
               <Input
                 type="email"
                 {...register("email", {
@@ -98,6 +135,7 @@ function FormProvider() {
               />
               {errors.email && <p>{errors.email.message}</p>}
             </FormControl>
+
             <FormControl>
               <FormLabel>Telefono</FormLabel>
               <Input
@@ -108,6 +146,7 @@ function FormProvider() {
               />
               {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
+
             <FormControl>
               <FormLabel>Ubicacion</FormLabel>
               <Input
@@ -116,13 +155,13 @@ function FormProvider() {
                   required: "El campo ubicacion es requerido",
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {errors.ubicacion && <p>{errors.ubicacion.message}</p>}
             </FormControl>
-            <FormControl>
-              <FormLabel>Contraseña</FormLabel>
 
+            {/* <FormControl>
+              <FormLabel>Contraseña</FormLabel>
               <Input type="password" />
-            </FormControl>
+            </FormControl> */}
 
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
@@ -161,7 +200,6 @@ function FormProvider() {
 
             <FormControl>
               <FormLabel>Años de experiencia</FormLabel>
-
               <NumberInput defaultValue={0} min={0} max={100}>
                 <NumberInputField
                   {...register("years_exp", {
@@ -174,48 +212,96 @@ function FormProvider() {
                 </NumberInputStepper>
               </NumberInput>
             </FormControl>
+
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <Select
-                placeholder="Select option"
-                defaultValue={1}
-                {...register("categories")}
+                placeholder="Seleccione una categoría"
+                defaultValue={
+                  selectedCategory && selectedCategory.nombre
+                    ? selectedCategory.nombre
+                    : ""
+                }
+                {...register("category")}
+                onChange={(e) => {
+                  const selectedCategory = categorias.find(
+                    (categoria) => categoria.nombre === e.target.value
+                  );
+                  setSelectedCategory(selectedCategory);
+
+                  // Encuentra las ocupaciones correspondientes a la categoría seleccionada
+                  const selectedOccupations = categorias.find(
+                    (categoria) => categoria.nombre === e.target.value
+                  ).profesiones;
+
+                  setSelectedOccupations(selectedOccupations);
+                  setFormValue("occupations", selectedOccupations);
+                }}
               >
-                {categorias?.map((c) => (
-                  <option value={c.idcategoria} key={c.idcategoria}>
-                    {c.nombre}
+                {categorias && categorias.length > 0 ? (
+                  categorias.map((categoria) => (
+                    <option
+                      value={categoria.nombre}
+                      key={categoria.idcategoria}
+                    >
+                      {categoria.nombre}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    Cargando categorías...
                   </option>
-                ))}
+                )}
               </Select>
             </FormControl>
+
             <FormControl>
-              <FormLabel>Ocupacion</FormLabel>
+              <FormLabel>Ocupación</FormLabel>
               <Select
-                placeholder="Select option"
-                selectedValues={[1, 2]}
-                {...register("ocupations", {
+                placeholder="Seleccione una ocupación"
+                value={getValues('occupations')}
+
+                {...register("occupations", {
                   validate: (value) => value.length > 0,
                 })}
+                onChange={(e) => {
+                  const selectedOptions = Array.from(
+                    e.target.selectedOptions,
+                    (option) => option.value
+                  );
+                  const selectedOccupations = selectedOptions.map(
+                    (selectedOption) =>
+                      selectedCategory.profesiones.find(
+                        (profesion) => profesion.name === selectedOption
+                      )
+                  );
+                  setSelectedOccupations(selectedOccupations);
+                  setFormValue('occupations', selectedOptions); // Actualizar el valor del formulario
+                }}
+                
               >
-                {profesiones?.map((c) => (
-                  <option value={c.name} key={c.id}>
-                    {c.name}
-                  </option>
-                ))}
+                {selectedCategory &&
+                  selectedCategory.profesiones?.map((c) => (
+                    <option value={c.name} key={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
               </Select>
             </FormControl>
 
             <FormControl>
               <FormLabel>Descripción</FormLabel>
+
               <Textarea
-             
                 type="description"
                 isRequired
                 {...register("description", {
                   required: "El campo descripción es requerido",
                 })}
               />
+              {errors.description && <p>{errors.description.message}</p>}
             </FormControl>
+
             <FormControl>
               <FormLabel></FormLabel>
               <Button
@@ -239,38 +325,3 @@ function FormProvider() {
 }
 
 export default FormProvider;
-
-// //Agregar conectar con redux
-// connect(
-//   ({ name,email,image,genre, years_exp,description,profesiones,categorias ,ubicacion,phone }),
-//   postProveedor
-// )(FormProvider)
-
-// //agregar en actions
-
-// export const postProveedor = (info) => {
-//   return async function (dispatch) {
-//     try {
-//       // Verificación
-//       if (
-//         info.name === "" ||
-//         info.email === "" ||
-//         info.image === "" ||
-//         info.genre === "" ||
-//         info.years_exp === "" ||
-//         info.description === "" ||
-//         info.ubicacion === "" ||
-//         info.phone === "" ||
-//         info.profesiones === "" ||
-//         info.categorias === 0
-//       ) {
-//         throw new Error("Faltan datos");
-//       }
-
-//       const response = await axios.post("link a base de datos", info);
-//       alert("Corredor creado");
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// };
