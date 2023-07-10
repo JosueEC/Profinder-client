@@ -1,139 +1,298 @@
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllCategories,
+  postProveedor,
+} from "../../services/redux/actions/actions";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Textarea,
+  Stack,
+  Button,
+  Text,
+  useColorModeValue,
+  Link,
+  Radio,
+  RadioGroup,
+  Select,
+} from "@chakra-ui/react";
 
-function FromProvider() {
+function FormProvider(props) {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue: setFormValue, // Rename setValue from useForm to setFormValue
+    getValues, // Get form values from useForm
   } = useForm({
     defaultValues: {
-      name: "Nombre y apellido",
-      email: "email",
-      image: "Imagen Url", //chequear
-      description: "Agregue una descripcion",
+      name: "",
+      email: "",
+      image: "",
+      genre: "",
+      years_exp: "",
+      description: "",
+      ubicacion: "",
+      phone: "",
+      ocupations: [],
+      categories: [],
     },
   });
+
+  const categorias = useSelector((state) => state.categories);
+  console.log(categorias);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedOccupations, setSelectedOccupations] = useState([]);
+  const [value, setValue] = useState("");
+
+  const envioCategoria = (event) => {
+    const value = event.target.value;
+    setSelectedCategory([value]);
+  };
+
+  // const envioOcupaciones = (event) => {
+  //   const value = event.target.value;
+  //   setSelectedOccupations([value]);
+
+  // };
+  const envioOcupaciones = (event) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOccupations(selectedOptions);
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
+    const newData = {
+      name: data.name,
+      email: data.email,
+      image: data.image,
+      genre: data.genre,
+      years_exp: data.years_exp,
+      phone: data.phone,
+      ubication: data.ubicacion,
+      description: data.description,
+      ocupations: selectedOccupations,
+
+      categories: selectedCategory,
+    };
+
+    dispatch(postProveedor(newData));
   };
 
   return (
-    <div>
-      <h2>Formulario nuevo profesional</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Nombre y apellido</label>
-          <input
-            type="text"
-            {...register("name", {
-              required: true,
-            })}
-          />
-          {errors.name?.type === "required" && (
-            <p>El campo nombre es requerido</p>
-          )}
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            {...register("email", {
-              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-            })}
-          />
-          {errors.email?.type === "pattern" && (
-            <p>El formato del email es incorrecto</p>
-          )}
-        </div>
-        <div>
-          <label>Foto de perfil</label>
-          <input
-            type="url"
-            {...register("image", {
-              required: true,
-            })}
-          />
-          {errors.image?.type === "required" && (
-            <p>El campo imagen es requerido</p>
-          )}
-        </div>
-        <div>
-          <label>Genero</label>
-          <input
-            type="radio"
-            {...register("genre", {
-              required: true,
-            })}
-          />
-          {errors.genero?.type === "required" && (
-            <p>El campo genero es requerido</p>
-          )}
-        </div>
-        <div>
-          <label>Años de experiencia</label>
-          <input
-            type="number"
-            {...register("years_exp", {
-              required: true,
-            })}
-          />
-          {errors.number?.type === "required" && (
-            <p>El campo años de experiencia es requerido</p>
-          )}
-        </div>
-        <div>
-          <label>Descripcion</label>
-          <input
-            type="text"
-            {...register("description", {
-              required: true,
-            })}
-          />
-          {errors.description?.type === "required" && (
-            <p>El campo descripcion es requerido</p>
-          )}
-        </div>
-        <div>
-          <div>
-            <label>Categorías</label>
-            <div>
-              <input
-                type="checkbox"
-                id="categoria1"
-                value="1"
-                {...register("categories", {
-                  validate: (value) => value.length > 0,
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.800", "gray.800")}
+      width={"100%"}
+    >
+      <Box
+        rounded={"lg"}
+        bg={useColorModeValue("blackAlpha.800", "gray800")}
+        boxShadow={"lg"}
+        p={8}
+        color="gray.300"
+      >
+        <Stack spacing={4}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl>
+              <FormLabel>Nombre y apellido</FormLabel>
+              <Input
+                type="text"
+                {...register("name", {
+                  required: "El campo nombre es requerido",
                 })}
               />
-              <label htmlFor="categoria1">Categoría 1</label>
-            </div>
-            {errors.categories && errors.categories.type === "validate" && (
-              <p>Debes seleccionar al menos una categoría</p>
-            )}
-          </div>
-        </div>
-        <div>
-          <label>Ocupacion</label>
+              {errors.name && <p>{errors.name.message}</p>}
+            </FormControl>
 
-          <div>
-            <input
-              type="checkbox"
-              id="ocupation1"
-              value="1"
-              {...register("ocupations", {
-                validate: (value) => value.length > 0,
-              })}
-            />
-            <label htmlFor="ocupation1">Ocupacion 1</label>
-          </div>
-          {errors.ocupations && errors.ocupations.type === "validate" && (
-            <p>Debes seleccionar al menos una categoría</p>
-          )}
-        </div>
-        <input type="submit" value="Enviar" />
-      </form>
-    </div>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                type="email"
+                {...register("email", {
+                  required: "El campo email es requerido",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                    message: "El formato del email es incorrecto",
+                  },
+                })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Telefono</FormLabel>
+              <Input
+                type="number"
+                {...register("phone", {
+                  required: "El campo telefono es requerido",
+                })}
+              />
+              {errors.phone && <p>{errors.phone.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Ubicacion</FormLabel>
+              <Input
+                type="text"
+                {...register("ubicacion", {
+                  required: "El campo ubicacion es requerido",
+                })}
+              />
+              {errors.ubicacion && <p>{errors.ubicacion.message}</p>}
+            </FormControl>
+
+            {/* <FormControl>
+              <FormLabel>Contraseña</FormLabel>
+              <Input type="password" />
+            </FormControl> */}
+
+            <FormControl>
+              <FormLabel>Foto de perfil</FormLabel>
+              <Input
+                type="url"
+                {...register("image", {
+                  required: "El campo imagen es requerido",
+                })}
+              />
+              {errors.image && <p>{errors.image.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Género</FormLabel>
+              <RadioGroup onChange={(value) => setValue(value)} value={value}>
+                <Stack direction="row">
+                  <Radio
+                    {...register("genre", {
+                      required: "Seleccione una opción de género",
+                    })}
+                    value="female"
+                  >
+                    Femenino
+                  </Radio>
+                  <Radio
+                    {...register("genre", {
+                      required: "Seleccione una opción de género",
+                    })}
+                    value="male"
+                  >
+                    Masculino
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Años de experiencia</FormLabel>
+              <NumberInput defaultValue={0} min={0} max={100}>
+                <NumberInputField
+                  {...register("years_exp", {
+                    required: true,
+                  })}
+                />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Categorías</FormLabel>
+              <Select
+                placeholder="Seleccione una categoría"
+                value={
+                  selectedCategory && selectedCategory.nombre
+                    ? selectedCategory.nombre
+                    : ""
+                }
+                {...register("categories")}
+                onChange={envioCategoria}
+              >
+                {categorias?.map((categoria, index) => (
+                  <option value={categoria.nombre} key={index}>
+                    {categoria.nombre}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Ocupación</FormLabel>
+              <Select
+                placeholder="Seleccione una ocupación"
+                {...register("occupations", {
+                  validate: (value) => value.length > 0,
+                })}
+                onChange={envioOcupaciones}
+              >
+                {categorias &&
+                  selectedCategory.length > 0 &&
+                  categorias
+                    .find(
+                      (categoria) => categoria.nombre === selectedCategory[0]
+                    )
+                    ?.profesiones?.map((profesion, index) => (
+                      <option value={profesion.name} key={index}>
+                        {profesion.name}
+                      </option>
+                    ))}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Descripción</FormLabel>
+
+              <Textarea
+                type="description"
+                isRequired
+                {...register("description", {
+                  required: "El campo descripción es requerido",
+                })}
+              />
+              {errors.description && <p>{errors.description.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel></FormLabel>
+              <Button
+                type="submit"
+                loadingText="Submitting"
+                size="lg"
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              >
+                Registrarme
+              </Button>
+            </FormControl>
+          </form>
+        </Stack>
+      </Box>
+    </Flex>
   );
 }
 
-export default FromProvider;
+export default FormProvider;
