@@ -78,8 +78,6 @@ const getAllCategories = () => {
           type: GET_CATEGORIES,
           payload: results.data[0].categorias
         })
-
-        //  console.log(results.data[0].categorias);
       })
       .catch((error) => console.error(error.message))
   }
