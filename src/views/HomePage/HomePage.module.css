@@ -15,7 +15,7 @@ html {
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, #F4F4F4, #E0E0E0);
-  background-image: URL("../../assets/img-home-1.png") I !important ;
+  background-image: URL("../../assets/img-home-1.png")  !important ;
   color: #333333;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -124,3 +124,4 @@ html {
   margin-top: 2px; /* Agregamos un margen superior de 2px para separar las secciones */
   margin-bottom: 2px; /* Agregamos un margen inferior de 2px para separar las secciones */
 }
+

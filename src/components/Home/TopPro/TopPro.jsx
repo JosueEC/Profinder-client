@@ -74,7 +74,7 @@ export default function TopPro() {
             description={
               'Plomería en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinámica de trabajo'
             }
-            to={'/detail'}
+            to={'/detail/1'}
           />
           <Card
             heading={'Marcus Truction'}
@@ -82,7 +82,7 @@ export default function TopPro() {
             description={
               'Gran albañil destacado en la construcción de asadores y galerías. Ideal para refactorización de zonas'
             }
-            to={'/detail'}
+            to={'/detail/2'}
           />
           <Card
             heading={'Meque Trefe'}
@@ -90,7 +90,7 @@ export default function TopPro() {
             description={
               'Electricista matriculado de la ciudad de Zimbague. Súper ordenado y atenido a la norma'
             }
-            to={'/detail'}
+            to={'/detail/3'}
           />
           <Card
             heading={'Susana Oria'}
@@ -98,13 +98,13 @@ export default function TopPro() {
             description={
               'Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalación'
             }
-            to={'/detail'}
+            to={'/detail/4'}
           />
           <Card
             heading={'Marciana Pazos'}
             icon={<Icon as={FcAbout} w={10} h={10} />}
             description={'Gasista matriculada. Conexión de estufas y hornos'}
-            to={'/detail'}
+            to={'/detail/5'}
           />
         </Flex>
       </Container>
