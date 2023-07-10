@@ -1,34 +1,4 @@
-// Para la dashboard de las imagenes que se mostrarían en el detalle (si comprendí bien la idea de Josué)
-
-// Json para crearlo
-
-const json = {
-  "image": [
-  "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg",
-    "https://example.com/image3.jpg"
-  ],
-  "description": "Description ",
-  "view" : true,
-  "profesionalId": "80"
-};
-
-// Tiene el put y si ponen el view en false, no se vería ninguna publicación, se pueden agregar tantas imagenes como quitar las que quieran
-
-const jsonput = {
-  "image": [
-  "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg",
-    "https://example.com/image3.jpg"
-  ],
-  "description": "Description ",
-  "view" : true,
-  "profesionalId": "80"
-};
-
-// Por si requieren tener un get de todos los profesionalimagesPost()
-
-const allImagesJobs = [
+[
 	{
 		"id": "3342600b-f312-4eee-9f0b-8cae5d4b537c",
 		"image": [
@@ -97,4 +67,4 @@ const allImagesJobs = [
 		"view": true,
 		"ProfesionalId": 78
 	}
-];
+]

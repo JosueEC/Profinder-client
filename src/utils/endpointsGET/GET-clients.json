@@ -1,6 +1,4 @@
-// Estructura del clients
-
-const clients = [
+[
   {  
     "name": "Pablo",
     "email": "christian23@gmail.com",
