@@ -1,23 +1,27 @@
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { orderByRating } from '../../services/redux/actions/actions'
+import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByRating = () => {
+  const [ratingSelected, setRatingSelected] = useState('Rating')
   const dispatch = useDispatch()
   const ratingOptions = [
     { name: 'Aleatorio' },
-    { name: 'Mejor valorado' },
-    { name: 'Menor valorado' }
+    { name: 'Mejor valoracion' },
+    { name: 'Menor valoracion' }
   ]
 
-  const handleSelectRating = (event) => {
+  function handleSelectRating (event) {
     const { name } = event.target
-    dispatch(orderByRating(name))
+    setRatingSelected(name)
+    dispatch(applyFilters({ filter: 'rating', value: name }))
+    dispatch(getAllSuppliers())
   }
 
   return (
     <DropdownMenu
-      titleMenu='Rating'
+      titleMenu={ratingSelected}
       menuItems={ratingOptions}
       onClick={handleSelectRating}
     />

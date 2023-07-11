@@ -19,7 +19,7 @@ const initialState = {
     category: '',
     ocupation: '',
     rating: '',
-    genero: ''
+    genre: ''
   }
 }
 

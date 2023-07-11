@@ -1,23 +1,27 @@
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { filterByGenres } from '../../services/redux/actions/actions'
+import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByGenres = () => {
+  const [genreSelected, setGenreSelected] = useState('Genero')
   const dispatch = useDispatch()
   const genreOptions = [
     { name: 'Todos' },
-    { name: 'Masculino' },
-    { name: 'femenino' }
+    { name: 'Male' },
+    { name: 'Female' }
   ]
 
   const handlerByGenres = (event) => {
     const { name } = event.target
-    dispatch(filterByGenres(name))
+    setGenreSelected(name)
+    dispatch(applyFilters({ filter: 'genre', value: name.toLowerCase() }))
+    dispatch(getAllSuppliers())
   }
 
   return (
     <DropdownMenu
-      titleMenu='Genero'
+      titleMenu={genreSelected}
       menuItems={genreOptions}
       onClick={handlerByGenres}
     />

@@ -17,6 +17,8 @@ export default function FiltersPanel () {
   const filters = useSelector(state => state.filters)
   const categorySelected = filters.category || ''
   const ocupationSelected = filters.ocupation || ''
+  const ratingSelected = filters.rating || ''
+  const genreSelected = filters.genre || ''
 
   function handleSelectCategory (value) {
     dispatch(applyFilters({ filter: 'category', value }))
@@ -67,7 +69,7 @@ export default function FiltersPanel () {
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
           <Text>
-            {`Resultados para ${categorySelected} >> ${ocupationSelected}`}
+            {`Resultados para ${categorySelected} >> ${ocupationSelected} >> ${ratingSelected} >> ${genreSelected}`}
           </Text>
         </Container>
       </Box>

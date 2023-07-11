@@ -1,8 +1,10 @@
 export const filterSuppliers = (suppliers, objFilters) => {
   const stateByCategory = filterCategory(suppliers, objFilters)
   const stateByOcupation = filterOcupation(stateByCategory, objFilters)
+  const stateByRating = filterRating(stateByOcupation, objFilters)
+  const stateByGenre = filterGenre(stateByRating, objFilters)
 
-  return stateByOcupation
+  return stateByGenre
 }
 
 export const filterOcupation = (suppliers, objFilters) => {
@@ -27,6 +29,30 @@ export const filterCategory = (suppliers, objFilters) => {
       if (objFilters.category === '' || objFilters.category === 'Todas') newState.push(card)
       else if (category === objFilters.category) newState.push(card)
     })
+  })
+  return newState
+}
+
+export const filterRating = (suppliers, objFilters) => {
+  const order = objFilters.rating
+  if (order === 'Aleatorio') return suppliers
+  const newState = suppliers.sort((a, b) => {
+    if (order === 'Menor valoracion') {
+      return a.rating - b.rating
+    } else if (order === 'Mejor valoracion') {
+      return b.rating - a.rating
+    }
+    return 0
+  })
+
+  return newState
+}
+
+export const filterGenre = (suppliers, objFilters) => {
+  const selectedGenre = objFilters.genre
+  if (selectedGenre === 'todos' || selectedGenre === '') return suppliers
+  const newState = suppliers.filter(({ genre }) => {
+    return genre === selectedGenre
   })
   return newState
 }
