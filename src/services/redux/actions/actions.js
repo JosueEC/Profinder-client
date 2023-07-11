@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { API } from '../../../utils/API/constants'
+import { API, LOCAL } from '../../../utils/API/constants'
 import axios from 'axios'
 import {
   FILTER_BY_CATEGORY,
@@ -12,7 +12,8 @@ import {
 
 //! Action para obtener a todos lo Proveedores/Profesionales
 const getAllSuppliers = () => {
-  const URL = `${API.DOMAIN}/profesional`
+  // const URL = `${API.DOMAIN}/profesional`
+  const URL = LOCAL.pofesional
 
   return function (dispatch) {
     fetch(URL)
@@ -27,14 +28,15 @@ const getAllSuppliers = () => {
 
 //! Todas las categorias con su ID
 const getAllCategories = () => {
-  const URL = API.JSON
+  // const URL = API.DOMAIN
+  const URL = LOCAL.category
   return function (dispatch) {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
         dispatch({
           type: GET_CATEGORIES,
-          payload: results.data[0].categorias
+          payload: results
         })
       })
       .catch((error) => console.error(error.message))
@@ -57,11 +59,13 @@ const resetCategoryFilter = () => {
 
 //! action para buscar por nombre de profesion
 export const searchProfessionals = (name) => {
+  const URL = API.DOMAIN
+  // const URL = LOCAL.profesionalOcupation
   return function (dispatch) {
-    fetch(`https://backprofinder-production.up.railway.app/ocupations?name=${name}`)
+    fetch(`${URL}/ocupations?name=${name}`)
       .then((response) => response.json())
       .then((results) => {
-        console.log(results)
+        console.info(results)
         dispatch({
           type: SEARCH_PROFESSIONALS,
           payload: results
@@ -109,7 +113,7 @@ const postProveedor = (info) => {
       }
 
       await axios.post('https://backprofinder-production.up.railway.app/profesional/', info)
-      alert('Corredor creado')
+      alert('Perfil creado')
     } catch (error) {
       alert(`${error.response.data.error}`)
     }
