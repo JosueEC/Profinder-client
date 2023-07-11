@@ -2,12 +2,9 @@
 import { API, LOCAL } from '../../../utils/API/constants'
 import axios from 'axios'
 import {
-  FILTER_BY_CATEGORY,
   GET_ALL_SUPPLIERS,
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
-  ORDER_BY_RATING,
-  FILTER_BY_GENRES,
   APPLY_FILTERS
 } from '../actionsTypes/actionsType'
 
@@ -44,20 +41,6 @@ const getAllCategories = () => {
   }
 }
 
-//! Filtrar por categoria
-const filterByCategory = (category) => {
-  return {
-    type: FILTER_BY_CATEGORY,
-    payload: category
-  }
-}
-
-const resetCategoryFilter = () => {
-  return {
-    type: 'RESET_CATEGORY_FILTER'
-  }
-}
-
 //! action para buscar por nombre de profesion
 export const searchProfessionals = (name) => {
   const URL = API.DOMAIN
@@ -73,22 +56,6 @@ export const searchProfessionals = (name) => {
         })
       })
       .catch((error) => console.error(error.message))
-  }
-}
-
-//!
-const orderByRating = (payload) => {
-  return {
-    type: ORDER_BY_RATING,
-    payload
-  }
-}
-
-//! Filter by Genres
-const filterByGenres = (payload) => {
-  return {
-    type: FILTER_BY_GENRES,
-    payload
   }
 }
 
@@ -128,10 +95,6 @@ const postProveedor = (info) => {
 export {
   getAllSuppliers,
   getAllCategories,
-  filterByCategory,
-  resetCategoryFilter,
-  orderByRating,
-  filterByGenres,
   postProveedor,
   applyFilters
 }
