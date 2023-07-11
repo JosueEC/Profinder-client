@@ -13,10 +13,10 @@ const initialState = {
   filteredCategories: [],
   filteredSuppliers: [],
   filters: {
-    category: '',
-    ocupation: '',
-    rating: '',
-    genre: ''
+    category: 'Categorias',
+    ocupation: 'Seleccion una categoria',
+    rating: 'Rating',
+    genre: 'Genero'
   }
 }
 

@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByGenres = () => {
-  const [genreSelected, setGenreSelected] = useState('Genero')
+  const filters = useSelector(state => state.filters)
+  const [genreSelected, setGenreSelected] = useState(filters.genre)
   const dispatch = useDispatch()
   const genreOptions = [
     { name: 'Todos' },

@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByRating = () => {
-  const [ratingSelected, setRatingSelected] = useState('Rating')
+  const filters = useSelector(state => state.filters)
+  const [ratingSelected, setRatingSelected] = useState(filters.rating)
   const dispatch = useDispatch()
   const ratingOptions = [
     { name: 'Aleatorio' },

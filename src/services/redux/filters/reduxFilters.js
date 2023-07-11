@@ -9,12 +9,13 @@ export const filterSuppliers = (suppliers, objFilters) => {
 
 export const filterOcupation = (suppliers, objFilters) => {
   const newState = new Set()
+  const selectedOcupation = objFilters.ocupation
+  if (selectedOcupation === '' || selectedOcupation === 'Seleccion una categoria') return suppliers
   suppliers.forEach((supplier) => {
     const card = supplier
     supplier.professions.forEach(({ ocupations }) => {
       ocupations.forEach(({ name }) => {
-        if (objFilters.ocupation === '') newState.add(card)
-        else if (objFilters.ocupation === name) newState.add(card)
+        if (objFilters.ocupation === name) newState.add(card)
       })
     })
   })
@@ -23,11 +24,12 @@ export const filterOcupation = (suppliers, objFilters) => {
 
 export const filterCategory = (suppliers, objFilters) => {
   const newState = []
+  const selectedCategory = objFilters.category
+  if (selectedCategory === '' || selectedCategory === 'Todas' || selectedCategory === 'Categorias') return suppliers
   suppliers.forEach(supplier => {
     const card = supplier
     supplier.professions.forEach(({ category }) => {
-      if (objFilters.category === '' || objFilters.category === 'Todas') newState.push(card)
-      else if (category === objFilters.category) newState.push(card)
+      if (category === objFilters.category) newState.push(card)
     })
   })
   return newState
@@ -35,7 +37,7 @@ export const filterCategory = (suppliers, objFilters) => {
 
 export const filterRating = (suppliers, objFilters) => {
   const order = objFilters.rating
-  if (order === 'Aleatorio') return suppliers
+  if (order === 'Aleatorio' || order === 'Rating') return suppliers
   const newState = suppliers.sort((a, b) => {
     if (order === 'Menor valoracion') {
       return a.rating - b.rating
@@ -50,7 +52,7 @@ export const filterRating = (suppliers, objFilters) => {
 
 export const filterGenre = (suppliers, objFilters) => {
   const selectedGenre = objFilters.genre
-  if (selectedGenre === 'todos' || selectedGenre === '') return suppliers
+  if (selectedGenre === 'todos' || selectedGenre === 'Genero') return suppliers
   const newState = suppliers.filter(({ genre }) => {
     return genre === selectedGenre
   })

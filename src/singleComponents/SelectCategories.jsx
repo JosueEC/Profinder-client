@@ -7,10 +7,11 @@ import { Stack } from '@chakra-ui/layout'
 import DropdownMenu from './DropdownMenu'
 
 export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation }) {
+  const filters = useSelector(state => state.filters)
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories)
-  const [categoryName, setCategoryName] = useState('Categorias')
-  const [ocupationName, setOcupationName] = useState('Ocupacion')
+  const [categoryName, setCategoryName] = useState(filters.category)
+  const [ocupationName, setOcupationName] = useState(filters.ocupation)
   const [ocupationsArray, setOcupationsArray] = useState([])
 
   function handleClickCategory (event) {
