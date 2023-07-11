@@ -7,13 +7,22 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import SelectCategories from '../../singleComponents/SelectCategories'
+import FilterByRating from '../Filteres/FilterByRating'
+import FilterByGenres from '../Filteres/FilterByGenres'
+// import { useState } from 'react'
 
 export default function FiltersPanel () {
+  // const [category, setCategory] = useState('')
+  // const [ocupations, setOcupations] = useState([])
+
+  // function addOcupation (value) {
+  //   setOcupations((prevState) => [...prevState, value])
+  // }
+
   return (
     <Box
       bg={useColorModeValue('gray.800', 'gray.800')}
       color={useColorModeValue('gray.50', 'gray.200')}
-      border='solid 2px red'
     >
       <Container
         as={Stack}
@@ -22,8 +31,12 @@ export default function FiltersPanel () {
         spacing={4}
         justify='center'
         align='center'
+        direction='row'
+        wrap='wrap'
       >
         <SelectCategories />
+        <FilterByRating />
+        <FilterByGenres />
       </Container>
 
       <Box

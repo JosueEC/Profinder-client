@@ -1,33 +1,26 @@
 import { useDispatch } from 'react-redux'
 import { orderByRating } from '../../services/redux/actions/actions'
-import { useState } from 'react'
-import { Select, FormControl } from '@chakra-ui/react'
+import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByRating = () => {
   const dispatch = useDispatch()
-  const [orderRating, setOrderByRating] = useState('')
+  const ratingOptions = [
+    { name: 'Aleatorio' },
+    { name: 'Mejor valorado' },
+    { name: 'Menor valorado' }
+  ]
 
-  const handlerByRating = (event) => {
-    const { value } = event.target
-    dispatch(orderByRating(value))
-    setOrderByRating(`Order ${value}`)
+  const handleSelectRating = (event) => {
+    const { name } = event.target
+    dispatch(orderByRating(name))
   }
 
   return (
-    <FormControl>
-      <Select
-        onChange={handlerByRating}
-        value={orderRating}
-        variant='filled'
-        width='200px'
-        borderRadius='md'
-        boxShadow='md'
-        _focus={{ boxShadow: 'outline' }}
-      >
-        <option value='lower'>Lower</option>
-        <option value='higher'>Higher</option>
-      </Select>
-    </FormControl>
+    <DropdownMenu
+      titleMenu='Rating'
+      menuItems={ratingOptions}
+      onClick={handleSelectRating}
+    />
   )
 }
 

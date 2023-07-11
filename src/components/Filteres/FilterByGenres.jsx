@@ -1,36 +1,26 @@
 import { useDispatch } from 'react-redux'
 import { filterByGenres } from '../../services/redux/actions/actions'
-import { useEffect, useState } from 'react'
-import { Select } from '@chakra-ui/react'
+import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 const FilterByGenres = () => {
-  const [filterGenre, setFilterGenre] = useState('')
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(filterByGenres(filterGenre))
-  }, [dispatch, filterGenre])
+  const genreOptions = [
+    { name: 'Todos' },
+    { name: 'Masculino' },
+    { name: 'femenino' }
+  ]
 
   const handlerByGenres = (event) => {
-    const { value } = event.target
-    dispatch(filterByGenres(value))
-    setFilterGenre(value)
+    const { name } = event.target
+    dispatch(filterByGenres(name))
   }
 
   return (
-    <Select
-      onChange={handlerByGenres}
-      value={filterGenre}
-      variant='filled'
-      width='200px'
-      borderRadius='md'
-      boxShadow='md'
-      _focus={{ boxShadow: 'outline' }}
-    >
-      <option value='All'>All Genres</option>
-      <option value='male'>Male</option>
-      <option value='female'>Female</option>
-    </Select>
+    <DropdownMenu
+      titleMenu='Genero'
+      menuItems={genreOptions}
+      onClick={handlerByGenres}
+    />
   )
 }
 
