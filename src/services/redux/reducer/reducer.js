@@ -4,15 +4,23 @@ import {
   FILTER_BY_CATEGORY,
   SEARCH_PROFESSIONALS,
   FILTER_BY_GENRES,
-  ORDER_BY_RATING
+  ORDER_BY_RATING,
+  APPLY_FILTERS
 } from '../actionsTypes/actionsType'
+import { filterSuppliers } from '../filters/reduxFilters'
 
 const initialState = {
   suppliers: [],
   backup: [],
   categories: [],
   filteredCategories: [],
-  filteredSuppliers: []
+  filteredSuppliers: [],
+  filters: {
+    category: '',
+    ocupation: '',
+    rating: '',
+    genero: ''
+  }
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,12 +29,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         backup: action.payload,
-        suppliers: action.payload
+        suppliers: filterSuppliers(action.payload, state.filters)
       }
     case GET_CATEGORIES:
       return {
         ...state,
         categories: action.payload
+      }
+    case APPLY_FILTERS:
+      return {
+        ...state,
+        filters: { ...state.filters, [action.payload.filter]: action.payload.value }
       }
     case FILTER_BY_CATEGORY: {
       const filteredCategories = state.categories.filter(

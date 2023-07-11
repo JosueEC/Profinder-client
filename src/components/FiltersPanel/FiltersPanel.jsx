@@ -6,18 +6,28 @@ import {
   Text,
   useColorModeValue
 } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
+import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import SelectCategories from '../../singleComponents/SelectCategories'
 import FilterByRating from '../Filteres/FilterByRating'
 import FilterByGenres from '../Filteres/FilterByGenres'
-// import { useState } from 'react'
 
 export default function FiltersPanel () {
-  // const [category, setCategory] = useState('')
-  // const [ocupations, setOcupations] = useState([])
+  const dispatch = useDispatch()
+  const filters = useSelector(state => state.filters)
+  const categorySelected = filters.category || ''
+  const ocupationSelected = filters.ocupation || ''
 
-  // function addOcupation (value) {
-  //   setOcupations((prevState) => [...prevState, value])
-  // }
+  function handleSelectCategory (value) {
+    dispatch(applyFilters({ filter: 'category', value }))
+    dispatch(applyFilters({ filter: 'ocupation', value: '' }))
+    dispatch(getAllSuppliers())
+  }
+
+  function handleSelectOcupation (value) {
+    dispatch(applyFilters({ filter: 'ocupation', value }))
+    dispatch(getAllSuppliers())
+  }
 
   return (
     <Box
@@ -34,7 +44,10 @@ export default function FiltersPanel () {
         direction='row'
         wrap='wrap'
       >
-        <SelectCategories />
+        <SelectCategories
+          fnSelectCategory={handleSelectCategory}
+          fnSelectOcupation={handleSelectOcupation}
+        />
         <FilterByRating />
         <FilterByGenres />
       </Container>
@@ -53,7 +66,9 @@ export default function FiltersPanel () {
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
-          <Text>Resultados para</Text>
+          <Text>
+            {`Resultados para ${categorySelected} >> ${ocupationSelected}`}
+          </Text>
         </Container>
       </Box>
     </Box>

@@ -7,7 +7,8 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   ORDER_BY_RATING,
-  FILTER_BY_GENRES
+  FILTER_BY_GENRES,
+  APPLY_FILTERS
 } from '../actionsTypes/actionsType'
 
 //! Action para obtener a todos lo Proveedores/Profesionales
@@ -91,10 +92,14 @@ const filterByGenres = (payload) => {
   }
 }
 
+const applyFilters = (objFilters) => {
+  return { type: APPLY_FILTERS, payload: objFilters }
+}
+
 //! Postear porveerdore
 //! Postear proveedor
 const postProveedor = (info) => {
-  return async function (dispatch) {
+  return async function () {
     try {
       // Verificación
       if (
@@ -127,5 +132,6 @@ export {
   resetCategoryFilter,
   orderByRating,
   filterByGenres,
-  postProveedor
+  postProveedor,
+  applyFilters
 }

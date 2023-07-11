@@ -17,8 +17,12 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation 
     const { name } = event.target
     setCategoryName(name)
     setOcupationName('Ocupacion')
-    const array = categories.find(item => item.name === name)
-    setOcupationsArray(array.Ocupations)
+    if (name !== 'Todas') {
+      const array = categories.find(item => item.name === name)
+      setOcupationsArray(array.Ocupations)
+    } else {
+      setOcupationsArray([])
+    }
     fnSelectCategory && fnSelectCategory(name)
   }
 
@@ -36,7 +40,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation 
     <Stack direction='row' spacing={6}>
       <DropdownMenu
         titleMenu={categoryName}
-        menuItems={categories}
+        menuItems={[{ name: 'Todas' }, ...categories]}
         onClick={handleClickCategory}
       />
       <DropdownMenu
