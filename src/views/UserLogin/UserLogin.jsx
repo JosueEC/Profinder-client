@@ -4,69 +4,34 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Button,
   Heading,
   Text,
   useColorModeValue,
-  useToast,
-  FormErrorMessage
+  FormErrorMessage,
+  Divider
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { validateEmail } from '../../services/validators/validationsLogin'
 import { Link } from 'react-router-dom'
+import DropdownMenu from '../../singleComponents/DropdownMenu'
 
 export default function SimpleCard () {
-  const [loading, setLoading] = useState(false)
-  const toast = useToast()
-  const [form, setForm] = useState({
-    email: '',
-    password: ''
-  })
-  const [errors, setErrors] = useState({
-    email: '',
-    password: ''
-  })
-
-  function handleChange (event) {
-    const key = event.target.id
-    const value = event.target.value
-    setForm({
-      ...form,
-      [key]: value
-    })
-  }
-
-  function handleClick () {
-
-  }
+  const {
+    userTypes,
+    user,
+    dataSession,
+    errors,
+    setErrors,
+    handleChange,
+    handleSelectUser
+  } = useCredentials()
 
   function handleSubmit (event) {
     event.preventDefault()
-    validateEmail(form.email, errors, setErrors)
-    if (errors.email === '' && errors.password === '') {
-      setLoading(true)
-      // hacemos dispatch para loggear en el backend
-      // segun la respuesta mostramos alert
-      toast({
-        title: 'Sesion iniciada',
-        description: 'Es un placer verte de nuevo',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        onCloseComplete: () => setLoading(false)
-      })
-    } else {
-      toast({
-        title: 'El usuario no existe',
-        description: 'Le invitamos a crearse una cuenta con nosotros.',
-        status: 'errors',
-        duration: 4000,
-        isClosable: true,
-        onCloseComplete: () => setLoading(false)
-      })
-    }
+    try { validateEmail(dataSession.email) } catch (error) { setErrors({ ...errors, email: error.message }) }
+    console.info(dataSession)
   }
 
   return (
@@ -115,45 +80,35 @@ export default function SimpleCard () {
               </FormControl>
               <FormControl id='password' color='gray.300' isRequired>
                 <FormLabel color='gray.300'>Contraseña</FormLabel>
-                <Input type='password' focusBorderColor='teal.400' />
+                <Input
+                  type='password'
+                  focusBorderColor='teal.400'
+                  id='password'
+                  onChange={handleChange}
+                />
               </FormControl>
               <Stack spacing={10}>
-                <Stack direction={{ base: 'column', sm: 'row' }} align='start' justify='space-between'>
-                  <Checkbox color='gray.300'>Recordarme</Checkbox>
-                </Stack>
+                <DropdownMenu
+                  titleMenu={user}
+                  menuItems={userTypes}
+                  onClick={handleSelectUser}
+                />
+                <Divider />
                 <Stack spacing={5}>
                   <Button bg='teal.50' color='black' _hover={{ bg: 'teal.100' }}>
                     Google
                   </Button>
-                  {/* <Button bg='blue.600' color='white' _hover={{ bg: 'blue.700' }}>
-                  Facebook
-                </Button> */}
-                  {
-                    (loading)
-                      ? (
-                        <Button
-                          bg='teal.400'
-                          color='white'
-                          _hover={{ bg: 'teal.500' }}
-                          isLoading
-                        />
-                        )
-                      : (
-                        <Button
-                          bg='teal.400'
-                          color='white'
-                          _hover={{ bg: 'teal.500' }}
-                          type='submit'
-                          onClick={handleClick}
-                        >
-                          Ingresar
-                        </Button>
-                        )
-                  }
+                  <Button
+                    bg='teal.400'
+                    color='white'
+                    _hover={{ bg: 'teal.500' }}
+                    loadingText='Ingresando'
+                    type='submit'
+                  >
+                    Ingresar
+                  </Button>
                   <Text color='gray.300' letterSpacing='0.5px'>
-                    Aun no tienes una cuenta? Registrate gratis <Link to='/userRegister'>
-                      aqui
-                    </Link>
+                    Aun no tienes una cuenta? Registrate gratis <Link to='/userRegister'>aqui</Link>
                   </Text>
                 </Stack>
               </Stack>
