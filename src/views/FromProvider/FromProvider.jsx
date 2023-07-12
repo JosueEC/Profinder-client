@@ -24,8 +24,7 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 import SelectCategories from "../../singleComponents/SelectCategories";
-
-
+import { uploadFile } from "../../utils/Firebase/config";
 
 function FormProvider(props) {
   const {
@@ -66,22 +65,25 @@ function FormProvider(props) {
     setSelectedOccupations(value);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const imageData = await uploadFile(data.image); // Upload the image and get the URL
+  
     const newData = {
       name: data.name,
       email: data.email,
-      image: data.image,
+      image: imageData, // Assign the URL of the image
       genre: data.genre,
       years_exp: data.years_exp,
       phone: data.phone,
-      ubication: data.ubicacion,
+      ubicacion: data.ubicacion,
       description: data.description,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
-console.log(newData)
+  console.log(newData)
     dispatch(postProveedor(newData));
   };
+  
 
   return (
     <Flex
@@ -156,12 +158,35 @@ console.log(newData)
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
-                type="url"
+                type="file"
                 {...register("image", {
                   required: "El campo imagen es requerido",
+                  validate: {
+                    isImage: (value) => {
+                      if (value) {
+                        const acceptedFormats = [".jpg", ".jpeg", ".png"];
+                        const fileExtension = value[0].name.substring(
+                          value[0].name.lastIndexOf(".")
+                        );
+                        return acceptedFormats.includes(fileExtension);
+                      }
+                      return true;
+                    },
+                  },
                 })}
+                onChange={(e) => uploadFile(e.target.files[0])}
               />
-              {errors.image && <p>{errors.image.message}</p>}
+              {errors.image && errors.image.type === "isImage" && (
+                <p>
+                  El formato de la imagen es inválido. Utilice .jpg, .jpeg o
+                  .png
+                </p>
+              )}
+              {errors.image && errors.image.type !== "isImage" && (
+                <p>{errors.image.message}</p>
+              )}
+
+          
             </FormControl>
 
             <FormControl>
@@ -210,8 +235,6 @@ console.log(newData)
                 fnSelectOcupation={envioOcupaciones} // Pasa el manejador para la selección de ocupación
               />
             </FormControl>
-
-     
 
             <FormControl>
               <FormLabel>Descripción</FormLabel>
