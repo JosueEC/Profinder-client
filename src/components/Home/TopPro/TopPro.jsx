@@ -12,6 +12,9 @@ const TopPro = () => {
     dispatch(getAllSuppliers());
   }, [dispatch]);
 
+  // Ordena los proveedores por rating de mayor a menor
+  const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
+
   return (
     <Center p={4} bg={useColorModeValue('gray.900', 'gray.900')} color={useColorModeValue('gray.300', 'gray.300')} h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
@@ -19,13 +22,10 @@ const TopPro = () => {
           <Heading fontSize="xl" mb={125}>
             Profesionales Mejor Puntuados
           </Heading>
-          {/* <Text color={useColorModeValue('gray.500', 'gray.400')} mb={4} mt={125}>
-            Aquí encontrarás a los profesionales mejor puntuados de nuestra aplicación.
-          </Text> */}
         </Box>
         <Box mt={8} align="center">
           <Box display="grid" gridGap={6} gridTemplateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)' }}>
-            {suppliers.slice(0, 4).map((supplier) => (
+            {sortedSuppliers.slice(0, 4).map((supplier) => (
               <Card key={supplier.id} supplier={supplier} />
             ))}
           </Box>
