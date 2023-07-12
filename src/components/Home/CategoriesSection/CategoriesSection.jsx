@@ -44,7 +44,7 @@ const Card = ({ heading, description, icon }) => {
           color='white'
           rounded='full'
           bg={iconBgColor}
-          _hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}
+          //_hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}
         >
           {icon}
         </Flex>
@@ -106,7 +106,7 @@ const CategoriesSection = () => {
             <Card
               heading='Manualidades'
               icon={<img src={manualidadesIcon} alt='Manualidades' />}
-              description='Aquí encontrarás productos de oficio. Desde orfebres, esculores hasta cermaistas y floristas.'
+              description='Aquí encontrarás productos de oficio. Desde orfebres, esculores hasta cermaistas y floristas'
               href='#'
             />
           </Flex>

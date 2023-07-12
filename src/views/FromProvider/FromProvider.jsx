@@ -25,10 +25,22 @@ import {
 } from "@chakra-ui/react";
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
+import {
+  validateCategories,
+  validateEmail,
+  validateGenre,
+  validateImage,
+  validateName,
+  validateOcupations,
+  validatePhone,
+  validateUbication,
+  validateYearsExp,
+} from "../../services/validators/validationsLogin";
 
 function FormProvider(props) {
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -46,7 +58,97 @@ function FormProvider(props) {
     },
   });
 
-  const categorias = useSelector((state) => state.categories);
+  // Verificar el campo "name" en tiempo real
+  const name = watch("name");
+  useEffect(() => {
+    try {
+      validateName(name);
+    } catch (error) {
+      errors.name = { message: error.message };
+    }
+  }, [name]);
+
+  // Verificar el campo "email" en tiempo real
+  const email = watch("email");
+  useEffect(() => {
+    try {
+      validateEmail(email);
+    } catch (error) {
+      errors.email = { message: error.message };
+    }
+  }, [email]);
+
+  // Verificar el campo "image" en tiempo real
+  const image = watch("image");
+  useEffect(() => {
+    try {
+      validateImage(image);
+    } catch (error) {
+      errors.image = { message: error.message };
+    }
+  }, [image]);
+
+  // Verificar el campo "genre" en tiempo real
+  const genre = watch("genre");
+  useEffect(() => {
+    try {
+      validateGenre(genre);
+    } catch (error) {
+      errors.genre = { message: error.message };
+    }
+  }, [genre]);
+
+  // Verificar el campo "years_exp" en tiempo real
+  const yearsExp = watch("years_exp");
+  useEffect(() => {
+    try {
+      validateYearsExp(yearsExp);
+    } catch (error) {
+      errors.years_exp = { message: error.message };
+    }
+  }, [yearsExp]);
+
+  // Verificar el campo "categories" en tiempo real
+  const categories = watch("categories");
+  useEffect(() => {
+    try {
+      validateCategories(categories);
+    } catch (error) {
+      errors.categories = { message: error.message };
+    }
+  }, [categories]);
+
+  // Verificar el campo "ocupations" en tiempo real
+  const ocupations = watch("ocupations");
+  useEffect(() => {
+    try {
+      validateOcupations(ocupations);
+    } catch (error) {
+      errors.ocupations = { message: error.message };
+    }
+  }, [ocupations]);
+
+  // Verificar el campo "phone" en tiempo real
+  const phone = watch("phone");
+  useEffect(() => {
+    try {
+      validatePhone(phone);
+    } catch (error) {
+      errors.phone = { message: error.message };
+    }
+  }, [phone]);
+
+  // Verificar el campo "ubicacion" en tiempo real
+  const ubicacion = watch("ubicacion");
+  useEffect(() => {
+    try {
+      validateUbication(ubicacion);
+    } catch (error) {
+      errors.ubicacion = { message: error.message };
+    }
+  }, [ubicacion]);
+
+  // const categorias = useSelector((state) => state.categories);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -67,7 +169,7 @@ function FormProvider(props) {
 
   const onSubmit = async (data) => {
     const imageData = await uploadFile(data.image); // Upload the image and get the URL
-  
+
     const newData = {
       name: data.name,
       email: data.email,
@@ -80,10 +182,9 @@ function FormProvider(props) {
       ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
-  console.log(newData)
+    console.log(newData);
     dispatch(postProveedor(newData));
   };
-  
 
   return (
     <Flex
@@ -176,17 +277,6 @@ function FormProvider(props) {
                 })}
                 onChange={(e) => uploadFile(e.target.files[0])}
               />
-              {errors.image && errors.image.type === "isImage" && (
-                <p>
-                  El formato de la imagen es inválido. Utilice .jpg, .jpeg o
-                  .png
-                </p>
-              )}
-              {errors.image && errors.image.type !== "isImage" && (
-                <p>{errors.image.message}</p>
-              )}
-
-          
             </FormControl>
 
             <FormControl>
