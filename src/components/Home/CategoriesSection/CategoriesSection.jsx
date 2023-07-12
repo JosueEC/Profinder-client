@@ -44,7 +44,7 @@ const Card = ({ heading, description, icon }) => {
           color='white'
           rounded='full'
           bg={iconBgColor}
-          _hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}
+          //_hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}
         >
           {icon}
         </Flex>
