@@ -1,106 +1,66 @@
-/* eslint-disable react/prop-types */
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Icon,
-  Stack,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
-import { FcAbout, FcAssistant, FcCollaboration, FcDonate, FcManager } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Center, Flex, Heading, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { getAllSuppliers } from '../../../services/redux/actions/actions';
+import { Link as RouterLink } from 'react-router-dom';
 
-const Card = ({ heading, description, icon, to }) => {
-  const cardColor = useColorModeValue('gray.300', 'blackAlpha.500')
-  const linkColor = useColorModeValue('teal.400', 'teal.400')
+const TopPro = () => {
+  const dispatch = useDispatch();
+  const suppliers = useSelector((state) => state.suppliers);
+
+  useEffect(() => {
+    dispatch(getAllSuppliers());
+  }, [dispatch]);
 
   return (
-    <Box
-      maxW={{ base: 'full', md: '275px' }}
-      w='full'
-      borderWidth='1px'
-      borderRadius='lg'
-      overflow='hidden'
-      p={5}
-      bg={cardColor}
-
-    >
-      <Stack align='start' spacing={2}>
-        <Flex
-          w={16}
-          h={16}
-          align='center'
-          justify='center'
-          color='white'
-          rounded='full'
-          bg={useColorModeValue('gray.900', 'blackAlpha.500')}
-        >
-          {icon}
-        </Flex>
-        <Box mt={2}>
-          <Heading size='md'>{heading}</Heading>
-          <Text mt={1} fontSize='sm'>
-            {description}
-          </Text>
+    <Center p={4} bg={useColorModeValue('gray.900', 'gray.900')} color={useColorModeValue('gray.300', 'gray.300')} h="100vh" w="100%">
+      <Box mx="auto" maxW="5xl" w="100%">
+        <Box textAlign="center" mt={15}>
+          <Heading fontSize="xl" mb={125}>
+            Profesionales Mejor Puntuados
+          </Heading>
+          {/* <Text color={useColorModeValue('gray.500', 'gray.400')} mb={4} mt={125}>
+            Aquí encontrarás a los profesionales mejor puntuados de nuestra aplicación.
+          </Text> */}
         </Box>
-        <Link to={to} variant='link' color={linkColor} size='sm'>
-          Learn more
-        </Link>
-      </Stack>
-    </Box>
-  )
-}
+        <Box mt={8} align="center">
+          <Box display="grid" gridGap={6} gridTemplateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)' }}>
+            {suppliers.slice(0, 4).map((supplier) => (
+              <Card key={supplier.id} supplier={supplier} />
+            ))}
+          </Box>
+        </Box>
+      </Box>
+    </Center>
+  );
+};
 
-export default function TopPro () {
-  const backgroundColor = useColorModeValue('gray.900', 'gray.900')
+const Card = ({ supplier }) => {
+  const cardBgColor = useColorModeValue('white', 'gray.900');
+  const textColor = useColorModeValue('gray.700', 'gray.400');
+  const linkColor = useColorModeValue('teal.400', 'teal.400');
 
   return (
-    <Box p={4} bg={backgroundColor} h='100vh' width='100%'>
-      <Stack spacing={4} as={Container} maxW='3xl' textAlign='center'>
-        <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight='bold' color='gray.300'>
-          PROFESIONALES RECOMENDADOS
-        </Heading>
-        <Text color='gray.300' fontSize={{ base: 'sm', sm: 'lg' }}>
-          Aquí verás los servicios más utilizados y mejor puntuados por nuestros usuarios.
-        </Text>
-      </Stack>
-
-      <Container maxW='5xl' mt={12}>
-        <Flex flexWrap='wrap' gridGap={6} justify='center'>
-          <Card
-            heading='George Plumber'
-            icon={<Icon as={FcAssistant} w={10} h={10} />}
-            description='Plomería en el acto! Sus servicios son eficientes y eficaces. Tiene una gran dinámica de trabajo'
-            to='/detail/1'
-          />
-          <Card
-            heading='Marcus Truction'
-            icon={<Icon as={FcCollaboration} w={10} h={10} />}
-            description='Gran albañil destacado en la construcción de asadores y galerías. Ideal para refactorización de zonas'
-            to='/detail/2'
-          />
-          <Card
-            heading='Meque Trefe'
-            icon={<Icon as={FcDonate} w={10} h={10} />}
-            description='Electricista matriculado de la ciudad de Zimbague. Súper ordenado y atenido a la norma'
-            to='/detail/3'
-          />
-          <Card
-            heading='Susana Oria'
-            icon={<Icon as={FcManager} w={10} h={10} />}
-            description='Electricista matriculada de la ciudad de Mozambique. Ideal para renormalizar una instalación'
-            to='/detail/4'
-          />
-          <Card
-            heading='Marciana Pazos'
-            icon={<Icon as={FcAbout} w={10} h={10} />}
-            description='Gasista matriculada. Conexión de estufas y hornos'
-            to='/detail/5'
-          />
-        </Flex>
-      </Container>
+    <Box borderWidth="1px" borderRadius="lg" bg={cardBgColor} boxShadow="2xl" p={4}>
+      <Flex>
+        <Image objectFit="cover" boxSize={{ sm: '100px', md: '200px' }} src={supplier.image} />
+        <Stack justifyContent="center" alignItems="center" p={4} pl={6} spacing={2}>
+          <Heading fontSize="2xl" fontFamily="body">
+            {supplier.name}
+          </Heading>
+          <Text fontWeight={600} color={textColor} fontSize="sm" mb={2}>
+            {supplier.category}
+          </Text>
+          <Text textAlign="center" color={textColor}>
+            Rating: {supplier.rating}
+          </Text>
+          <Button as={RouterLink} to={`/detail/${supplier.id}`} mt={4} colorScheme="teal" size="sm">
+            Ver detalle
+          </Button>
+        </Stack>
+      </Flex>
     </Box>
-  )
-}
+  );
+};
+
+export default TopPro;
