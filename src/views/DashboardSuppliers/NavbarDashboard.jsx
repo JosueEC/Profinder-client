@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Flex,
@@ -13,80 +13,108 @@ import {
   Stack,
   useColorMode,
   Center,
-  Image
-
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import Sidebar from './Sidebar';
-import { Link } from 'react-router-dom'
-import logo from '../../assets/categoriesIcons/logo.png';
-
-
+  Image,
+  HStack,
+  VStack,
+  Spacer,
+} from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import Sidebar from "./Sidebar";
+import { Link } from "react-router-dom";
+import logo from "../../assets/categoriesIcons/logo.png";
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex
+          h={16}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          direction={{ base: "column", md: "row" }}
+        >
+          <Flex
+            flex={{ base: "0 0 100%", md: "0 0 20%" }}
+            justifyContent="center"
+          >
+            <Link to="/" textDecoration="none">
+              <Image
+                src={logo}
+                alt="Logo"
+                maxW={{ base: "70%", md: "100%" }}
+                height="auto"
+              />
+            </Link>
+          </Flex>
 
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <Box flex={{ base: '0 0 100%', md: '0 0 20%' }}>
-          <Link to='/' textDecoration='none'>
-            <Image src={logo} alt='Logo' width='70%' height='auto' />
-          </Link>
-        </Box>
-          <Button variant="outline">Home</Button>
-              <Button variant="solid" colorScheme="green">
-                Obtén Premium
-              </Button>
+          <HStack
+            spacing={4}
+            alignItems="center"
+            flex={1}
+            justifyContent="center"
+            mt={{ base: 4, md: 0 }}
+          >
+            <Link
+              to="/"
+              variant="outline"
+              color={useColorModeValue("gray.700", "gray.200")}
+              textDecoration="none"
+            >
+              Home
+            </Link>
+            <Link
+              variant="solid"
+              colorScheme="green"
+              borderRadius="md"
+              px={4}
+              py={2}
+              fontWeight="bold"
+              textDecoration="none"
+              _hover={{ opacity: 0.8 }}
+            >
+              Obtén Premium
+            </Link>
+          </HStack>
 
-
-          <Flex alignItems={'center'}>
-            <Stack direction={'row'} spacing={7}>
+          <Flex alignItems={"center"}>
+            <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
 
               <Menu>
                 <MenuButton
                   as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
                   minW={0}
                 >
                   <Avatar
-                    size={'sm'}
-                    src={'https://avatars.dicebear.com/api/male/username.svg'}
+                    size={"sm"}
+                    src={"https://avatars.dicebear.com/api/male/username.svg"}
                   />
                 </MenuButton>
-                <MenuList alignItems={'center'}>
-                  <br />
-                  <Center>
+                <MenuList alignItems={"center"}>
+                  <VStack spacing={2}>
                     <Avatar
-                      size={'2xl'}
-                      src={'https://avatars.dicebear.com/api/male/username.svg'}
+                      size={"2xl"}
+                      src={"https://avatars.dicebear.com/api/male/username.svg"}
                     />
-                  </Center>
-                  <br />
-                  <Center>
                     <p>Username</p>
-                  </Center>
-                  <br />
+                  </VStack>
                   <MenuDivider />
                   <MenuItem>Account Settings</MenuItem>
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
               </Menu>
-
-           
             </Stack>
           </Flex>
         </Flex>
       </Box>
       <Sidebar />
-
     </>
   );
 }

@@ -13,13 +13,13 @@ import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname === "/NavbarDashboard";
+  const hideNavbar = location.pathname === "/dashboardSuppliers";
   return (
     <div>
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/NavbarDashboard" element={<NavbarDashboard />} />
+        <Route path="/dashboardSuppliers" element={<NavbarDashboard />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/registerProvider" element={<FromProvider />} />
