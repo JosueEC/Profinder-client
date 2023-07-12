@@ -11,17 +11,18 @@ import {
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
-import consultoriaIcon from '../../../assets/categoriesIcons/educación.png'
-import arteDiseñoIcon from '../../../assets/categoriesIcons/salud.png'
-import tecnologiaIcon from '../../../assets/categoriesIcons/desarrollo-de-software.png'
-import serviciosIcon from '../../../assets/categoriesIcons/comercio.png'
-import manualidadesIcon from '../../../assets/categoriesIcons/hobbie.png'
+import consultoriaIcon from '../../../assets/categoriesIcons/consultoria.png'
+import arteDiseñoIcon from '../../../assets/categoriesIcons/pintura.png'
+import tecnologiaIcon from '../../../assets/categoriesIcons/informatica.png'
+import serviciosIcon from '../../../assets/categoriesIcons/public-service.png'
+import manualidadesIcon from '../../../assets/categoriesIcons/artesanias.png'
 import ingenieriaIcon from '../../../assets/categoriesIcons/ingeniería.png'
 
 const Card = ({ heading, description, icon }) => {
   const cardBgColor = useColorModeValue('blackAlpha.500', 'gray.900')
   const textColor = useColorModeValue('gray.300', 'gray.300')
   const linkColor = useColorModeValue('teal.400', 'teal.400')
+  const iconBgColor = useColorModeValue('gray.900', 'gray.700')
 
   return (
     <Box
@@ -42,7 +43,8 @@ const Card = ({ heading, description, icon }) => {
           justify='center'
           color='white'
           rounded='full'
-          bg={useColorModeValue('gray.100', 'gray.700')}
+          bg={iconBgColor}
+          _hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}
         >
           {icon}
         </Flex>
@@ -53,7 +55,7 @@ const Card = ({ heading, description, icon }) => {
           </Text>
         </Box>
         <Link to='/categories'>
-          <Button variant='link' color={linkColor} size='sm'>
+          <Button as={Link} to='/categories' variant='link' color={linkColor} size='sm'>
             Learn more
           </Button>
         </Link>
@@ -68,10 +70,10 @@ const CategoriesSection = () => {
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW='3xl' textAlign='center'>
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight='bold'>
-            NUESTRAS CATEGORIAS
+            NUESTRAS CATEGORíAS
           </Heading>
           <Text color='gray.600' fontSize={{ base: 'sm', sm: 'lg' }}>
-            Este es un repaso de nuestras categorias
+            Estas son nuestras categorias donde puedes encontrar las ocupaciones de los servicios que procuras!
           </Text>
         </Stack>
 
@@ -80,37 +82,31 @@ const CategoriesSection = () => {
             <Card
               heading='Tecnología'
               icon={<img src={tecnologiaIcon} alt='Tecnología' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              description='Aquí encontrarás ofertas de servicios en todo lo que respecta al area IT'
               href='#'
             />
             <Card
               heading='Arte y Diseño'
               icon={<img src={arteDiseñoIcon} alt='Arte y Diseño' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              description='Aquí encontraras desde diseñadores e ilustradores hasta decoradores de interior, escenófragos, entre otros...'
               href='#'
             />
             <Card
               heading='Consultoría'
               icon={<img src={consultoriaIcon} alt='Consultoría' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              description='Aquí encontrarás todo tipo de consultorías'
               href='#'
             />
             <Card
               heading='Servicios'
               icon={<img src={serviciosIcon} alt='Servicios' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              description='Aquí encontraras servicios generales.'
               href='#'
             />
             <Card
               heading='Manualidades'
               icon={<img src={manualidadesIcon} alt='Manualidades' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
-              href='#'
-            />
-            <Card
-              heading='Ingeniería'
-              icon={<img src={ingenieriaIcon} alt='Ingeniería' />}
-              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              description='Aquí encontrarás productos de oficio. Desde orfebres, esculores hasta cermaistas y floristas.'
               href='#'
             />
           </Flex>
