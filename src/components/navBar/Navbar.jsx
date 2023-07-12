@@ -40,7 +40,7 @@ const Navbar = () => {
         </Box>
 
         <Box display={{ base: 'none', md: 'block' }}>
-          <Link to="/comofunciona" style={{ fontSize: '20px' }} textDecoration="none" ml={4} fontSize="lg">
+          <Link to="/comofunciona" style={{ fontSize: '20px', textDecoration: 'none' }} ml={4} fontSize="lg">
             ¿Cómo funciona?
           </Link>
         </Box>
@@ -67,19 +67,18 @@ const Navbar = () => {
         </Box>
 
         <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
-          <ul>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
             <li>
-              <a style={{ fontSize: '20px' }} href="#" onClick={toggleDropdown} textDecoration="none">
+              <a style={{ fontSize: '20px', textDecoration: 'none' }} href="#" onClick={toggleDropdown}>
                 Registrate ▼
               </a>
               {isOpen && (
-                <ul>
+                <ul style={{ listStyle: 'none', padding: 0 }}>
                   <li>
                     <a
                       href="#"
                       onClick={() => handleOptionClick('cliente')}
-                      textDecoration="none"
-                      style={{ fontSize: '12px' }}
+                      style={{ fontSize: '12px', textDecoration: 'none' }}
                     >
                       Soy Cliente
                     </a>
@@ -89,8 +88,7 @@ const Navbar = () => {
                     <a
                       href="/registerProvider"
                       onClick={() => handleOptionClick('profesional')}
-                      textDecoration="none"
-                      style={{ fontSize: '12px' }}
+                      style={{ fontSize: '12px', textDecoration: 'none' }}
                     >
                       Soy Profesional
                     </a>

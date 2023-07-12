@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Flex,
@@ -12,11 +11,9 @@ import {
   useColorModeValue,
   Stack,
   useColorMode,
-  Center,
   Image,
   HStack,
   VStack,
-  Spacer,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Sidebar from "./Sidebar";
