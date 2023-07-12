@@ -9,11 +9,7 @@ import {
   Text,
   useColorModeValue
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom' // Importa el componente Link de React Router
-
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllCategories } from '../../../services/redux/actions/actions'
+import { Link } from 'react-router-dom'
 
 import consultoriaIcon from '../../../assets/categoriesIcons/educación.png'
 import arteDiseñoIcon from '../../../assets/categoriesIcons/salud.png'
@@ -56,7 +52,7 @@ const Card = ({ heading, description, icon }) => {
             {description}
           </Text>
         </Box>
-        <Link to='/categories'> {/* Agrega el componente Link y establece la ruta "/categories" */}
+        <Link to='/categories'>
           <Button variant='link' color={linkColor} size='sm'>
             Learn more
           </Button>
@@ -67,32 +63,6 @@ const Card = ({ heading, description, icon }) => {
 }
 
 const CategoriesSection = () => {
-  const categories = useSelector(state => state.categories)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getAllCategories())
-  }, [dispatch])
-
-  const getCategoryIcon = (categoryName) => {
-    switch (categoryName) {
-      case 'Tecnología':
-        return tecnologiaIcon
-      case 'Arte y Diseño':
-        return arteDiseñoIcon
-      case 'Consultoría':
-        return consultoriaIcon
-      case 'Servicios':
-        return serviciosIcon
-      case 'Manualidades':
-        return manualidadesIcon
-      case 'Ingeniería':
-        return ingenieriaIcon
-      default:
-        return null
-    }
-  }
-
   return (
     <Box p={4} bg='gray.900' color='gray.300' h='100vh' width='100%'>
       <Box p={4}>
@@ -107,19 +77,42 @@ const CategoriesSection = () => {
 
         <Container maxW='5xl' mt={12}>
           <Flex flexWrap='wrap' gridGap={6} justify='center'>
-            {categories.map((category, index) => {
-              const categoryIcon = getCategoryIcon(category.nombre)
-
-              return (
-                <Card
-                  key={index}
-                  heading={category.nombre}
-                  icon={<img src={categoryIcon} alt={category.nombre} />}
-                  description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
-                  href='#'
-                />
-              )
-            })}
+            <Card
+              heading='Tecnología'
+              icon={<img src={tecnologiaIcon} alt='Tecnología' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
+            <Card
+              heading='Arte y Diseño'
+              icon={<img src={arteDiseñoIcon} alt='Arte y Diseño' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
+            <Card
+              heading='Consultoría'
+              icon={<img src={consultoriaIcon} alt='Consultoría' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
+            <Card
+              heading='Servicios'
+              icon={<img src={serviciosIcon} alt='Servicios' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
+            <Card
+              heading='Manualidades'
+              icon={<img src={manualidadesIcon} alt='Manualidades' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
+            <Card
+              heading='Ingeniería'
+              icon={<img src={ingenieriaIcon} alt='Ingeniería' />}
+              description='Lorem ipsum dolor sit amet catetur, adipisicing elit.'
+              href='#'
+            />
           </Flex>
         </Container>
       </Box>
@@ -127,4 +120,4 @@ const CategoriesSection = () => {
   )
 }
 
-export default CategoriesSection
+export default CategoriesSection;
