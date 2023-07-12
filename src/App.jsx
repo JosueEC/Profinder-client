@@ -7,6 +7,7 @@ import HowDoesItWork from '../src/components/HowDoesItWork/HowDoesItWork'
 import Footer from './components/Footer/Footer'
 import DetailSupplier from './views/DetailsSupplier/DetailsSupplier'
 import UserLogin from './views/UserLogin/UserLogin'
+import FormCliente from './views/FormCliente/FormCliente.jsx'
 
 function App () {
   return (
@@ -17,6 +18,7 @@ function App () {
         <Route path='/categories' element={<Categories />} />
         <Route path='/comofunciona' element={<HowDoesItWork />} />
         <Route path='/registerProvider' element={<FromProvider />} />
+        <Route path='/registerCliente' element={<FormCliente />} />
         <Route path='/detail/:supplierID' element={<DetailSupplier />} />
         <Route path='/userLogin' element={<UserLogin />} />
       </Routes>

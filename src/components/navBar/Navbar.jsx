@@ -102,7 +102,7 @@ const Navbar = () => {
                   {/* Opción: Soy Cliente */}
                   <li>
                     <a
-                      href='#'
+                      href='/registerCliente'
                       onClick={() => handleOptionClick('cliente')}
                       textDecoration='none'
                       style={{ fontSize: '12px' }}
