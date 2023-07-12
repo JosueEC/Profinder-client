@@ -31,6 +31,7 @@ function FormCliente(props) {
       name: "",
       email: "",
       password: "",
+      phone: "",
     },
   });
 
@@ -38,8 +39,8 @@ function FormCliente(props) {
     const newData = {
       name: data.name,
       email: data.email,
-
       password: data.password,
+      phone: data.phone,
     };
     console.log(newData);
     // dispatch(postCiente(newData));
@@ -96,6 +97,16 @@ function FormCliente(props) {
                   required: "El campo descripción es requerido",
                 })}
               />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Telefono</FormLabel>
+              <Input
+                type="number"
+                {...register("phone", {
+                  required: "El campo telefono es requerido",
+                })}
+              />
+              {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
 
             <FormControl>

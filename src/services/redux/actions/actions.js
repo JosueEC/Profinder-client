@@ -100,11 +100,19 @@ const postCiente = (info) => {
   return async function () {
     try {
       // Verificación
-      if (info.name === "" || info.email === "" || info.password === 0) {
+      if (
+        info.name === "" ||
+        info.email === "" ||
+        info.phone === "" ||
+        info.password === 0
+      ) {
         throw new Error("Faltan datos");
       }
 
-      await axios.post("https://backprofinder-production.up.railway.app/client", info);
+      await axios.post(
+        "https://backprofinder-production.up.railway.app/client",
+        info
+      );
       alert("Perfil creado");
     } catch (error) {
       alert(`${error.response.data.error}`);
@@ -112,4 +120,10 @@ const postCiente = (info) => {
   };
 };
 
-export { getAllSuppliers, getAllCategories, postProveedor, applyFilters, postCiente };
+export {
+  getAllSuppliers,
+  getAllCategories,
+  postProveedor,
+  applyFilters,
+  postCiente,
+};
