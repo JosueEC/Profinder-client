@@ -1,6 +1,7 @@
 export const API = Object.freeze({
   DOMAIN: 'https://backprofinder-production.up.railway.app',
-  JSON: 'https://raw.githubusercontent.com/johpaz/ApiProfinder/master/src/json/db.json'
+  JSON: 'https://raw.githubusercontent.com/johpaz/ApiProfinder/master/src/json/db.json',
+  LOCAL: 'http://localhost:3001'
 })
 
 export const LOCAL = Object.freeze({

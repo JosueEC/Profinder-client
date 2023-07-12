@@ -5,7 +5,7 @@ import {
   GET_ALL_SUPPLIERS,
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
-  APPLY_FILTERS,
+  APPLY_FILTERS
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos lo Proveedores/Profesionales
@@ -120,10 +120,33 @@ const postCiente = (info) => {
   };
 };
 
+const registerUser = (dataSession) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataSession)
+  }
+
+  return function () {
+    fetch(`${API.LOCAL}/register`, options)
+    // fetch(`${API.DOMAIN}/register`, options)
+      .then((response) => response.json())
+      .then((results) => {
+        console.info('Respuesta Backend', results)
+      })
+      .catch((error) => {
+        console.error(error.message)
+      })
+  }
+}
+
 export {
   getAllSuppliers,
   getAllCategories,
   postProveedor,
   applyFilters,
   postCiente,
+  registerUser
 };

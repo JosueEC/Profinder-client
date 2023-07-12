@@ -6,7 +6,6 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
@@ -16,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { validateEmail } from '../../services/validators/validationsLogin'
+import { Link } from 'react-router-dom'
 
 export default function SimpleCard () {
   const [loading, setLoading] = useState(false)
@@ -151,8 +151,7 @@ export default function SimpleCard () {
                         )
                   }
                   <Text color='gray.300' letterSpacing='0.5px'>
-                    Aun no tienes una cuenta? Registrate gratis
-                    <Link color='teal.300' ml='0.3rem'>
+                    Aun no tienes una cuenta? Registrate gratis <Link to='/userRegister'>
                       aqui
                     </Link>
                   </Text>
