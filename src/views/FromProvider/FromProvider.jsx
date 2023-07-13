@@ -23,24 +23,24 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
+
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
-import {
-  validateCategories,
-  validateEmail,
-  validateGenre,
-  validateImage,
-  validateName,
-  validateOcupations,
-  validatePhone,
-  validateUbication,
-  validateYearsExp,
-} from "../../services/validators/validationsLogin";
+// import {
+//   validateCategories,
+//   validateGenre,
+//   validateImage,
+//   validateName,
+//   validateOcupations,
+//   validatePhone,
+//   validateUbication,
+//   validateYearsExp,
+// } from "../../services/validators/validationsLogin";
 
 function FormProvider(props) {
   const {
     register,
-    watch,
+    // watch,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -50,8 +50,8 @@ function FormProvider(props) {
       image: "",
       genre: "",
       years_exp: "",
-      description: "",
-      ubicacion: "",
+      password: "",
+      ubication: "",
       phone: "",
       ocupations: [],
       categories: [],
@@ -59,94 +59,94 @@ function FormProvider(props) {
   });
 
   // Verificar el campo "name" en tiempo real
-  const name = watch("name");
-  useEffect(() => {
-    try {
-      validateName(name);
-    } catch (error) {
-      errors.name = { message: error.message };
-    }
-  }, [name]);
+  // const name = watch("name");
+  // useEffect(() => {
+  //   try {
+  //     validateName(name);
+  //   } catch (error) {
+  //     errors.name = { message: error.message };
+  //   }
+  // }, [name]);
 
   // Verificar el campo "email" en tiempo real
-  const email = watch("email");
-  useEffect(() => {
-    try {
-      validateEmail(email);
-    } catch (error) {
-      errors.email = { message: error.message };
-    }
-  }, [email]);
+  // const email = watch("email");
+  // useEffect(() => {
+  //   try {
+  //     validateEmail(email);
+  //   } catch (error) {
+  //     errors.email = { message: error.message };
+  //   }
+  // }, [email]);
 
   // Verificar el campo "image" en tiempo real
-  const image = watch("image");
-  useEffect(() => {
-    try {
-      validateImage(image);
-    } catch (error) {
-      errors.image = { message: error.message };
-    }
-  }, [image]);
+  // const image = watch("image");
+  // useEffect(() => {
+  //   try {
+  //     validateImage(image);
+  //   } catch (error) {
+  //     errors.image = { message: error.message };
+  //   }
+  // }, [image]);
 
   // Verificar el campo "genre" en tiempo real
-  const genre = watch("genre");
-  useEffect(() => {
-    try {
-      validateGenre(genre);
-    } catch (error) {
-      errors.genre = { message: error.message };
-    }
-  }, [genre]);
+  // const genre = watch("genre");
+  // useEffect(() => {
+  //   try {
+  //     validateGenre(genre);
+  //   } catch (error) {
+  //     errors.genre = { message: error.message };
+  //   }
+  // }, [genre]);
 
   // Verificar el campo "years_exp" en tiempo real
-  const yearsExp = watch("years_exp");
-  useEffect(() => {
-    try {
-      validateYearsExp(yearsExp);
-    } catch (error) {
-      errors.years_exp = { message: error.message };
-    }
-  }, [yearsExp]);
+  // const yearsExp = watch("years_exp");
+  // useEffect(() => {
+  //   try {
+  //     validateYearsExp(yearsExp);
+  //   } catch (error) {
+  //     errors.years_exp = { message: error.message };
+  //   }
+  // }, [yearsExp]);
 
   // Verificar el campo "categories" en tiempo real
-  const categories = watch("categories");
-  useEffect(() => {
-    try {
-      validateCategories(categories);
-    } catch (error) {
-      errors.categories = { message: error.message };
-    }
-  }, [categories]);
+  // const categories = watch("categories");
+  // useEffect(() => {
+  //   try {
+  //     validateCategories(categories);
+  //   } catch (error) {
+  //     errors.categories = { message: error.message };
+  //   }
+  // }, [categories]);
 
   // Verificar el campo "ocupations" en tiempo real
-  const ocupations = watch("ocupations");
-  useEffect(() => {
-    try {
-      validateOcupations(ocupations);
-    } catch (error) {
-      errors.ocupations = { message: error.message };
-    }
-  }, [ocupations]);
+  // const ocupations = watch("ocupations");
+  // useEffect(() => {
+  //   try {
+  //     validateOcupations(ocupations);
+  //   } catch (error) {
+  //     errors.ocupations = { message: error.message };
+  //   }
+  // }, [ocupations]);
 
   // Verificar el campo "phone" en tiempo real
-  const phone = watch("phone");
-  useEffect(() => {
-    try {
-      validatePhone(phone);
-    } catch (error) {
-      errors.phone = { message: error.message };
-    }
-  }, [phone]);
+  // const phone = watch("phone");
+  // useEffect(() => {
+  //   try {
+  //     validatePhone(phone);
+  //   } catch (error) {
+  //     errors.phone = { message: error.message };
+  //   }
+  // }, [phone]);
 
   // Verificar el campo "ubicacion" en tiempo real
-  const ubicacion = watch("ubicacion");
-  useEffect(() => {
-    try {
-      validateUbication(ubicacion);
-    } catch (error) {
-      errors.ubicacion = { message: error.message };
-    }
-  }, [ubicacion]);
+  // const ubicacion = watch("ubicacion");
+  // useEffect(() => {
+  //   try {
+  //     validateUbication(ubicacion);
+  //   } catch (error) {
+  //     errors.ubicacion = { message: error.message };
+  //   }
+  // }, [ubicacion]);
 
   // const categorias = useSelector((state) => state.categories);
   const dispatch = useDispatch();
@@ -177,8 +177,8 @@ function FormProvider(props) {
       genre: data.genre,
       years_exp: data.years_exp,
       phone: data.phone,
-      ubicacion: data.ubicacion,
-      description: data.description,
+      ubication: data.ubication,
+      password: data.password,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
@@ -211,7 +211,6 @@ function FormProvider(props) {
                   required: "El campo nombre es requerido",
                 })}
               />
-              {errors.name && <p>{errors.name.message}</p>}
             </FormControl>
 
             <FormControl>
@@ -237,24 +236,19 @@ function FormProvider(props) {
                   required: "El campo telefono es requerido",
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {/* {errors.phone && <p>{errors.phone.message}</p>} */}
             </FormControl>
 
             <FormControl>
               <FormLabel>Ubicacion</FormLabel>
               <Input
                 type="text"
-                {...register("ubicacion", {
+                {...register("ubication", {
                   required: "El campo ubicacion es requerido",
                 })}
               />
-              {errors.ubicacion && <p>{errors.ubicacion.message}</p>}
+              {/* {errors.ubicacion && <p>{errors.ubicacion.message}</p>} */}
             </FormControl>
-
-            {/* <FormControl>
-              <FormLabel>Contraseña</FormLabel>
-              <Input type="password" />
-            </FormControl> */}
 
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
@@ -327,15 +321,14 @@ function FormProvider(props) {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Descripción</FormLabel>
-              <Textarea
-                type="description"
-                isRequired
-                {...register("description", {
-                  required: "El campo descripción es requerido",
+              <FormLabel>Contraseña</FormLabel>
+              <Input
+                type="password"
+                {...register("password", {
+                  required: "El campo contraseña es requerido",
                 })}
               />
-              {errors.description && <p>{errors.description.message}</p>}
+              {/* {errors.password && <p>{errors.password.message}</p>} */}
             </FormControl>
 
             <FormControl>
