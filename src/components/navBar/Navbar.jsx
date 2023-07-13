@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, IconButton, Menu, MenuButton, MenuList, MenuItem, Flex, Image, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link, useLocation } from 'react-router-dom';
-import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+//import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
 import logo from '../../assets/categoriesIcons/Logo.png';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -105,7 +105,7 @@ const Navbar = () => {
 
         {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
         {isCategoriesRoute && <SearchBar />}
-        <DarkModeToggle />
+        {/* <DarkModeToggle /> */}
 
         <Box display={{ base: 'none', md: 'block' }}>
           <Link to="/userLogin" textDecoration="none" style={{ fontSize: '20px' }}>

@@ -10,7 +10,7 @@ import {
     MenuItem,
     useColorModeValue,
     Stack,
-    useColorMode,
+   // useColorMode,
     Image,
     HStack,
     VStack,
@@ -21,11 +21,11 @@ import {
   import logo from "../../assets/categoriesIcons/logo.png";
   
   export default function Nav() {
-    const { colorMode, toggleColorMode } = useColorMode();
+   // const { colorMode, toggleColorMode } = useColorMode(); ***** bg={useColorModeValue("gray.100", "gray.900")} px={4}
   
     return (
       <>
-        <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Box >
           <Flex
             h={16}
             alignItems={"center"}
@@ -77,9 +77,9 @@ import {
   
             <Flex alignItems={"center"}>
               <Stack direction={"row"} spacing={7}>
-                <Button onClick={toggleColorMode}>
+                {/* <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                </Button>
+                </Button> */}
   
                 <Menu>
                   <MenuButton
