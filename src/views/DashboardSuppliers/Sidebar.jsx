@@ -30,7 +30,7 @@ const Sidebar = () => {
           duration={500}
           style={linkStyle}
         >
-          <Text>Publicaciones</Text>
+          <Text>Publicar</Text>
         </Link>
         <Link
           to="nuevas-publicaciones"
@@ -39,7 +39,7 @@ const Sidebar = () => {
           duration={500}
           style={linkStyle}
         >
-          <Text>Nuevas Publicaciones</Text>
+          <Text>Ver mis Publicaciones</Text>
         </Link>
         <Link
           to="obtener-premium"

@@ -103,6 +103,7 @@ import {
                       <p>Usuario</p>
                     </VStack>
                     <MenuDivider />
+                    <MenuItem>Ver mi Perfil</MenuItem>
                     <MenuItem>Editar Perfil</MenuItem>
                     <MenuItem>Cerrar Sesión</MenuItem>
                   </MenuList>
