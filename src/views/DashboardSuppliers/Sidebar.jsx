@@ -3,7 +3,7 @@ import { Link } from 'react-scroll';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-const Sidebar = () => {
+const DashboardClient = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCollapse = () => {
@@ -97,4 +97,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default DashboardClient;
