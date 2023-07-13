@@ -10,6 +10,7 @@ import UserLogin from "./views/UserLogin/UserLogin";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
 import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
+import DashboardClient from "./views/DashboardClient/DashboardClient.jsx"
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboardClient" element={<DashboardClient />} />
         <Route path="/dashboardSuppliers" element={<NavbarDashboard />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
