@@ -34,14 +34,12 @@ const HomePage = () => {
       <section className={`${styles.Categories} ${styles.fullHeight}`}>
         <div className={styles.divider} />
         <CategoriesSection />
-
       </section>
 
+      <div className={styles.divider} /> 
       <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
-        <div className={styles.divider} />
         <TopPro />
       </section>
-      <div className={styles.divider} />
     </div>
   )
 }
