@@ -120,7 +120,7 @@ const postCiente = (info) => {
   };
 };
 
-const registerUser = (dataSession) => {
+const getSessionUser = (dataSession) => {
   const options = {
     method: 'POST',
     headers: {
@@ -129,16 +129,44 @@ const registerUser = (dataSession) => {
     body: JSON.stringify(dataSession)
   }
 
-  return function () {
-    fetch(`${API.LOCAL}/register`, options)
-    // fetch(`${API.DOMAIN}/register`, options)
+  return async function () {
+    const URL = `${API.LOCALHOST}/login`
+
+    const data = await fetch(URL, options)
       .then((response) => response.json())
       .then((results) => {
-        console.info('Respuesta Backend', results)
+        return results
       })
       .catch((error) => {
         console.error(error.message)
       })
+      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false
+      localStorage.setItem('userSession', JSON.stringify(data))
+  }
+}
+
+const postSessionUser = (dataSession) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataSession)
+  }
+
+  return async function () {
+    const URL = `${API.LOCALHOST}/register`
+
+    const data = await fetch(URL, options)
+      .then((response) => response.json())
+      .then((results) => {
+        return results
+      })
+      .catch((error) => {
+        console.error(error.message)
+      })
+      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false
+      window.localStorage.setItem('userSession', JSON.stringify(data))
   }
 }
 
@@ -148,5 +176,6 @@ export {
   postProveedor,
   applyFilters,
   postCiente,
-  registerUser
+  getSessionUser,
+  postSessionUser
 };

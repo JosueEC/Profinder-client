@@ -14,24 +14,29 @@ import {
 } from '@chakra-ui/react'
 import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { validateEmail } from '../../services/validators/validationsLogin'
+import { useDispatch } from 'react-redux'
+import { getSessionUser } from '../../services/redux/actions/actions'
 import { Link } from 'react-router-dom'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
-export default function SimpleCard () {
+export default function UserLogin () {
+  const dispatch = useDispatch()
   const {
     userTypes,
-    user,
+    usuario,
     dataSession,
     errors,
     setErrors,
     handleChange,
-    handleSelectUser
+    handleSelectUser,
+    handleUserSession
   } = useCredentials()
 
-  function handleSubmit (event) {
+  async function handleSubmit (event) {
     event.preventDefault()
     try { validateEmail(dataSession.email) } catch (error) { setErrors({ ...errors, email: error.message }) }
-    console.info(dataSession)
+    await dispatch(getSessionUser(dataSession))
+    handleUserSession('Sesion iniciada', 'Algo salio mal')
   }
 
   return (
@@ -89,7 +94,7 @@ export default function SimpleCard () {
               </FormControl>
               <Stack spacing={10}>
                 <DropdownMenu
-                  titleMenu={user}
+                  titleMenu={usuario}
                   menuItems={userTypes}
                   onClick={handleSelectUser}
                 />
@@ -104,6 +109,7 @@ export default function SimpleCard () {
                     _hover={{ bg: 'teal.500' }}
                     loadingText='Ingresando'
                     type='submit'
+                    // onMouseUp={notifyUser}
                   >
                     Ingresar
                   </Button>

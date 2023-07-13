@@ -14,27 +14,29 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
 import { useCredentials } from '../../utils/customHooks/useCredentials'
+import { postSessionUser } from '../../services/redux/actions/actions'
 import { Link } from 'react-router-dom'
-import { registerUser } from '../../services/redux/actions/actions'
 import { useDispatch } from 'react-redux'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
-export default function SignupCard () {
+export default function UserRegister () {
   const disptach = useDispatch()
-  const [showPassword, setShowPassword] = useState(false)
   const {
     userTypes,
-    user,
+    usuario,
     dataSession,
+    showPassword,
+    setShowPassword,
     handleChange,
-    handleSelectUser
+    handleSelectUser,
+    handleUserSession
   } = useCredentials()
 
-  function handleClickRegister () {
-    console.log(dataSession)
-    disptach(registerUser(dataSession))
+  async function handleSubmit (event) {
+    event.preventDefault()
+    await disptach(postSessionUser(dataSession))
+    handleUserSession('Cuenta creada', 'Algo salio mal')
   }
 
   return (
@@ -65,7 +67,7 @@ export default function SignupCard () {
           boxShadow='lg'
           p={8}
         >
-          <Stack spacing={4}>
+          <form onSubmit={handleSubmit} >
             <HStack>
               <Box>
                 <FormControl id='name' isRequired>
@@ -100,13 +102,13 @@ export default function SignupCard () {
               </InputGroup>
             </FormControl>
             <DropdownMenu
-              titleMenu={user}
+              titleMenu={usuario}
               menuItems={userTypes}
               onClick={handleSelectUser}
             />
             <Stack spacing={10} pt={2}>
               <Button
-                onClick={handleClickRegister}
+                type='submit'
                 loadingText='Registrando'
                 size='lg'
                 bg='blue.400'
@@ -123,7 +125,7 @@ export default function SignupCard () {
                 Ya tienes una cuenta? ingresa desde aqui <Link to='/userLogin'>Login</Link>
               </Text>
             </Stack>
-          </Stack>
+          </form>
         </Box>
       </Stack>
     </Flex>

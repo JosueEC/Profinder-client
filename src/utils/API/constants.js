@@ -1,10 +1,11 @@
 export const API = Object.freeze({
   DOMAIN: 'https://backprofinder-production.up.railway.app',
   JSON: 'https://raw.githubusercontent.com/johpaz/ApiProfinder/master/src/json/db.json',
-  LOCAL: 'http://localhost:3001'
+  LOCALHOST: 'http://localhost:3001'
 })
 
 export const LOCAL = Object.freeze({
+  register: 'src/utils/endpointsGET/GET-register.json',
   pofesional: 'src/utils/endpointsGET/GET-all-profesional.json',
   profesionalID: 'src/utils/endpointsGET/GET-profesional-ID.json',
   profesionalName: 'src/utils/endpointsGET/GET-profesional-name.json',

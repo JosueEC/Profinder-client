@@ -14,7 +14,7 @@ const initialState = {
   filteredSuppliers: [],
   filters: {
     category: 'Categorias',
-    ocupation: 'Seleccion una categoria',
+    ocupation: 'Selecciona una categoria',
     rating: 'Rating',
     genre: 'Genero'
   }
