@@ -1,43 +1,58 @@
-/* eslint-disable react/prop-types */
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { searchProfessionals } from '../../services/redux/actions/actions'
-import { Input, Button, Flex } from '@chakra-ui/react'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getOcupationsByName } from "../../services/redux/actions/actions";
+import { Input, Box, Image } from "@chakra-ui/react";
+import notfound from "../../assets/defaultImages/notfound.jpg";
 
-const SearchBar = ({ searchTerm, setSearchTerm, cards }) => {
-  const dispatch = useDispatch()
+const SearchBar = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    dispatch(searchProfessionals())
-  }, [dispatch])
+    dispatch(getOcupationsByName());
+  }, [dispatch]);
 
-  const handleSearch = async () => {
-    try {
-      const response = await dispatch(searchProfessionals(searchTerm))
-      console.log(response)
-    } catch (error) {
-      console.error(error)
+  function handleInputChange(event) {
+    const value = event.target.value;
+    const regex = /^[a-zA-Z\s]*$/;
+    if (regex.test(value)) {
+      setName(value);
+      setError(false);
     }
   }
 
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value)
+  function handleSubmit(event) {
+    event.preventDefault();
+    const response = dispatch(getOcupationsByName(name));
+    console.log(response);
+    setName("");
   }
 
   return (
-    <Flex alignItems='center' justifyContent='center' mb={4} color='gray.500'>
-      <Input
-        type='text'
-        placeholder='Search professionals'
-        value={searchTerm}
-        onChange={handleInputChange}
-        mr={2}
-      />
-      <Button colorScheme='teal' onClick={handleSearch}>
-        Search
-      </Button>
-    </Flex>
-  )
-}
+    <Box display="flex" alignItems="center" justifyContent="center">
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          name="txt"
+          value={name}
+          onChange={handleInputChange}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSubmit(event);
+            }
+          }}
+          placeholder="🔍"
+          size="md"
+          maxWidth="md"
+          borderRadius="md"
+        />
+      </form>
+      {error && (
+        <Image src={notfound} alt="Error" maxWidth="md" mt={4} />
+      )}
+    </Box>
+  );
+};
 
-export default SearchBar
+export default SearchBar;

@@ -5,7 +5,8 @@ import {
   GET_ALL_SUPPLIERS,
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
-  APPLY_FILTERS
+  APPLY_FILTERS,
+  GET_PROFESIONALS_BY_NAME,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos lo Proveedores/Profesionales
@@ -17,7 +18,7 @@ const getAllSuppliers = () => {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
-        console.info("fetching-all-suppliers");
+        //console.info("fetching-all-suppliers");
         dispatch({ type: GET_ALL_SUPPLIERS, payload: results });
       })
       .catch((error) => console.error(error.message));
@@ -56,6 +57,24 @@ export const searchProfessionals = (name) => {
         });
       })
       .catch((error) => console.error(error.message));
+  };
+};
+
+const getOcupationsByName = (name) => {
+  const URL = "https://backprofinder-production.up.railway.app/ocupationsp";
+  return async function (dispatch) {
+    try {
+      let json = await axios.get(`${URL}/?name=${name}`);
+      console.log(json.data); 
+      if (json.data) {
+        return dispatch({
+          type: GET_PROFESIONALS_BY_NAME,
+          payload: json.data,
+        });
+      }
+    } catch (error) {
+      console.log(error); 
+    }
   };
 };
 
@@ -122,25 +141,25 @@ const postCiente = (info) => {
 
 const registerUser = (dataSession) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(dataSession)
-  }
+    body: JSON.stringify(dataSession),
+  };
 
   return function () {
     fetch(`${API.LOCAL}/register`, options)
-    // fetch(`${API.DOMAIN}/register`, options)
+      // fetch(`${API.DOMAIN}/register`, options)
       .then((response) => response.json())
       .then((results) => {
-        console.info('Respuesta Backend', results)
+        console.info("Respuesta Backend", results);
       })
       .catch((error) => {
-        console.error(error.message)
-      })
-  }
-}
+        console.error(error.message);
+      });
+  };
+};
 
 export {
   getAllSuppliers,
@@ -148,5 +167,6 @@ export {
   postProveedor,
   applyFilters,
   postCiente,
-  registerUser
+  registerUser,
+  getOcupationsByName,
 };

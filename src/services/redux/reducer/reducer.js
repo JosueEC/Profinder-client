@@ -2,12 +2,14 @@ import {
   GET_ALL_SUPPLIERS,
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
-  APPLY_FILTERS
+  APPLY_FILTERS,
+  GET_PROFESIONALS_BY_NAME
 } from '../actionsTypes/actionsType'
 import { filterSuppliers } from '../filters/reduxFilters'
 
 const initialState = {
   suppliers: [],
+  ocupations: [],
   backup: [],
   categories: [],
   filteredCategories: [],
@@ -33,6 +35,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         categories: action.payload
       }
+      case GET_PROFESIONALS_BY_NAME:
+        return {
+          ...state,
+          suppliers: action.payload
+        }
     case APPLY_FILTERS:
       return {
         ...state,

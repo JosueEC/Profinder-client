@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Box, IconButton, Menu, MenuButton, MenuList, MenuItem, Flex, Image, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
 import logo from '../../assets/categoriesIcons/Logo.png';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -16,8 +18,10 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Obtener el color de fondo de la Navbar según el modo de color actual
   const navbarBgColor = useColorModeValue('gray.200', 'gray.900');
+
+  // variable para controlar la renderizacion de la searchbar"
+  const isCategoriesRoute = location.pathname === "/categories";
 
   return (
     <nav>
@@ -98,6 +102,9 @@ const Navbar = () => {
             </li>
           </ul>
         </Box>
+
+        {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
+        {isCategoriesRoute && <SearchBar />}
         <DarkModeToggle />
 
         <Box display={{ base: 'none', md: 'block' }}>
@@ -105,7 +112,6 @@ const Navbar = () => {
             Login
           </Link>
         </Box>
-
       </Flex>
     </nav>
   );
