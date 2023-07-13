@@ -19,6 +19,7 @@ function App() {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboardClient" />
         <Route path="/dashboardSuppliers" element={<NavbarDashboard />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
