@@ -18,7 +18,7 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const navbarBgColor = useColorModeValue('gray.200', 'gray.900');
+//  const navbarBgColor = useColorModeValue('gray.200', 'gray.900'); *******  bg={navbarBgColor}
 
   // variable para controlar la renderizacion de la searchbar"
   const isCategoriesRoute = location.pathname === "/categories";
@@ -29,7 +29,7 @@ const Navbar = () => {
         justifyContent="space-between"
         alignItems="center"
         padding={4}
-        bg={navbarBgColor}
+       
         as="div"
         textTransform="uppercase"
         fontWeight="bold"
@@ -105,7 +105,7 @@ const Navbar = () => {
 
         {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
         {isCategoriesRoute && <SearchBar />}
-        <DarkModeToggle />
+        {/* <DarkModeToggle /> */}
 
         <Box display={{ base: 'none', md: 'block' }}>
           <Link to="/userLogin" textDecoration="none" style={{ fontSize: '20px' }}>
