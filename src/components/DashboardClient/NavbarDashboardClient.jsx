@@ -10,22 +10,22 @@ import {
     MenuItem,
     useColorModeValue,
     Stack,
-    useColorMode,
+   // useColorMode,
     Image,
     HStack,
     VStack,
   } from "@chakra-ui/react";
   import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-  import Sidebar from "./Sidebar";
+  import SidebarClient from "./SidebarClient";
   import { Link } from "react-router-dom";
   import logo from "../../assets/categoriesIcons/logo.png";
   
-  export default function Nav() {
-    const { colorMode, toggleColorMode } = useColorMode();
+  export default function NavbarDashboardClient() {
+   // const { colorMode, toggleColorMode } = useColorMode(); ***** bg={useColorModeValue("gray.100", "gray.900")} px={4}
   
     return (
       <>
-        <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Box >
           <Flex
             h={16}
             alignItems={"center"}
@@ -71,15 +71,27 @@ import {
                 textDecoration="none"
                 _hover={{ opacity: 0.8 }}
               >
-                Obtén Premium
+                Categorias
+              </Link>
+              <Link
+                variant="solid"
+                colorScheme="green"
+                borderRadius="md"
+                px={4}
+                py={2}
+                fontWeight="bold"
+                textDecoration="none"
+                _hover={{ opacity: 0.8 }}
+              >
+                Ayuda
               </Link>
             </HStack>
   
             <Flex alignItems={"center"}>
               <Stack direction={"row"} spacing={7}>
-                <Button onClick={toggleColorMode}>
+                {/* <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                </Button>
+                </Button> */}
   
                 <Menu>
                   <MenuButton
@@ -112,7 +124,7 @@ import {
             </Flex>
           </Flex>
         </Box>
-        <Sidebar />
+       
       </>
     );
   }
