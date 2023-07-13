@@ -80,7 +80,7 @@ const Navbar = () => {
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                   <li>
                     <a
-                      href="#"
+                      href="/registerCliente"
                       onClick={() => handleOptionClick('cliente')}
                       style={{ fontSize: '12px', textDecoration: 'none' }}
                     >

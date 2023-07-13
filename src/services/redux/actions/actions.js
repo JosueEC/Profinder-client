@@ -93,8 +93,8 @@ const postProveedor = (info) => {
         info.image === "" ||
         info.genre === "" ||
         info.years_exp === "" ||
-        info.description === "" ||
-        info.ubicacion === "" ||
+        info.password === "" ||
+        info.ubication === "" ||
         info.phone === "" ||
         info.ocupations === "" ||
         info.categories === 0
