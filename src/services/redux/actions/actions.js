@@ -195,6 +195,7 @@ export {
   postProveedor,
   applyFilters,
   postCiente,
+  getOcupationsByName,
   getSessionUser,
   postSessionUser
 };
