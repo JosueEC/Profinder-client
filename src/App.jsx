@@ -11,7 +11,8 @@ import DetailSupplier from "./views/DetailsSupplier/DetailsSupplier";
 import UserLogin from "./views/UserLogin/UserLogin";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
-import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
+import DashboardSuppliers from './views/DashboardSuppliers/Sidebar'
+// import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
 import DashboardClient from "./views/DashboardClient/DashboardClient/DashboardClient.jsx";
 import FeedbackForm from './components/Feedback/FormFeedback.jsx'
 import LoggedNavbar from './components/LoggedNavbar/LoggedNavbar.jsx'
@@ -23,7 +24,7 @@ import DashboardClientCategories from "./views/DashboardClient/DashboardClientCa
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
 import DashboardClientHelp from "./views/DashboardClient/DashboardClientHelp/DashboardClientHelp";
 import FormServicio from "../src/views/FormServicio/FormServicio";
-
+import Dashboard from "./views/DashboardSuppliers/Dashboard";
 
 function App() {
   const setSessionState = useSessionState(state => state.setSessionState)
@@ -43,6 +44,8 @@ function App() {
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
       <Routes>
+      <Route path="/dashboardSuppliers" element={<DashboardSuppliers/>} />
+
         <Route path="/" element={<HomePage />} />
         <Route path="/feedback" element={<FeedbackForm/>} />
         <Route path="/dashboardClient" element={<DashboardClient/>} />
@@ -52,7 +55,7 @@ function App() {
         <Route path="/dashboardClient/categories" element={<DashboardClientCategories/>}/>
         <Route path="/dashboardClient/feedbackform" element={<DashboardClientFeedbackForm/>}/>
         <Route path="/dashboardClient/help" element={<DashboardClientHelp/>}/>
-        <Route path="/dashboardSuppliers" element={<NavbarDashboard />} />
+        {/* <Route path="/dashboardSuppliers" element={<NavbarDashboard />} /> */}
         <Route path="/categories" element={<Categories />} />
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/registerProvider" element={<FromProvider />} />
