@@ -22,6 +22,7 @@ import DashboardClientTopPro from "./views/DashboardClient/DashboardClientTopPro
 import DashboardClientCategories from "./views/DashboardClient/DashboardClientCategories/DashboardClientCategories";
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
 import DashboardClientHelp from "./views/DashboardClient/DashboardClientHelp/DashboardClientHelp";
+import FormServicio from "./views/FormSevicio/FormServicio";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/registerProvider" element={<FromProvider />} />
         <Route path="/registerCliente" element={<FormCliente />} />
+        <Route path="/formservicio" element={<FormServicio />} />
         <Route path="/detail/:supplierID" element={<DetailSupplier />} />
         <Route
           path="/userLogin"
