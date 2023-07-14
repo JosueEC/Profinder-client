@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllCategories } from '../../services/redux/actions/actions'
 import { Select, Box, Text } from '@chakra-ui/react'
 
-const FilterByCategoria = () => {
+const FilterByCategoria = ({setCurrentPage}) => {
   const categories = useSelector((state) => state.categories)
   // console.log( categories);
   const filteredCategories = useSelector((state) => state.filteredCategories)
@@ -22,10 +22,12 @@ const FilterByCategoria = () => {
     setSelectedCategory(category)
     const selectedCategoryObj = categories.find((cat) => cat.nombre === category)
     setFilteredProfessions(selectedCategoryObj?.profesiones || [])
+    setCurrentPage(1)
   }
 
   const handleProfessionChange = (event) => {
     setSelectedProfession(event.target.value)
+    setCurrentPage(1)
   }
 
   const categoryNames = categories.map((category) => category.nombre)
