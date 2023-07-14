@@ -43,7 +43,7 @@ function App() {
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/registerProvider" element={<FromProvider />} />
         <Route path="/registerCliente" element={<FormCliente />} />
-        <Route path="/detail/:supplierID" element={<DetailSupplier />} />
+        <Route path="/detail/:id" element={<DetailSupplier />} />
         <Route
           path="/userLogin"
           element={<UserLogin />}
