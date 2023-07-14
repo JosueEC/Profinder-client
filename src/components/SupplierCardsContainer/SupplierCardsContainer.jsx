@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllSuppliers } from '../../services/redux/actions/actions'
 import { Skeleton } from '@chakra-ui/skeleton'
 import Paginator from '../Paginator/Paginator'
-// import SearchBar from '../SearchBar/SearchBar'
 const SupplierCard = lazy(() => import('../SupplierCard/SupplierCard'))
 
 export default function SupplierCardsContainer () {
@@ -28,7 +27,7 @@ export default function SupplierCardsContainer () {
 
   return (
     <Stack mt={12} align='center' justify='center'>
-      {/* <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={suppliers} /> */}
+   
       <Paginator
         cards={suppliers}
         currentPage={currentPage}

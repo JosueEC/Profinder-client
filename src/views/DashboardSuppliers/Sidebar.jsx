@@ -3,7 +3,7 @@ import { Link } from 'react-scroll';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-const Sidebar = () => {
+const DashboardClient = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCollapse = () => {
@@ -30,7 +30,7 @@ const Sidebar = () => {
           duration={500}
           style={linkStyle}
         >
-          <Text>Publicaciones</Text>
+          <Text>Publicar</Text>
         </Link>
         <Link
           to="nuevas-publicaciones"
@@ -39,7 +39,7 @@ const Sidebar = () => {
           duration={500}
           style={linkStyle}
         >
-          <Text>Nuevas Publicaciones</Text>
+          <Text>Ver mis Publicaciones</Text>
         </Link>
         <Link
           to="obtener-premium"
@@ -97,4 +97,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default DashboardClient;

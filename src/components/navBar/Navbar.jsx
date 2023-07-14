@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Box, IconButton, Menu, MenuButton, MenuList, MenuItem, Flex, Image, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
-import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+import { Link, useLocation } from 'react-router-dom';
+//import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
 import logo from '../../assets/categoriesIcons/Logo.png';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -16,8 +18,10 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Obtener el color de fondo de la Navbar según el modo de color actual
   const navbarBgColor = useColorModeValue('gray.200', 'gray.900');
+
+  // variable para controlar la renderizacion de la searchbar"
+  const isCategoriesRoute = location.pathname === "/categories";
 
   return (
     <nav>
@@ -76,7 +80,7 @@ const Navbar = () => {
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                   <li>
                     <a
-                      href="#"
+                      href="/registerCliente"
                       onClick={() => handleOptionClick('cliente')}
                       style={{ fontSize: '12px', textDecoration: 'none' }}
                     >
@@ -98,14 +102,16 @@ const Navbar = () => {
             </li>
           </ul>
         </Box>
-        <DarkModeToggle />
+
+        {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
+        {isCategoriesRoute && <SearchBar />}
+        {/* <DarkModeToggle /> */}
 
         <Box display={{ base: 'none', md: 'block' }}>
           <Link to="/userLogin" textDecoration="none" style={{ fontSize: '20px' }}>
             Login
           </Link>
         </Box>
-
       </Flex>
     </nav>
   );
