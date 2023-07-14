@@ -24,9 +24,10 @@ import SupplierPost from '../../components/SupplierPost/SupplierPost'
 // import ModalNewPost from '../../components/NewPost/ModalNewPost'
 
 const ArticleList = () => {
-  const { supplierID } = useParams()
-  const { data, isLoading } = useFetch(`${API.DOMAIN}/profesional/${supplierID}`)
+  const { id } = useParams()
+  const { data, isLoading } = useFetch(`${API.DOMAIN}/profesional/${id}`)
   // const { isOpen, onOpen, onClose } = useDisclosure()
+  console.log(data)
 
   return (
     <Container
@@ -156,9 +157,9 @@ const ArticleList = () => {
         justify='center'
       >
         {
-        (data.jobimages)
+        (data.posts)
           ? (
-              data.jobimages.map(({ image, description }) => {
+              data.posts.map(({ image, description }) => {
                 return (
                   <SupplierPost
                     key={description}
