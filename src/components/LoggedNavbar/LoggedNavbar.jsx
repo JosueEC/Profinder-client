@@ -28,6 +28,7 @@ export default function LoggedNavbar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
   const toast = useToast()
+  const session = useSessionState(state => state.session)
   const removeSessionState = useSessionState(state => state.removeSessionState)
 
   function handleLogout () {
@@ -40,8 +41,14 @@ export default function LoggedNavbar () {
       variant: 'top-accent',
       position: 'bottom-right',
       duration: 5000,
-      isClosable: true,
+      isClosable: true
     })
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+    navigate('/')
   }
 
   return (
@@ -87,7 +94,7 @@ export default function LoggedNavbar () {
               <NavLink textLink='ACERCA DE' routeLink='/' />
             </HStack>
           </HStack>
-          
+
           <Flex
             alignItems='center'
           >
@@ -105,10 +112,16 @@ export default function LoggedNavbar () {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => navigate('/dashboardClient')}>Dashboard cliente</MenuItem>
-                <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard profesional</MenuItem>
-                <MenuItem onClick={() => navigate('/registerCliente')}>Completar perfil cliente</MenuItem>
-                <MenuItem onClick={() => navigate('/registerProvider')}>Completar perfil profesional</MenuItem>
+                {
+                (session.usuario === 'c')
+                  ? <MenuItem onClick={() => navigate('/dashboardClient')}>Dashboard</MenuItem>
+                  : <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
+                }
+                {
+                  (session.usuario === 'c')
+                    ? <MenuItem onClick={() => navigate('/registerCliente')}>Completar perfil</MenuItem>
+                    : <MenuItem onClick={() => navigate('/registerProvider')}>Completar perfil</MenuItem>
+                }
                 <MenuDivider />
                 <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>
               </MenuList>

@@ -139,18 +139,17 @@ const postCliente = (info) => {
 
 const loginSessionGoogle = () => {
   return async function () {
-    const URL = `${API.LOCALHOST}/auth/google`
+    const URL = 'http://localhost:3001/auth/google'
     // const URL = LOCAL.register
 
-    try {
-      const response = await fetch(URL);
-      const data = await response.json();
-      data.status =
-        data.email && !data.message.includes("No pertenece") ? true : false;
-      localStorage.setItem("userSession", JSON.stringify(data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    await fetch(URL)
+      .then(response => response.json())
+      .then(results => {
+        return results
+      })
+      .catch(error => console.error(error.message))
+      // localStorage.setItem("userSession", JSON.stringify(data));
+      // data.status = data.email && !data.message.includes("No pertenece") ? true : false;
   };
 };
 
@@ -166,7 +165,8 @@ const getSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
-    const URL = LOCAL.register
+    // const URL = LOCAL.register
+    const URL = `${API.DOMAIN}/login`
 
     try {
       const response = await fetch(URL, options);
@@ -192,7 +192,8 @@ const postSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/register`
-    const URL = LOCAL.register
+    // const URL = LOCAL.register
+    const URL = `${API.DOMAIN}/register`
 
     try {
       const response = await fetch(URL, options);
@@ -215,5 +216,6 @@ export {
   getOcupationsByName,
   getSessionUser,
   postSessionUser,
-  loginSessionGoogle
+  loginSessionGoogle,
+  searchProfessionals
 };
