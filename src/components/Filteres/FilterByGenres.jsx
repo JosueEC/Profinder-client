@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { applyFilters, getAllSuppliers } from '../../services/redux/actions/actions'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
-const FilterByGenres = () => {
+const FilterByGenres = ({setCurrentPage}) => {
   const filters = useSelector(state => state.filters)
   const [genreSelected, setGenreSelected] = useState(filters.genre)
   const dispatch = useDispatch()
@@ -18,6 +18,7 @@ const FilterByGenres = () => {
     setGenreSelected(name)
     dispatch(applyFilters({ filter: 'genre', value: name.toLowerCase() }))
     dispatch(getAllSuppliers())
+    setCurrentPage(1)
   }
 
   return (

@@ -156,15 +156,15 @@ const ArticleList = () => {
         justify='center'
       >
         {
-        (data.jobimages)
+        (data.posts)
           ? (
-              data.jobimages.map(({ image, description }) => {
+              data.posts.map(({ image, content,title ,id}) => {
                 return (
                   <SupplierPost
-                    key={description}
+                    key={id}
                     imagePost={image[0]}
-                    titularPost={description}
-                    descriptionPost={description}
+                    titularPost={title}
+                    descriptionPost={content}
                   />
                 )
               })

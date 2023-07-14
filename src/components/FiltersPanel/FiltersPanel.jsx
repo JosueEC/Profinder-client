@@ -12,23 +12,27 @@ import SelectCategories from '../../singleComponents/SelectCategories'
 import FilterByRating from '../Filteres/FilterByRating'
 import FilterByGenres from '../Filteres/FilterByGenres'
 
-export default function FiltersPanel () {
+export default function FiltersPanel ({setCurrentPage}) {
   const dispatch = useDispatch()
   const filters = useSelector(state => state.filters)
   const categorySelected = filters.category || ''
+
   const ocupationSelected = filters.ocupation || ''
   const ratingSelected = filters.rating || ''
   const genreSelected = filters.genre || ''
 
   function handleSelectCategory (value) {
+   
     dispatch(applyFilters({ filter: 'category', value }))
     dispatch(applyFilters({ filter: 'ocupation', value: '' }))
     dispatch(getAllSuppliers())
+    setCurrentPage(1)
   }
 
   function handleSelectOcupation (value) {
     dispatch(applyFilters({ filter: 'ocupation', value }))
     dispatch(getAllSuppliers())
+    setCurrentPage(1)
   }
 
   return (
@@ -49,9 +53,10 @@ export default function FiltersPanel () {
         <SelectCategories
           fnSelectCategory={handleSelectCategory}
           fnSelectOcupation={handleSelectOcupation}
+          setCurrentPage={setCurrentPage}
         />
-        <FilterByRating />
-        <FilterByGenres />
+        <FilterByRating setCurrentPage={setCurrentPage} />
+        <FilterByGenres setCurrentPage={setCurrentPage} />
       </Container>
 
       <Box
