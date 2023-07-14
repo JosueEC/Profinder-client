@@ -75,12 +75,12 @@ export default function UserRegister () {
                   <Input type='text' onChange={handleChange} />
                 </FormControl>
               </Box>
-              <Box>
+              {/* <Box>
                 <FormControl id='apellido'>
                   <FormLabel>Apellido</FormLabel>
                   <Input type='text' />
                 </FormControl>
-              </Box>
+              </Box> */}
             </HStack>
             <FormControl id='email' isRequired>
               <FormLabel>Correo electronico</FormLabel>

@@ -9,8 +9,8 @@ export const useCredentials = () => {
   const [showPassword, setShowPassword] = useState(false)
   const userTypes = [
     { name: 'Cliente' },
-    { name: 'Profesional' },
-    { name: 'Administrador' }
+    { name: 'Profesional' }
+    // { name: 'Administrador' }
   ]
   const [usuario, setUser] = useState('Tipo de usuario')
   const [dataSession, setDataSession] = useState({
@@ -48,9 +48,10 @@ export const useCredentials = () => {
   }
 
   function handleUserSession (succesTitle, errorTitle) {
+    console.info('Request', dataSession)
     const session = JSON.parse(window.localStorage.getItem('userSession'))
-    console.info('useCredentials: ', session)
-    console.info('useCredentials: ', session.status)
+    // console.info('useCredentials: ', session)
+    // console.info('useCredentials: ', session.status)
     if (session.status) {
       toast({
         title: succesTitle,

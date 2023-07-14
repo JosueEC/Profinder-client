@@ -13,7 +13,7 @@ import {
   Divider
 } from '@chakra-ui/react'
 import { useCredentials } from '../../utils/customHooks/useCredentials'
-import { validateEmail } from '../../services/validators/validationsLogin'
+// import { validateEmail } from '../../services/validators/validationsLogin'
 import { useDispatch } from 'react-redux'
 import { getSessionUser, loginSessionGoogle } from '../../services/redux/actions/actions'
 import { Link } from 'react-router-dom'
@@ -26,7 +26,7 @@ export default function UserLogin () {
     usuario,
     dataSession,
     errors,
-    setErrors,
+    // setErrors,
     handleChange,
     handleSelectUser,
     handleUserSession
@@ -34,7 +34,7 @@ export default function UserLogin () {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    try { validateEmail(dataSession.email) } catch (error) { setErrors({ ...errors, email: error.message }) }
+    // try { validateEmail(dataSession.email) } catch (error) { setErrors({ ...errors, email: error.message }) }
     await dispatch(getSessionUser(dataSession))
     handleUserSession('Sesion iniciada', 'Algo salio mal')
   }
