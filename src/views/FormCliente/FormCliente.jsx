@@ -24,6 +24,16 @@ import { useSessionState } from "../../services/zustand/useSession";
 
 function FormCliente(props) {
   const session = useSessionState(state => state.session)
+  const setSessionState = useSessionState(state => state.setSessionState)
+
+  useEffect(() => {
+    const userSession = window.localStorage.getItem('userSession')
+    if (userSession) {
+      const user = JSON.parse(userSession)
+      setSessionState(user)
+    }
+  }, [])
+
   const {
     register,
     formState: { errors },

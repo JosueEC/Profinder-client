@@ -68,7 +68,7 @@ export const useCredentials = () => {
         left: 0,
         behavior: 'smooth'
       })
-      navigate('/')
+      navigate((session.usuario === 'c') ? '/dashboardClient': '/dashboardSuppliers')
     } else {
       toast({
         title: errorTitle,

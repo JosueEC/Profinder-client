@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -40,6 +41,16 @@ import { uploadFile } from "../../utils/Firebase/config";
 
 function FormProvider() {
   const session = useSessionState(state => state.session)
+  const setSessionState = useSessionState(state => state.setSessionState)
+
+  useEffect(() => {
+    const userSession = window.localStorage.getItem('userSession')
+    if (userSession) {
+      const user = JSON.parse(userSession)
+      setSessionState(user)
+    }
+  }, [])
+
   const {
     register,
     // watch,
