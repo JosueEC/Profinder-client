@@ -15,7 +15,7 @@ import {
     HStack,
     VStack,
   } from "@chakra-ui/react";
-  import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+ // import { MoonIcon, SunIcon } from "@chakra-ui/icons";
   import Sidebar from "./Sidebar";
   import { Link } from "react-router-dom";
   import logo from "../../assets/categoriesIcons/logo.png";

@@ -98,7 +98,7 @@ const FeedbackForm = () => {
     >
       <form ref={form} onSubmit={handleSubmit}>
         <FormControl>
-          <FormLabel>Name</FormLabel>
+          <FormLabel>Nombre</FormLabel>
           <Input
             type="text"
             name="name"
@@ -110,7 +110,7 @@ const FeedbackForm = () => {
         {formErrors.nameError && <Box color="red">{formErrors.nameError}</Box>}
 
         <FormControl mt={4}>
-          <FormLabel>Email</FormLabel>
+          <FormLabel>Correo Electronico</FormLabel>
           <Input
             type="email"
             name="email"
@@ -124,7 +124,7 @@ const FeedbackForm = () => {
         )}
 
         <FormControl mt={4}>
-          <FormLabel>Message</FormLabel>
+          <FormLabel>Mensaje</FormLabel>
           <Textarea
             name="message"
             value={formValues.message}
@@ -137,7 +137,7 @@ const FeedbackForm = () => {
         )}
 
         <Button type="submit" mt={4} colorScheme="blue" isFullWidth size="lg">
-          Send
+          Enviar
         </Button>
       </form>
     </Box>
