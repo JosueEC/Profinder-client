@@ -35,7 +35,7 @@ function Footer () {
               Información
             </Heading>
             <Link to='./'><Text color='gray.400'>Sobre nosotros</Text></Link>
-            <Link to='./'><Text color='gray.400'>Contáctanos</Text></Link>
+            <Link to='./feedback'><Text color='gray.400'>Contáctanos</Text></Link>
             <Link to='./comofunciona'><Text color='gray.400'>Cómo funciona</Text></Link>
             <Link to='./'><Text color='gray.400'>Home</Text></Link>
           </Stack>
