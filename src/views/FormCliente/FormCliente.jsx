@@ -20,8 +20,10 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
+import { useSessionState } from "../../services/zustand/useSession";
 
 function FormCliente(props) {
+  const session = useSessionState(state => state.session)
   const {
     register,
     formState: { errors },
@@ -76,6 +78,8 @@ function FormCliente(props) {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
+                value={session.email}
+                disabled
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -91,6 +95,8 @@ function FormCliente(props) {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
+                value={session.password}
+                disabled
                 type="password"
                 isRequired
                 {...register("password", {

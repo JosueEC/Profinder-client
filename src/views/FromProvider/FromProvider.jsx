@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getAllCategories,
   postProveedor,
@@ -16,7 +16,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Textarea,
+  // Textarea,
   Stack,
   Button,
   useColorModeValue,
@@ -24,6 +24,7 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 
+import { useSessionState } from '../../services/zustand/useSession'
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
 // import {
@@ -37,7 +38,8 @@ import { uploadFile } from "../../utils/Firebase/config";
 //   validateYearsExp,
 // } from "../../services/validators/validationsLogin";
 
-function FormProvider(props) {
+function FormProvider() {
+  const session = useSessionState(state => state.session)
   const {
     register,
     // watch,
@@ -216,6 +218,8 @@ function FormProvider(props) {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
+                value={session.email}
+                disabled
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -323,6 +327,8 @@ function FormProvider(props) {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
+                value={session.password}
+                disabled
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
