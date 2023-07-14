@@ -45,12 +45,12 @@ const Card = ({ backup, cardBgColor, textColor }) => {
 };
 
 const TopPro = ({ cardBgColor, textColor, linkColor }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const backup = useSelector((state) => state.backup);
 
-  // useEffect(() => {
-  //   dispatch(getAllSuppliers());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllSuppliers());
+  }, [dispatch]);
 
   // Ordena los proveedores por rating de mayor a menor
   const sortedSuppliers = [...backup].sort((a, b) => b.rating - a.rating);
