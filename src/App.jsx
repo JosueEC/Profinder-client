@@ -13,6 +13,7 @@ import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
 import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
 import DashboardClient from "./views/DashboardClient/DashboardClient.jsx";
+import FeedbackForm from './components/Feedback/FormFeedback.jsx'
 import LoggedNavbar from './components/LoggedNavbar/LoggedNavbar.jsx'
 import Navbar from "./components/navBar/Navbar";
 
@@ -35,6 +36,7 @@ function App() {
       {session.status ? <LoggedNavbar /> : <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/feedback" element={<FeedbackForm/>} />
         <Route path="/dashboardClient" element={<DashboardClient/>} />
         <Route path="/dashboardSuppliers" element={<NavbarDashboard />} />
         <Route path="/categories" element={<Categories />} />

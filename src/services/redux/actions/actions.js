@@ -6,20 +6,16 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
-  GET_PROFESIONALS_BY_NAME,
+  GET_OCUPATION_BY_NAME,
 } from "../actionsTypes/actionsType";
 
-//! Action para obtener a todos lo Proveedores/Profesionales
+//! Action para obtener a todos los Proveedores/Profesionales
 const getAllSuppliers = () => {
-  // const URL = `${API.DOMAIN}/profesional`
-  const URL = LOCAL.pofesional;
-
   return function (dispatch) {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((results) => {
-        //console.info("fetching-all-suppliers");
-        dispatch({ type: GET_ALL_SUPPLIERS, payload: results });
+    axios
+      .get(`https://backprofinder-production.up.railway.app/profesional`)
+      .then((response) => {
+        dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
       })
       .catch((error) => console.error(error.message));
   };
@@ -27,7 +23,6 @@ const getAllSuppliers = () => {
 
 //! Todas las categorias con su ID
 const getAllCategories = () => {
-  // const URL = API.DOMAIN
   const URL = LOCAL.category;
   return function (dispatch) {
     fetch(URL)
@@ -43,37 +38,39 @@ const getAllCategories = () => {
 };
 
 //! action para buscar por nombre de profesion
-export const searchProfessionals = (name) => {
+const searchProfessionals = (name) => {
   const URL = API.DOMAIN;
-  // const URL = LOCAL.profesionalOcupation
   return function (dispatch) {
-    fetch(`${URL}/ocupations?name=${name}`)
-      .then((response) => response.json())
-      .then((results) => {
-        console.info(results);
-        dispatch({
-          type: SEARCH_PROFESSIONALS,
-          payload: results,
-        });
-      })
-      .catch((error) => console.error(error.message));
+    if (name) {
+      // Verificar si name no es undefined
+      axios
+        .get(`${URL}/ocupations?name=${name}`)
+        .then((response) => {
+          console.info(response.data);
+          dispatch({
+            type: SEARCH_PROFESSIONALS,
+            payload: response.data,
+          });
+        })
+        .catch((error) => console.error(error.message));
+    }
   };
 };
 
 const getOcupationsByName = (name) => {
-  const URL = "https://backprofinder-production.up.railway.app/ocupationsp";
+  const URL = "https://backprofinder-production.up.railway.app/ocupations";
   return async function (dispatch) {
     try {
-      let json = await axios.get(`${URL}/?name=${name}`);
-      console.log(json.data); 
-      if (json.data) {
+      let response = await axios.get(`${URL}?name=${name}`);
+      console.log(response.data);
+      if (response.data) {
         return dispatch({
-          type: GET_PROFESIONALS_BY_NAME,
-          payload: json.data,
+          type: GET_OCUPATION_BY_NAME,
+          payload: response.data,
         });
       }
     } catch (error) {
-      console.log(error); 
+      console.log(error);
     }
   };
 };
@@ -103,8 +100,9 @@ const postProveedor = (info) => {
       }
 
       await axios.post(
-        "https://backprofinder-production.up.railway.app/profesional/",
-        info
+        "https://backprofinder-production.up.railway.app/profesional",
+        info,
+        { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
     } catch (error) {
@@ -113,9 +111,8 @@ const postProveedor = (info) => {
   };
 };
 
-//! postear cliente
-
-const postCiente = (info) => {
+//! Postear cliente
+const postCliente = (info) => {
   return async function () {
     try {
       // Verificación
@@ -130,7 +127,8 @@ const postCiente = (info) => {
 
       await axios.post(
         "https://backprofinder-production.up.railway.app/client",
-        info
+        info,
+        { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
     } catch (error) {
@@ -141,63 +139,63 @@ const postCiente = (info) => {
 
 const getSessionUser = (dataSession) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(dataSession)
-  }
+    body: JSON.stringify(dataSession),
+  };
 
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
     const URL = LOCAL.register
 
-    const data = await fetch(URL, options)
-      .then((response) => response.json())
-      .then((results) => {
-        return results
-      })
-      .catch((error) => {
-        console.error(error.message)
-      })
-      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false
-      localStorage.setItem('userSession', JSON.stringify(data))
-  }
-}
+    try {
+      const response = await fetch(URL, options);
+      const data = await response.json();
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      localStorage.setItem("userSession", JSON.stringify(data));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
 
 const postSessionUser = (dataSession) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(dataSession)
-  }
+    body: JSON.stringify(dataSession),
+  };
 
   return async function () {
     // const URL = `${API.LOCALHOST}/register`
     const URL = LOCAL.register
 
-    const data = await fetch(URL, options)
-      .then((response) => response.json())
-      .then((results) => {
-        return results
-      })
-      .catch((error) => {
-        console.error(error.message)
-      })
-      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false
-      window.localStorage.setItem('userSession', JSON.stringify(data))
-  }
-}
+    try {
+      const response = await fetch(URL, options);
+      const data = await response.json();
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      window.localStorage.setItem("userSession", JSON.stringify(data));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
 
 export {
   getAllSuppliers,
   getAllCategories,
   postProveedor,
   applyFilters,
-  postCiente,
+  postCliente,
   getOcupationsByName,
   getSessionUser,
-  postSessionUser
+  postSessionUser,
 };
