@@ -16,8 +16,7 @@ const getAllSuppliers = () => {
       .get(`https://backprofinder-production.up.railway.app/profesional`)
       .then((response) => {
         dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
-      })
-      .catch((error) => console.error(error.message));
+      });
   };
 };
 
