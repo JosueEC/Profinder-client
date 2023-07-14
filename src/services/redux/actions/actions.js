@@ -79,6 +79,32 @@ const applyFilters = (objFilters) => {
   return { type: APPLY_FILTERS, payload: objFilters };
 };
 
+const postServicio = (info) => {
+  return async function () {
+    try {
+      // Verificación
+      if (
+        info.title === "" ||
+        info.ocupations === "" ||
+        info.categories === "" ||
+        info.images === "" ||
+        info.content ===  0
+      ) {
+        throw new Error("Faltan datos");
+      }
+
+      await axios.post(
+        "https://backprofinder-production.up.railway.app/postprofesional",
+        info,
+        { headers: { "Access-Control-Allow-Origin": "*" } }
+      );
+      alert("Publicacion Creada");
+    } catch (error) {
+      alert(`${error.response.data.error}`);
+    }
+  };
+};
+
 //! Postear proveedor
 const postProveedor = (info) => {
   return async function () {
@@ -139,17 +165,17 @@ const postCliente = (info) => {
 
 const loginSessionGoogle = () => {
   return async function () {
-    const URL = 'http://localhost:3001/auth/google'
+    const URL = "http://localhost:3001/auth/google";
     // const URL = LOCAL.register
 
     await fetch(URL)
-      .then(response => response.json())
-      .then(results => {
-        return results
+      .then((response) => response.json())
+      .then((results) => {
+        return results;
       })
-      .catch(error => console.error(error.message))
-      // localStorage.setItem("userSession", JSON.stringify(data));
-      // data.status = data.email && !data.message.includes("No pertenece") ? true : false;
+      .catch((error) => console.error(error.message));
+    // localStorage.setItem("userSession", JSON.stringify(data));
+    // data.status = data.email && !data.message.includes("No pertenece") ? true : false;
   };
 };
 
@@ -166,7 +192,7 @@ const getSessionUser = (dataSession) => {
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
     // const URL = LOCAL.register
-    const URL = `${API.DOMAIN}/login`
+    const URL = `${API.DOMAIN}/login`;
 
     try {
       const response = await fetch(URL, options);
@@ -193,7 +219,7 @@ const postSessionUser = (dataSession) => {
   return async function () {
     // const URL = `${API.LOCALHOST}/register`
     // const URL = LOCAL.register
-    const URL = `${API.DOMAIN}/register`
+    const URL = `${API.DOMAIN}/register`;
 
     try {
       const response = await fetch(URL, options);
@@ -217,5 +243,6 @@ export {
   getSessionUser,
   postSessionUser,
   loginSessionGoogle,
-  searchProfessionals
+  searchProfessionals,
+  postServicio,
 };
