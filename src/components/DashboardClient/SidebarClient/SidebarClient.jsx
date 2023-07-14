@@ -1,5 +1,5 @@
 import { Box, Stack, Text, Button, useColorModeValue, IconButton, Collapse } from '@chakra-ui/react';
-import { Link } from 'react-scroll';
+import { NavLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
@@ -23,62 +23,48 @@ const SidebarClient = () => {
   return (
     <Box as="aside" w="200px" h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2}>
       <Stack spacing={4}>
-      <Link
-            to="editar-perfil"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Editar perfil.</Text>
-          </Link>
-          <Link
-            to="favoritos"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Favoritos</Text>
-          </Link>
-          <Link
-            to="recomendados"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Recomendados</Text>
-          </Link>
-          <Link
-            to="categories"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Categorias</Text>
-          </Link>
-       
-          <Link
-            to="feedback-form"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Formulario Feedback</Text>
-          </Link>
-          
-          <Link
-            to="ayuda"
-            spy={true}
-            smooth={true}
-            duration={500}
-            style={linkStyle}
-          >
-            <Text>Ayuda</Text>
-          </Link>
+        <NavLink
+          to="/dashboardClient/editForm"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Editar perfil</Text>
+        </NavLink>
+        <NavLink
+          to="/dashboardClient/favorites"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Favoritos</Text>
+        </NavLink>
+        <NavLink
+          to="/dashboardClient/recomended"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Recomendados</Text>
+        </NavLink>
+        <NavLink
+          to="/dashboardClient/categories"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Categorías</Text>
+        </NavLink>
+        <NavLink
+          to="/dashboardClient/feedbackform"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Formulario de feedback</Text>
+        </NavLink>
+        <NavLink
+          to="/dashboardClient/help"
+          style={linkStyle}
+          activeClassName="active"
+        >
+          <Text>Ayuda</Text>
+        </NavLink>
       </Stack>
 
       <IconButton
@@ -93,60 +79,48 @@ const SidebarClient = () => {
 
       <Collapse in={isOpen}>
         <Stack spacing={4}>
-          <Link
-            to="editar-perfil"
-            spy={true}
-            smooth={true}
-            duration={500}
+          <NavLink
+            to="/dashboardClient/editForm"
             style={linkStyle}
+            activeClassName="active"
           >
-            <Text>Editar perfil.</Text>
-          </Link>
-          <Link
-            to="favoritos"
-            spy={true}
-            smooth={true}
-            duration={500}
+            <Text>Editar perfil</Text>
+          </NavLink>
+          <NavLink
+            to="/dashboardClient/favorites"
             style={linkStyle}
+            activeClassName="active"
           >
             <Text>Favoritos</Text>
-          </Link>
-          <Link
-            to="recomendados"
-            spy={true}
-            smooth={true}
-            duration={500}
+          </NavLink>
+          <NavLink
+            to="/dashboardClient/recomended"
             style={linkStyle}
+            activeClassName="active"
           >
             <Text>Recomendados</Text>
-          </Link>
-          <Link
-            to="ayuda"
-            spy={true}
-            smooth={true}
-            duration={500}
+          </NavLink>
+          <NavLink
+            to="/dashboardClient/help"
             style={linkStyle}
+            activeClassName="active"
           >
             <Text>Ayuda</Text>
-          </Link>
-          <Link
-            to="feedback-form"
-            spy={true}
-            smooth={true}
-            duration={500}
+          </NavLink>
+          <NavLink
+            to="/dashboardClient/feedbackform"
             style={linkStyle}
+            activeClassName="active"
           >
-            <Text>Formulario Feedback</Text>
-          </Link>
-          <Link
-            to="categories"
-            spy={true}
-            smooth={true}
-            duration={500}
+            <Text>Formulario de feedback</Text>
+          </NavLink>
+          <NavLink
+            to="/dashboardClient/categories"
             style={linkStyle}
+            activeClassName="active"
           >
-            <Text>Categorias</Text>
-          </Link>
+            <Text>Categorías</Text>
+          </NavLink>
         </Stack>
       </Collapse>
     </Box>
