@@ -137,6 +137,23 @@ const postCliente = (info) => {
   };
 };
 
+const loginSessionGoogle = () => {
+  return async function () {
+    const URL = `${API.LOCALHOST}/auth/google`
+    // const URL = LOCAL.register
+
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      localStorage.setItem("userSession", JSON.stringify(data));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
+
 const getSessionUser = (dataSession) => {
   const options = {
     method: "POST",
@@ -198,4 +215,5 @@ export {
   getOcupationsByName,
   getSessionUser,
   postSessionUser,
+  loginSessionGoogle
 };
