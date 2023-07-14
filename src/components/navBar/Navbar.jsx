@@ -1,120 +1,120 @@
-import { useState } from 'react';
-import { Box, IconButton, Menu, MenuButton, MenuList, MenuItem, Flex, Image, useColorModeValue } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { Link, useLocation } from 'react-router-dom';
-//import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
-import logo from '../../assets/categoriesIcons/Logo.png';
-import SearchBar from '../SearchBar/SearchBar';
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Flex,
+  Image,
+  useColorModeValue,
+  HStack,
+  Button
+} from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { useLocation, useNavigate } from 'react-router-dom'
+// import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+import Logo from '../../assets/categoriesIcons/Logo.png'
+import SearchBar from '../SearchBar/SearchBar'
+import NavLink from '../../singleComponents/NavLink'
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOptionClick = () => {
-    setIsOpen(false);
-  };
-
-  const navbarBgColor = useColorModeValue('gray.200', 'gray.900');
+  const navbarBgColor = useColorModeValue('gray.200', 'gray.900')
 
   // variable para controlar la renderizacion de la searchbar"
-  const isCategoriesRoute = location.pathname === "/categories";
+  const isCategoriesRoute = location.pathname === '/categories'
 
   return (
     <nav>
       <Flex
-        justifyContent="space-between"
-        alignItems="center"
+        justifyContent='space-between'
+        alignItems='center'
         padding={4}
         bg={navbarBgColor}
-        as="div"
-        textTransform="uppercase"
-        fontWeight="bold"
-        fontSize="2xl"
-        fontFamily="body"
-        color="gray.700"
+        as='div'
+        textTransform='uppercase'
+        fontWeight='bold'
+        fontSize='2xl'
+        fontFamily='body'
+        color='gray.700'
       >
-        <Box flex={{ base: '0 0 100%', md: '0 0 20%' }}>
-          <Link to="/" textDecoration="none">
-            <Image src={logo} alt="Logo" width="70%" height="auto" />
-          </Link>
-        </Box>
-
-        <Box display={{ base: 'none', md: 'block' }}>
-          <Link to="/comofunciona" style={{ fontSize: '20px', textDecoration: 'none' }} ml={4} fontSize="lg">
-            ¿Cómo funciona?
-          </Link>
-        </Box>
+        <HStack
+          spacing={8}
+          alignItems='center'
+        >
+          <Box onClick={() => navigate('/')} _hover={{ cursor: 'pointer' }}>
+            <Image
+              src={Logo}
+              width={{ base: '50%', md: '100%', lg: '100%' }}
+              height='70px'
+            />
+          </Box>
+          <HStack
+            as='nav'
+            spacing={10}
+            display={{ base: 'none', md: 'flex' }}
+            fontSize='1.2rem'
+            fontWeight='bold'
+          >
+            <NavLink textLink='¿Como funciona?' routeLink='/comofunciona' />
+            <NavLink textLink='Categorias' routeLink='/categories' />
+            <NavLink textLink='Contacto' routeLink='/' />
+            <NavLink textLink='Acerca de' routeLink='/' />
+          </HStack>
+        </HStack>
 
         <Box display={{ base: 'block', md: 'none' }}>
           <Menu>
-            <MenuButton as={IconButton} icon={<HamburgerIcon />} variant="ghost" textDecoration="none" />
+            <MenuButton
+              as={IconButton}
+              size='lg'
+              icon={<HamburgerIcon />}
+              variant='ghost'
+              textDecoration='none'
+            />
             <MenuList>
-              <MenuItem fontSize="lg">
-                <Link to="/comofunciona" textDecoration="none">
-                  ¿Cómo funciona?
-                </Link>
-              </MenuItem>
-
-              <MenuItem onClick={() => handleOptionClick('cliente')} fontSize="lg">
-                Soy Cliente
-              </MenuItem>
-
-              <MenuItem as="a" href="/login" onClick={() => handleOptionClick('profesional')} fontSize="lg">
-                Soy Profesional
-              </MenuItem>
+              <MenuItem onClick={() => navigate('/comofunciona')}>¿Como funciona?</MenuItem>
+              <MenuItem onClick={() => navigate('/categories')}>Categorias</MenuItem>
+              <MenuItem onClick={() => navigate('/')}>Contacto</MenuItem>
+              <MenuItem onClick={() => navigate('/')}>Acerca de</MenuItem>
+              <MenuItem onClick={() => navigate('/userLogin')}>Iniciar sesion</MenuItem>
+              <MenuItem onClick={() => navigate('/userRegister')}>Registrarse</MenuItem>
             </MenuList>
           </Menu>
-        </Box>
-
-        <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li>
-              <a style={{ fontSize: '20px', textDecoration: 'none' }} href="#" onClick={toggleDropdown}>
-                Registrate ▼
-              </a>
-              {isOpen && (
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                  <li>
-                    <a
-                      href="/registerCliente"
-                      onClick={() => handleOptionClick('cliente')}
-                      style={{ fontSize: '12px', textDecoration: 'none' }}
-                    >
-                      Soy Cliente
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="/registerProvider"
-                      onClick={() => handleOptionClick('profesional')}
-                      style={{ fontSize: '12px', textDecoration: 'none' }}
-                    >
-                      Soy Profesional
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-          </ul>
         </Box>
 
         {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
         {isCategoriesRoute && <SearchBar />}
         {/* <DarkModeToggle /> */}
 
-        <Box display={{ base: 'none', md: 'block' }}>
-          <Link to="/userLogin" textDecoration="none" style={{ fontSize: '20px' }}>
-            Login
-          </Link>
-        </Box>
+        <HStack
+          display={{ base: 'none', md: 'block', lg: 'row' }}
+          justifyContent='space-between'
+        >
+          <Button
+            variant='solid'
+            colorScheme='gray'
+            size='md'
+            mr={6}
+            onClick={() => navigate('/userLogin')}
+          >
+            Iniciar sesion
+          </Button>
+          <Button
+            variant='solid'
+            colorScheme='blue'
+            size='md'
+            onClick={() => navigate('/userRegister')}
+          >
+            Registrarse
+          </Button>
+        </HStack>
       </Flex>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

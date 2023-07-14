@@ -149,7 +149,8 @@ const getSessionUser = (dataSession) => {
   }
 
   return async function () {
-    const URL = `${API.LOCALHOST}/login`
+    // const URL = `${API.LOCALHOST}/login`
+    const URL = LOCAL.register
 
     const data = await fetch(URL, options)
       .then((response) => response.json())
@@ -174,7 +175,8 @@ const postSessionUser = (dataSession) => {
   }
 
   return async function () {
-    const URL = `${API.LOCALHOST}/register`
+    // const URL = `${API.LOCALHOST}/register`
+    const URL = LOCAL.register
 
     const data = await fetch(URL, options)
       .then((response) => response.json())

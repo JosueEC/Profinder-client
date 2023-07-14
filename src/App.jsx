@@ -1,5 +1,7 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "./components/navBar/Navbar.jsx";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Routes, Route } from "react-router-dom";
+import { useEffect } from 'react'
+import { useSessionState } from "./services/zustand/useSession";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -11,14 +13,26 @@ import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
 import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
 import DashboardClient from "./views/DashboardClient/DashboardClient.jsx";
+import LoggedNavbar from './components/LoggedNavbar/LoggedNavbar.jsx'
+import Navbar from "./components/navBar/Navbar";
 
 function App() {
-  const location = useLocation();
-  const hideNavbar = location.pathname === "/dashboardSuppliers" || location.pathname === "/dashboardClient";
+  const setSessionState = useSessionState(state => state.setSessionState)
+  const session = useSessionState(state => state.session)
+  // const location = useLocation();
+  // const hideNavbar = location.pathname === "/dashboardSuppliers" || location.pathname === "/dashboardClient";
+
+  useEffect(() => {
+    const userSession = window.localStorage.getItem('userSession')
+    if (userSession) {
+      const user = JSON.parse(userSession)
+      setSessionState(user)
+    }
+  }, [])
 
   return (
     <div>
-      {!hideNavbar && <Navbar />}
+      {session.status ? <LoggedNavbar /> : <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboardClient" element={<DashboardClient/>} />
@@ -28,7 +42,10 @@ function App() {
         <Route path="/registerProvider" element={<FromProvider />} />
         <Route path="/registerCliente" element={<FormCliente />} />
         <Route path="/detail/:supplierID" element={<DetailSupplier />} />
-        <Route path="/userLogin" element={<UserLogin />} />
+        <Route
+          path="/userLogin"
+          element={<UserLogin />}
+        />
         <Route path="/userRegister" element={<UserRegister />} />
       </Routes>
       <Footer />
