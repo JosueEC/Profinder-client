@@ -6,20 +6,18 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
-  GET_OCUPATION_BY_NAME
+  GET_OCUPATION_BY_NAME,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
-const getAllSuppliers = (name) => {
+const getAllSuppliers = () => {
   return function (dispatch) {
-    if (name) { // Verificar si name no es undefined
-      axios
-        .get(`https://backprofinder-production.up.railway.app/profesional?name=${name}`)
-        .then((response) => {
-          dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
-        })
-        .catch((error) => console.error(error.message));
-    }
+    axios
+      .get(`https://backprofinder-production.up.railway.app/profesional`)
+      .then((response) => {
+        dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
+      })
+      .catch((error) => console.error(error.message));
   };
 };
 
@@ -43,7 +41,8 @@ const getAllCategories = () => {
 const searchProfessionals = (name) => {
   const URL = API.DOMAIN;
   return function (dispatch) {
-    if (name) { // Verificar si name no es undefined
+    if (name) {
+      // Verificar si name no es undefined
       axios
         .get(`${URL}/ocupations?name=${name}`)
         .then((response) => {
@@ -103,7 +102,7 @@ const postProveedor = (info) => {
       await axios.post(
         "https://backprofinder-production.up.railway.app/profesional",
         info,
-        { headers: { 'Access-Control-Allow-Origin': '*' } }
+        { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
     } catch (error) {
@@ -129,7 +128,7 @@ const postCliente = (info) => {
       await axios.post(
         "https://backprofinder-production.up.railway.app/client",
         info,
-        { headers: { 'Access-Control-Allow-Origin': '*' } }
+        { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
     } catch (error) {
@@ -140,12 +139,12 @@ const postCliente = (info) => {
 
 const getSessionUser = (dataSession) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(dataSession)
+    body: JSON.stringify(dataSession),
   };
 
   return async function () {
@@ -154,8 +153,9 @@ const getSessionUser = (dataSession) => {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false;
-      localStorage.setItem('userSession', JSON.stringify(data));
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
     }
@@ -164,12 +164,12 @@ const getSessionUser = (dataSession) => {
 
 const postSessionUser = (dataSession) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify(dataSession)
+    body: JSON.stringify(dataSession),
   };
 
   return async function () {
@@ -178,8 +178,9 @@ const postSessionUser = (dataSession) => {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status = (data.email && !data.message.includes('No pertenece')) ? true : false;
-      window.localStorage.setItem('userSession', JSON.stringify(data));
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      window.localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
     }
@@ -194,5 +195,5 @@ export {
   postCliente,
   getOcupationsByName,
   getSessionUser,
-  postSessionUser
+  postSessionUser,
 };
