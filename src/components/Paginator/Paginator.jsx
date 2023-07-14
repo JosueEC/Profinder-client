@@ -1,30 +1,58 @@
-/* eslint-disable react/prop-types */
-import './Paginator.css'
-import ReactPaginate from 'react-paginate'
+import { Button, HStack } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
-function Paginator ({ cards, currentPage, setCurrentPage }) {
-  const itemsPerPage = 10
-  const pageCount = Math.ceil(cards.length / itemsPerPage)
+const Paginator = ({ currentPage, setCurrentPage, totalPages }) => {
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
-  const changePage = ({ selected }) => {
-    setCurrentPage(selected)
-  }
+  const generatePageButtons = () => {
+    const buttons = [];
+
+    buttons.push(
+      <Button
+        key="prev"
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        colorScheme="teal"
+        leftIcon={<ChevronLeftIcon />}
+      >
+        Previo
+      </Button>
+    );
+
+    for (let page = 1; page <= totalPages; page++) {
+      buttons.push(
+        <Button
+          key={page}
+          onClick={() => handlePageChange(page)}
+          colorScheme={currentPage === page ? 'teal' : 'gray'}
+        >
+          {page}
+        </Button>
+      );
+    }
+
+    buttons.push(
+      <Button
+        key="next"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        colorScheme="teal"
+        rightIcon={<ChevronRightIcon />}
+      >
+        Siguiente
+      </Button>
+    );
+
+    return buttons;
+  };
 
   return (
-    <div className='Paginator'>
-      <ReactPaginate
-        previousLabel='Previous'
-        nextLabel='Next'
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName='paginationBttns'
-        previousLinkClassName='previousBttn'
-        nextLinkClassName='nextBttn'
-        activeClassName='paginationActive'
-        forcePage={currentPage}
-      />
-    </div>
-  )
-}
+    <HStack spacing={2} mt={4} justify="center">
+      {generatePageButtons()}
+    </HStack>
+  );
+};
 
-export default Paginator
+export default Paginator;
