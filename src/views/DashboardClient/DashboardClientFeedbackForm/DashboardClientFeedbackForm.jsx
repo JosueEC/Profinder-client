@@ -1,7 +1,8 @@
 import { Flex, Spacer } from '@chakra-ui/react';
-import EditClient from '../../components/DashboardClient/EditClient';
+import FeedbackForm from '../../../components/DashboardClient/FeedbackForm/FeedbackForm';
 
-import SidebarClient from '../../components/DashboardClient/SidebarClient';
+
+import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 
 const DashboardClient = () => {
   return (
@@ -11,7 +12,7 @@ const DashboardClient = () => {
       <Flex>
         <SidebarClient />
         <Spacer  />
-        <EditClient />
+        
       </Flex>
     </div>
   );
