@@ -12,7 +12,7 @@ const DashboardClient = () => {
       <Flex>
         <SidebarClient />
         <Spacer  />
-        
+        <FeedbackForm/>
       </Flex>
     </div>
   );
