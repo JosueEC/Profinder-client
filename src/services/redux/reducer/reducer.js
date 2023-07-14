@@ -3,7 +3,7 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
-  // GET_PROFESIONALS_BY_NAME
+  GET_OCUPATION_BY_NAME,
 } from '../actionsTypes/actionsType'
 import { filterSuppliers } from '../filters/reduxFilters'
 
@@ -14,6 +14,7 @@ const initialState = {
   categories: [],
   filteredCategories: [],
   filteredSuppliers: [],
+  suppliersByname:[],
   filters: {
     category: 'Categorias',
     ocupation: 'Selecciona una categoria',
@@ -35,11 +36,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         categories: action.payload
       }
-      // case GET_PROFESIONALS_BY_NAME:
-      //   return {
-      //     ...state,
-      //     suppliers: action.payload
-      //   }
+      case GET_OCUPATION_BY_NAME:
+        return {
+          ...state,
+          suppliersByname: action.payload
+        }
     case APPLY_FILTERS:
       return {
         ...state,
