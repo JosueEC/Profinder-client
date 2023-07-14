@@ -10,7 +10,7 @@ const DashboardClient = () => {
       
       <Flex>
         <SidebarClient />
-        <Spacer  />
+        
         <Categories />
       </Flex>
     </div>
