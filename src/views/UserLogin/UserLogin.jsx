@@ -15,7 +15,7 @@ import {
 import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { validateEmail } from '../../services/validators/validationsLogin'
 import { useDispatch } from 'react-redux'
-import { getSessionUser } from '../../services/redux/actions/actions'
+import { getSessionUser, loginSessionGoogle } from '../../services/redux/actions/actions'
 import { Link } from 'react-router-dom'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 
@@ -100,7 +100,12 @@ export default function UserLogin () {
                 />
                 <Divider />
                 <Stack spacing={5}>
-                  <Button bg='teal.50' color='black' _hover={{ bg: 'teal.100' }}>
+                  <Button
+                    bg='teal.50'
+                    color='black'
+                    _hover={{ bg: 'teal.100' }}
+                    onClick={() => dispatch(loginSessionGoogle())}
+                  >
                     Google
                   </Button>
                   <Button
