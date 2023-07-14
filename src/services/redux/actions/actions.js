@@ -12,14 +12,15 @@ import {
 //! Action para obtener a todos lo Proveedores/Profesionales
 const getAllSuppliers = () => {
   // const URL = `${API.DOMAIN}/profesional`
-  const URL = LOCAL.pofesional;
+  // const URL = LOCAL.pofesional;
 
   return function (dispatch) {
-    fetch(URL)
+    fetch("https://backprofinder-production.up.railway.app/profesional")
       .then((response) => response.json())
       .then((results) => {
         //console.info("fetching-all-suppliers");
         dispatch({ type: GET_ALL_SUPPLIERS, payload: results });
+       
       })
       .catch((error) => console.error(error.message));
   };
