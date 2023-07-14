@@ -48,7 +48,7 @@ export const useCredentials = () => {
   }
 
   function handleUserSession (succesTitle, errorTitle) {
-    console.info('Request', dataSession)
+    // console.info('Request', dataSession)
     const session = JSON.parse(window.localStorage.getItem('userSession'))
     // console.info('useCredentials: ', session)
     // console.info('useCredentials: ', session.status)
