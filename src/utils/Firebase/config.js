@@ -21,3 +21,14 @@ export async function uploadFile(file) {
   const url = await getDownloadURL(storageRef);
   return url;
 }
+export async function uploadFiles2(files) {
+  const urls = [];
+  for (const file of files) {
+    const fileName = v4() + ".jpg";
+    const storageRef = ref(storage, "posteos/" + fileName); // Update the storage reference to the "posteos" folder
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    urls.push(url);
+  }
+  return urls;
+}
