@@ -293,14 +293,13 @@ const getAllClients = () => {
 
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
-  const userSession = window.localStorage.getItem('userSession')
-  if(userSession){
-    const user = JSON.parse(userSession);
-    info.id = user.id
-  } 
   return function (dispatch) {
+    const userSession = JSON.parse(localStorage.getItem('userSession'));
+    if (userSession) {
+      newData.id = userSession.id;
+    }
     axios
-      .put(`https://backprofinder-production.up.railway.app/client/${infoId}`, newData)
+      .put(`https://backprofinder-production.up.railway.app/client/${clientId}`, newData)
       .then((response) => {
         dispatch({ type: "UPDATE_CLIENT", payload: response.data });
       })
@@ -309,6 +308,7 @@ const updateClient = (clientId, newData) => {
       });
   };
 };
+
 
 
 export {
