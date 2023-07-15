@@ -156,9 +156,9 @@ function EditClient() {
               <Box>
                 <FormLabel>Género</FormLabel>
                 <Select placeholder="Género" value={genre} onChange={handleGenreChange}>
-                  <option value="masculino">Masculino</option>
-                  <option value="femenino">Femenino</option>
-                  <option value="otro">Otro</option>
+                  <option value="male">Masculino</option>
+                  <option value="female">Femenino</option>
+                  <option value="other">Otro</option>
                 </Select>
               </Box>
             </FormControl>
