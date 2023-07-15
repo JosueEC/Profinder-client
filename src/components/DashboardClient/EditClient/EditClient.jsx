@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   FormControl,
@@ -8,33 +8,25 @@ import {
   VStack,
   Avatar,
   Spacer,
-  IconButton,
   Select,
   Textarea,
   Box,
   Center,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useColorModeValue,
-  Icon,
 } from '@chakra-ui/react';
-import { AddIcon, StarIcon } from '@chakra-ui/icons';
+import { AddIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import { getAllClients, updateClient } from '../../../services/redux/actions/actions';
 
 function EditClient() {
-  const fileInputRef = useRef();
   const dispatch = useDispatch();
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [genre, setGenre] = useState('');
-  const [location, setLocation] = useState('');
+  const [ubication, setUbication] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
@@ -44,8 +36,9 @@ function EditClient() {
       setEmail(userSession.email);
       setPhone(userSession.phone);
       setGenre(userSession.genre);
-      setLocation(userSession.location);
+      setUbication(userSession.location);
       setDescription(userSession.description);
+      setImageUrl(userSession.imageUrl);
     }
   }, []);
 
@@ -65,16 +58,16 @@ function EditClient() {
     setGenre(e.target.value);
   };
   
-  const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+  const handleUbicationChange = (e) => {
+    setUbication(e.target.value);
   };
   
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
-
-  const handleFileUpload = () => {
-    fileInputRef.current.click();
+  
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
   };
   
   const handleSubmit = (e) => {
@@ -85,8 +78,9 @@ function EditClient() {
       email: email,
       phone: phone,
       genre: genre,
-      location: location,
+      ubication: ubication,
       description: description,
+      image: imageUrl,
     };
     
     dispatch(updateClient(userSession.clientId, newData));
@@ -105,31 +99,26 @@ function EditClient() {
       setEmail(client.email);
       setPhone(client.phone);
       setGenre(client.genre);
-      setLocation(client.location);
+      setUbication(client.ubication);
       setDescription(client.description);
+      setImageUrl(client.image);
     }
   }, [client]);
   
   return (
-    <Center p={4} bg={useColorModeValue('gray.900', 'gray.900')} color={useColorModeValue('gray.300', 'gray.300')} h="100vh" w="100%">
+    <Center p={4} bg={'gray.900'} color={'gray.300'} h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
           <VStack as="form" alignItems="center" textAlign="center" onSubmit={handleSubmit}>
             <FormControl>
               <Box>
                 <FormLabel>Imagen</FormLabel>
-                <Avatar size="xl" name="Nombre y apellido" src="url de la imagen" />
-                <IconButton
-                  aria-label="Subir imagen"
-                  icon={<AddIcon />}
-                  variant="outline"
-                  onClick={handleFileUpload}
-                />
+                <Avatar size="xl" name="Nombre y apellido" src={imageUrl} />
                 <Input
-                  ref={fileInputRef}
-                  type="file"
-                  display="none"
-                  accept="image/jpeg, image/jpg, image/png, application/pdf"
+                  type="text"
+                  placeholder="URL de la imagen"
+                  value={imageUrl}
+                  onChange={handleImageUrlChange}
                 />
               </Box>
             </FormControl>
@@ -165,7 +154,7 @@ function EditClient() {
             <FormControl>
               <Box>
                 <FormLabel>Ubicación</FormLabel>
-                <Input variant="unstyled" type="text" placeholder="Ubicación" value={location} onChange={handleLocationChange} />
+                <Input variant="unstyled" type="text" placeholder="Ubicación" value={ubication} onChange={handleUbicationChange} />
               </Box>
             </FormControl>
             <FormControl>
