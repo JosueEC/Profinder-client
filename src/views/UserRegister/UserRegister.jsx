@@ -67,7 +67,7 @@ export default function UserRegister () {
           boxShadow='lg'
           p={8}
         >
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit}>
             <HStack>
               <Box>
                 <FormControl id='name' isRequired>

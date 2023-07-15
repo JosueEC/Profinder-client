@@ -5,7 +5,6 @@ export const useSessionState = create((set) => ({
     id: 1,
     name: '',
     email: '',
-    password: '',
     usuario: '',
     message: '',
     status: false
@@ -14,7 +13,6 @@ export const useSessionState = create((set) => ({
     id: 1,
     name: '',
     email: '',
-    password: '',
     usuario: '',
     message: '',
     status: false

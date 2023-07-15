@@ -119,8 +119,8 @@ export default function LoggedNavbar () {
                 }
                 {
                   (session.usuario === 'c')
-                    ? <MenuItem onClick={() => navigate('/registerCliente')}>Completar perfil</MenuItem>
-                    : <MenuItem onClick={() => navigate('/registerProvider')}>Completar perfil</MenuItem>
+                    ? <MenuItem onClick={() => navigate('/registerCliente')}>Ver mi perfil</MenuItem>
+                    : <MenuItem onClick={() => navigate('/registerProvider')}>Ver mi perfil</MenuItem>
                 }
                 <MenuDivider />
                 <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>

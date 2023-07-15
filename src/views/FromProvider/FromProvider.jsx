@@ -25,9 +25,10 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 
-import { useSessionState } from '../../services/zustand/useSession'
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
+import { postSessionUser } from "../../services/redux/actions/actions";
+import { useCredentials } from "../../utils/customHooks/useCredentials";
 // import {
 //   validateCategories,
 //   validateGenre,
@@ -40,16 +41,7 @@ import { uploadFile } from "../../utils/Firebase/config";
 // } from "../../services/validators/validationsLogin";
 
 function FormProvider() {
-  const session = useSessionState(state => state.session)
-  const setSessionState = useSessionState(state => state.setSessionState)
-
-  useEffect(() => {
-    const userSession = window.localStorage.getItem('userSession')
-    if (userSession) {
-      const user = JSON.parse(userSession)
-      setSessionState(user)
-    }
-  }, [])
+  const { handleUserSession } = useCredentials()
 
   const {
     register,
@@ -189,14 +181,24 @@ function FormProvider() {
       image: imageData, // Assign the URL of the image
       genre: data.genre,
       years_exp: data.years_exp,
+      description: 'pendiente',
       phone: data.phone,
       ubication: data.ubication,
       password: data.password,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
+
+    const sessionData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      usuario: 'p'
+    }
     console.log(newData);
+    await dispatch(postSessionUser(sessionData))
     dispatch(postProveedor(newData));
+    handleUserSession('Cuenta creada', 'Algo salio mal')
   };
 
   return (
@@ -229,8 +231,6 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
-                value={session.email}
-                disabled
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -338,8 +338,6 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
-                value={session.password}
-                disabled
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
@@ -352,7 +350,7 @@ function FormProvider() {
               <FormLabel />
               <Button
                 type="submit"
-                loadingText="Submitting"
+                loadingText="Creando cuenta"
                 size="lg"
                 bg="blue.400"
                 color="white"

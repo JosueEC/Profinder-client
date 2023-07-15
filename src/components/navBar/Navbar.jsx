@@ -11,7 +11,7 @@ import {
   HStack,
   Button
 } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 // import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
 import Logo from '../../assets/categoriesIcons/Logo.png'
@@ -21,7 +21,6 @@ import NavLink from '../../singleComponents/NavLink'
 const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
-
   const navbarBgColor = useColorModeValue('gray.200', 'gray.900')
 
   // variable para controlar la renderizacion de la searchbar"
@@ -81,7 +80,8 @@ const Navbar = () => {
               <MenuItem onClick={() => navigate('/')}>Contacto</MenuItem>
               <MenuItem onClick={() => navigate('/')}>Acerca de</MenuItem>
               <MenuItem onClick={() => navigate('/userLogin')}>Iniciar sesion</MenuItem>
-              <MenuItem onClick={() => navigate('/userRegister')}>Registrarse</MenuItem>
+              <MenuItem onClick={() => navigate('/registerCliente')}>Registrarse cliente</MenuItem>
+              <MenuItem onClick={() => navigate('/registerProvider')}>Registrarse profesional</MenuItem>
             </MenuList>
           </Menu>
         </Box>
@@ -103,14 +103,41 @@ const Navbar = () => {
           >
             Iniciar sesion
           </Button>
-          <Button
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              bg={useColorModeValue('blue.500', 'blue.700')}
+              color='gray.100'
+              _hover={{
+                bg: 'blue.600'
+              }}
+            >
+              Registrarse
+            </MenuButton>
+            <MenuList>
+              <MenuItem
+                color='gray.800'
+                onClick={() => navigate('/registerProvider')}
+              >
+                Soy profesional
+              </MenuItem>
+              <MenuItem
+                color='gray.800'
+                onClick={() => navigate('/registerCliente')}
+              >
+                Soy cliente
+              </MenuItem>
+            </MenuList>
+          </Menu>
+          {/* <Button
             variant='solid'
             colorScheme='blue'
             size='md'
             onClick={() => navigate('/userRegister')}
           >
             Registrarse
-          </Button>
+          </Button> */}
         </HStack>
       </Flex>
     </nav>

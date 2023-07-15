@@ -107,6 +107,12 @@ const postServicio = (info) => {
 
 //! Postear proveedor
 const postProveedor = (info) => {
+  const userSession = window.localStorage.getItem('userSession')
+    if (userSession) {
+      const user = JSON.parse(userSession)
+      info.id = user.id
+    }
+
   return async function () {
     try {
       // Verificación
@@ -125,13 +131,14 @@ const postProveedor = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.post(
-        "https://backprofinder-production.up.railway.app/profesional",
+      await axios.put(
+        `https://backprofinder-production.up.railway.app/profesional/${info.id}`,
         info,
         { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
     } catch (error) {
+      console.error(error.response.data.error)
       alert(`${error.response.data.error}`);
     }
   };
@@ -139,6 +146,12 @@ const postProveedor = (info) => {
 
 //! Postear cliente
 const postCliente = (info) => {
+  const userSession = window.localStorage.getItem('userSession')
+  if (userSession) {
+    const user = JSON.parse(userSession)
+    info.id = user.id
+  }
+
   return async function () {
     try {
       // Verificación
@@ -151,8 +164,8 @@ const postCliente = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.post(
-        "https://backprofinder-production.up.railway.app/client",
+      await axios.put(
+        `https://backprofinder-production.up.railway.app/client/${info.id}`,
         info,
         { headers: { "Access-Control-Allow-Origin": "*" } }
       );
@@ -191,14 +204,13 @@ const getSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
-    // const URL = LOCAL.register
     const URL = `${API.DOMAIN}/login`;
 
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status =
-        data.email && !data.message.includes("No pertenece") ? true : false;
+      data.status = data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password
       localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
@@ -218,14 +230,13 @@ const postSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/register`
-    // const URL = LOCAL.register
     const URL = `${API.DOMAIN}/register`;
 
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status =
-        data.email && !data.message.includes("No pertenece") ? true : false;
+      data.status = data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password
       window.localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
