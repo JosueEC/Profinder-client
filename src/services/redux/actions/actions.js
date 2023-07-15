@@ -7,6 +7,8 @@ import {
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
   GET_OCUPATION_BY_NAME,
+  UPDATE_PROFESIONAL,
+  GET_INFO_PROFESIONALS
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -37,7 +39,7 @@ const getAllCategories = () => {
   };
 };
 
-//! action para buscar por nombre de profesion
+//! action para buscar por nombre de profesion //*****Revisar si aun se esta usando si no borrar */
 const searchProfessionals = (name) => {
   const URL = API.DOMAIN;
   return function (dispatch) {
@@ -233,6 +235,46 @@ const postSessionUser = (dataSession) => {
   };
 };
 
+//! Traigo profesionales  para renderizar sus post
+const getProfesionals = () => {
+  const URL = "https://backprofinder-production.up.railway.app/profesional";
+  return async function (dispatch) {
+    try {
+      let response = await axios.get(`${URL}`);
+      console.log(response.data);
+      if (response.data) {
+        return dispatch({
+          type: GET_INFO_PROFESIONALS,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//! Actualizar Profesionales
+const updateProfesionals = (id, data) => {
+  console.log(id);
+  const URL = `https://backprofinder-production.up.railway.app/profesional/${id}`;
+
+  return async function (dispatch) {
+    try {
+      let response = await axios.put(URL, data);
+      console.log(response.data);
+      if (response.data) {
+        return dispatch({
+          type: UPDATE_PROFESIONAL,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export {
   getAllSuppliers,
   getAllCategories,
@@ -245,4 +287,6 @@ export {
   loginSessionGoogle,
   searchProfessionals,
   postServicio,
+  getProfesionals,
+  updateProfesionals
 };
