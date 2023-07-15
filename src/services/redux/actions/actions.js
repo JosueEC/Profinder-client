@@ -299,7 +299,7 @@ const updateClient = (clientId, newData) => {
       newData.id = userSession.id;
     }
     axios
-      .put(`https://backprofinder-production.up.railway.app/client/${clientId}`, newData)
+      .put(`https://backprofinder-production.up.railway.app/client/${newData.id}`, newData)
       .then((response) => {
         dispatch({ type: "UPDATE_CLIENT", payload: response.data });
       })
