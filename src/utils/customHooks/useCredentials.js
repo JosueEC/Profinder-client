@@ -4,7 +4,7 @@ import { useSessionState } from '../../services/zustand/useSession'
 import { useToast } from '@chakra-ui/toast'
 export const useCredentials = () => {
   const navigate = useNavigate()
-  const setSessionState = useSessionState((state) => state.setSessionState) 
+  const setSessionState = useSessionState((state) => state.setSessionState)
   const toast = useToast()
   const [showPassword, setShowPassword] = useState(false)
   const userTypes = [
@@ -60,7 +60,7 @@ export const useCredentials = () => {
         variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
-        isClosable: true,
+        isClosable: true
       })
       setSessionState(session)
       window.scroll({
@@ -68,7 +68,7 @@ export const useCredentials = () => {
         left: 0,
         behavior: 'smooth'
       })
-      navigate((session.usuario === 'c') ? '/dashboardClient': '/dashboardSuppliers')
+      navigate((session.usuario === 'c') ? '/dashboardClient' : '/dashboardSuppliers')
     } else {
       toast({
         title: errorTitle,
@@ -77,7 +77,7 @@ export const useCredentials = () => {
         variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
-        isClosable: true,
+        isClosable: true
       })
       window.localStorage.removeItem('userSession')
     }
