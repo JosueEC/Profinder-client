@@ -35,7 +35,20 @@ function EditClient() {
   const [genre, setGenre] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  
+
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+
+  useEffect(() => {
+    if (userSession) {
+      setName(userSession.name);
+      setEmail(userSession.email);
+      setPhone(userSession.phone);
+      setGenre(userSession.genre);
+      setLocation(userSession.location);
+      setDescription(userSession.description);
+    }
+  }, []);
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -60,10 +73,8 @@ function EditClient() {
     setDescription(e.target.value);
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    // Realiza el proceso de subida de archivo o cualquier otra lógica que necesites aquí
-    console.log('Archivo subido:', file);
+  const handleFileUpload = () => {
+    fileInputRef.current.click();
   };
   
   const handleSubmit = (e) => {
@@ -78,15 +89,11 @@ function EditClient() {
       description: description,
     };
     
-    dispatch(updateClient(clientId, newData)); // Reemplaza "clientId" por el ID del cliente actual
+    dispatch(updateClient(userSession.clientId, newData));
   };
-
-  // Obtener la información de la sesión iniciada
-  const session = JSON.parse(window.localStorage.getItem('userSession'));
-  const clientId = session.clientId;
-
+  
   const clients = useSelector((state) => state.clients);
-  const client = clients.find((client) => client.id === clientId); // Reemplaza "clientId" por el ID del cliente actual
+  const client = clients.find((client) => client.id === userSession.clientId);
 
   useEffect(() => {
     dispatch(getAllClients());
