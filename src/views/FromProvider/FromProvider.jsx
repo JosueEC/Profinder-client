@@ -29,6 +29,7 @@ import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
 import { postSessionUser } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
+import PrivacyNotice from '../../components/PrivacyNotice/PrivacyNotice'
 // import {
 //   validateCategories,
 //   validateGenre,
@@ -360,6 +361,7 @@ function FormProvider() {
               >
                 Registrarme
               </Button>
+              <PrivacyNotice />
             </FormControl>
           </form>
         </Stack>

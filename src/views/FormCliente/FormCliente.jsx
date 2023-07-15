@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { postSessionUser, postCliente } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
+import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 
 function FormCliente(props) {
   const dispatch = useDispatch()
@@ -112,7 +113,7 @@ function FormCliente(props) {
                 })}
               />
             </FormControl>
-            <FormControl>
+            <FormControl mb='30px'>
               <FormLabel>Telefono</FormLabel>
               <Input
                 type="number"
@@ -137,6 +138,7 @@ function FormCliente(props) {
               >
                 Registrarme
               </Button>
+              <PrivacyNotice />
             </FormControl>
           </form>
         </Stack>
