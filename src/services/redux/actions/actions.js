@@ -293,11 +293,12 @@ const getAllClients = () => {
 
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
-  return function (dispatch) {
-    const userSession = JSON.parse(localStorage.getItem('userSession'));
+  const userSession = JSON.parse(localStorage.getItem('userSession'));
     if (userSession) {
       newData.id = userSession.id;
     }
+  return function (dispatch) {
+    
     axios
       .put(`https://backprofinder-production.up.railway.app/client/${newData.id}`, newData)
       .then((response) => {
