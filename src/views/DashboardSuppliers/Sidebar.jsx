@@ -1,23 +1,16 @@
+import { Link as RouterLink,  } from "react-router-dom";
 import {
   Box,
-  Stack,
+  Flex,
   useColorModeValue,
-  IconButton,
-  Collapse,
   Button,
+  Stack,
 } from "@chakra-ui/react";
-import { Link } from "react-scroll";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { Link as ScrollLink } from "react-scroll";
 
-const DashboardClient = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const DashboardSuppliers = () => {
 
-  const toggleCollapse = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // llevar luego a otro componente
+  //! aqui defino los estilos de los links de la sidebar....... con esto podremos crear variables en otro componente y reutilizar los estilos y en la etiqueta se implementan asi: style={linkStyle}
   const linkStyle = {
     display: "block",
     padding: "10px",
@@ -29,69 +22,50 @@ const DashboardClient = () => {
   };
 
   return (
-    <Box
-      as="aside"
-      w="250px"
-      h="100vh"
-      bg={useColorModeValue("gray.100", "gray.900")}
-      py={6}
-      px={0.5}
-    >
-      <Stack spacing={4}>
-        <Link to="publicaciones" spy smooth duration={500} style={linkStyle}>
-          <Button variant="outline">Publicar</Button>
-        </Link>
-        <Link
-          to="nuevas-publicaciones"
-          spy
-          smooth
-          duration={500}
-          style={linkStyle}
-        >
-          <Button variant="outline">Ver mis Publicaciones</Button>
-        </Link>
-        <Link to="obtener-premium" spy smooth duration={500} style={linkStyle}>
-          <Button variant="outline">Obtén Premium</Button>
-        </Link>
-      </Stack>
+    <Box height="100vh" display="flex" flexDirection="column">
+      <Flex flex="1">
+   
+        <Box w="250px" bg="gray.600" p={4}>
+          <Stack spacing={4}>
+            <ScrollLink
+              to="publicaciones"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+            >
+              <Button variant="outline">Publicar</Button>
+            </ScrollLink>
+            <ScrollLink
+              to="nuevas-publicaciones"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+            >
+              <Button variant="outline">Ver mis Publicaciones</Button>
+            </ScrollLink>
+            <RouterLink to="/formUpdate" style={linkStyle}>
+              <Button variant="outline">Editar mi Perfil</Button>
+            </RouterLink>
+            <ScrollLink
+              to="obtener-premium"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+            >
+              <Button variant="outline">Obtén Premium</Button>
+            </ScrollLink>
+          </Stack>
+        </Box>
 
-      <IconButton
-        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-        variant="ghost"
-        size="md"
-        onClick={toggleCollapse}
-        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
-        display={{ base: "block", md: "none" }}
-        alignSelf="flex-end"
-      />
+      </Flex>
 
-      <Collapse in={isOpen}>
-        <Stack spacing={2}>
-          <Link to="publicaciones" spy smooth duration={500} style={linkStyle}>
-            <Button variant="outline">Publicaciones</Button>
-          </Link>
-          <Link
-            to="nuevas-publicaciones"
-            spy
-            smooth
-            duration={500}
-            style={linkStyle}
-          >
-            <Button variant="outline">Nuevas Publicaciones</Button>
-          </Link>
-          <Link
-            to="obtener-premium"
-            spy
-            smooth
-            duration={500}
-            style={linkStyle}
-          >
-            <Button variant="outline">Obtén Premium</Button>
-          </Link>
-        </Stack>
-      </Collapse>
+      {/*aca iria un btn hamburguesa para dispositivos moviles */}
+
     </Box>
   );
 };
 
-export default DashboardClient;
+export default DashboardSuppliers;

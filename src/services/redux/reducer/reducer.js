@@ -4,6 +4,7 @@ import {
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
   GET_OCUPATION_BY_NAME,
+  UPDATE_PROFESIONAL
 } from '../actionsTypes/actionsType'
 import { filterSuppliers } from '../filters/reduxFilters'
 
@@ -12,6 +13,7 @@ const initialState = {
   ocupations: [],
   backup: [],
   categories: [],
+  clients: [],
   filteredCategories: [],
   filteredSuppliers: [],
   suppliersByname:[],
@@ -36,6 +38,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         categories: action.payload
       }
+      //! esta es para traer los profesionales por el nombre de la ocupacion y renderizarlos en categories, se implementa en la searchBar
       case GET_OCUPATION_BY_NAME:
         return {
           ...state,
@@ -51,6 +54,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         professionals: action.payload
       }
+      //! actualizar profesional // preguntar cual es el estado a actualizar
+      case UPDATE_PROFESIONAL:
+        return {
+          ...state,
+          profesional: action.payload, 
+        };
+      case "GET_ALL_CLIENTS":
+      return {
+        ...state,
+        clients: action.payload,
+      };
+    case "UPDATE_CLIENT":
+      return {
+        ...state,
+        clients: state.clients.map((client) =>
+          client.id === action.payload.id ? action.payload : client
+        ),
+      };  
     //! caso por default
     default:
       return { ...state }
