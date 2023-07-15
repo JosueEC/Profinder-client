@@ -1,4 +1,4 @@
-import { Flex, Spacer } from '@chakra-ui/react';
+import { Flex} from '@chakra-ui/react';
 import Categories from "../../Categories/Categories"
 
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';

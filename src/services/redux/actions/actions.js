@@ -305,8 +305,10 @@ const getAllClients = () => {
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
   const userSession = JSON.parse(localStorage.getItem('userSession'));
-    if (userSession) {
+  console.log(userSession);  
+  if (userSession) {
       newData.id = userSession.id;
+      
     }
   return function (dispatch) {
     
