@@ -80,7 +80,8 @@ const Navbar = () => {
               <MenuItem onClick={() => navigate('/')}>Contacto</MenuItem>
               <MenuItem onClick={() => navigate('/')}>Acerca de</MenuItem>
               <MenuItem onClick={() => navigate('/userLogin')}>Iniciar sesion</MenuItem>
-              <MenuItem onClick={() => navigate('/userRegister')}>Registrarse</MenuItem>
+              <MenuItem onClick={() => navigate('/registerCliente')}>Registrarse cliente</MenuItem>
+              <MenuItem onClick={() => navigate('/registerProvider')}>Registrarse profesional</MenuItem>
             </MenuList>
           </Menu>
         </Box>

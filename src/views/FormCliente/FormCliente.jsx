@@ -20,20 +20,12 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { useSessionState } from "../../services/zustand/useSession";
+import { postSessionUser, postCliente } from "../../services/redux/actions/actions";
+import { useCredentials } from "../../utils/customHooks/useCredentials";
 
 function FormCliente(props) {
-  const session = useSessionState(state => state.session)
-  const setSessionState = useSessionState(state => state.setSessionState)
-
-  useEffect(() => {
-    const userSession = window.localStorage.getItem('userSession')
-    if (userSession) {
-      const user = JSON.parse(userSession)
-      setSessionState(user)
-    }
-  }, [])
-
+  const dispatch = useDispatch()
+  const { handleUserSession } = useCredentials()
   const {
     register,
     formState: { errors },
@@ -54,8 +46,18 @@ function FormCliente(props) {
       password: data.password,
       phone: data.phone,
     };
+
+    const dataSession = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      usuario: 'c'
+    }
+
     console.log(newData);
-    // dispatch(postCiente(newData));
+    await dispatch(postSessionUser(dataSession))
+    dispatch(postCliente(newData));
+    handleUserSession('Cuenta creada', 'Algo salio mal')
   };
 
   return (
@@ -88,8 +90,6 @@ function FormCliente(props) {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
-                value={session.email}
-                disabled
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -105,8 +105,6 @@ function FormCliente(props) {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
-                value={session.password}
-                disabled
                 type="password"
                 isRequired
                 {...register("password", {
