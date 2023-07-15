@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -22,48 +22,16 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, StarIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
-
-const Card = ({ backup, cardBgColor, textColor }) => {
-  const ratingStars = Array.from({ length: backup.rating }, (_, index) => (
-    <Icon key={index} as={StarIcon} color="teal.400" />
-  ));
-
-  return (
-    <Box borderWidth="1px" borderRadius="lg" bg={cardBgColor} boxShadow="2xl" p={4}>
-      <Flex>
-        <Box overflow="hidden" borderRadius="full" boxSize={{ sm: '80px', md: '150px' }}>
-          <Image
-            objectFit="cover"
-            boxSize="100%"
-            src={backup.image}
-            alt={backup.name}
-            fallbackSrc="https://via.placeholder.com/150"
-          />
-        </Box>
-        <Stack justifyContent="center" alignItems="center" p={4} pl={6} spacing={2}>
-          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15}>
-            {backup.name}
-          </Heading>
-          <Text fontWeight={600} color={textColor} fontSize="sm" mb={2} textAlign="center">
-            Categoría: {backup.professions[0].category}
-          </Text>
-          <Text fontWeight={600} color={textColor} fontSize="sm" mb={2} textAlign="center">
-            Rating:
-            <Flex align="center" ml={2}>
-              {ratingStars}
-            </Flex>
-          </Text>
-          <Button as={RouterLink} to={`/detail/${backup.id}`} mt={4} colorScheme="teal" size="sm">
-            Ver detalle
-          </Button>
-        </Stack>
-      </Flex>
-    </Box>
-  );
-};
+import { useDispatch } from 'react-redux';
+import { getAllClients } from '../../../services/redux/actions/actions';
 
 function EditClient() {
   const fileInputRef = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllClients());
+  }, []);
 
   const handleFileUpload = () => {
     fileInputRef.current.click();

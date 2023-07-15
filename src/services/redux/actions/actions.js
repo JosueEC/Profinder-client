@@ -282,6 +282,7 @@ const getAllClients = () => {
     axios
       .get("https://backprofinder-production.up.railway.app/client")
       .then((response) => {
+        console.log(response.data);
         dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
       })
       .catch((error) => {
