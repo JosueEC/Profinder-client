@@ -205,6 +205,7 @@ const getSessionUser = (dataSession) => {
       const response = await fetch(URL, options);
       const data = await response.json();
       data.status = data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password
       localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
@@ -230,6 +231,7 @@ const postSessionUser = (dataSession) => {
       const response = await fetch(URL, options);
       const data = await response.json();
       data.status = data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password
       window.localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
