@@ -13,6 +13,7 @@ const initialState = {
   ocupations: [],
   backup: [],
   categories: [],
+  clients: [],
   filteredCategories: [],
   filteredSuppliers: [],
   suppliersByname:[],
@@ -59,6 +60,18 @@ const reducer = (state = initialState, action) => {
           ...state,
           profesional: action.payload, 
         };
+      case "GET_ALL_CLIENTS":
+      return {
+        ...state,
+        clients: action.payload,
+      };
+    case "UPDATE_CLIENT":
+      return {
+        ...state,
+        clients: state.clients.map((client) =>
+          client.id === action.payload.id ? action.payload : client
+        ),
+      };  
     //! caso por default
     default:
       return { ...state }

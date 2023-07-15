@@ -275,9 +275,40 @@ const updateProfesionals = (id, data) => {
   };
 };
 
+
+// Action para obtener todos los clientes
+const getAllClients = () => {
+  return function (dispatch) {
+    axios
+      .get("https://backprofinder-production.up.railway.app/client")
+      .then((response) => {
+        dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+};
+
+// Action para modificar los datos de un cliente
+const updateClient = (clientId, newData) => {
+  return function (dispatch) {
+    axios
+      .put(`https://backprofinder-production.up.railway.app/client/${clientId}`, newData)
+      .then((response) => {
+        dispatch({ type: "UPDATE_CLIENT", payload: response.data });
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+};
+
+
 export {
   getAllSuppliers,
   getAllCategories,
+  getAllClients,
   postProveedor,
   applyFilters,
   postCliente,
@@ -288,5 +319,6 @@ export {
   searchProfessionals,
   postServicio,
   getProfesionals,
-  updateProfesionals
+  updateProfesionals,
+  updateClient
 };
