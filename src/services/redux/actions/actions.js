@@ -91,6 +91,7 @@ const postServicio = (info) => {
         info.ocupations === "" ||
         info.categories === "" ||
         info.images === "" ||
+        info.ProfesionalId === "" ||
         info.content === 0
       ) {
         throw new Error("Faltan datos");
