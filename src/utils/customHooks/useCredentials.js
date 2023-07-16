@@ -5,53 +5,29 @@ import { useToast } from '@chakra-ui/toast'
 export const useCredentials = () => {
   const navigate = useNavigate()
   const setSessionState = useSessionState((state) => state.setSessionState)
-  const toast = useToast()
   const [showPassword, setShowPassword] = useState(false)
+  const toast = useToast()
   const userTypes = [
     { name: 'Cliente' },
     { name: 'Profesional' }
     // { name: 'Administrador' }
   ]
   const [usuario, setUser] = useState('Tipo de usuario')
-  const [dataSession, setDataSession] = useState({
-    name: '',
-    email: '',
-    password: '',
-    usuario: ''
-  })
-  const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: '',
-    usuario: ''
-  })
-
-  function setUserType (usuario) {
-    setDataSession(prevState => {
-      return { ...prevState, usuario }
-    })
-  }
-
-  function handleChange (event) {
-    const { id, value } = event.target
-    setDataSession(prevState => {
-      return { ...prevState, [id]: value }
-    })
-  }
+  const [userRol, setUserRol] = useState('')
+  const [errorRol, setErrorRol] = useState(false)
 
   function handleSelectUser (event) {
     const { name } = event.target
-    if (name === 'Cliente') setUserType('c')
-    else if (name === 'Profesional') setUserType('p')
-    else if (name === 'Administrador') setUserType('a')
+    if (name === 'Cliente') setUserRol('c')
+    else if (name === 'Profesional') setUserRol('p')
+    else if (name === 'Administrador') setUserRol('a')
     setUser(name)
+    setErrorRol(false)
+    console.info(userRol, errorRol)
   }
 
   function handleUserSession (succesTitle, errorTitle) {
-    // console.info('Request', dataSession)
     const session = JSON.parse(window.localStorage.getItem('userSession'))
-    // console.info('useCredentials: ', session)
-    // console.info('useCredentials: ', session.status)
     if (session.status) {
       toast({
         title: succesTitle,
@@ -86,12 +62,11 @@ export const useCredentials = () => {
   return {
     userTypes,
     usuario,
-    dataSession,
-    errors,
+    userRol,
+    errorRol,
+    setErrorRol,
     showPassword,
     setShowPassword,
-    setErrors,
-    handleChange,
     handleSelectUser,
     handleUserSession
   }
