@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
@@ -17,36 +16,26 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  // Textarea,
   Stack,
   Button,
   useColorModeValue,
   Radio,
   RadioGroup,
+  Select,
+  CircularProgress,
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
 import { postSessionUser } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
-import PrivacyNotice from '../../components/PrivacyNotice/PrivacyNotice'
-// import {
-//   validateCategories,
-//   validateGenre,
-//   validateImage,
-//   validateName,
-//   validateOcupations,
-//   validatePhone,
-//   validateUbication,
-//   validateYearsExp,
-// } from "../../services/validators/validationsLogin";
+import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 
 function FormProvider() {
-  const { handleUserSession } = useCredentials()
+  const { handleUserSession } = useCredentials();
 
   const {
     register,
-    // watch,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -57,104 +46,14 @@ function FormProvider() {
       genre: "",
       years_exp: "",
       password: "",
-      ubication: "",
+      country: "",
+      location: "",
       phone: "",
       ocupations: [],
       categories: [],
     },
   });
 
-  // Verificar el campo "name" en tiempo real
-  // const name = watch("name");
-  // useEffect(() => {
-  //   try {
-  //     validateName(name);
-  //   } catch (error) {
-  //     errors.name = { message: error.message };
-  //   }
-  // }, [name]);
-
-  // Verificar el campo "email" en tiempo real
-  // const email = watch("email");
-  // useEffect(() => {
-  //   try {
-  //     validateEmail(email);
-  //   } catch (error) {
-  //     errors.email = { message: error.message };
-  //   }
-  // }, [email]);
-
-  // Verificar el campo "image" en tiempo real
-  // const image = watch("image");
-  // useEffect(() => {
-  //   try {
-  //     validateImage(image);
-  //   } catch (error) {
-  //     errors.image = { message: error.message };
-  //   }
-  // }, [image]);
-
-  // Verificar el campo "genre" en tiempo real
-  // const genre = watch("genre");
-  // useEffect(() => {
-  //   try {
-  //     validateGenre(genre);
-  //   } catch (error) {
-  //     errors.genre = { message: error.message };
-  //   }
-  // }, [genre]);
-
-  // Verificar el campo "years_exp" en tiempo real
-  // const yearsExp = watch("years_exp");
-  // useEffect(() => {
-  //   try {
-  //     validateYearsExp(yearsExp);
-  //   } catch (error) {
-  //     errors.years_exp = { message: error.message };
-  //   }
-  // }, [yearsExp]);
-
-  // Verificar el campo "categories" en tiempo real
-  // const categories = watch("categories");
-  // useEffect(() => {
-  //   try {
-  //     validateCategories(categories);
-  //   } catch (error) {
-  //     errors.categories = { message: error.message };
-  //   }
-  // }, [categories]);
-
-  // Verificar el campo "ocupations" en tiempo real
-  // const ocupations = watch("ocupations");
-  // useEffect(() => {
-  //   try {
-  //     validateOcupations(ocupations);
-  //   } catch (error) {
-  //     errors.ocupations = { message: error.message };
-  //   }
-  // }, [ocupations]);
-
-  // Verificar el campo "phone" en tiempo real
-  // const phone = watch("phone");
-  // useEffect(() => {
-  //   try {
-  //     validatePhone(phone);
-  //   } catch (error) {
-  //     errors.phone = { message: error.message };
-  //   }
-  // }, [phone]);
-
-  // Verificar el campo "ubicacion" en tiempo real
-  // const ubicacion = watch("ubicacion");
-  // useEffect(() => {
-  //   try {
-  //     validateUbication(ubicacion);
-  //   } catch (error) {
-  //     errors.ubicacion = { message: error.message };
-  //   }
-  // }, [ubicacion]);
-
-  // const categorias = useSelector((state) => state.categories);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -163,8 +62,51 @@ function FormProvider() {
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedOccupations, setSelectedOccupations] = useState([]);
-  const [value, setValue] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    fetch("https://backprofinder-production.up.railway.app/country")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleCountryChange = (countryId) => {
+    setSelectedCountry(countryId);
+
+    if (countryId) {
+      fetch(
+        `https://backprofinder-production.up.railway.app/country/${countryId}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const selectedCountry = data;
+          if (selectedCountry) {
+            fetch("https://backprofinder-production.up.railway.app/location")
+              .then((response) => response.json())
+              .then((locationsData) => {
+                const filteredLocations = locationsData.filter(
+                  (location) => location.CountryId === selectedCountry.id
+                );
+                setLocations(filteredLocations);
+              })
+              .catch((error) => console.log(error));
+          } else {
+            setLocations([]);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      setLocations([]);
+    }
+  };
+  console.log(locations)
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
@@ -174,18 +116,26 @@ function FormProvider() {
   };
 
   const onSubmit = async (data) => {
-    const imageData = await uploadFile(data.image); // Upload the image and get the URL
+    const imageData = await uploadFile(data.image);
+
+    const selectedCountryObj = countries.find(
+      (country) => country.id === parseInt(data.country)
+    );
+    const selectedLocationObj = locations.find(
+      (location) => location.id === parseInt(data.location)
+    );
+    console.log(selectedCountryObj.id);
 
     const newData = {
       name: data.name,
       email: data.email,
-      image: imageData, // Assign the URL of the image
+      image: imageData,
       genre: data.genre,
       years_exp: data.years_exp,
-      description: 'pendiente',
-      phone: data.phone,
-      ubication: data.ubication,
       password: data.password,
+      CountryId: selectedCountryObj?.id,
+      LocationId: selectedLocationObj?.id,
+      phone: data.phone,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
@@ -194,12 +144,14 @@ function FormProvider() {
       name: data.name,
       email: data.email,
       password: data.password,
-      usuario: 'p'
-    }
+      usuario: "p",
+    };
+
     console.log(newData);
-    await dispatch(postSessionUser(sessionData))
+
+    await dispatch(postSessionUser(sessionData));
     dispatch(postProveedor(newData));
-    handleUserSession('Cuenta creada', 'Algo salio mal')
+    handleUserSession("Cuenta creada", "Algo salió mal");
   };
 
   return (
@@ -252,18 +204,48 @@ function FormProvider() {
                   required: "El campo telefono es requerido",
                 })}
               />
-              {/* {errors.phone && <p>{errors.phone.message}</p>} */}
+              {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
 
             <FormControl>
-              <FormLabel>Ubicacion</FormLabel>
-              <Input
-                type="text"
-                {...register("ubication", {
-                  required: "El campo ubicacion es requerido",
+              <FormLabel>País</FormLabel>
+              <Select
+                {...register("country", {
+                  required: "El campo país es requerido",
                 })}
-              />
-              {/* {errors.ubicacion && <p>{errors.ubicacion.message}</p>} */}
+                bg={useColorModeValue("white", "gray.700")}
+                borderWidth="1px"
+                color="gray.800"
+                onChange={(e) => handleCountryChange(parseInt(e.target.value))}
+              >
+                <option value="">Seleccionar país</option>
+                {countries.map((country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.country && <p>{errors.country.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Provincia/Estado</FormLabel>
+              <Select
+                {...register("location", {
+                  required: "El campo provincia/estado es requerido",
+                })}
+                bg={useColorModeValue("white", "gray.700")}
+                borderWidth="1px"
+                color="gray.800"
+              >
+                <option value="">Seleccionar provincia/estado</option>
+                {locations.map((location) => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.location && <p>{errors.location.message}</p>}
             </FormControl>
 
             <FormControl>
@@ -273,42 +255,24 @@ function FormProvider() {
                 {...register("image", {
                   required: "El campo imagen es requerido",
                   validate: {
-                    isImage: (value) => {
-                      if (value) {
-                        const acceptedFormats = [".jpg", ".jpeg", ".png"];
-                        const fileExtension = value[0].name.substring(
-                          value[0].name.lastIndexOf(".")
-                        );
-                        return acceptedFormats.includes(fileExtension);
-                      }
-                      return true;
-                    },
+                    isImage: (value) =>
+                      ["image/jpeg", "image/png"].includes(value[0]?.type) ||
+                      "Solo se permiten archivos de imagen JPEG o PNG",
                   },
                 })}
-                onChange={(e) => uploadFile(e.target.files[0])}
               />
+              {errors.image && <p>{errors.image.message}</p>}
             </FormControl>
 
             <FormControl>
               <FormLabel>Género</FormLabel>
-              <RadioGroup onChange={(value) => setValue(value)} value={value}>
+              <RadioGroup
+                defaultValue=""
+                {...register("genre", { required: true })}
+              >
                 <Stack direction="row">
-                  <Radio
-                    {...register("genre", {
-                      required: "Seleccione una opción de género",
-                    })}
-                    value="female"
-                  >
-                    Femenino
-                  </Radio>
-                  <Radio
-                    {...register("genre", {
-                      required: "Seleccione una opción de género",
-                    })}
-                    value="male"
-                  >
-                    Masculino
-                  </Radio>
+                  <Radio value="female">Femenino</Radio>
+                  <Radio value="male">Masculino</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -317,9 +281,7 @@ function FormProvider() {
               <FormLabel>Años de experiencia</FormLabel>
               <NumberInput defaultValue={0} min={0} max={100}>
                 <NumberInputField
-                  {...register("years_exp", {
-                    required: true,
-                  })}
+                  {...register("years_exp", { required: true })}
                 />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -331,8 +293,8 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
-                fnSelectCategory={envioCategoria} // Pasa el manejador para la selección de categoría
-                fnSelectOcupation={envioOcupaciones} // Pasa el manejador para la selección de ocupación
+                fnSelectCategory={envioCategoria}
+                fnSelectOcupation={envioOcupaciones}
               />
             </FormControl>
 
@@ -344,24 +306,34 @@ function FormProvider() {
                   required: "El campo contraseña es requerido",
                 })}
               />
-              {/* {errors.password && <p>{errors.password.message}</p>} */}
+              {errors.password && <p>{errors.password.message}</p>}
             </FormControl>
 
             <FormControl>
               <FormLabel />
-              <Button
-                type="submit"
-                loadingText="Creando cuenta"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Registrarme
-              </Button>
-              <PrivacyNotice />
+              {isLoading ? (
+                <CircularProgress
+                  isIndeterminate
+                  size="24px"
+                  color="blue.500"
+                />
+              ) : (
+                <>
+                  <Button
+                    type="submit"
+                    loadingText="Creando cuenta"
+                    size="lg"
+                    bg="blue.400"
+                    color="white"
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Registrarme
+                  </Button>
+                  <PrivacyNotice />
+                </>
+              )}
             </FormControl>
           </form>
         </Stack>

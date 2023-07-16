@@ -22,7 +22,8 @@ const initialState = {
     ocupation: 'Selecciona una categoria',
     rating: 'Rating',
     genre: 'Genero'
-  }
+  },
+  session: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -44,6 +45,12 @@ const reducer = (state = initialState, action) => {
           ...state,
           suppliersByname: action.payload
         }
+           //! actualizar profesional // preguntar cual es el estado a actualizar
+      case UPDATE_PROFESIONAL:
+        return {
+          ...state,
+          session: action.payload, 
+        };
     case APPLY_FILTERS:
       return {
         ...state,
@@ -54,12 +61,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         professionals: action.payload
       }
-      //! actualizar profesional // preguntar cual es el estado a actualizar
-      case UPDATE_PROFESIONAL:
-        return {
-          ...state,
-          profesional: action.payload, 
-        };
+   
       case "GET_ALL_CLIENTS":
       return {
         ...state,

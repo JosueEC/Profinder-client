@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
+import { useSessionState } from "../../services/zustand/useSession";
 
 import {
   Flex,
@@ -37,6 +38,7 @@ function FormServicio(props) {
       categories: [],
       images: [], 
       content: "",
+
     },
   });
 
@@ -48,6 +50,8 @@ function FormServicio(props) {
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedOccupations, setSelectedOccupations] = useState([]);
+  const session = useSessionState((state) => state.session);
+
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
@@ -63,14 +67,15 @@ function FormServicio(props) {
 
     const newData = {
       title: data.title,
-      ocupations: [selectedOccupations],
-      categories: selectedCategory,
-      images: imageUrls,
+      ocupation: selectedOccupations,
+      category: selectedCategory,
+      image: imageUrls,
       content: data.content,
+      ProfesionalId: session.id
     };
 
     console.log(newData);
-    // dispatch(postServicio(newData));
+    dispatch(postServicio(newData));
   };
 
   return (
