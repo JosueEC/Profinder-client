@@ -196,7 +196,6 @@ function FormProvider() {
       password: data.password,
       usuario: 'p'
     }
-    console.log(newData);
     await dispatch(postSessionUser(sessionData))
     dispatch(postProveedor(newData));
     handleUserSession('Cuenta creada', 'Algo salio mal')

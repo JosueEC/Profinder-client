@@ -1,11 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import {
-  getAllCategories,
-  updateProfesionals,
-} from "../../services/redux/actions/actions";
+import { getAllCategories } from "../../services/redux/actions/actions";
 import {
   Flex,
   Box,
@@ -23,39 +19,26 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { useSessionState } from "../../services/zustand/useSession";
+
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
+import { updateProfesionals } from "../../services/redux/actions/actions";
+import { useSessionState } from "../../services/zustand/useSession";
 
-function FormUpdate() {
+function FormUpdateProfile() {
   const session = useSessionState((state) => state.session);
-  //console.log(session);
   const setSessionState = useSessionState((state) => state.setSessionState);
 
-  useEffect(() => {
-    const userSession = window.localStorage.getItem("userSession");
-    if (userSession) {
-      const user = JSON.parse(userSession);
-      setSessionState(user);
-    }
-  }, []);
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
+  const { handleSubmit, register } = useForm({
     defaultValues: {
       name: "",
-      email: "",
-      image: "",
       genre: "",
       years_exp: "",
-      password: "",
       ubication: "",
       phone: "",
       ocupations: [],
       categories: [],
+      image: "",
     },
   });
 
@@ -70,6 +53,8 @@ function FormUpdate() {
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
+    
+    console.log(value);
     setSelectedCategory([value]);
   };
 
@@ -79,23 +64,24 @@ function FormUpdate() {
 
   const onSubmit = async (data) => {
     const imageData = await uploadFile(data.image);
-
     const newData = {
       name: data.name,
-      email: data.email,
       image: imageData,
       genre: data.genre,
       years_exp: data.years_exp,
+      description: "pendiente",
       phone: data.phone,
       ubication: data.ubication,
-      password: data.password,
-      ocupations: [selectedOccupations],
+      ocupations: selectedOccupations,
       categories: selectedCategory,
     };
 
-    dispatch(updateProfesionals(session.id, newData));
+    const response = await dispatch(updateProfesionals(session.id, newData));
+    if (response && response.payload) {
+      setSessionState({ ...session, name: newData.name });
+    }
   };
-
+  console.log();
   return (
     <Flex
       minH="100vh"
@@ -115,73 +101,25 @@ function FormUpdate() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Nombre y apellido</FormLabel>
-              <Input
-                type="text"
-                {...register("name", {
-                  required: "El campo nombre es requerido",
-                })}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input
-                value={session.email}
-                disabled
-                type="email"
-                {...register("email", {
-                  required: "El campo email es requerido",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-                    message: "El formato del email es incorrecto",
-                  },
-                })}
-              />
-              {errors.email && <p>{errors.email.message}</p>}
+              <Input type="text" {...register("name")} />
             </FormControl>
 
             <FormControl>
               <FormLabel>Telefono</FormLabel>
-              <Input
-                type="number"
-                {...register("phone", {
-                  required: "El campo telefono es requerido",
-                })}
-              />
-              {/* {errors.phone && <p>{errors.phone.message}</p>} */}
+              <Input type="number" {...register("phone")} />
             </FormControl>
 
             <FormControl>
               <FormLabel>Ubicacion</FormLabel>
-              <Input
-                type="text"
-                {...register("ubication", {
-                  required: "El campo ubicacion es requerido",
-                })}
-              />
-              {/* {errors.ubicacion && <p>{errors.ubicacion.message}</p>} */}
+              <Input type="text" {...register("ubication")} />
             </FormControl>
 
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
                 type="file"
-                {...register("image", {
-                  required: "El campo imagen es requerido",
-                  validate: {
-                    isImage: (value) => {
-                      if (value) {
-                        const acceptedFormats = [".jpg", ".jpeg", ".png"];
-                        const fileExtension = value[0].name.substring(
-                          value[0].name.lastIndexOf(".")
-                        );
-                        return acceptedFormats.includes(fileExtension);
-                      }
-                      return true;
-                    },
-                  },
-                })}
                 onChange={(e) => uploadFile(e.target.files[0])}
+                {...register("image")}
               />
             </FormControl>
 
@@ -212,11 +150,7 @@ function FormUpdate() {
             <FormControl>
               <FormLabel>Años de experiencia</FormLabel>
               <NumberInput defaultValue={0} min={0} max={100}>
-                <NumberInputField
-                  {...register("years_exp", {
-                    required: true,
-                  })}
-                />
+                <NumberInputField {...register("years_exp")} />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
@@ -227,29 +161,16 @@ function FormUpdate() {
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
-                fnSelectCategory={envioCategoria}
-                fnSelectOcupation={envioOcupaciones}
+                fnSelectCategory={envioCategoria} 
+                fnSelectOcupation={envioOcupaciones} 
               />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Contraseña</FormLabel>
-              <Input
-                value={session.password}
-                disabled
-                type="password"
-                {...register("password", {
-                  required: "El campo contraseña es requerido",
-                })}
-              />
-              {/* {errors.password && <p>{errors.password.message}</p>} */}
             </FormControl>
 
             <FormControl>
               <FormLabel />
               <Button
                 type="submit"
-                loadingText="Submitting"
+                loadingText="Creando cuenta"
                 size="lg"
                 bg="blue.400"
                 color="white"
@@ -267,4 +188,4 @@ function FormUpdate() {
   );
 }
 
-export default FormUpdate
+export default FormUpdateProfile;

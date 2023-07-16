@@ -1,4 +1,4 @@
-import { Link as RouterLink,  } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -7,10 +7,27 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { Link as ScrollLink } from "react-scroll";
+import FormUpdate from "./FormUpdateProfile"; // Importa el formulario FormUpdate
+import { useState, useEffect } from "react";
+//import { useSessionState } from "../../services/zustand/useSession";
+
 
 const DashboardSuppliers = () => {
+  // const session = useSessionState((state) => state.session);
+  // console.log(session);
+  // const setSessionState = useSessionState((state) => state.setSessionState);
 
-  //! aqui defino los estilos de los links de la sidebar....... con esto podremos crear variables en otro componente y reutilizar los estilos y en la etiqueta se implementan asi: style={linkStyle}
+
+  //! aca vienen los datos del usuario email,status,e ID
+  useEffect(() => {
+    const userSession = window.localStorage.getItem("userSession");
+    if (userSession) {
+      const user = JSON.parse(userSession);
+      console.log(user);
+    }
+  }, []);
+
+
   const linkStyle = {
     display: "block",
     padding: "10px",
@@ -21,10 +38,11 @@ const DashboardSuppliers = () => {
     },
   };
 
+  const [showForm, setShowForm] = useState(false); 
+
   return (
     <Box height="100vh" display="flex" flexDirection="column">
       <Flex flex="1">
-   
         <Box w="250px" bg="gray.600" p={4}>
           <Stack spacing={4}>
             <ScrollLink
@@ -45,7 +63,11 @@ const DashboardSuppliers = () => {
             >
               <Button variant="outline">Ver mis Publicaciones</Button>
             </ScrollLink>
-            <RouterLink to="/formUpdate" style={linkStyle}>
+            <RouterLink
+              to="/formUpdate"
+              style={linkStyle}
+              onClick={() => setShowForm(true)}
+            >
               <Button variant="outline">Editar mi Perfil</Button>
             </RouterLink>
             <ScrollLink
@@ -60,10 +82,14 @@ const DashboardSuppliers = () => {
           </Stack>
         </Box>
 
+        <Box flex="1">
+          {showForm ? (
+            <FormUpdate />
+          ) : (
+            <p>Contenido del dashboard</p>
+          )}
+        </Box>
       </Flex>
-
-      {/*aca iria un btn hamburguesa para dispositivos moviles */}
-
     </Box>
   );
 };

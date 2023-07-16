@@ -8,7 +8,7 @@ import {
   APPLY_FILTERS,
   GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
-  GET_INFO_PROFESIONALS
+  GET_INFO_PROFESIONALS,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -90,7 +90,7 @@ const postServicio = (info) => {
         info.ocupations === "" ||
         info.categories === "" ||
         info.images === "" ||
-        info.content ===  0
+        info.content === 0
       ) {
         throw new Error("Faltan datos");
       }
@@ -109,11 +109,11 @@ const postServicio = (info) => {
 
 //! Postear proveedor
 const postProveedor = (info) => {
-  const userSession = window.localStorage.getItem('userSession')
-    if (userSession) {
-      const user = JSON.parse(userSession)
-      info.id = user.id
-    }
+  const userSession = window.localStorage.getItem("userSession");
+  if (userSession) {
+    const user = JSON.parse(userSession);
+    info.id = user.id;
+  }
 
   return async function () {
     try {
@@ -140,7 +140,7 @@ const postProveedor = (info) => {
       );
       alert("Perfil creado");
     } catch (error) {
-      console.error(error.response.data.error)
+      console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
     }
   };
@@ -148,10 +148,10 @@ const postProveedor = (info) => {
 
 //! Postear cliente
 const postCliente = (info) => {
-  const userSession = window.localStorage.getItem('userSession')
+  const userSession = window.localStorage.getItem("userSession");
   if (userSession) {
-    const user = JSON.parse(userSession)
-    info.id = user.id
+    const user = JSON.parse(userSession);
+    info.id = user.id;
   }
 
   return async function () {
@@ -211,8 +211,9 @@ const getSessionUser = (dataSession) => {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status = data.email && !data.message.includes("No pertenece") ? true : false;
-      delete data.password
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password;
       localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
@@ -237,8 +238,9 @@ const postSessionUser = (dataSession) => {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
-      data.status = data.email && !data.message.includes("No pertenece") ? true : false;
-      delete data.password
+      data.status =
+        data.email && !data.message.includes("No pertenece") ? true : false;
+      delete data.password;
       window.localStorage.setItem("userSession", JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
@@ -267,25 +269,25 @@ const getProfesionals = () => {
 
 //! Actualizar Profesionales
 const updateProfesionals = (id, data) => {
-  console.log(id);
+  //console.log(id);  // el id llega bien***** falta la data
   const URL = `https://backprofinder-production.up.railway.app/profesional/${id}`;
 
   return async function (dispatch) {
     try {
-      let response = await axios.put(URL, data);
-      console.log(response.data);
-      if (response.data) {
-        return dispatch({
+      const response = await axios.put(URL, data);
+      if (response && response.data) {
+        dispatch({
           type: UPDATE_PROFESIONAL,
           payload: response.data,
         });
+      } else {
+        console.log("La respuesta no contiene datos:", response);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
   };
 };
-
 
 // Action para obtener todos los clientes
 const getAllClients = () => {
@@ -304,14 +306,16 @@ const getAllClients = () => {
 
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
-  const userSession = JSON.parse(localStorage.getItem('userSession'));
-    if (userSession) {
-      newData.id = userSession.id;
-    }
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  if (userSession) {
+    newData.id = userSession.id;
+  }
   return function (dispatch) {
-    
     axios
-      .put(`https://backprofinder-production.up.railway.app/client/${newData.id}`, newData)
+      .put(
+        `https://backprofinder-production.up.railway.app/client/${newData.id}`,
+        newData
+      )
       .then((response) => {
         dispatch({ type: "UPDATE_CLIENT", payload: response.data });
       })
@@ -320,8 +324,6 @@ const updateClient = (clientId, newData) => {
       });
   };
 };
-
-
 
 export {
   getAllSuppliers,
@@ -338,5 +340,5 @@ export {
   postServicio,
   getProfesionals,
   updateProfesionals,
-  updateClient
+  updateClient,
 };
