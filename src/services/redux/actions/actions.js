@@ -6,7 +6,7 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
-  GET_OCUPATION_BY_NAME,
+ //GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
 } from "../actionsTypes/actionsType";
@@ -30,6 +30,7 @@ const getAllCategories = () => {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
+       // console.log(results);
         dispatch({
           type: GET_CATEGORIES,
           payload: results,
@@ -59,23 +60,23 @@ const searchProfessionals = (name) => {
   };
 };
 
-const getOcupationsByName = (name) => {
-  const URL = "https://backprofinder-production.up.railway.app/ocupations";
-  return async function (dispatch) {
-    try {
-      let response = await axios.get(`${URL}?name=${name}`);
-      console.log(response.data);
-      if (response.data) {
-        return dispatch({
-          type: GET_OCUPATION_BY_NAME,
-          payload: response.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+// const getOcupationsByName = (name) => {
+//   const URL = "https://backprofinder-production.up.railway.app/ocupations";
+//   return async function (dispatch) {
+//     try {
+//       let response = await axios.get(`${URL}?name=${name}`);
+//       console.log(response.data);
+//       if (response.data) {
+//         return dispatch({
+//           type: GET_OCUPATION_BY_NAME,
+//           payload: response.data,
+//         });
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
 const applyFilters = (objFilters) => {
   return { type: APPLY_FILTERS, payload: objFilters };
@@ -332,7 +333,7 @@ export {
   postProveedor,
   applyFilters,
   postCliente,
-  getOcupationsByName,
+  //getOcupationsByName,
   getSessionUser,
   postSessionUser,
   loginSessionGoogle,

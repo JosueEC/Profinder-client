@@ -53,16 +53,17 @@ function FormUpdateProfile() {
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
-    
-    console.log(value);
+    //console.log(value); //lega el value
     setSelectedCategory([value]);
   };
-
+  
   const envioOcupaciones = (value) => {
+   // console.log(value); //lega el value
     setSelectedOccupations(value);
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
     const imageData = await uploadFile(data.image);
     const newData = {
       name: data.name,
