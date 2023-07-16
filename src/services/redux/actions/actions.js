@@ -126,8 +126,8 @@ const postProveedor = (info) => {
         info.genre === "" ||
         info.years_exp === "" ||
         info.password === "" ||
-        info.country === "" ||
-        info.location === "" ||
+        info.CountryId === "" ||
+        info.LocationId === "" ||
         info.phone === "" ||
         info.ocupations === "" ||
         info.categories === 0

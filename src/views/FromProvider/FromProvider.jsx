@@ -81,7 +81,9 @@ function FormProvider() {
     setSelectedCountry(countryId);
 
     if (countryId) {
-      fetch(`https://backprofinder-production.up.railway.app/country/${countryId}`)
+      fetch(
+        `https://backprofinder-production.up.railway.app/country/${countryId}`
+      )
         .then((response) => response.json())
         .then((data) => {
           const selectedCountry = data;
@@ -104,7 +106,7 @@ function FormProvider() {
       setLocations([]);
     }
   };
-
+  console.log(locations)
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
@@ -116,8 +118,13 @@ function FormProvider() {
   const onSubmit = async (data) => {
     const imageData = await uploadFile(data.image);
 
-    const selectedCountryObj = countries.find((country) => country.id === parseInt(data.country));
-    const selectedLocationObj = locations.find((location) => location.id === parseInt(data.location));
+    const selectedCountryObj = countries.find(
+      (country) => country.id === parseInt(data.country)
+    );
+    const selectedLocationObj = locations.find(
+      (location) => location.id === parseInt(data.location)
+    );
+    console.log(selectedCountryObj.id);
 
     const newData = {
       name: data.name,
@@ -126,8 +133,8 @@ function FormProvider() {
       genre: data.genre,
       years_exp: data.years_exp,
       password: data.password,
-      country: selectedCountryObj?.name || "",
-      location: selectedLocationObj?.name || "",
+      CountryId: selectedCountryObj?.id,
+      LocationId: selectedLocationObj?.id,
       phone: data.phone,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
@@ -140,6 +147,7 @@ function FormProvider() {
       usuario: "p",
     };
 
+    console.log(newData);
 
     await dispatch(postSessionUser(sessionData));
     dispatch(postProveedor(newData));
@@ -208,9 +216,7 @@ function FormProvider() {
                 bg={useColorModeValue("white", "gray.700")}
                 borderWidth="1px"
                 color="gray.800"
-                onChange={(e) =>
-                  handleCountryChange(parseInt(e.target.value))
-                }
+                onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
                 {countries.map((country) => (

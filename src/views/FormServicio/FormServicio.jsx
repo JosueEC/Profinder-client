@@ -67,15 +67,15 @@ function FormServicio(props) {
 
     const newData = {
       title: data.title,
-      ocupations: [selectedOccupations],
-      categories: selectedCategory,
-      images: imageUrls,
+      ocupation: selectedOccupations,
+      category: selectedCategory,
+      image: imageUrls,
       content: data.content,
-      profesionalId: session.id
+      ProfesionalId: session.id
     };
 
     console.log(newData);
-    // dispatch(postServicio(newData));
+    dispatch(postServicio(newData));
   };
 
   return (
