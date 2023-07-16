@@ -64,6 +64,7 @@ function FormProvider() {
   const [selectedOccupations, setSelectedOccupations] = useState([]);
   const [countries, setCountries] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -74,14 +75,35 @@ function FormProvider() {
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-
-    fetch("https://backprofinder-production.up.railway.app/location")
-      .then((response) => response.json())
-      .then((data) => {
-        setLocations(data);
-      })
-      .catch((error) => console.log(error));
   }, []);
+
+  const handleCountryChange = (countryId) => {
+    setSelectedCountry(countryId);
+
+    if (countryId) {
+      fetch(`https://backprofinder-production.up.railway.app/country/${countryId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const selectedCountry = data;
+          if (selectedCountry) {
+            fetch("https://backprofinder-production.up.railway.app/location")
+              .then((response) => response.json())
+              .then((locationsData) => {
+                const filteredLocations = locationsData.filter(
+                  (location) => location.CountryId === selectedCountry.id
+                );
+                setLocations(filteredLocations);
+              })
+              .catch((error) => console.log(error));
+          } else {
+            setLocations([]);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      setLocations([]);
+    }
+  };
 
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
@@ -94,6 +116,9 @@ function FormProvider() {
   const onSubmit = async (data) => {
     const imageData = await uploadFile(data.image);
 
+    const selectedCountryObj = countries.find((country) => country.id === parseInt(data.country));
+    const selectedLocationObj = locations.find((location) => location.id === parseInt(data.location));
+
     const newData = {
       name: data.name,
       email: data.email,
@@ -101,8 +126,8 @@ function FormProvider() {
       genre: data.genre,
       years_exp: data.years_exp,
       password: data.password,
-      country: data.country,
-      location: data.location,
+      country: selectedCountryObj?.name || "",
+      location: selectedLocationObj?.name || "",
       phone: data.phone,
       ocupations: [selectedOccupations],
       categories: selectedCategory,
@@ -114,7 +139,8 @@ function FormProvider() {
       password: data.password,
       usuario: "p",
     };
-    console.log(newData);
+
+
     await dispatch(postSessionUser(sessionData));
     dispatch(postProveedor(newData));
     handleUserSession("Cuenta creada", "Algo salió mal");
@@ -182,10 +208,13 @@ function FormProvider() {
                 bg={useColorModeValue("white", "gray.700")}
                 borderWidth="1px"
                 color="gray.800"
+                onChange={(e) =>
+                  handleCountryChange(parseInt(e.target.value))
+                }
               >
                 <option value="">Seleccionar país</option>
                 {countries.map((country) => (
-                  <option key={country.id} value={country.name}>
+                  <option key={country.id} value={country.id}>
                     {country.name}
                   </option>
                 ))}
@@ -205,7 +234,7 @@ function FormProvider() {
               >
                 <option value="">Seleccionar provincia/estado</option>
                 {locations.map((location) => (
-                  <option key={location.id} value={location.name}>
+                  <option key={location.id} value={location.id}>
                     {location.name}
                   </option>
                 ))}
