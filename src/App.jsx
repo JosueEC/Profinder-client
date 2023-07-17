@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
 import FormUpdate from "./views/DashboardSuppliers/FormUpdateProfile";
@@ -29,7 +29,7 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
   const session = useSessionState((state) => state.session);
-  // const location = useLocation();
+   const location = useLocation();
   // const hideNavbar = location.pathname === "/dashboardSuppliers" || location.pathname === "/dashboardClient";
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
       setSessionState(user);
     }
   }, []);
-
+   const isHomePage = location.pathname === "/";
   return (
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
@@ -79,7 +79,7 @@ function App() {
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
       </Routes>
-      {window.location.pathname !== "/" && <Footer />}
+      {!isHomePage && <Footer />}
     </div>
   );
 }
