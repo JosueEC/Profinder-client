@@ -143,7 +143,16 @@ export default function UserLogin () {
                   >
                     Google
                   </Button> */}
-                  <div id='signInDiv' />
+                  <div
+                    id='signInDiv'
+                    style={{ 
+                      width: '100%',
+                      backgroundColor: 'white',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      borderRadius: '0.3rem'
+                    }}
+                  />
                   <Button
                     bg='teal.400'
                     color='white'
