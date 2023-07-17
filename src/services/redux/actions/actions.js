@@ -9,6 +9,7 @@ import {
   //GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
+  POST_PROFESIONAL
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -328,6 +329,18 @@ const updateClient = (clientId, newData) => {
       .catch((error) => {
         console.error(error.message);
       });
+  };
+};
+export const getPostProfesional = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `https://backprofinder-production.up.railway.app/profesional`
+      );
+      dispatch({ type: POST_PROFESIONAL, payload: response.data });
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 };
 

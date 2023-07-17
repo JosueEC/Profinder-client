@@ -3,6 +3,8 @@ import { Box, useColorModeValue, Button, Stack } from "@chakra-ui/react";
 import { Link as ScrollLink } from "react-scroll";
 import FormUpdate from "./FormUpdateProfile";
 import { useState, useEffect } from "react";
+import FormServicio from "../FormServicio/FormServicio";
+import PostsSuppliers from "./PostsSuppliers";
 
 const DashboardSuppliers = () => {
   useEffect(() => {
@@ -23,6 +25,26 @@ const DashboardSuppliers = () => {
   };
 
   const [showForm, setShowForm] = useState(false);
+  const [showPosts, setShowPosts] = useState(false);
+  const [showFormServicio, setShowFormServicio] = useState(false);
+
+  const handleShowForm = () => {
+    setShowForm(true);
+    setShowPosts(false);
+    setShowFormServicio(false);
+  };
+
+  const handleShowPosts = () => {
+    setShowForm(false);
+    setShowPosts(true);
+    setShowFormServicio(false);
+  };
+
+  const handleShowFormServicio = () => {
+    setShowForm(false);
+    setShowPosts(false);
+    setShowFormServicio(true);
+  };
 
   return (
     <Box height="100vh" display="flex">
@@ -35,7 +57,14 @@ const DashboardSuppliers = () => {
             duration={500}
             style={linkStyle}
           >
-            <Button variant="outline">Publicar</Button>
+            <Button
+              variant="outline"
+              onClick={handleShowFormServicio}
+              bg={showFormServicio ? "blue.500" : ""}
+              color={showFormServicio ? "white" : ""}
+            >
+              Publicar
+            </Button>
           </ScrollLink>
           <ScrollLink
             to="nuevas-publicaciones"
@@ -44,14 +73,27 @@ const DashboardSuppliers = () => {
             duration={500}
             style={linkStyle}
           >
-            <Button variant="outline">Ver mis Publicaciones</Button>
+            <Button
+              variant="outline"
+              onClick={handleShowPosts}
+              bg={showPosts ? "blue.500" : ""}
+              color={showPosts ? "white" : ""}
+            >
+              Ver mis Publicaciones
+            </Button>
           </ScrollLink>
           <RouterLink
             to="/formUpdate"
             style={linkStyle}
-            onClick={() => setShowForm(true)}
+            onClick={handleShowForm}
           >
-            <Button variant="outline">Editar mi Perfil</Button>
+            <Button
+              variant="outline"
+              bg={showForm ? "blue.500" : ""}
+              color={showForm ? "white" : ""}
+            >
+              Editar mi Perfil
+            </Button>
           </RouterLink>
           <ScrollLink
             to="obtener-premium"
@@ -66,8 +108,11 @@ const DashboardSuppliers = () => {
       </Box>
 
       <Box flex="1">
-        {showForm ? <FormUpdate /> : <p>Contenido del dashboard</p>}
+        {showForm ? <FormUpdate /> : null}
+        {showFormServicio ? <FormServicio /> : null}
+        {showPosts ? <PostsSuppliers /> : null}
       </Box>
+      <Box></Box>
     </Box>
   );
 };
