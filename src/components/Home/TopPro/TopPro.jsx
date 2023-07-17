@@ -5,8 +5,8 @@ import { StarIcon } from '@chakra-ui/icons';
 import { getAllSuppliers } from '../../../services/redux/actions/actions';
 import { Link as RouterLink } from 'react-router-dom';
 
-const Card = ({ backup, cardBgColor, textColor }) => {
-  const ratingStars = Array.from({ length: backup.rating }, (_, index) => (
+const Card = ({ supplier, cardBgColor, textColor }) => {
+  const ratingStars = Array.from({ length: supplier.rating }, (_, index) => (
     <Icon key={index} as={StarIcon} color="teal.400" />
   ));
 
@@ -17,25 +17,25 @@ const Card = ({ backup, cardBgColor, textColor }) => {
           <Image
             objectFit="cover"
             boxSize="100%"
-            src={backup.image}
-            alt={backup.name}
+            src={supplier.image}
+            alt={supplier.name}
             fallbackSrc="https://via.placeholder.com/150"
           />
         </Box>
         <Stack justifyContent="center" alignItems="center" p={4} pl={6} spacing={2}>
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15}>
-            {backup.name}
+            {supplier.name}
           </Heading>
           <Text fontWeight={600} color={textColor} fontSize="sm" mb={2}>
-            Categoría: {backup.professions[0].category}
+            Categoría: {supplier.professions[0].category}
           </Text>
           <Text fontWeight={600} color={textColor} fontSize="sm" mb={2}>
-            Rating:
+            Valoración:
             <Flex align="center" ml={2}>
               {ratingStars}
             </Flex>
           </Text>
-          <Button as={RouterLink} to={`/detail/${backup.id}`} mt={4} colorScheme="teal" size="sm">
+          <Button as={RouterLink} to={`/detail/${supplier.id}`} mt={4} colorScheme="teal" size="sm">
             Ver detalle
           </Button>
         </Stack>
@@ -45,17 +45,15 @@ const Card = ({ backup, cardBgColor, textColor }) => {
 };
 
 const TopPro = ({ cardBgColor, textColor, linkColor }) => {
-   const dispatch = useDispatch();
-  const backup = useSelector((state) => state.backup);
+  const dispatch = useDispatch();
+  const suppliers = useSelector((state) => state.suppliers);
 
-   useEffect(() => {
-     dispatch(getAllSuppliers());
+  useEffect(() => {
+    dispatch(getAllSuppliers());
   }, [dispatch]);
 
   // Ordena los proveedores por rating de mayor a menor
-  const sortedSuppliers = [...backup].sort((a, b) => b.rating - a.rating);
-
-  console.log(backup); // Verifica la estructura del objeto en la consola
+  const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
 
   return (
     <Center p={4} bg={useColorModeValue('gray.900', 'gray.900')} color={useColorModeValue('gray.300', 'gray.300')} h="100vh" w="100%">
@@ -70,8 +68,8 @@ const TopPro = ({ cardBgColor, textColor, linkColor }) => {
         </Box>
         <Box mt={8} align="center">
           <Box display="grid" gridGap={6} gridTemplateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)' }}>
-            {sortedSuppliers.slice(0, 4).map((backup) => (
-              <Card key={backup.id} backup={backup} cardBgColor={cardBgColor} textColor={textColor} />
+            {sortedSuppliers.slice(0, 4).map((supplier) => (
+              <Card key={supplier.id} supplier={supplier} cardBgColor={cardBgColor} textColor={textColor} />
             ))}
           </Box>
         </Box>

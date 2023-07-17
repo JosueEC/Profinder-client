@@ -38,11 +38,11 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
             {description}
           </Text>
         </Box>
-        <Link to="/categories">
+        
           <Button as={Link} to="/categories" variant="link" color={linkColor} size="sm">
             Learn more
           </Button>
-        </Link>
+        
       </Stack>
     </Box>
   );
