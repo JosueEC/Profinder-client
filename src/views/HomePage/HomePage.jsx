@@ -31,7 +31,9 @@ const HomePage = () => {
         <HowItWorks />
       </Box>
 
-      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+      <Box bg="gray.900">
+        <Divider height="3px" borderColor="gray.300" width="40%" mx="auto" />
+      </Box>
 
       <Box
         display="flex"
@@ -43,10 +45,13 @@ const HomePage = () => {
         boxShadow="0 8px 16px rgba(0, 0, 0, 0.2)"
       >
         <FeaturesGrid />
+        <Divider height="3px" borderColor="gray.300" width="40%" mx="auto" />
         <TestimonialCarrousel />
       </Box>
 
-      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+      <Box bg="gray.900">
+        <Divider height="3px" borderColor="gray.300" width="40%" mx="auto" />
+      </Box>
 
       <Box
         display="flex"
@@ -60,7 +65,9 @@ const HomePage = () => {
         <CategoriesSection />
       </Box>
 
-      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+      <Box bg="gray.900">
+        <Divider height="3px" borderColor="gray.300" width="40%" mx="auto" />
+      </Box>
 
       <Box
         display="flex"
