@@ -114,10 +114,10 @@ const ArticleList = () => {
               />
               <InfoLabel textLabel={data.email} iconLabel={FaMailBulk} />
               <InfoLabel textLabel={data.phone} iconLabel={FaPhone} />
-              <InfoLabel
+              {/* <InfoLabel
                 textLabel={data.ubication}
                 iconLabel={FaMapMarkerAlt}
-              />
+              /> */}
             </Box>
           </Box>
         </ScaleFade>
