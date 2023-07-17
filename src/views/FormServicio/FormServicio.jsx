@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
-import {useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom';
+
 
 import {
   Flex,
@@ -44,7 +45,7 @@ function FormServicio(props) {
       content: "",
     },
   });
-const history = useHistory()
+// const history = useHistory()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const history = useHistory()
 
     console.log(newData);
     dispatch(postServicio(newData));
-    history.push("/DashboardSuppliers");
+    // history.push("/DashboardSuppliers");
   };
 
   return (

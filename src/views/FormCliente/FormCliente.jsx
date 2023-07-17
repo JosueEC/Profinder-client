@@ -46,6 +46,7 @@ function FormCliente(props) {
       email: data.email,
       password: data.password,
       phone: data.phone,
+
     };
 
     const dataSession = {
