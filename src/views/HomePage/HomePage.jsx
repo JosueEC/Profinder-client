@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllCategories } from '../../services/redux/actions/actions'
+import { Box, Divider } from '@chakra-ui/react'
+import Footer from '../../components/Footer/Footer'
 
 import TopPro from '../../components/Home/TopPro/TopPro'
 import FeaturesGrid from '../../components/Home/FeaturesGrid/FeaturesGrid'
 import TestimonialCarrousel from '../../components/Home/TestimonialCarrousel/TestimonialCarrousel'
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks'
 import CategoriesSection from '../../components/Home/CategoriesSection/CategoriesSection'
-
-import styles from './HomePage.module.css'
 
 const HomePage = () => {
   const dispatch = useDispatch()
@@ -18,29 +18,63 @@ const HomePage = () => {
   }, [dispatch])
 
   return (
-    <div>
-      <section className={`${styles.howItWorks} ${styles.fullHeight}`}>
+    <Box height="100vh">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+        bgGradient="linear(to-b, #333333, #333333)"
+        boxShadow="0 8px 16px rgba(0, 0, 0, 0.2)"
+      >
         <HowItWorks />
-      </section>
+      </Box>
 
-      <div className={styles.divider} />
-      <section className={`${styles.publicOpinion} ${styles.fullHeight}`}>
+      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+        bgGradient="linear(to-b, #161c24 , #161c24)"
+        boxShadow="0 8px 16px rgba(0, 0, 0, 0.2)"
+      >
         <FeaturesGrid />
-    
-
         <TestimonialCarrousel />
-      </section>
+      </Box>
 
-        <div className={styles.divider} />
-      <section className={`${styles.Categories} ${styles.fullHeight}`}>
+      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+        bgGradient="linear(to-b, #161c24, #161c24)"
+        boxShadow="0 8px 16px rgba(0, 0, 0, 0.2)"
+      >
         <CategoriesSection />
-      </section>
+      </Box>
 
-      <div className={styles.divider} /> 
-      <section className={`${styles.serviceOffers} ${styles.fullHeight}`}>
+      <Divider height="2.5px" backgroundColor="white" width="40%" mx="auto" />
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+        bgGradient="linear(to-b, #161c24, #161c24)"
+        boxShadow="0 8px 16px rgba(0, 0, 0, 0.2)"
+      >
         <TopPro />
-      </section>
-    </div>
+      </Box>
+      <Footer />
+    </Box>
   )
 }
 

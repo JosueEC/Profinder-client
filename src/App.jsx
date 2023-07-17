@@ -79,7 +79,7 @@ function App() {
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
       </Routes>
-      <Footer />
+      {window.location.pathname !== "/" && <Footer />}
     </div>
   );
 }
