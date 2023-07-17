@@ -23,6 +23,7 @@ import { useSessionState } from '../../services/zustand/useSession'
 import NavLink from '../../singleComponents/NavLink'
 import Logo from '../../assets/categoriesIcons/Logo.png'
 import SinFoto from '../../assets/defaultImages/sinfoto.webp'
+import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
 
 export default function LoggedNavbar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -94,7 +95,7 @@ export default function LoggedNavbar () {
               <NavLink textLink='ACERCA DE' routeLink='/' />
             </HStack>
           </HStack>
-
+          <DarkModeToggle />
           <Flex
             alignItems='center'
           >
@@ -108,7 +109,7 @@ export default function LoggedNavbar () {
               >
                 <Avatar
                   size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                  src={SinFoto}
+                  src={session.image || SinFoto}
                 />
               </MenuButton>
               <MenuList>
@@ -128,6 +129,7 @@ export default function LoggedNavbar () {
             </Menu>
           </Flex>
         </Flex>
+
 
         {isOpen
           ? (

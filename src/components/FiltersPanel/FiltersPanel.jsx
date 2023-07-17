@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
@@ -12,7 +13,7 @@ import SelectCategories from '../../singleComponents/SelectCategories'
 import FilterByRating from '../Filteres/FilterByRating'
 import FilterByGenres from '../Filteres/FilterByGenres'
 
-export default function FiltersPanel ({setCurrentPage}) {
+export default function FiltersPanel ({ setCurrentPage }) {
   const dispatch = useDispatch()
   const filters = useSelector(state => state.filters)
   const categorySelected = filters.category || ''
@@ -22,7 +23,6 @@ export default function FiltersPanel ({setCurrentPage}) {
   const genreSelected = filters.genre || ''
 
   function handleSelectCategory (value) {
-   
     dispatch(applyFilters({ filter: 'category', value }))
     dispatch(applyFilters({ filter: 'ocupation', value: '' }))
     dispatch(getAllSuppliers())
@@ -74,7 +74,11 @@ export default function FiltersPanel ({setCurrentPage}) {
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
           <Text>
-            {`Resultados para ${categorySelected} >> ${ocupationSelected} >> ${ratingSelected} >> ${genreSelected}`}
+            {`Resultados para
+            ${categorySelected === 'Categorias' ? '' : categorySelected + '🔹'} 
+            ${ocupationSelected === 'Selecciona una categoria' || ocupationSelected === '' ? '' : ocupationSelected + '🔹'}
+            ${ratingSelected === 'Rating' ? '' : ratingSelected + '🔹'}
+            ${genreSelected === 'Genero' ? '' : genreSelected}`}
           </Text>
         </Container>
       </Box>
