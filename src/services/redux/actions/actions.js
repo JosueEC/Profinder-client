@@ -6,7 +6,7 @@ import {
   GET_CATEGORIES,
   SEARCH_PROFESSIONALS,
   APPLY_FILTERS,
- //GET_OCUPATION_BY_NAME,
+  //GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
 } from "../actionsTypes/actionsType";
@@ -30,7 +30,7 @@ const getAllCategories = () => {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
-       // console.log(results);
+        // console.log(results);
         dispatch({
           type: GET_CATEGORIES,
           payload: results,
@@ -88,10 +88,10 @@ const postServicio = (info) => {
       // Verificación
       if (
         info.title === "" ||
-        info.ocupations === "" ||
-        info.categories === "" ||
-        info.images === "" ||
-        info.ProfesionalId === "" ||
+        info.ocupation === "" ||
+        info.category === "" ||
+        info.image === "" ||
+        info.profesionalId === "" ||
         info.content === 0
       ) {
         throw new Error("Faltan datos");

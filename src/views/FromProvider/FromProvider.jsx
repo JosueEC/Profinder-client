@@ -106,7 +106,7 @@ function FormProvider() {
       setLocations([]);
     }
   };
-  console.log(locations)
+ 
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
