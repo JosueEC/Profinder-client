@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
@@ -33,12 +34,9 @@ import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 
 function FormProvider() {
   const { handleUserSession } = useCredentials();
+  const [genre, setGenre] = useState('female')
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -51,7 +49,7 @@ function FormProvider() {
       phone: "",
       ocupations: [],
       categories: [],
-    },
+    }
   });
 
   const dispatch = useDispatch();
@@ -124,13 +122,12 @@ function FormProvider() {
     const selectedLocationObj = locations.find(
       (location) => location.id === parseInt(data.location)
     );
-    console.log(selectedCountryObj.id);
 
     const newData = {
       name: data.name,
       email: data.email,
       image: imageData,
-      genre: data.genre,
+      genre: genre,
       years_exp: data.years_exp,
       password: data.password,
       CountryId: selectedCountryObj?.id,
@@ -266,10 +263,7 @@ function FormProvider() {
 
             <FormControl>
               <FormLabel>Género</FormLabel>
-              <RadioGroup
-                defaultValue=""
-                {...register("genre", { required: true })}
-              >
+              <RadioGroup onChange={setGenre} value={genre}>
                 <Stack direction="row">
                   <Radio value="female">Femenino</Radio>
                   <Radio value="male">Masculino</Radio>
@@ -304,6 +298,10 @@ function FormProvider() {
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
+                  minLength: {
+                    value: 8,
+                    message: 'La contraseña debe tener minimo 8 caracteres'
+                  }
                 })}
               />
               {errors.password && <p>{errors.password.message}</p>}

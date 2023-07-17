@@ -135,7 +135,8 @@ const postProveedor = (info) => {
       ) {
         throw new Error("Faltan datos");
       }
-
+      // `http://localhost:3001/profesional/${info.id}`
+      // `https://backprofinder-production.up.railway.app/profesional/${info.id}`
       await axios.put(
         `https://backprofinder-production.up.railway.app/profesional/${info.id}`,
         info,

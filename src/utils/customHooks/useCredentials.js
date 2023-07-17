@@ -23,7 +23,6 @@ export const useCredentials = () => {
     else if (name === 'Administrador') setUserRol('a')
     setUser(name)
     setErrorRol(false)
-    console.info(userRol, errorRol)
   }
 
   function handleUserSession (succesTitle, errorTitle) {
