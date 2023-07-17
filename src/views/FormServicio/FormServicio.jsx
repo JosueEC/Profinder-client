@@ -24,7 +24,10 @@ import {
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFiles2 } from "../../utils/Firebase/config";
-import { getAllCategories, postServicio } from "../../services/redux/actions/actions";
+import {
+  getAllCategories,
+  postServicio,
+} from "../../services/redux/actions/actions";
 
 function FormServicio(props) {
   const {
@@ -34,11 +37,10 @@ function FormServicio(props) {
   } = useForm({
     defaultValues: {
       title: "",
-      ocupations: [],
-      categories: [],
-      images: [], 
+      ocupation: "",
+      category: "",
+      images: [],
       content: "",
-
     },
   });
 
@@ -48,14 +50,14 @@ function FormServicio(props) {
     dispatch(getAllCategories());
   }, [dispatch]);
 
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const [selectedOccupations, setSelectedOccupations] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedOccupations, setSelectedOccupations] = useState("");
   const session = useSessionState((state) => state.session);
 
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
-    setSelectedCategory([value]);
+    setSelectedCategory(value);
   };
 
   const envioOcupaciones = (value) => {
@@ -63,7 +65,7 @@ function FormServicio(props) {
   };
 
   const onSubmit = async (data) => {
-    const imageUrls = await uploadFiles2(data.images); 
+    const imageUrls = await uploadFiles2(data.images);
 
     const newData = {
       title: data.title,
@@ -71,7 +73,7 @@ function FormServicio(props) {
       category: selectedCategory,
       image: imageUrls,
       content: data.content,
-      ProfesionalId: session.id
+      profesionalId: session.id,
     };
 
     console.log(newData);
