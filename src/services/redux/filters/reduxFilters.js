@@ -3,14 +3,13 @@ export const filterSuppliers = (suppliers, objFilters) => {
   const stateByOcupation = filterOcupation(stateByCategory, objFilters)
   const stateByRating = filterRating(stateByOcupation, objFilters)
   const stateByGenre = filterGenre(stateByRating, objFilters)
-
   return stateByGenre
 }
 
 export const filterOcupation = (suppliers, objFilters) => {
   const newState = new Set()
   const selectedOcupation = objFilters.ocupation
-  if (selectedOcupation === '' || selectedOcupation === 'Seleccion una categoria') return suppliers
+  if (selectedOcupation === '' || selectedOcupation === 'Selecciona una categoria') return suppliers
   suppliers.forEach((supplier) => {
     const card = supplier
     supplier.professions.forEach(({ ocupations }) => {

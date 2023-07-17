@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Heading } from '@chakra-ui/layout'
 import styles from './Categories.module.css'
 import SupplierCardsContainer from '../../components/SupplierCardsContainer/SupplierCardsContainer'
@@ -5,14 +6,14 @@ import FiltersPanel from '../../components/FiltersPanel/FiltersPanel'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllSuppliers } from '../../services/redux/actions/actions'
-import { Skeleton } from '@chakra-ui/skeleton'
-import Paginator from './../../components/Paginator/Paginator';
+import Paginator from './../../components/Paginator/Paginator'
 
 const Categories = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
   const suppliers = useSelector((state) => state.suppliers)
   const dispatch = useDispatch()
+  console.info(suppliers)
 
   useEffect(() => {
     dispatch(getAllSuppliers())
