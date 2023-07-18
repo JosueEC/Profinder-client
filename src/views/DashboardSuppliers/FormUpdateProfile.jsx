@@ -20,6 +20,9 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 
+
+
+//cambio de prueba
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
 import { updateProfesionals } from "../../services/redux/actions/actions";
