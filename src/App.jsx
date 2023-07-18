@@ -12,6 +12,7 @@ import DetailSupplier from "./views/DetailsSupplier/DetailsSupplier";
 import UserLogin from "./views/UserLogin/UserLogin";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
+import DashboardAdmin from "./views/DashboardAdmin/DashboardAdmin";
 import DashboardSuppliers from "./views/DashboardSuppliers/Sidebar";
 // import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
 import DashboardClient from "./views/DashboardClient/DashboardClient/DashboardClient.jsx";
@@ -29,7 +30,7 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
   const session = useSessionState((state) => state.session);
-   const location = useLocation();
+  const location = useLocation();
   // const hideNavbar = location.pathname === "/dashboardSuppliers" || location.pathname === "/dashboardClient";
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function App() {
       setSessionState(user);
     }
   }, []);
-   const isHomePage = location.pathname === "/";
+  const isHomePage = location.pathname === "/";
   return (
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
@@ -78,6 +79,7 @@ function App() {
         <Route path="/detail/:supplierID" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
+        <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
       </Routes>
       {!isHomePage && <Footer />}
     </div>

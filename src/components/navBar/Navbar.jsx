@@ -89,6 +89,9 @@ const Navbar = () => {
               <MenuItem onClick={() => navigate("/registerProvider")}>
                 Registrarse profesional
               </MenuItem>
+              <MenuItem onClick={() => navigate("/dashboardAdmin")}>
+                Dashboard Admin
+              </MenuItem>
             </MenuList>
           </Menu>
         </Box>
@@ -133,6 +136,12 @@ const Navbar = () => {
                 onClick={() => navigate("/registerCliente")}
               >
                 Soy cliente
+              </MenuItem>
+              <MenuItem
+                color="gray.800"
+                onClick={() => navigate("/dashboardAdmin")}
+              >
+                Dashboard Admin
               </MenuItem>
             </MenuList>
           </Menu>

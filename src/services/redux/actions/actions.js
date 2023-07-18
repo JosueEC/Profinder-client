@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { API, LOCAL } from "../../../utils/API/constants";
+import { API } from "../../../utils/API/constants";
 import axios from "axios";
 import {
   GET_ALL_SUPPLIERS,
@@ -14,9 +14,12 @@ import {
 
 //! Action para obtener a todos los Proveedores/Profesionales
 const getAllSuppliers = () => {
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`
+
   return function (dispatch) {
     axios
-      .get(`https://backprofinder-production.up.railway.app/profesional`)
+      .get(URL)
       .then((response) => {
         dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
       })
@@ -26,7 +29,9 @@ const getAllSuppliers = () => {
 
 //! Todas las categorias con su ID
 const getAllCategories = () => {
-  const URL = LOCAL.category;
+  // const URL = `${API.LOCALHOST}/category`
+  const URL = `${API.DBONLINE}/category`
+
   return function (dispatch) {
     fetch(URL)
       .then((response) => response.json())
@@ -43,12 +48,14 @@ const getAllCategories = () => {
 
 //! action para buscar por nombre de profesion //*****Revisar si aun se esta usando si no borrar */
 const searchProfessionals = (name) => {
-  const URL = API.DOMAIN;
+  // const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
+  const URL = `${API.DBONLINE}/ocupationsp?name=${name}`
+
   return function (dispatch) {
     if (name) {
       // Verificar si name no es undefined
       axios
-        .get(`${URL}/ocupations?name=${name}`)
+        .get(URL)
         .then((response) => {
           console.info(response.data);
           dispatch({
@@ -84,6 +91,9 @@ const applyFilters = (objFilters) => {
 };
 
 const postServicio = (info) => {
+  // const URL = `${API.LOCALHOST}/postprofesional`
+  const URL = `${API.DBONLINE}/postprofesional`
+
   return async function () {
     try {
       // Verificación
@@ -98,9 +108,7 @@ const postServicio = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.post(
-        "https://backprofinder-production.up.railway.app/postprofesional",
-        info,
+      await axios.post(URL, info,
         { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Publicacion Creada");
@@ -117,6 +125,9 @@ const postProveedor = (info) => {
     const user = JSON.parse(userSession);
     info.id = user.id;
   }
+
+  // const URL = `${API.LOCALHOST}/profesional/${info.id}`
+  const URL = `${API.DBONLINE}/profesional/${info.id}`
 
   return async function () {
     try {
@@ -137,9 +148,7 @@ const postProveedor = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(
-        `https://backprofinder-production.up.railway.app/profesional/${info.id}`,
-        info,
+      await axios.put(URL, info,
         { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
@@ -158,6 +167,9 @@ const postCliente = (info) => {
     info.id = user.id;
   }
 
+  // const URL = `${API.LOCALHOST}/client/${info.id}`
+  const URL = `${API.DBONLINE}/client/${info.id}`
+
   return async function () {
     try {
       // Verificación
@@ -170,9 +182,7 @@ const postCliente = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(
-        `https://backprofinder-production.up.railway.app/client/${info.id}`,
-        info,
+      await axios.put(URL, info,
         { headers: { "Access-Control-Allow-Origin": "*" } }
       );
       alert("Perfil creado");
@@ -183,10 +193,10 @@ const postCliente = (info) => {
 };
 
 const loginSessionGoogle = () => {
-  return async function () {
-    const URL = "http://localhost:3001/auth/google";
-    // const URL = LOCAL.register
+  // const URL = `${API.LOCALHOST}/auth/google`
+  const URL = `${API.DBONLINE}/auth/google`
 
+  return async function () {
     await fetch(URL)
       .then((response) => response.json())
       .then((results) => {
@@ -210,7 +220,7 @@ const getSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
-    const URL = `${API.DOMAIN}/login`;
+    const URL = `${API.DBONLINE}/login`;
 
     try {
       const response = await fetch(URL, options);
@@ -235,10 +245,10 @@ const postSessionUser = (dataSession) => {
     body: JSON.stringify(dataSession),
   };
 
-  return async function () {
-    // const URL = `${API.LOCALHOST}/register`
-    const URL = `${API.DOMAIN}/register`;
+  // const URL = `${API.LOCALHOST}/register`
+  const URL = `${API.DBONLINE}/register`;
 
+  return async function () {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
@@ -254,7 +264,9 @@ const postSessionUser = (dataSession) => {
 
 //! Traigo profesionales  para renderizar sus post
 const getProfesionals = () => {
-  const URL = "https://backprofinder-production.up.railway.app/profesional";
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`
+
   return async function (dispatch) {
     try {
       let response = await axios.get(`${URL}`);
@@ -274,7 +286,8 @@ const getProfesionals = () => {
 //! Actualizar Profesionales
 const updateProfesionals = (id, data) => {
   //console.log(id);  // el id llega bien***** falta la data
-  const URL = `https://backprofinder-production.up.railway.app/profesional/${id}`;
+  // const URL = `${API.LOCALHOST}/profesional/${id}`
+  const URL = `${API.DBONLINE}/profesional/${id}`
 
   return async function (dispatch) {
     try {
@@ -295,9 +308,12 @@ const updateProfesionals = (id, data) => {
 
 // Action para obtener todos los clientes
 const getAllClients = () => {
+  // const URL = `${API.LOCALHOST}/client`
+  const URL = `${API.DBONLINE}/client`
+
   return function (dispatch) {
     axios
-      .get("https://backprofinder-production.up.railway.app/client")
+      .get(URL)
       .then((response) => {
         console.log(response.data);
         dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
@@ -316,12 +332,13 @@ const updateClient = (clientId, newData) => {
       newData.id = userSession.id;
       
     }
+
+  // const URL = `${API.LOCALHOST}/client/${newData.id}`
+  const URL = `${API.DBONLINE}/client/${newData.id}`
+
   return function (dispatch) {
     axios
-      .put(
-        `https://backprofinder-production.up.railway.app/client/${newData.id}`,
-        newData
-      )
+      .put(URL, newData)
       .then((response) => {
         dispatch({ type: "UPDATE_CLIENT", payload: response.data });
       })
@@ -330,12 +347,14 @@ const updateClient = (clientId, newData) => {
       });
   };
 };
+
 export const getPostProfesional = () => {
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`
+
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `https://backprofinder-production.up.railway.app/profesional`
-      );
+      const response = await axios.get(URL);
       dispatch({ type: POST_PROFESIONAL, payload: response.data });
     } catch (error) {
       console.error(error.message);
