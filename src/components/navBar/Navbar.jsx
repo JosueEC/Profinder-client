@@ -1,57 +1,153 @@
-//import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Flex,
+  Image,
+  useColorModeValue,
+  HStack,
+  Button,
+} from "@chakra-ui/react";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import DarkModeToggle from "../../utils/Darkmode/DarkmodeToggle";
+import Logo from "../../assets/categoriesIcons/Logo.png";
+//import SearchBar from '../SearchBar/SearchBar'
+import NavLink from "../../singleComponents/NavLink";
 
 const Navbar = () => {
-  // Estado para controlar la visibilidad del desplegable
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  // const location = useLocation()
+  const navbarBgColor = useColorModeValue("gray.200", "gray.900");
 
-  // Función para alternar la visibilidad del desplegable
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  // variable para controlar la renderizacion de la searchbar"
+  // const isCategoriesRoute = location.pathname === '/categories'
 
-  // Función para manejar el clic en una opción
-  const handleOptionClick = (option) => {
-    console.log("Selected option:", option);
-    setIsOpen(false); // Cerrar el desplegable al seleccionar una opción
-  };
   return (
-    <div>
-      <nav>
-        <div>
-          <Link to="/home">logo</Link>
-          <Link to="/comofunciona">Cómo funciona</Link>
-          {/* <Link to="/login">Crear usuario Profesional</Link> */}
-        </div>
-        <div>
-          <ul>
-            <li>
-              <a href="#" onClick={toggleDropdown}>
-                Registrate ▼
-              </a>  
-              {isOpen && (
-                <ul>
-                  <li>
-                    <a href="#" onClick={() => handleOptionClick("cliente")}>
-                      Soy Cliente
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={() => handleOptionClick("profesional")}
-                    >
-                      Soy Profesional
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <nav>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        padding={4}
+        bg={navbarBgColor}
+        as="div"
+        textTransform="uppercase"
+        fontWeight="bold"
+        fontSize="2xl"
+        fontFamily="body"
+        color="gray.700"
+      >
+        <HStack spacing={8} alignItems="center">
+          <Box onClick={() => navigate("/")} _hover={{ cursor: "pointer" }}>
+            <Image
+              src={Logo}
+              width={{ base: "50%", md: "100%", lg: "100%" }}
+              height="70px"
+            />
+          </Box>
+          <HStack
+            as="nav"
+            spacing={10}
+            display={{ base: "none", md: "flex" }}
+            fontSize="1.2rem"
+            fontWeight="bold"
+          >
+            <NavLink textLink="¿Como funciona?" routeLink="/comofunciona" />
+            <NavLink textLink="Categorias" routeLink="/categories" />
+            <NavLink textLink="Contacto" routeLink="/" />
+            <NavLink textLink="Acerca de" routeLink="/" />
+          </HStack>
+        </HStack>
+
+        <Box display={{ base: "block", md: "none" }}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              size="lg"
+              icon={<HamburgerIcon />}
+              variant="ghost"
+              textDecoration="none"
+            />
+            <MenuList>
+              <MenuItem onClick={() => navigate("/comofunciona")}>
+                ¿Como funciona?
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/categories")}>
+                Categorias
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/")}>Contacto</MenuItem>
+              <MenuItem onClick={() => navigate("/")}>Acerca de</MenuItem>
+              <MenuItem onClick={() => navigate("/userLogin")}>
+                Iniciar sesion
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/registerCliente")}>
+                Registrarse cliente
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/registerProvider")}>
+                Registrarse profesional
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+        <DarkModeToggle />
+        {/* pregunto si es true, si es asi se muestra la search, de lo contrario se oculta */}
+        {/* {isCategoriesRoute && <SearchBar />} */}
+
+        <HStack
+          display={{ base: "none", md: "block", lg: "row" }}
+          justifyContent="space-between"
+        >
+          <Button
+            variant="solid"
+            colorScheme="gray"
+            size="md"
+            mr={6}
+            onClick={() => navigate("/userLogin")}
+          >
+            Iniciar sesion
+          </Button>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              bg={useColorModeValue("blue.500", "blue.700")}
+              color="gray.100"
+              _hover={{
+                bg: "blue.600",
+              }}
+            >
+              Registrarse
+            </MenuButton>
+            <MenuList>
+              <MenuItem
+                color="gray.800"
+                onClick={() => navigate("/registerProvider")}
+              >
+                Soy profesional
+              </MenuItem>
+              <MenuItem
+                color="gray.800"
+                onClick={() => navigate("/registerCliente")}
+              >
+                Soy cliente
+              </MenuItem>
+            </MenuList>
+          </Menu>
+          {/* <Button
+            variant='solid'
+            colorScheme='blue'
+            size='md'
+            onClick={() => navigate('/userRegister')}
+          >
+            Registrarse
+          </Button> */}
+        </HStack>
+      </Flex>
+    </nav>
   );
 };
+
 export default Navbar;

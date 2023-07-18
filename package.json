@@ -11,18 +11,32 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.7.1",
+    "@chakra-ui/theme-tools": "^2.0.18",
+    "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "axios": "^1.4.0",
+    "firebase": "^10.0.0",
     "framer-motion": "^10.12.18",
+    "jwt-decode": "^3.1.2",
+    "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
+    "react-icons": "^4.10.1",
+    "react-leaflet": "^4.2.1",
+    "react-paginate": "^8.2.0",
+    "react-paginator": "^0.0.5",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
+    "react-scroll": "^1.8.9",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "uuid": "^9.0.0",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -32,6 +46,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "vite": "^4.4.0"
+    "standard": "^17.1.0",
+    "vite": "^4.4.1"
   }
 }
