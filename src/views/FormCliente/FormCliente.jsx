@@ -8,25 +8,21 @@ import {
   FormControl,
   FormLabel,
   Input,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Textarea,
   Stack,
   Button,
   useColorModeValue,
-  Radio,
-  RadioGroup,
 } from "@chakra-ui/react";
-import { postSessionUser, postCliente } from "../../services/redux/actions/actions";
+import {
+  postSessionUser,
+  postCliente,
+} from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
 import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
+import { uploadFile } from "../../utils/Firebase/config";
 
 function FormCliente(props) {
-  const dispatch = useDispatch()
-  const { handleUserSession } = useCredentials()
+  const dispatch = useDispatch();
+  const { handleUserSession } = useCredentials();
   const {
     register,
     formState: { errors },
@@ -36,30 +32,32 @@ function FormCliente(props) {
       name: "",
       email: "",
       password: "",
+      image: "",
       phone: "",
     },
   });
 
   const onSubmit = async (data) => {
+    const imageData = await uploadFile(data.image);
     const newData = {
       name: data.name,
       email: data.email,
       password: data.password,
+      image: imageData,
       phone: data.phone,
-
     };
 
     const dataSession = {
       name: data.name,
       email: data.email,
       password: data.password,
-      usuario: 'c'
-    }
+      usuario: "c",
+    };
 
     console.log(newData);
-    await dispatch(postSessionUser(dataSession))
+    await dispatch(postSessionUser(dataSession));
     dispatch(postCliente(newData));
-    handleUserSession('Cuenta creada', 'Algo salio mal')
+    handleUserSession("Cuenta creada", "Algo salio mal");
   };
 
   return (
@@ -114,7 +112,22 @@ function FormCliente(props) {
                 })}
               />
             </FormControl>
-            <FormControl mb='30px'>
+            <FormControl>
+              <FormLabel>Foto de perfil</FormLabel>
+              <Input
+                type="file"
+                {...register("image", {
+                  required: "El campo imagen es requerido",
+                  validate: {
+                    isImage: (value) =>
+                      ["image/jpeg", "image/png"].includes(value[0]?.type) ||
+                      "Solo se permiten archivos de imagen JPEG o PNG",
+                  },
+                })}
+              />
+              {errors.image && <p>{errors.image.message}</p>}
+            </FormControl>
+            <FormControl mb="30px">
               <FormLabel>Telefono</FormLabel>
               <Input
                 type="number"
