@@ -12,7 +12,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
-//import { updateFeedback } from '../../../services/redux/actions/actions';
+import { updateFeedback } from '../../../services/redux/actions/actions';
 
 function FeedbackForm() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function FeedbackForm() {
 
   // Obtener el ID del cliente de la sesión actual desde el almacenamiento local
   const userSession = JSON.parse(localStorage.getItem("userSession"));
-  const clientId = userSession ? userSession.clientId : null;
+  const clientId = userSession && userSession.id ? userSession.id : null;
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -363,6 +363,43 @@ export const getPostProfesional = () => {
   };
 };
 
+
+// Acción para enviar el feedback al backend
+ const updateFeedback = (feedbackData) => {
+  return async (dispatch) => {
+    try {
+      // Llamar a la API o endpoint correspondiente para enviar el feedback
+      const response = await axios.post('/api/feedback', feedbackData);
+      
+      // Aquí puedes despachar otra acción si lo necesitas, por ejemplo, para actualizar el estado de la aplicación
+      
+      // Ejemplo de despacho de una acción de éxito
+      dispatch(updateFeedbackSuccess(response.data));
+    } catch (error) {
+      // Manejar errores si es necesario
+      
+      // Ejemplo de despacho de una acción de error
+      dispatch(updateFeedbackError(error.message));
+    }
+  };
+};
+
+// Acción para éxito del envío del feedback
+ const updateFeedbackSuccess = (data) => {
+  return {
+    type: 'UPDATE_FEEDBACK_SUCCESS',
+    payload: data,
+  };
+};
+
+// Acción para error en el envío del feedback
+ const updateFeedbackError = (error) => {
+  return {
+    type: 'UPDATE_FEEDBACK_ERROR',
+    payload: error,
+  };
+};
+
 export {
   getAllSuppliers,
   getAllCategories,
@@ -379,4 +416,7 @@ export {
   getProfesionals,
   updateProfesionals,
   updateClient,
+  updateFeedback,
+  updateFeedbackSuccess,
+  updateFeedbackError
 };

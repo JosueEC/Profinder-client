@@ -19,6 +19,8 @@ const initialState = {
   filteredSuppliers: [],
   suppliersByname:[],
   profesionales:[],
+  feedback: null,
+  error: null,
   filters: {
     category: 'Categorias',
     ocupation: 'Selecciona una categoria',
@@ -80,7 +82,19 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           profesionales: action.payload,
-        } 
+        }
+      case 'UPDATE_FEEDBACK_SUCCESS':
+        return {
+          ...state,
+          feedback: action.payload,
+          error: null,
+        };
+      case 'UPDATE_FEEDBACK_ERROR':
+        return {
+          ...state,
+          feedback: null,
+          error: action.payload,
+        };   
     //! caso por default
     default:
       return { ...state }
