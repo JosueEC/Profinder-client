@@ -77,7 +77,7 @@ function FeedbackForm() {
 
     dispatch(updateFeedback(newData))
       .then(() => {
-        setSuccessMessage('Comentario enviado exitosamente.');
+        setSuccessMessage('Formulario enviado exitosamente.');
         setShowSuccessAlert(true);
         // Limpia el formulario
         setContent('');
