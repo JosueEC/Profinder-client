@@ -1,117 +1,117 @@
 import {
-    Box,
-    Button,
-    Divider,
-    Heading,
-    List,
-    ListIcon,
-    ListItem,
-    Stack,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
-  import { FaCheckCircle } from 'react-icons/fa';
-  
-  const options = [
-    { id: 1, desc: '1 lorem ipsum' },
-    { id: 2, desc: 'Lorem, ipsum dolor.' },
-    { id: 3, desc: 'Monthly Updates' },
-  ];
-  
-  const PackageTier = ({ title, options, typePlan, checked = false }) => {
-    const colorTextLight = checked ? 'white' : 'purple.600';
-    const bgColorLight = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
-  
-    const colorTextDark = checked ? 'white' : 'purple.500';
-    const bgColorDark = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
-  
-    return (
-      <Stack
-        p={3}
-        py={3}
-        justifyContent={{
-          base: 'flex-start',
-          md: 'space-around',
-        }}
-        direction={{
-          base: 'column',
-          md: 'row',
-        }}
-        alignItems={{ md: 'center' }}
-      >
-        <Heading size={'md'}>{title}</Heading>
-        <List spacing={3} textAlign="start">
-          {options.map((desc) => (
-            <ListItem key={desc.id}>
-              <ListIcon as={FaCheckCircle} color="green.500" />
-              <Text color={useColorModeValue('white', 'gray.100')}>{desc.desc}</Text> {/* Cambio a color blanco o gris claro */}
-            </ListItem>
-          ))}
-        </List>
-        <Heading size={'xl'}>{typePlan}</Heading>
-        <Stack>
-          <Button
-            size="md"
-            color={useColorModeValue(colorTextLight, colorTextDark)}
-            bgColor={useColorModeValue(bgColorLight, bgColorDark)}
-          >
-            Get Started
-          </Button>
-        </Stack>
+  Box,
+  Button,
+  Divider,
+  Heading,
+  List,
+  ListIcon,
+  ListItem,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { FaCheckCircle } from 'react-icons/fa';
+
+const options = [
+  { id: 1, desc: '1 lorem ipsum' },
+  { id: 2, desc: 'Lorem, ipsum dolor.' },
+  { id: 3, desc: 'Monthly Updates' },
+];
+
+const PackageTier = ({ title, options, typePlan, checked = false }) => {
+  const colorTextLight = checked ? 'white' : 'purple.600';
+  const bgColorLight = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
+
+  const colorTextDark = checked ? 'white' : 'purple.500';
+  const bgColorDark = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
+
+  return (
+    <Stack
+      p={3}
+      py={3}
+      justifyContent={{
+        base: 'flex-start',
+        md: 'space-around',
+      }}
+      direction={{
+        base: 'column',
+        md: 'row',
+      }}
+      alignItems={{ md: 'center' }}
+    >
+      <Heading size={'md'}>{title}</Heading>
+      <List spacing={3} textAlign="start">
+        {options.map((desc) => (
+          <ListItem key={desc.id}>
+            <ListIcon as={FaCheckCircle} color="green.500" />
+            <Text color={useColorModeValue('white', 'gray.100')}>{desc.desc}</Text> {/* Cambio a color blanco o gris claro */}
+          </ListItem>
+        ))}
+      </List>
+      <Heading size={'xl'}>{typePlan}</Heading>
+      <Stack>
+        <Button
+          size="md"
+          color={useColorModeValue(colorTextLight, colorTextDark)}
+          bgColor={useColorModeValue(bgColorLight, bgColorDark)}
+        >
+          Get Started
+        </Button>
       </Stack>
-    );
-  };
-  
-  const PricingHome = () => {
-    return (
-      <Box py={6} px={5} min={'100vh'}>
-        <Stack spacing={4} width={'100%'} direction={'column'}>
+    </Stack>
+  );
+};
+
+const PricingHome = () => {
+  return (
+    <Box py={6} px={5} min={'100vh'}>
+      <Stack spacing={4} width={'100%'} direction={'column'}>
+        <Stack
+          p={5}
+          alignItems={'center'}
+          justifyContent={{
+            base: 'flex-start',
+            md: 'space-around',
+          }}
+          direction={{
+            base: 'column',
+            md: 'row',
+          }}
+        >
           <Stack
-            p={5}
-            alignItems={'center'}
-            justifyContent={{
-              base: 'flex-start',
-              md: 'space-around',
+            width={{
+              base: '100%',
+              md: '40%',
             }}
-            direction={{
-              base: 'column',
-              md: 'row',
+            textAlign={'center'}
+          >
+            <Heading size={'lg'}>
+              The Right Plan for <Text color="purple.400">Your Business</Text>
+            </Heading>
+          </Stack>
+          <Stack
+            width={{
+              base: '100%',
+              md: '60%',
             }}
           >
-            <Stack
-              width={{
-                base: '100%',
-                md: '40%',
-              }}
-              textAlign={'center'}
-            >
-              <Heading size={'lg'}>
-                The Right Plan for <Text color="purple.400">Your Business</Text>
-              </Heading>
-            </Stack>
-            <Stack
-              width={{
-                base: '100%',
-                md: '60%',
-              }}
-            >
-              <Text textAlign={'center'} color={useColorModeValue('white', 'gray.100')}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                quod in iure vero. Facilis magnam, sed officiis commodi labore
-                odit.
-              </Text>
-            </Stack>
+            <Text textAlign={'center'} color={useColorModeValue('white', 'gray.100')}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              quod in iure vero. Facilis magnam, sed officiis commodi labore
+              odit.
+            </Text>
           </Stack>
-          <Divider />
-          <PackageTier
-            title={'Lorem Plus'}
-            checked={true}
-            typePlan="$32.00"
-            options={options}
-          />
         </Stack>
-      </Box>
-    );
-  };
-  
-  export default PricingHome;
+        <Divider />
+        <PackageTier
+          title={'Lorem Plus'}
+          checked={true}
+          typePlan="$32.00"
+          options={options}
+        />
+      </Stack>
+    </Box>
+  );
+};
+
+export default PricingHome;
