@@ -177,7 +177,7 @@ const postCliente = (info) => {
         info.name === "" ||
         info.email === "" ||
         info.phone === "" ||
-        info.image === "" ||
+        // info.image === "" ||
         info.password === 0
       ) {
         throw new Error("Faltan datos");
