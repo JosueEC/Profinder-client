@@ -50,7 +50,7 @@ function FeedbackForm() {
                   onChange={(e) => setRating(e.target.value)}
                   placeholder="Selecciona una valoración"
                 >
-                  
+ 
                   <option value="1">Malo</option>
                   <option value="2">Regular</option>
                   <option value="3">Bueno</option>
