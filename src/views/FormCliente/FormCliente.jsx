@@ -18,7 +18,7 @@ import {
 } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
 import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
-import { uploadFile } from "../../utils/Firebase/config";
+// import { uploadFile } from "../../utils/Firebase/config";
 
 function FormCliente(props) {
   const dispatch = useDispatch();
@@ -32,18 +32,18 @@ function FormCliente(props) {
       name: "",
       email: "",
       password: "",
-      image: "",
+      // image: "",
       phone: "",
     },
   });
 
   const onSubmit = async (data) => {
-    const imageData = await uploadFile(data.image);
+    // const imageData = await uploadFile(data.image);
     const newData = {
       name: data.name,
       email: data.email,
       password: data.password,
-      image: imageData,
+      // image: imageData,
       phone: data.phone,
     };
 
@@ -112,7 +112,7 @@ function FormCliente(props) {
                 })}
               />
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
                 type="file"
@@ -126,7 +126,7 @@ function FormCliente(props) {
                 })}
               />
               {errors.image && <p>{errors.image.message}</p>}
-            </FormControl>
+            </FormControl> */}
             <FormControl mb="30px">
               <FormLabel>Telefono</FormLabel>
               <Input

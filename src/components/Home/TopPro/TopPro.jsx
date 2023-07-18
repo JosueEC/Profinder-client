@@ -30,7 +30,7 @@ const Card = ({ supplier, cardBgColor, textColor }) => {
             Categoría: {supplier.professions[0].category}
           </Text>
           <Text fontWeight={600} color={textColor} fontSize="sm" mb={2}>
-            Valoración:
+            Valoraci:
             <Flex align="center" ml={2}>
               {ratingStars}
             </Flex>

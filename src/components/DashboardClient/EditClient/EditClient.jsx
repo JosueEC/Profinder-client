@@ -13,8 +13,7 @@ import {
   Box,
   Center,
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
-import { Link as RouterLink } from 'react-router-dom';
+
 import { getAllClients, updateClient } from '../../../services/redux/actions/actions';
 
 function EditClient() {
