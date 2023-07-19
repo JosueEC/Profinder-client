@@ -7,7 +7,7 @@ import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import { Avatar } from '@chakra-ui/avatar'
 import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
 import { useEffect } from 'react'
-import FiltersPanel from '../../../../components/FiltersPanel/FiltersPanel'
+import FiltersDashboard from '../FiltersDashboard/FiltersDashboard'
 
 export default function UsersTable () {
   const profesional = useProfesionalDash(state => state.profesional)
@@ -41,9 +41,8 @@ export default function UsersTable () {
               }}
               shadow='lg'
             >
-              <FiltersPanel />
+              <FiltersDashboard />
               <SimpleGrid // Encabezado tabla
-          // border='solid 2px red'
                 spacingY={3}
                 columns={{
                   base: 1,
