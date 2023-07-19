@@ -40,8 +40,9 @@ export async function uploadFiles3(files) {
   const urls = [];
   for (const file of files) {
     const fileName = v4() + ".jpg";
-    const storageRef = ref(storage, "cliente/" + fileName); // Update the storage reference to the "posteos" folder
-    await uploadBytes(storageRef, file);
+    const storageRef = ref(storage, "cliente/" + fileName);
+    // Specify the contentType as "image/jpeg"
+    await uploadBytes(storageRef, file, { contentType: "image/jpeg" });
     const url = await getDownloadURL(storageRef);
     urls.push(url);
   }

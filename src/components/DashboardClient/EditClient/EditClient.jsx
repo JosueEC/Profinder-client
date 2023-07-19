@@ -20,6 +20,7 @@ import {
   updateClient,
 } from "../../../services/redux/actions/actions";
 import { uploadFile, uploadFiles3 } from "../../../utils/Firebase/config";
+import { v4 as uuidv4 } from "uuid";
 
 function EditClient() {
   const dispatch = useDispatch();
@@ -126,13 +127,13 @@ function EditClient() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       setIsLoading(true);
-  
+
       // Upload the image to Firebase storage and get the download URL
       const imageUrls = await uploadFiles3([imageUrl]);
-  
+
       // Create the newData object with the updated image property
       const newData = {
         name: name,
@@ -145,10 +146,10 @@ function EditClient() {
         CountryId: parseInt(countryId),
         LocationId: parseInt(locationId),
       };
-  
+
       // Dispatch the updateClient action with the newData object
       dispatch(updateClient(userSession.clientId, newData));
-  
+
       // Reset the isLoading state and notify the user that the update was successful
       setIsLoading(false);
       alert("Client information updated successfully!");
@@ -156,10 +157,11 @@ function EditClient() {
       // Handle errors during the image upload or updateClient dispatch
       setIsLoading(false);
       console.error("Error updating client information:", error);
-      alert("An error occurred while updating client information. Please try again later.");
+      alert(
+        "An error occurred while updating client information. Please try again later."
+      );
     }
   };
-  
 
   const clients = useSelector((state) => state.clients);
   const client = clients.find((client) => client.id === userSession.clientId);
