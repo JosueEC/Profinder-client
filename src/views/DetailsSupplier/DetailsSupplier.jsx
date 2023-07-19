@@ -32,7 +32,7 @@ import SupplierPost from "../../components/SupplierPost/SupplierPost";
 const ArticleList = () => {
   const { supplierID } = useParams();
   const { data, isLoading } = useFetch(
-    `${API.DOMAIN}/profesional/${supplierID}`
+    `${API.DBONLINE}/profesional/${supplierID}`
   );
   // const { isOpen, onOpen, onClose } = useDisclosure()
 
