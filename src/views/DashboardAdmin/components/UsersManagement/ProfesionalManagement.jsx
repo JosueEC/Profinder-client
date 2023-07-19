@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
-import Statistic from '../../singleComponents/Statistic'
-import UsersTable from '../UsersTable/UsersTable'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import UsersTable from '../UsersTable/UsersTable'
+import Statistic from '../../singleComponents/Statistic'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
