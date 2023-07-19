@@ -79,7 +79,7 @@ function App() {
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
-        <Route path="/pasarelaPagos" element={<PasarelaPagos />} />
+        <Route path="/pasarela" element={<PasarelaPagos />} />
       </Routes>
       {!isHomePage && <Footer />}
     </div>
