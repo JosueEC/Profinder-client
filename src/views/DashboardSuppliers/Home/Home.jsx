@@ -1,10 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Box, useColorModeValue, Button, Stack } from "@chakra-ui/react";
+import { ChatIcon, ViewIcon, EditIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
-import FormUpdate from "./FormUpdateProfile";
+import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
 import { useState, useEffect } from "react";
-import FormServicio from "../FormServicio/FormServicio";
-import PostsSuppliers from "./PostsSuppliers";
+import FormServicio from "../../FormServicio/FormServicio";
+import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 
 const DashboardSuppliers = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const DashboardSuppliers = () => {
     }
   }, []);
 
+  //! variable paar que todas las opciones del panel tengan el mismo estilo
   const linkStyle = {
     display: "block",
     padding: "10px",
@@ -62,6 +64,7 @@ const DashboardSuppliers = () => {
               onClick={handleShowFormServicio}
               bg={showFormServicio ? "blue.500" : ""}
               color={showFormServicio ? "white" : ""}
+              leftIcon={<ChatIcon />}
             >
               Publicar
             </Button>
@@ -78,19 +81,17 @@ const DashboardSuppliers = () => {
               onClick={handleShowPosts}
               bg={showPosts ? "blue.500" : ""}
               color={showPosts ? "white" : ""}
+              leftIcon={<ViewIcon />}
             >
               Ver mis Publicaciones
             </Button>
           </ScrollLink>
-          <RouterLink
-            to="/formUpdate"
-            style={linkStyle}
-            onClick={handleShowForm}
-          >
+          <RouterLink to="" style={linkStyle} onClick={handleShowForm}>
             <Button
               variant="outline"
               bg={showForm ? "blue.500" : ""}
               color={showForm ? "white" : ""}
+              leftIcon={<EditIcon />}
             >
               Editar mi Perfil
             </Button>
@@ -111,6 +112,7 @@ const DashboardSuppliers = () => {
         {showForm ? <FormUpdate /> : null}
         {showFormServicio ? <FormServicio /> : null}
         {showPosts ? <PostsSuppliers /> : null}
+        {/* aca va toda la info en la primer ventana que se abre */}
       </Box>
       <Box></Box>
     </Box>

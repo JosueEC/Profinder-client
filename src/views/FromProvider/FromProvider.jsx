@@ -40,7 +40,7 @@ function FormProvider() {
     defaultValues: {
       name: "",
       email: "",
-      image: "",
+      image: [],
       genre: "",
       years_exp: "",
       password: "",

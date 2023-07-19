@@ -55,7 +55,7 @@ const CategoriesSection = () => {
   const iconBgColor = useColorModeValue('gray.900', 'gray.700');
 
   return (
-    <Box p={4} bg="gray.900" color="gray.300" h="100vh" width="100%">
+    <Box p={4}  h="100vh" width="100%">
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold">
