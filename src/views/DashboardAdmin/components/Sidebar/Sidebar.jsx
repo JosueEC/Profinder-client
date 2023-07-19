@@ -6,15 +6,15 @@ import {
   DrawerContent,
   useDisclosure
 } from '@chakra-ui/react'
-import { useLocation } from 'react-router'
+// import { useLocation } from 'react-router'
 import SidebarContent from './SidebarContent'
 import MobileNav from './MobileNav'
-import ProfesionalManage from '../DashContent/ProfesionalManage'
-import ClientManage from '../DashContent/ClientManage'
+// import ProfesionalManage from '../DashContent/ProfesionalManage'
+// import ClientManage from '../DashContent/ClientManage'
 
 export default function Sidebar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { pathname } = useLocation()
+  // const { pathname } = useLocation()
 
   return (
     <Box // contenedor principal
@@ -44,13 +44,13 @@ export default function Sidebar () {
         ml={{ base: 0, md: 60 }}
         p='4'
       >
-        {
+        {/* {
         (pathname === '/dashboardAdmin/manageProfesional')
           ? <ProfesionalManage />
           : (pathname === '/dashboardAdmin/manageClient')
               ? <ClientManage />
               : null
-      }
+      } */}
       </Box>
     </Box>
   )
