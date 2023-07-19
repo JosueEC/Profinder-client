@@ -19,8 +19,7 @@ import {
   getAllClients,
   updateClient,
 } from "../../../services/redux/actions/actions";
-import { uploadFile, uploadFiles3 } from "../../../utils/Firebase/config";
-import { v4 as uuidv4 } from "uuid";
+import { uploadFiles3 } from "../../../utils/Firebase/config";
 
 function EditClient() {
   const dispatch = useDispatch();
@@ -116,14 +115,7 @@ function EditClient() {
   };
 
   const handleImageUrlChange = (e) => {
-    const file = e.target.files[0]; // Get the selected file
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageUrl(reader.result); // Set the base64 data URL as the imageUrl
-      };
-      reader.readAsDataURL(file); // Read the file as a data URL
-    }
+    setImageUrl(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -148,6 +140,7 @@ function EditClient() {
         LocationId: parseInt(locationId),
       };
 
+      console.log(newData)
       // Dispatch the updateClient action with the newData object
       dispatch(updateClient(userSession.clientId, newData));
 
@@ -161,14 +154,15 @@ function EditClient() {
         CountryId: newData.CountryId,
         LocationId: newData.LocationId,
         description: newData.description,
-        image: newData.image[0], // Suponiendo que imageUrls es un array con la URL de la imagen
+        image: newData.image, 
       };
 
+      console.log(updatedSession)
       localStorage.setItem("userSession", JSON.stringify(updatedSession));
 
-      // Reset the isLoading state and notify the user that the update was successful
+    
       setIsLoading(false);
-      alert("Client information updated successfully!");
+      // alert("Client information updated successfully!");
     } catch (error) {
       // Handle errors during the image upload or updateClient dispatch
       setIsLoading(false);
@@ -209,23 +203,15 @@ function EditClient() {
             textAlign="center"
             onSubmit={handleSubmit}
           >
-            {/* <FormControl>
-              <Box>
-                <FormLabel>Imagen</FormLabel>
-                <Avatar size="xl" name="Nombre y apellido" src={imageUrl} />
-                <Input
-                  type="text"
-                  placeholder="URL de la imagen"
-                  value={imageUrl}
-                  onChange={handleImageUrlChange}
-                />
-              </Box>
-            </FormControl> */}
             <FormControl>
               <Box>
                 <FormLabel>Foto de perfil</FormLabel>
-                <Avatar size="xl" name="Nombre y apellido" src={imageUrl} />
-                {/* Modify the input element */}
+                <Avatar
+                  size="xl"
+                  name="Nombre y apellido"
+                  src={imageUrl || undefined}
+                />
+
                 <Input
                   type="file"
                   accept="image/*"
