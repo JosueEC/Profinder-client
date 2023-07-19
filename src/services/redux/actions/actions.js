@@ -102,7 +102,7 @@ const postServicio = (info) => {
         info.ocupation === "" ||
         info.category === "" ||
         info.image === "" ||
-        info.profesionalId === "" ||
+        info.ProfesionalId === "" ||
         info.content === 0
       ) {
         throw new Error("Faltan datos");
@@ -285,8 +285,8 @@ const getProfesionals = () => {
 };
 
 //! Actualizar Profesionales
-const updateProfesionals = (id, data) => {
-  //console.log(id);  // el id llega bien***** falta la data
+const updateProfesionals = (data, id) => {
+ // console.log(id);  // el id llega bien***** falta la data
   // const URL = `${API.LOCALHOST}/profesional/${id}`
   const URL = `${API.DBONLINE}/profesional/${id}`
 
@@ -294,6 +294,7 @@ const updateProfesionals = (id, data) => {
     try {
       const response = await axios.put(URL, data);
       if (response && response.data) {
+       // console.log(response.data);
         dispatch({
           type: UPDATE_PROFESIONAL,
           payload: response.data,

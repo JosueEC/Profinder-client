@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { getAllCategories } from "../../../services/redux/actions/actions";
+import {
+  getAllCategories,
+  updateProfesionals,
+} from "../../../services/redux/actions/actions";
 import {
   Flex,
   Box,
@@ -18,28 +21,45 @@ import {
   useColorModeValue,
   Radio,
   RadioGroup,
+  Select,
+  CircularProgress,
 } from "@chakra-ui/react";
-
-//cambio de prueba
 import SelectCategories from "../../../singleComponents/SelectCategories";
 import { uploadFile } from "../../../utils/Firebase/config";
-import { updateProfesionals } from "../../../services/redux/actions/actions";
-import { useSessionState } from "../../../services/zustand/useSession";
+//import { useSelector } from "react-redux";
+//import { useSessionState } from "../../../services/zustand/useSession";
+//import { postSessionUser } from "../../services/redux/actions/actions";
+//import { useCredentials } from "../../../utils/customHooks/useCredentials";
 
 function FormUpdateProfile() {
-  const session = useSessionState((state) => state.session);
-  const setSessionState = useSessionState((state) => state.setSessionState);
+  const session = JSON.parse(localStorage.getItem("userSession"));
+  // const session = useSessionState((state) => state.session);
+  // console.log(session);  // ok // este es el dato que deseo cambiar
+  //   const session = useSelector((state) => state.session);
+  //  console.log(session); // preguntarle a josue como actualizo el estado, de zustand ya que los datos cargan ok
+  //console.log(session);
 
-  const { handleSubmit, register } = useForm({
+  // const { handleUserSession } = useCredentials();
+
+  const [genre, setGenre] = useState("male");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      name: "",
+      name: session.name,
+      email: session.email,
+      image: [],
       genre: "",
       years_exp: "",
-      ubication: "",
+      password: "",
+      countryId: "",
+      locationId: "",
       phone: "",
-      ocupations: [],
       categories: [],
-      image: "",
+      ocupations: [],
     },
   });
 
@@ -51,37 +71,93 @@ function FormUpdateProfile() {
 
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedOccupations, setSelectedOccupations] = useState([]);
-  const [value, setValue] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://backprofinder-production.up.railway.app/country")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleCountryChange = (countryId) => {
+    setSelectedCountry(countryId);
+
+    if (countryId) {
+      fetch(
+        `https://backprofinder-production.up.railway.app/country/${countryId}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const selectedCountry = data;
+          if (selectedCountry) {
+            fetch("https://backprofinder-production.up.railway.app/location")
+              .then((response) => response.json())
+              .then((locationsData) => {
+                const filteredLocations = locationsData.filter(
+                  (location) => location.CountryId === selectedCountry.id
+                );
+                setLocations(filteredLocations);
+              })
+              .catch((error) => console.log(error));
+          } else {
+            setLocations([]);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      setLocations([]);
+    }
+  };
 
   const envioCategoria = (value) => {
-    //console.log(value); //lega el value
     setSelectedCategory([value]);
   };
 
   const envioOcupaciones = (value) => {
-    // console.log(value); //lega el value
     setSelectedOccupations(value);
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     const imageData = await uploadFile(data.image);
+
+    const selectedCountryObj = countries.find(
+      (country) => country.id === parseInt(data.country)
+    );
+    const selectedLocationObj = locations.find(
+      (location) => location.id === parseInt(data.location)
+    );
+
     const newData = {
       name: data.name,
+      email: data.email,
       image: imageData,
-      genre: data.genre,
+      genre: genre,
       years_exp: data.years_exp,
-      description: "pendiente",
+      password: data.password,
+      CountryId: selectedCountryObj?.id,
+      LocationId: selectedLocationObj?.id,
       phone: data.phone,
-      ubication: data.ubication,
-      ocupations: selectedOccupations,
+      ocupations: [selectedOccupations],
       categories: selectedCategory,
     };
 
-    const response = await dispatch(updateProfesionals(session.id, newData));
-    if (response && response.payload) {
-      setSessionState({ ...session, name: newData.name });
-    }
+    const sessionData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      usuario: "p",
+    };
+
+    //console.log(newData);
+
+    await dispatch(updateProfesionals(newData, session.id));
   };
 
   return (
@@ -92,59 +168,108 @@ function FormUpdateProfile() {
       bg={useColorModeValue("gray.800", "gray.800")}
       width="100%"
     >
-      <Box
-        rounded="lg"
-        bg={useColorModeValue("blackAlpha.800", "gray800")}
-        boxShadow="lg"
-        p={8}
-        color="gray.300"
-      >
+      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Nombre y apellido</FormLabel>
-              <Input type="text" {...register("name")} />
+              <Input
+                type="text"
+                {...register("name", {
+                  required: "El campo nombre es requerido",
+                })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                type="email"
+                {...register("email", {
+                  required: "El campo email es requerido",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                    message: "El formato del email es incorrecto",
+                  },
+                })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
             </FormControl>
 
             <FormControl>
               <FormLabel>Telefono</FormLabel>
-              <Input type="number" {...register("phone")} />
+              <Input
+                type="number"
+                {...register("phone", {
+                  required: "El campo telefono es requerido",
+                })}
+              />
+              {errors.phone && <p>{errors.phone.message}</p>}
             </FormControl>
 
             <FormControl>
-              <FormLabel>Ubicacion</FormLabel>
-              <Input type="text" {...register("ubication")} />
+              <FormLabel>País</FormLabel>
+              <Select
+                {...register("country", {
+                  required: "El campo país es requerido",
+                })}
+                // bg={useColorModeValue("white", "gray.700")}
+                borderWidth="1px"
+                // color="gray.800"
+                onChange={(e) => handleCountryChange(parseInt(e.target.value))}
+              >
+                <option value="">Seleccionar país</option>
+                {countries.map((country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.country && <p>{errors.country.message}</p>}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Provincia/Estado</FormLabel>
+              <Select
+                {...register("location", {
+                  required: "El campo provincia/estado es requerido",
+                })}
+                // bg={useColorModeValue("white", "gray.700")}
+                borderWidth="1px"
+                // color="gray.800"
+              >
+                <option value="">Seleccionar provincia/estado</option>
+                {locations.map((location) => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.location && <p>{errors.location.message}</p>}
             </FormControl>
 
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
                 type="file"
-                onChange={(e) => uploadFile(e.target.files[0])}
-                {...register("image")}
+                {...register("image", {
+                  required: "El campo imagen es requerido",
+                  validate: {
+                    isImage: (value) =>
+                      ["image/jpeg", "image/png"].includes(value[0]?.type) ||
+                      "Solo se permiten archivos de imagen JPEG o PNG",
+                  },
+                })}
               />
+              {errors.image && <p>{errors.image.message}</p>}
             </FormControl>
 
             <FormControl>
               <FormLabel>Género</FormLabel>
-              <RadioGroup onChange={(value) => setValue(value)} value={value}>
+              <RadioGroup onChange={setGenre} value={genre}>
                 <Stack direction="row">
-                  <Radio
-                    {...register("genre", {
-                      required: "Seleccione una opción de género",
-                    })}
-                    value="female"
-                  >
-                    Femenino
-                  </Radio>
-                  <Radio
-                    {...register("genre", {
-                      required: "Seleccione una opción de género",
-                    })}
-                    value="male"
-                  >
-                    Masculino
-                  </Radio>
+                  <Radio value="female">Femenino</Radio>
+                  <Radio value="male">Masculino</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -152,7 +277,9 @@ function FormUpdateProfile() {
             <FormControl>
               <FormLabel>Años de experiencia</FormLabel>
               <NumberInput defaultValue={0} min={0} max={100}>
-                <NumberInputField {...register("years_exp")} />
+                <NumberInputField
+                  {...register("years_exp", { required: true })}
+                />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
@@ -169,19 +296,44 @@ function FormUpdateProfile() {
             </FormControl>
 
             <FormControl>
+              <FormLabel>Contraseña</FormLabel>
+              <Input
+                type="password"
+                {...register("password", {
+                  required: "El campo contraseña es requerido",
+                  minLength: {
+                    value: 8,
+                    message: "La contraseña debe tener minimo 8 caracteres",
+                  },
+                })}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
+            </FormControl>
+
+            <FormControl>
               <FormLabel />
-              <Button
-                type="submit"
-                loadingText="Creando cuenta"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Actualizar
-              </Button>
+              {isLoading ? (
+                <CircularProgress
+                  isIndeterminate
+                  size="24px"
+                  color="blue.500"
+                />
+              ) : (
+                <>
+                  <Button
+                    type="submit"
+                    loadingText="Creando cuenta"
+                    size="lg"
+                    bg="blue.400"
+                    color="white"
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Actualizar
+                  </Button>
+                </>
+              )}
             </FormControl>
           </form>
         </Stack>

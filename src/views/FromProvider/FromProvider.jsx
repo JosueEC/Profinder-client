@@ -161,7 +161,7 @@ function FormProvider() {
     >
       <Box
         rounded="lg"
-        bg={useColorModeValue("blackAlpha.800", "gray800")}
+   
         boxShadow="lg"
         p={8}
         color="gray.300"
@@ -210,9 +210,9 @@ function FormProvider() {
                 {...register("country", {
                   required: "El campo país es requerido",
                 })}
-                bg={useColorModeValue("white", "gray.700")}
+                // bg={useColorModeValue("white", "gray.700")}
                 borderWidth="1px"
-                color="gray.800"
+                // color="gray.800"
                 onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
@@ -231,9 +231,9 @@ function FormProvider() {
                 {...register("location", {
                   required: "El campo provincia/estado es requerido",
                 })}
-                bg={useColorModeValue("white", "gray.700")}
+                // bg={useColorModeValue("white", "gray.700")}
                 borderWidth="1px"
-                color="gray.800"
+                // color="gray.800"
               >
                 <option value="">Seleccionar provincia/estado</option>
                 {locations.map((location) => (
