@@ -114,6 +114,7 @@ function EditClient() {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
+
   const handleImageUrlChange = (e) => {
     const file = e.target.files[0]; // Get the selected file
     if (file) {
@@ -149,6 +150,21 @@ function EditClient() {
 
       // Dispatch the updateClient action with the newData object
       dispatch(updateClient(userSession.clientId, newData));
+
+      // Actualiza la sesión en localStorage con los nuevos datos
+      const updatedSession = {
+        ...userSession,
+        name: newData.name,
+        email: newData.email,
+        phone: newData.phone,
+        genre: newData.genre,
+        CountryId: newData.CountryId,
+        LocationId: newData.LocationId,
+        description: newData.description,
+        image: newData.image[0], // Suponiendo que imageUrls es un array con la URL de la imagen
+      };
+
+      localStorage.setItem("userSession", JSON.stringify(updatedSession));
 
       // Reset the isLoading state and notify the user that the update was successful
       setIsLoading(false);
