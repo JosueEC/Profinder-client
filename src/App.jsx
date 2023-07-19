@@ -25,6 +25,7 @@ import DashboardClientCategories from "./views/DashboardClient/DashboardClientCa
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
 import DashboardClientHelp from "./views/DashboardClient/DashboardClientHelp/DashboardClientHelp";
 import FormServicio from "../src/views/FormServicio/FormServicio";
+import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -78,6 +79,7 @@ function App() {
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
+        <Route path="/pasarelaPagos" element={<PasarelaPagos />} />
       </Routes>
       {!isHomePage && <Footer />}
     </div>
