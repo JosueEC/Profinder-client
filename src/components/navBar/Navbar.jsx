@@ -12,7 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "../../utils/Darkmode/DarkmodeToggle";
 import Logo from "../../assets/categoriesIcons/Logo.png";
 //import SearchBar from '../SearchBar/SearchBar'
@@ -27,8 +27,14 @@ const Navbar = () => {
   // const isCategoriesRoute = location.pathname === '/categories'
 
   return (
-    <nav>
+    <nav style={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 100
+    }}>
       <Flex
+        position='sticky'
+        top='0px'
         justifyContent="space-between"
         alignItems="center"
         padding={4}

@@ -8,11 +8,12 @@ import {
 } from '@chakra-ui/react'
 import SidebarContent from './SidebarContent'
 import MobileNav from './MobileNav'
+import ContainerContent from '../DashContent/ContainerContent'
 
-export default function Sidebar ({ children }) {
+export default function Sidebar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <Box
+    <Box // contenedor principal
       minH='100vh'
       bg={useColorModeValue('gray.100', 'gray.900')}
     >
@@ -35,8 +36,11 @@ export default function Sidebar ({ children }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p='4' border='solid 2px red'>
-        {children}
+      <Box
+        ml={{ base: 0, md: 60 }}
+        p='4'
+      >
+        <ContainerContent />
       </Box>
     </Box>
   )

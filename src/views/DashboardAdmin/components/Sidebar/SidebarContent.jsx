@@ -18,7 +18,7 @@ export default function SidebarContent ({ onClose, ...rest }) {
   ]
 
   return (
-    <Box
+    <Box // barra lateral sidebar
       bg={useColorModeValue('white', 'gray.900')}
       borderRight='1px'
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}

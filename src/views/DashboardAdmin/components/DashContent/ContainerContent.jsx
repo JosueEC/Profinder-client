@@ -1,98 +1,108 @@
-import { Button } from '@chakra-ui/button'
-import { Box, Container, Flex, Heading, Stack } from '@chakra-ui/layout'
+import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
+import Statistic from '../../singleComponents/Statistic'
+import UsersTable from '../UsersTable/UsersTable'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Doughnut } from 'react-chartjs-2'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function ContainerContent () {
+  const data = {
+    labels: [
+      'Activos',
+      'Baneados',
+      'Premium Activos',
+      'Premium Baneados'
+    ],
+    datasets: [{
+      label: 'Total',
+      data: [130, 8, 54, 6],
+      backgroundColor: [
+        '#48BB78',
+        '#A0AEC0',
+        '#805AD5',
+        '#FAF089'
+      ],
+      hoverOffset: 4
+    }]
+  }
+
   return (
     <Container maxW='7xl'>
       <Stack
         align='center'
+        justify='center'
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}
+        py={{ base: 20, md: 10 }}
         direction={{ base: 'column', md: 'row' }}
       >
-        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
-          <Heading
-            lineHeight={1.1}
-            fontWeight={600}
-            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
+        <Stack // Contenedor stats
+          flex={1}
+          spacing={{ base: 5, md: 10 }}
+          width={{ base: '100%', md: '50%' }}
+        >
+          <Heading size='lg'>Profesionales</Heading>
+          <Stack // bloque de stats
+            spacing={{ base: 4, sm: 6 }}
+            direction={{ base: 'column', sm: 'row' }}
           >
-            <Text
-              as='span'
-              position='relative'
-              _after={{
-                content: "''",
-                width: 'full',
-                height: '30%',
-                position: 'absolute',
-                bottom: 1,
-                left: 0,
-                bg: 'red.400',
-                zIndex: -1
-              }}
-            >
-              Write once,
-            </Text>
-            <br />
-            <Text as='span' color='red.400'>
-              use everywhere!
-            </Text>
-          </Heading>
-          <Text color='gray.500'>
-            Snippy is a rich coding snippets app that lets you create your own
-            code snippets, categorize them, and even sync them in the cloud so
-            you can use them anywhere. All that is free!
-          </Text>
+            <Statistic
+              label='Totales'
+              number={130}
+              helpText='Julio 18'
+            />
+            <Statistic
+              label='Activos'
+              number={122}
+              helpText='Julio 18'
+            />
+            <Statistic
+              label='Baneados'
+              number={8}
+              helpText='Julio 18'
+            />
+          </Stack>
+          <Heading size='lg'>Profesionales Premium</Heading>
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={{ base: 'column', sm: 'row' }}
           >
-            <Button
-              rounded='full'
-              size='lg'
-              fontWeight='normal'
-              px={6}
-              colorScheme='red'
-              bg='red.400'
-              _hover={{ bg: 'red.500' }}
-            >
-              Get started
-            </Button>
-            <Button
-              rounded='full'
-              size='lg'
-              fontWeight='normal'
-              px={6}
-            >
-              How It Works
-            </Button>
+            <Statistic
+              label='Totales'
+              number={60}
+              helpText='Julio 18'
+            />
+            <Statistic
+              label='Activos'
+              number={54}
+              helpText='Julio 18'
+            />
+            <Statistic
+              label='Baneados'
+              number={6}
+              helpText='Julio 18'
+            />
           </Stack>
         </Stack>
-        <Flex
+        <Flex // contenedor tabla
           flex={1}
+          direction='column'
           justify='center'
           align='center'
           position='relative'
           w='full'
         >
-          <Box
-            position='relative'
-            height='300px'
-            rounded='2xl'
-            boxShadow='2xl'
-            width='full'
-            overflow='hidden'
-          >
-            <Image
-              alt='Hero Image'
-              fit='cover'
-              align='center'
-              w='100%'
-              h='100%'
-              src='https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80'
-            />
-          </Box>
+          <Doughnut
+            data={data}
+            style={{
+              width: '400px',
+              height: '400px'
+            }}
+          />
         </Flex>
       </Stack>
+      <Heading>Gestion de profesionales</Heading>
+      <UsersTable />
     </Container>
   )
 }
