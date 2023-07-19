@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   FormControl,
@@ -8,7 +8,6 @@ import {
   VStack,
   Box,
   Center,
-  Select,
   Textarea,
   Alert,
   AlertIcon,
@@ -17,22 +16,39 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-
+import { Select } from './chakra-react-select'; // Reemplaza la ruta por la ubicación de tu componente Select
 import { updateFeedback } from '../../../services/redux/actions/actions';
+import { getAllSupliers } from '../../../services/redux/actions/actions'; // Importa tus acciones aquí
 
 function FeedbackForm() {
   const dispatch = useDispatch();
-
   const [content, setContent] = useState('');
   const [rating, setRating] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [suppliers, setSuppliers] = useState([]); // Estado para almacenar la lista de proveedores
+  const [selectedSupplier, setSelectedSupplier] = useState(null); // Estado para almacenar el proveedor seleccionado
 
   // Obtener el ID del cliente de la sesión actual desde el almacenamiento local
   const userSession = JSON.parse(localStorage.getItem('userSession'));
   const clientId = userSession && userSession.id ? userSession.id : null;
+
+  useEffect(() => {
+    // Llama a la acción para obtener los proveedores aquí
+    const fetchSuppliers = async () => {
+      try {
+        const suppliersData = await getAllSupliers();
+        setSuppliers(suppliersData);
+      } catch (error) {
+        // Manejar errores de ser necesario
+        console.error('Error fetching suppliers:', error);
+      }
+    };
+
+    fetchSuppliers();
+  }, []);
 
   const handleRatingChange = (e) => {
     setRating(e.target.value);
@@ -53,6 +69,10 @@ function FeedbackForm() {
     }
   };
 
+  const handleSupplierChange = (selectedOption) => {
+    setSelectedSupplier(selectedOption);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -71,7 +91,7 @@ function FeedbackForm() {
     const newData = {
       content: content,
       rating: Number(rating),
-      profesionalId: 789, // Reemplaza con el ID del profesional correspondiente
+      profesionalId: selectedSupplier ? selectedSupplier.value : null, // Utiliza el ID del proveedor seleccionado
       clientId: clientId, // Utiliza el ID del cliente de la sesión actual
     };
 
@@ -82,6 +102,7 @@ function FeedbackForm() {
         // Limpia el formulario
         setContent('');
         setRating('');
+        setSelectedSupplier(null);
       })
       .catch(() => {
         setErrorMessage('Ha ocurrido un error. Inténtalo nuevamente.');
@@ -130,6 +151,20 @@ function FeedbackForm() {
                   <option value="4">Muy bueno</option>
                   <option value="5">Excelente</option>
                 </Select>
+              </Box>
+            </FormControl>
+            <FormControl>
+              <Box>
+                <FormLabel>Profesional</FormLabel>
+                <Select
+                  options={suppliers.map((supplier) => ({
+                    label: supplier.name,
+                    value: supplier.id,
+                  }))}
+                  onChange={handleSupplierChange}
+                  value={selectedSupplier}
+                  placeholder="Selecciona un profesional"
+                />
               </Box>
             </FormControl>
             <FormControl>

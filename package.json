@@ -19,6 +19,7 @@
     "@emotion/styled": "^11.11.0",
     "@mercadopago/sdk-react": "^0.0.12",
     "axios": "^1.4.0",
+    "chakra-react-select": "^4.6.0",
     "chart.js": "^4.3.0",
     "downshift": "^8.0.0",
     "firebase": "^10.0.0",
