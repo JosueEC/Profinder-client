@@ -1,24 +1,23 @@
-import { useSessionState } from "../../services/zustand/useSession";
+import { useSessionState } from "../../../services/zustand/useSession";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostProfesional } from "../../services/redux/actions/actions";
+import { getPostProfesional } from "../../../services/redux/actions/actions";
 import {
   Box,
   Text,
   VStack,
   Image,
   Grid,
-  GridItem,
   Button,
 } from "@chakra-ui/react";
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
-  console.log(session);
+  // console.log(session);
 
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
-  console.log(filteredPosts);
+  // console.log(filteredPosts);
 
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -104,7 +103,7 @@ const PostsSuppliers = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                 <Image
+                <Image
                   src={post.image[currentImageIndex]}
                   alt={`Image ${currentImageIndex}`}
                   objectFit="cover"
@@ -121,7 +120,6 @@ const PostsSuppliers = () => {
                 <Button onClick={handleNextImage} size="sm" fontSize="xl">
                   &gt;
                 </Button>
-               
               </Grid>
             </Box>
           ))

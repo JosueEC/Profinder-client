@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { getAllCategories } from "../../services/redux/actions/actions";
+import { getAllCategories } from "../../../services/redux/actions/actions";
 import {
   Flex,
   Box,
@@ -20,13 +20,11 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 
-
-
 //cambio de prueba
-import SelectCategories from "../../singleComponents/SelectCategories";
-import { uploadFile } from "../../utils/Firebase/config";
-import { updateProfesionals } from "../../services/redux/actions/actions";
-import { useSessionState } from "../../services/zustand/useSession";
+import SelectCategories from "../../../singleComponents/SelectCategories";
+import { uploadFile } from "../../../utils/Firebase/config";
+import { updateProfesionals } from "../../../services/redux/actions/actions";
+import { useSessionState } from "../../../services/zustand/useSession";
 
 function FormUpdateProfile() {
   const session = useSessionState((state) => state.session);
@@ -59,9 +57,9 @@ function FormUpdateProfile() {
     //console.log(value); //lega el value
     setSelectedCategory([value]);
   };
-  
+
   const envioOcupaciones = (value) => {
-   // console.log(value); //lega el value
+    // console.log(value); //lega el value
     setSelectedOccupations(value);
   };
 
@@ -85,7 +83,7 @@ function FormUpdateProfile() {
       setSessionState({ ...session, name: newData.name });
     }
   };
-  console.log();
+
   return (
     <Flex
       minH="100vh"
@@ -165,8 +163,8 @@ function FormUpdateProfile() {
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
-                fnSelectCategory={envioCategoria} 
-                fnSelectOcupation={envioOcupaciones} 
+                fnSelectCategory={envioCategoria}
+                fnSelectOcupation={envioOcupaciones}
               />
             </FormControl>
 

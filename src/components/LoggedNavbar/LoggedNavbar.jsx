@@ -24,13 +24,22 @@ import NavLink from '../../singleComponents/NavLink'
 import Logo from '../../assets/categoriesIcons/Logo.png'
 import SinFoto from '../../assets/defaultImages/sinfoto.webp'
 import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+//import { useSelector } from "react-redux";
+
 
 export default function LoggedNavbar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
   const toast = useToast()
   const session = useSessionState(state => state.session)
+  //console.log(session);
   const removeSessionState = useSessionState(state => state.removeSessionState)
+
+ // const profesionalesimg = useSelector((state) => state.profesionales);
+ // console.log(profesionalesimg);
+
+  //const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
+
 
   function handleLogout () {
     removeSessionState()

@@ -2,7 +2,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
-import FormUpdate from "./views/DashboardSuppliers/FormUpdateProfile";
+// import FormUpdate from "./views/DashboardSuppliers/FormUpdateProfile";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -13,8 +13,7 @@ import UserLogin from "./views/UserLogin/UserLogin";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
 import DashboardAdmin from "./views/DashboardAdmin/DashboardAdmin";
-import DashboardSuppliers from "./views/DashboardSuppliers/Sidebar";
-// import NavbarDashboard from "./views/DashboardSuppliers/NavbarDashboard.jsx";
+import DashboardSuppliers from "./views/DashboardSuppliers/Home/Home";
 import DashboardClient from "./views/DashboardClient/DashboardClient/DashboardClient.jsx";
 import FeedbackForm from "./components/Feedback/FormFeedback.jsx";
 import LoggedNavbar from "./components/LoggedNavbar/LoggedNavbar.jsx";
@@ -31,7 +30,6 @@ function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
   const session = useSessionState((state) => state.session);
   const location = useLocation();
-  // const hideNavbar = location.pathname === "/dashboardSuppliers" || location.pathname === "/dashboardClient";
 
   useEffect(() => {
     const userSession = window.localStorage.getItem("userSession");
@@ -47,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/feedback" element={<FeedbackForm />} />
-        <Route path="/formUpdate" element={<FormUpdate />} />
+        {/* <Route path="/formUpdate" element={<FormUpdate />} /> */}
         <Route path="/dashboardSuppliers" element={<DashboardSuppliers />} />
         <Route path="/dashboardClient" element={<DashboardClient />} />
         <Route
