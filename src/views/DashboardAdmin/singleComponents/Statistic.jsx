@@ -10,9 +10,7 @@ import {
 export default function Statistic ({ label, number, helpText }) {
   return (
     <Stat
-      border='solid 2px'
-      borderColor='gray.300'
-      bg={useColorModeValue('blackAlpha.300', 'blackAlpha.300')}
+      bg={useColorModeValue('white', 'gray.800')}
       textAlign='center'
       borderRadius='0.3rem'
     >
