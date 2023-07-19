@@ -12,20 +12,25 @@ import {
   Textarea,
   Box,
   Center,
+  CircularProgress,
 } from '@chakra-ui/react';
 
 import { getAllClients, updateClient } from '../../../services/redux/actions/actions';
 
 function EditClient() {
   const dispatch = useDispatch();
-  
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [genre, setGenre] = useState('');
-  const [ubication, setUbication] = useState('');
+  const [countryId, setCountryId] = useState('');
+  const [locationId, setLocationId] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [countries, setCountries] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
@@ -35,56 +40,97 @@ function EditClient() {
       setEmail(userSession.email);
       setPhone(userSession.phone);
       setGenre(userSession.genre);
-      setUbication(userSession.location);
+      setCountryId(userSession.CountryId);
+      setLocationId(userSession.LocationId);
       setDescription(userSession.description);
-      setImageUrl(userSession.imageUrl);
+      setImageUrl(userSession.image);
     }
+
+    fetch("https://backprofinder-production.up.railway.app/country")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-  
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  
+
   const handlePhoneChange = (e) => {
     setPhone(e.target.value);
   };
-  
+
   const handleGenreChange = (e) => {
     setGenre(e.target.value);
   };
-  
-  const handleUbicationChange = (e) => {
-    setUbication(e.target.value);
+
+  const handleCountryChange = (e) => {
+    const countryId = e.target.value;
+    setCountryId(countryId);
+
+    if (countryId) {
+      fetch(`https://backprofinder-production.up.railway.app/country/${countryId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const selectedCountry = data;
+          if (selectedCountry) {
+            fetch("https://backprofinder-production.up.railway.app/location")
+              .then((response) => response.json())
+              .then((locationsData) => {
+                const filteredLocations = locationsData.filter(
+                  (location) => location.CountryId === selectedCountry.id
+                );
+                setLocations(filteredLocations);
+              })
+              .catch((error) => console.log(error));
+          } else {
+            setLocations([]);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      setLocations([]);
+    }
   };
-  
+
+  const handleLocationChange = (e) => {
+    setLocationId(e.target.value);
+  };
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
-  
+
   const handleImageUrlChange = (e) => {
     setImageUrl(e.target.value);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const newData = {
       name: name,
       email: email,
+      password: "", // Agrega la contraseña aquí si es necesario
+      image: [imageUrl], // Convertimos la URL en un arreglo como se espera en el backend
       phone: phone,
-      genre: genre,
-      ubication: ubication,
       description: description,
-      image: imageUrl,
+      genre: genre,
+      CountryId: parseInt(countryId), // Convertimos el ID del país en un número entero
+      LocationId: parseInt(locationId), // Convertimos el ID de la provincia/estado en un número entero
     };
-    
+
     dispatch(updateClient(userSession.clientId, newData));
+    console.log(newData);
   };
-  
+
   const clients = useSelector((state) => state.clients);
   const client = clients.find((client) => client.id === userSession.clientId);
 
@@ -98,12 +144,13 @@ function EditClient() {
       setEmail(client.email);
       setPhone(client.phone);
       setGenre(client.genre);
-      setUbication(client.ubication);
+      setCountryId(client.CountryId);
+      setLocationId(client.LocationId);
       setDescription(client.description);
       setImageUrl(client.image);
     }
   }, [client]);
-  
+
   return (
     <Center p={4} bg={'gray.900'} color={'gray.300'} h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
@@ -133,7 +180,7 @@ function EditClient() {
                 <Input variant="unstyled" type="email" placeholder="Correo electrónico" value={email} onChange={handleEmailChange} />
               </Box>
             </FormControl>
-            
+
             <FormControl>
               <Box>
                 <FormLabel>Teléfono</FormLabel>
@@ -152,8 +199,36 @@ function EditClient() {
             </FormControl>
             <FormControl>
               <Box>
-                <FormLabel>Ubicación</FormLabel>
-                <Input variant="unstyled" type="text" placeholder="Ubicación" value={ubication} onChange={handleUbicationChange} />
+                <FormLabel>País</FormLabel>
+                <Select
+                  placeholder="País"
+                  value={countryId}
+                  onChange={handleCountryChange}
+                >
+                  <option value="">Seleccionar país</option>
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                      {country.name}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+            </FormControl>
+            <FormControl>
+              <Box>
+                <FormLabel>Provincia/Estado</FormLabel>
+                <Select
+                  placeholder="Provincia/Estado"
+                  value={locationId}
+                  onChange={handleLocationChange}
+                >
+                  <option value="">Seleccionar provincia/estado</option>
+                  {locations.map((location) => (
+                    <option key={location.id} value={location.id}>
+                      {location.name}
+                    </option>
+                  ))}
+                </Select>
               </Box>
             </FormControl>
             <FormControl>
