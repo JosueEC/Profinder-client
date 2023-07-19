@@ -80,7 +80,7 @@ function App() {
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin/manageClient" element={<DashboardAdmin />} />
         <Route path="/dashboardAdmin/manageProfesional" element={<DashboardAdmin />} />
-        <Route path="/pasarelaPagos" element={<PasarelaPagos />} />
+        <Route path="/pasarela" element={<PasarelaPagos />} />
       </Routes>
       {!isHomePage && <Footer />}
     </div>
