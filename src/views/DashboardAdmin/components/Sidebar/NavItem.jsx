@@ -1,11 +1,14 @@
 import { Icon } from '@chakra-ui/icon'
 import { Flex, Link } from '@chakra-ui/layout'
+import { useNavigate } from 'react-router'
 
 /* eslint-disable react/prop-types */
-export default function NavItem ({ icon, children, ...rest }) {
+export default function NavItem ({ icon, children, linkRoute, ...rest }) {
+  const navigate = useNavigate()
   return (
-    <Link href='#' style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
+        onClick={() => navigate(linkRoute)}
         align='center'
         p='4'
         mx='4'

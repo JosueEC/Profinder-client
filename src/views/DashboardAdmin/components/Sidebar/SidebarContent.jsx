@@ -11,10 +11,10 @@ import NavItem from './NavItem'
 
 export default function SidebarContent ({ onClose, ...rest }) {
   const LinkItems = [
-    { name: 'Home', icon: DragHandleIcon },
-    { name: 'Profesionales', icon: EditIcon },
-    { name: 'Clientes', icon: EditIcon },
-    { name: 'Configuracion', icon: SettingsIcon }
+    { name: 'Home', icon: DragHandleIcon, linkRoute: '/' },
+    { name: 'Profesionales', icon: EditIcon, linkRoute: '/dashboardAdmin/manageProfesional' },
+    { name: 'Clientes', icon: EditIcon, linkRoute: '/dashboardAdmin/manageClient' },
+    { name: 'Configuracion', icon: SettingsIcon, linkRoute: '/' }
   ]
 
   return (
@@ -34,7 +34,7 @@ export default function SidebarContent ({ onClose, ...rest }) {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} linkRoute={link.linkRoute}>
           {link.name}
         </NavItem>
       ))}
