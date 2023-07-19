@@ -71,11 +71,11 @@ function FormServicio(props) {
 
     const newData = {
       title: data.title,
-      ocupation: selectedOccupations,
-      category: selectedCategory,
       image: imageUrls,
       content: data.content,
       ProfesionalId: session.id,
+      categories: selectedCategory,
+      ocupations: selectedOccupations,
     };
 
     console.log(newData);

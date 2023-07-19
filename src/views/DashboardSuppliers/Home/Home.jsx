@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const DashboardSuppliers = () => {
   const session = useSelector((state) => state.session);
-  //console.log(session); //trae el estado que tengo en redux con la info del profesional actualizada
+ // console.log(session); //trae el estado que tengo en redux con la info del profesional actualizada
 
   useEffect(() => {
     const userSession = window.localStorage.getItem("userSession");

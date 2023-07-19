@@ -1,202 +1,9 @@
-// import { useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import { getAllCategories } from "../../../services/redux/actions/actions";
-// import {
-//   Flex,
-//   Box,
-//   FormControl,
-//   FormLabel,
-//   Input,
-//   NumberInput,
-//   NumberInputField,
-//   NumberInputStepper,
-//   NumberIncrementStepper,
-//   NumberDecrementStepper,
-//   Stack,
-//   Button,
-//   useColorModeValue,
-//   Radio,
-//   RadioGroup,
-// } from "@chakra-ui/react";
-
-// import SelectCategories from "../../../singleComponents/SelectCategories";
-// import { uploadFile } from "../../../utils/Firebase/config";
-// import { updateProfesionals } from "../../../services/redux/actions/actions";
-// import { useSessionState } from "../../../services/zustand/useSession";
-
-// function FormUpdateProfile() {
-//   const session = useSessionState((state) => state.session);
-//   const setSessionState = useSessionState((state) => state.setSessionState);
-
-//   const { handleSubmit, register } = useForm({
-//     defaultValues: {
-//       name: "",
-//       genre: "",
-//       years_exp: "",
-//       ubication: "",
-//       phone: "",
-//       ocupations: [],
-//       categories: [],
-//       image: "",
-//     },
-//   });
-
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(getAllCategories());
-//   }, [dispatch]);
-
-//   const [selectedCategory, setSelectedCategory] = useState([]);
-//   const [selectedOccupations, setSelectedOccupations] = useState([]);
-//   const [value, setValue] = useState("");
-
-//   const envioCategoria = (value) => {
-//     //console.log(value); //lega el value
-//     setSelectedCategory([value]);
-//   };
-
-//   const envioOcupaciones = (value) => {
-//     // console.log(value); //lega el value
-//     setSelectedOccupations(value);
-//   };
-
-//   const onSubmit = async (data) => {
-//     console.log(data);
-//     const imageData = await uploadFile(data.image);
-//     const newData = {
-//       name: data.name,
-//       image: imageData,
-//       genre: data.genre,
-//       years_exp: data.years_exp,
-//       description: "pendiente",
-//       phone: data.phone,
-//       ubication: data.ubication,
-//       ocupations: selectedOccupations,
-//       categories: selectedCategory,
-//     };
-
-//     const response = await dispatch(updateProfesionals(session.id, newData));
-//     if (response && response.payload) {
-//       setSessionState({ ...session, name: newData.name });
-//     }
-//   };
-
-//   return (
-//     <Flex
-//       minH="100vh"
-//       align="center"
-//       justify="center"
-//       bg={useColorModeValue("gray.800", "gray.800")}
-//       width="100%"
-//     >
-//       <Box
-//         rounded="lg"
-//         bg={useColorModeValue("blackAlpha.800", "gray800")}
-//         boxShadow="lg"
-//         p={8}
-//         color="gray.300"
-//       >
-//         <Stack spacing={4}>
-//           <form onSubmit={handleSubmit(onSubmit)}>
-//             <FormControl>
-//               <FormLabel>Nombre y apellido</FormLabel>
-//               <Input type="text" {...register("name")} />
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Telefono</FormLabel>
-//               <Input type="number" {...register("phone")} />
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Ubicacion</FormLabel>
-//               <Input type="text" {...register("ubication")} />
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Foto de perfil</FormLabel>
-//               <Input
-//                 type="file"
-//                 onChange={(e) => uploadFile(e.target.files[0])}
-//                 {...register("image")}
-//               />
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Género</FormLabel>
-//               <RadioGroup onChange={(value) => setValue(value)} value={value}>
-//                 <Stack direction="row">
-//                   <Radio
-//                     {...register("genre", {
-//                       required: "Seleccione una opción de género",
-//                     })}
-//                     value="female"
-//                   >
-//                     Femenino
-//                   </Radio>
-//                   <Radio
-//                     {...register("genre", {
-//                       required: "Seleccione una opción de género",
-//                     })}
-//                     value="male"
-//                   >
-//                     Masculino
-//                   </Radio>
-//                 </Stack>
-//               </RadioGroup>
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Años de experiencia</FormLabel>
-//               <NumberInput defaultValue={0} min={0} max={100}>
-//                 <NumberInputField {...register("years_exp")} />
-//                 <NumberInputStepper>
-//                   <NumberIncrementStepper />
-//                   <NumberDecrementStepper />
-//                 </NumberInputStepper>
-//               </NumberInput>
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel>Categorías</FormLabel>
-//               <SelectCategories
-//                 fnSelectCategory={envioCategoria}
-//                 fnSelectOcupation={envioOcupaciones}
-//               />
-//             </FormControl>
-
-//             <FormControl>
-//               <FormLabel />
-//               <Button
-//                 type="submit"
-//                 loadingText="Creando cuenta"
-//                 size="lg"
-//                 bg="blue.400"
-//                 color="white"
-//                 _hover={{
-//                   bg: "blue.500",
-//                 }}
-//               >
-//                 Actualizar
-//               </Button>
-//             </FormControl>
-//           </form>
-//         </Stack>
-//       </Box>
-//     </Flex>
-//   );
-// }
-
-// export default FormUpdateProfile;
-
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
-  getAllCategories, updateProfesionals
+  getAllCategories,
+  updateProfesionals,
 } from "../../../services/redux/actions/actions";
 import {
   Flex,
@@ -217,30 +24,33 @@ import {
   Select,
   CircularProgress,
 } from "@chakra-ui/react";
-import {  useSelector } from "react-redux";
-import { useSessionState } from "../../../services/zustand/useSession";
 import SelectCategories from "../../../singleComponents/SelectCategories";
 import { uploadFile } from "../../../utils/Firebase/config";
+//import { useSelector } from "react-redux";
+//import { useSessionState } from "../../../services/zustand/useSession";
 //import { postSessionUser } from "../../services/redux/actions/actions";
-import { useCredentials } from "../../../utils/customHooks/useCredentials";
+//import { useCredentials } from "../../../utils/customHooks/useCredentials";
 
 function FormUpdateProfile() {
-  const session = useSessionState((state) => state.session);
- // console.log(session);  // ok // este es el dato que deseo cambiar
-  const session1 = useSelector((state) => state.session);
- //  console.log(session1); // preguntarle a josue como actualizo el estado, de zustand ya que los datos cargan ok
+  const session = JSON.parse(localStorage.getItem("userSession"));
+  // const session = useSessionState((state) => state.session);
+  // console.log(session);  // ok // este es el dato que deseo cambiar
+  //   const session = useSelector((state) => state.session);
+  //  console.log(session); // preguntarle a josue como actualizo el estado, de zustand ya que los datos cargan ok
+  //console.log(session);
 
+  // const { handleUserSession } = useCredentials();
 
+  const [genre, setGenre] = useState("male");
 
-
-
-  const { handleUserSession } = useCredentials();
-  const [genre, setGenre] = useState('female')
-
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
+      name: session.name,
+      email: session.email,
       image: [],
       genre: "",
       years_exp: "",
@@ -250,8 +60,7 @@ function FormUpdateProfile() {
       phone: "",
       categories: [],
       ocupations: [],
-  
-    }
+    },
   });
 
   const dispatch = useDispatch();
@@ -266,8 +75,6 @@ function FormUpdateProfile() {
   const [locations, setLocations] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
-
 
   useEffect(() => {
     fetch("https://backprofinder-production.up.railway.app/country")
@@ -308,7 +115,7 @@ function FormUpdateProfile() {
       setLocations([]);
     }
   };
- 
+
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
@@ -361,13 +168,7 @@ function FormUpdateProfile() {
       bg={useColorModeValue("gray.800", "gray.800")}
       width="100%"
     >
-      <Box
-        rounded="lg"
-   
-        boxShadow="lg"
-        p={8}
-        color="gray.300"
-      >
+      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
@@ -502,8 +303,8 @@ function FormUpdateProfile() {
                   required: "El campo contraseña es requerido",
                   minLength: {
                     value: 8,
-                    message: 'La contraseña debe tener minimo 8 caracteres'
-                  }
+                    message: "La contraseña debe tener minimo 8 caracteres",
+                  },
                 })}
               />
               {errors.password && <p>{errors.password.message}</p>}
