@@ -74,8 +74,8 @@ function FormServicio(props) {
       image: imageUrls,
       content: data.content,
       ProfesionalId: session.id,
-      categories: selectedCategory,
-      ocupations: selectedOccupations,
+      category: selectedCategory,
+      ocupation: selectedOccupations,
     };
 
     console.log(newData);
