@@ -95,7 +95,7 @@ const Navbar = () => {
               <MenuItem onClick={() => navigate("/registerProvider")}>
                 Registrarse profesional
               </MenuItem>
-              <MenuItem onClick={() => navigate("/dashboardAdmin")}>
+              <MenuItem onClick={() => navigate("/dashboardAdmin/manageProfesional")}>
                 Dashboard Admin
               </MenuItem>
             </MenuList>
@@ -145,7 +145,7 @@ const Navbar = () => {
               </MenuItem>
               <MenuItem
                 color="gray.800"
-                onClick={() => navigate("/dashboardAdmin")}
+                onClick={() => navigate("/dashboardAdmin/manageProfesional")}
               >
                 Dashboard Admin
               </MenuItem>

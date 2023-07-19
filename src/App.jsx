@@ -78,7 +78,8 @@ function App() {
         <Route path="/detail/:supplierID" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
-        <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
+        <Route path="/dashboardAdmin/manageClient" element={<DashboardAdmin />} />
+        <Route path="/dashboardAdmin/manageProfesional" element={<DashboardAdmin />} />
         <Route path="/pasarelaPagos" element={<PasarelaPagos />} />
       </Routes>
       {!isHomePage && <Footer />}
