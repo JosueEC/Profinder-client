@@ -83,7 +83,6 @@ function EditClient() {
     };
     
     dispatch(updateClient(userSession.clientId, newData));
-    console.log(newData);
   };
   
   const clients = useSelector((state) => state.clients);
