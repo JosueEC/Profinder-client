@@ -168,7 +168,7 @@ function FormServicio() {
               )}
             </FormControl>
 
-            {profile.active === false ? (
+            { profile.active === false ? (
               <Link to="/pasarela">
                 <Button
                   type="submit"
@@ -177,32 +177,29 @@ function FormServicio() {
                   bg="blue.400"
                   color="white"
                 >
-                  Suscribite
+                  Suscribite a premium
                 </Button>
               </Link>
-            ) : (
+            ) : null}
+
+            {profile.posts.length <= 1 || profile.active === true ? (
               <Button
-             
-                
+                type="submit"
+                loadingText="Submitting"
                 size="lg"
-                bg="gray.400"
+                bg="blue.400"
                 color="white"
+                _hover={{
+                  bg: "blue.500",
+                }}
               >
-                Suscribite
+                Enviar
+              </Button>
+            ) : (
+              <Button size="lg" bg="grey.400">
+                Enviar
               </Button>
             )}
-            <Button
-              type="submit"
-              loadingText="Submitting"
-              size="lg"
-              bg="blue.400"
-              color="white"
-              _hover={{
-                bg: "blue.500",
-              }}
-            >
-              Enviar
-            </Button>
           </form>
         </Stack>
       </Box>
