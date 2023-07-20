@@ -3,18 +3,16 @@ import { CloseButton } from '@chakra-ui/close-button'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import {
-  DragHandleIcon,
-  EditIcon,
-  SettingsIcon
+  // DragHandleIcon,
+  EditIcon
+  // SettingsIcon
 } from '@chakra-ui/icons'
 import NavItem from './NavItem'
 
 export default function SidebarContent ({ onClose, ...rest }) {
   const LinkItems = [
-    { name: 'Home', icon: DragHandleIcon, linkRoute: '/' },
     { name: 'Profesionales', icon: EditIcon, linkRoute: '/dashboardAdmin/manageProfesional' },
-    { name: 'Clientes', icon: EditIcon, linkRoute: '/dashboardAdmin/manageClient' },
-    { name: 'Configuracion', icon: SettingsIcon, linkRoute: '/' }
+    { name: 'Clientes', icon: EditIcon, linkRoute: '/dashboardAdmin/manageClient' }
   ]
 
   return (

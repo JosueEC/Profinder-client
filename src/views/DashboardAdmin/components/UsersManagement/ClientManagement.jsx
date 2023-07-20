@@ -2,7 +2,7 @@ import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import Statistic from '../../singleComponents/Statistic'
-import UsersTable from '../UsersTable/UsersTable'
+import ClientUsersTable from '../UsersTable/ClientUsersTable'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -77,7 +77,7 @@ export default function ClientManagement () {
         </Flex>
       </Stack>
       <Heading>Gestion de clientes</Heading>
-      <UsersTable />
+      <ClientUsersTable />
     </Container>
   )
 }
