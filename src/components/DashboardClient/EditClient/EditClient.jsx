@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   FormControl,
   FormLabel,
@@ -13,21 +13,25 @@ import {
   Box,
   Center,
   CircularProgress,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { getAllClients, updateClient } from '../../../services/redux/actions/actions';
+import {
+  getAllClients,
+  updateClient,
+} from "../../../services/redux/actions/actions";
+import { uploadFiles3 } from "../../../utils/Firebase/config";
 
 function EditClient() {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [genre, setGenre] = useState('');
-  const [countryId, setCountryId] = useState('');
-  const [locationId, setLocationId] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [genre, setGenre] = useState("");
+  const [countryId, setCountryId] = useState("");
+  const [locationId, setLocationId] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [countries, setCountries] = useState([]);
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -76,7 +80,9 @@ function EditClient() {
     setCountryId(countryId);
 
     if (countryId) {
-      fetch(`https://backprofinder-production.up.railway.app/country/${countryId}`)
+      fetch(
+        `https://backprofinder-production.up.railway.app/country/${countryId}`
+      )
         .then((response) => response.json())
         .then((data) => {
           const selectedCountry = data;
@@ -109,26 +115,62 @@ function EditClient() {
   };
 
   const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
+    setImageUrl(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newData = {
-      name: name,
-      email: email,
-      password: "", // Agrega la contraseña aquí si es necesario
-      image: [imageUrl], // Convertimos la URL en un arreglo como se espera en el backend
-      phone: phone,
-      description: description,
-      genre: genre,
-      CountryId: parseInt(countryId), // Convertimos el ID del país en un número entero
-      LocationId: parseInt(locationId), // Convertimos el ID de la provincia/estado en un número entero
-    };
+    try {
+      setIsLoading(true);
 
-    dispatch(updateClient(userSession.clientId, newData));
-    console.log(newData);
+      // Upload the image to Firebase storage and get the download URL
+      const imageUrls = await uploadFiles3([imageUrl]);
+
+      // Create the newData object with the updated image property
+      const newData = {
+        name: name,
+        email: email,
+        password: "", // Add the password here if necessary
+        image: imageUrls, // Set the image property as an array of Firebase storage URLs
+        phone: phone,
+        description: description,
+        genre: genre,
+        CountryId: parseInt(countryId),
+        LocationId: parseInt(locationId),
+      };
+
+      console.log(newData)
+      // Dispatch the updateClient action with the newData object
+      dispatch(updateClient(userSession.clientId, newData));
+
+      // Actualiza la sesión en localStorage con los nuevos datos
+      const updatedSession = {
+        ...userSession,
+        name: newData.name,
+        email: newData.email,
+        phone: newData.phone,
+        genre: newData.genre,
+        CountryId: newData.CountryId,
+        LocationId: newData.LocationId,
+        description: newData.description,
+        image: newData.image, 
+      };
+
+      console.log(updatedSession)
+      localStorage.setItem("userSession", JSON.stringify(updatedSession));
+
+    
+      setIsLoading(false);
+      // alert("Client information updated successfully!");
+    } catch (error) {
+      // Handle errors during the image upload or updateClient dispatch
+      setIsLoading(false);
+      console.error("Error updating client information:", error);
+      alert(
+        "An error occurred while updating client information. Please try again later."
+      );
+    }
   };
 
   const clients = useSelector((state) => state.clients);
@@ -152,45 +194,76 @@ function EditClient() {
   }, [client]);
 
   return (
-    <Center p={4} bg={'gray.900'} color={'gray.300'} h="100vh" w="100%">
+    <Center p={4} bg={"gray.900"} color={"gray.300"} h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
-          <VStack as="form" alignItems="center" textAlign="center" onSubmit={handleSubmit}>
+          <VStack
+            as="form"
+            alignItems="center"
+            textAlign="center"
+            onSubmit={handleSubmit}
+          >
             <FormControl>
               <Box>
-                <FormLabel>Imagen</FormLabel>
-                <Avatar size="xl" name="Nombre y apellido" src={imageUrl} />
+                <FormLabel>Foto de perfil</FormLabel>
+                <Avatar
+                  size="xl"
+                  name="Nombre y apellido"
+                  src={imageUrl || undefined}
+                />
+
                 <Input
-                  type="text"
-                  placeholder="URL de la imagen"
-                  value={imageUrl}
+                  type="file"
+                  accept="image/*"
                   onChange={handleImageUrlChange}
+                />
+              </Box>
+            </FormControl>
+
+            <FormControl>
+              <Box>
+                <FormLabel>Nombre y apellido</FormLabel>
+                <Input
+                  variant="unstyled"
+                  placeholder="Nombre y apellido"
+                  value={name}
+                  onChange={handleNameChange}
                 />
               </Box>
             </FormControl>
             <FormControl>
               <Box>
-                <FormLabel>Nombre y apellido</FormLabel>
-                <Input variant="unstyled" placeholder="Nombre y apellido" value={name} onChange={handleNameChange} />
-              </Box>
-            </FormControl>
-            <FormControl>
-              <Box>
                 <FormLabel>Correo electrónico</FormLabel>
-                <Input variant="unstyled" type="email" placeholder="Correo electrónico" value={email} onChange={handleEmailChange} />
+                <Input
+                  variant="unstyled"
+                  type="email"
+                  placeholder="Correo electrónico"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
               </Box>
             </FormControl>
 
             <FormControl>
               <Box>
                 <FormLabel>Teléfono</FormLabel>
-                <Input variant="unstyled" type="tel" placeholder="Teléfono" value={phone} onChange={handlePhoneChange} />
+                <Input
+                  variant="unstyled"
+                  type="tel"
+                  placeholder="Teléfono"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                />
               </Box>
             </FormControl>
             <FormControl>
               <Box>
                 <FormLabel>Género</FormLabel>
-                <Select placeholder="Género" value={genre} onChange={handleGenreChange}>
+                <Select
+                  placeholder="Género"
+                  value={genre}
+                  onChange={handleGenreChange}
+                >
                   <option value="male">Masculino</option>
                   <option value="female">Femenino</option>
                   <option value="otro">Otro</option>
@@ -234,7 +307,11 @@ function EditClient() {
             <FormControl>
               <Box>
                 <FormLabel>Descripción</FormLabel>
-                <Textarea placeholder="Descripción" value={description} onChange={handleDescriptionChange} />
+                <Textarea
+                  placeholder="Descripción"
+                  value={description}
+                  onChange={handleDescriptionChange}
+                />
               </Box>
             </FormControl>
             <Spacer />

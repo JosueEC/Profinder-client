@@ -36,3 +36,15 @@ export async function uploadFiles2(files) {
   }
   return urls;
 }
+export async function uploadFiles3(files) {
+  const urls = [];
+  for (const file of files) {
+    const fileName = v4() + ".jpg";
+    const storageRef = ref(storage, "cliente/" + fileName);
+    // Specify the contentType as "image/jpeg"
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    urls.push(url);
+  }
+  return urls;
+}

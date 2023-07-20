@@ -18,7 +18,6 @@ import axios from "axios";
 function PasarelaPagos() {
   const [preferenceId, setPreferenceId] = useState(null);
 
-  
   initMercadoPago("TEST-6d144f52-f1d4-4a24-853e-d1b4592053fb"); //ocultar cuando este deploy
 
   const createPreference = async () => {
@@ -27,7 +26,7 @@ function PasarelaPagos() {
         "https://backprofinder-production.up.railway.app/cash",
         {
           description: "Bienvenido",
-          price: 999,
+          price: 9,
           quantity: 1,
         }
       );
