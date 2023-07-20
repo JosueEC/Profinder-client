@@ -161,9 +161,9 @@ function FormProvider() {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
+     
     >
-      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300">
+      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300"  width="500px">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
@@ -171,7 +171,19 @@ function FormProvider() {
               <Input
                 type="text"
                 {...register("name", {
-                  required: "El campo nombre es requerido",
+                  required: "El campo nombre y apellido es requerido",
+                  pattern: {
+                    value: /^[a-zA-ZñÑ\s]+$/,
+                    message: "El nombre y apellido no puede contener expresiones especiales o símbolos",
+                  },
+                  minLength: {
+                    value: 2,
+                    message: "El nombre y apellido deben tener al menos 2 caracteres",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "El nombre y apellido no puede tener más de 100 caracteres",
+                  },
                 })}
               />
               {errors.name && (
@@ -201,7 +213,19 @@ function FormProvider() {
               <Input
                 type="number"
                 {...register("phone", {
-                  required: "El campo telefono es requerido",
+                  required: "El campo teléfono es requerido",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "El teléfono solo debe contener números",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "El teléfono debe tener al menos 10 dígitos",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "El teléfono no puede tener más de 10 dígitos",
+                  },
                 })}
               />
               {errors.phone && (
@@ -254,8 +278,9 @@ function FormProvider() {
               <FormLabel>Foto de perfil</FormLabel>
               <Input
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("image", {
-                  required: "El campo imagen es requerido",
+                  required: "Solo se permiten archivos de imagen JPEG o PNG",
                   validate: {
                     isImage: (value) =>
                       ["image/jpeg", "image/png"].includes(value[0]?.type) ||
@@ -263,6 +288,7 @@ function FormProvider() {
                   },
                 })}
               />
+              
               {errors.image && (
                 <span style={{ color: "red" }}>{errors.image.message}</span>
               )}
@@ -302,9 +328,10 @@ function FormProvider() {
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
-                  minLength: {
-                    value: 8,
-                    message: "La contraseña debe tener minimo 8 caracteres",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                    message:
+                      "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
                   },
                 })}
               />

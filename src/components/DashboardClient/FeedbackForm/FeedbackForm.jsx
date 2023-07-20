@@ -58,6 +58,12 @@ function FeedbackForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!selectedSupplierId) {
+      setErrorMessage('Debes seleccionar un proveedor.');
+      setShowErrorAlert(true);
+      return;
+    }
+
     if (!rating) {
       setErrorMessage('Debes seleccionar una valoración.');
       setShowErrorAlert(true);

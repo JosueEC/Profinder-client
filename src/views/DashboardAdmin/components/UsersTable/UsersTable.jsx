@@ -71,9 +71,8 @@ export default function UsersTable () {
                 <span>Foto</span>
                 <span>Nombre</span>
                 <span>correo electronico</span>
-                <span>estatus</span>
               </SimpleGrid>
-              {profesional.map(({ id, name, email, image }) => {
+              {profesional.map(({ id, name, email, image, active, softDelete }) => {
                 return (
                   <UserRegister
                     key={id}
@@ -81,6 +80,8 @@ export default function UsersTable () {
                     name={name}
                     email={email}
                     image={image}
+                    active={active}
+                    softDelete={softDelete}
                   />
                 )
               })}

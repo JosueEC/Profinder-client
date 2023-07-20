@@ -88,7 +88,8 @@ function FormServicio(props) {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
+      // width="100%"
+      width="500px"
     >
       <Box
         rounded="lg"
@@ -96,6 +97,7 @@ function FormServicio(props) {
         boxShadow="lg"
         p={8}
         color="gray.300"
+       
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,7 +120,7 @@ function FormServicio(props) {
                 type="file"
                 multiple // Allow multiple file selection
                 {...register("images", {
-                  required: "El campo imagen es requerido",
+                  required: "Solo se permiten archivos de imagen JPEG o PNG",
                   validate: {
                     isImage: (value) => {
                       if (value) {
@@ -155,7 +157,12 @@ function FormServicio(props) {
               <Textarea
                 type="text"
                 {...register("content", {
-                  required: "El campo contraseña es requerido",
+                  required: "El campo es requerido",
+                  maxLength: {
+                    value: 250,
+                    message:
+                      "La descripción no puede tener más de 250 caracteres",
+                  },
                 })}
               />
               {errors.content && (

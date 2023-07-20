@@ -1,12 +1,13 @@
 import { create } from 'zustand'
 import { API } from '../../utils/API/constants'
+import { filterData } from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
 
 export const useProfesionalDash = create((set) => ({
   profesional: [],
   auxProfesional: [],
   messageBackend: '',
   filters: {
-    category: 'Categoria',
+    category: 'Categorias',
     ocupation: 'Ocupacion',
     status: 'Estatus',
     plan: 'Plan'
@@ -19,15 +20,15 @@ export const useProfesionalDash = create((set) => ({
   },
 
   getProfesional: async () => {
-    const response = await fetchData(`${API.LOCALHOST}/profesional`)
-    set({
-      profesional: response,
+    const response = await fetchData(`${API.DBONLINE}/profesional`)
+    set((state) => ({
+      profesional: filterData(response, state.filters),
       auxProfesional: response
-    })
+    }))
   },
 
   getBannedProfesional: async () => {
-    const response = await fetchData(`${API.LOCALHOST}/profesional/delete`)
+    const response = await fetchData(`${API.DBONLINE}/profesional/delete`)
     set({
       profesional: response,
       auxProfesional: response
@@ -35,7 +36,7 @@ export const useProfesionalDash = create((set) => ({
   },
 
   getActiveProfesional: async () => {
-    const response = await fetchData(`${API.LOCALHOST}/profesional/noDelete`)
+    const response = await fetchData(`${API.DBONLINE}/profesional/noDelete`)
     set({
       profesional: response,
       auxProfesional: response
@@ -43,7 +44,7 @@ export const useProfesionalDash = create((set) => ({
   },
 
   getBasicProfesional: async () => {
-    const response = await fetchData(`${API.LOCALHOST}/profesional/noPremiun`)
+    const response = await fetchData(`${API.DBONLINE}/profesional/noPremiun`)
     set({
       profesional: response,
       auxProfesional: response
@@ -51,7 +52,7 @@ export const useProfesionalDash = create((set) => ({
   },
 
   getPremiumProfesional: async () => {
-    const response = await fetchData(`${API.LOCALHOST}/profesional/premiun`)
+    const response = await fetchData(`${API.DBONLINE}/profesional/premiun`)
     set({
       profesional: response,
       auxProfesional: response
@@ -59,11 +60,16 @@ export const useProfesionalDash = create((set) => ({
   },
 
   postBannedProfesional: async (userID) => {
-    const options = {
-      method: 'PUT'
-    }
-    const response = await fetchData(`${API.LOCALHOST}/profesional/delete/${userID}`, options)
-    console.info(response)
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/delete/${userID}`, options)
+    set({
+      messageBackend: response
+    })
+  },
+
+  postPremiumProfesional: async (userID) => {
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/premiun/${userID}`, options)
     set({
       messageBackend: response
     })
@@ -75,8 +81,21 @@ const fetchData = async (URL, options) => {
   const data = await fetch(URL, options)
     .then(response => response.json())
     .then(results => {
+      if (results.message) {
+        return [noResultsObject]
+      }
       return results
     })
     .catch(error => console.error(error))
   return data
+}
+
+const noResultsObject = {
+  id: 1,
+  name: 'Ningun',
+  email: 'Resultado',
+  image: undefined,
+  active: undefined,
+  softDelete: undefined,
+  noResults: true
 }
