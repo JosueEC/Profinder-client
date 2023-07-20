@@ -12,7 +12,8 @@ export default function UsersTable () {
   const {
     profesional,
     getProfesional,
-    countResults
+    countResults,
+    getCountsGraphic
   } = useProfesionalDash(state => state)
 
   const bg = useColorModeValue('white', 'gray.800')
@@ -24,6 +25,7 @@ export default function UsersTable () {
 
   useEffect(() => {
     countResults(profesional.length)
+    getCountsGraphic()
   }, [profesional])
 
   return (

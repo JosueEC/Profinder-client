@@ -2,12 +2,26 @@
 import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
 import UsersTable from '../UsersTable/UsersTable'
 import Statistic from '../../singleComponents/Statistic'
+import { useEffect } from 'react'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function ProfesionalManagement () {
+  const {
+    profesional,
+    profesionalActive,
+    profesionalBanned,
+    profesionalPremium,
+    profesionalPremiumActive,
+    profesionalPremiumBanned
+  } = useProfesionalDash(state => state.countsGraphic)
+  const {
+    getCountsGraphic
+  } = useProfesionalDash(state => state)
+
   const data = {
     labels: [
       'Activos',
@@ -27,6 +41,10 @@ export default function ProfesionalManagement () {
       hoverOffset: 4
     }]
   }
+
+  useEffect(() => {
+    getCountsGraphic()
+  }, [profesional])
 
   return (
     <Container maxW='7xl'>
@@ -49,17 +67,17 @@ export default function ProfesionalManagement () {
           >
             <Statistic
               label='Totales'
-              number={130}
+              number={profesional}
               helpText='Julio 18'
             />
             <Statistic
               label='Activos'
-              number={122}
+              number={profesionalActive}
               helpText='Julio 18'
             />
             <Statistic
               label='Baneados'
-              number={8}
+              number={profesionalBanned}
               helpText='Julio 18'
             />
           </Stack>
@@ -70,17 +88,17 @@ export default function ProfesionalManagement () {
           >
             <Statistic
               label='Totales'
-              number={60}
+              number={profesionalPremium}
               helpText='Julio 18'
             />
             <Statistic
               label='Activos'
-              number={54}
+              number={profesionalPremiumActive}
               helpText='Julio 18'
             />
             <Statistic
               label='Baneados'
-              number={6}
+              number={profesionalPremiumBanned}
               helpText='Julio 18'
             />
           </Stack>

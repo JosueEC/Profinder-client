@@ -1,11 +1,22 @@
 import { create } from 'zustand'
 import { API } from '../../utils/API/constants'
-import { filterData } from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
+import {
+  filterData,
+  filterStatus,
+  filterPlan
+} from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
 
 export const useProfesionalDash = create((set) => ({
   profesional: [],
   auxProfesional: [],
   messageBackend: '',
+  countsGraphic: {
+    profesional: 0,
+    profesionalActive: 0,
+    profesionalBanned: 0,
+    profesionalPremiumActive: 0,
+    profesionalPremiumBanned: 0
+  },
   filters: {
     category: 'Categorias',
     ocupation: 'Ocupacion',
@@ -23,6 +34,12 @@ export const useProfesionalDash = create((set) => ({
   countResults: (totalResults) => {
     set((state) => ({
       filters: { ...state.filters, results: totalResults }
+    }))
+  },
+
+  getCountsGraphic: () => {
+    set((state) => ({
+      countsGraphic: getCounts(state.countsGraphic, state.auxProfesional)
     }))
   },
 
@@ -89,4 +106,25 @@ const noResultsObject = {
   active: undefined,
   softDelete: undefined,
   noResults: true
+}
+
+const getCounts = (countsGraphic, data) => {
+  countsGraphic.profesional = data.length
+  countsGraphic.profesionalActive = filterStatus(data, { status: 'Activo' }).length
+  countsGraphic.profesionalBanned = filterStatus(data, { status: 'Baneado' }).length
+  countsGraphic.profesionalPremium = filterPlan(data, { plan: 'Premium' }).length
+  countsGraphic.profesionalPremiumActive = filterData(data, {
+    category: 'Categorias',
+    ocupation: 'Ocupacion',
+    status: 'Activo',
+    plan: 'Premium'
+  }).length
+  countsGraphic.profesionalPremiumBanned = filterData(data, {
+    category: 'Categorias',
+    ocupation: 'Ocupacion',
+    status: 'Beneado',
+    plan: 'Premium'
+  }).length
+
+  return countsGraphic
 }
