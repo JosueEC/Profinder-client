@@ -370,7 +370,7 @@ export const getPostProfesional = () => {
   return async (dispatch) => {
     try {
       // Llamar a la API o endpoint correspondiente para enviar el feedback
-      const response = await axios.post('/api/feedback', feedbackData);
+      const response = await axios.post('https://backprofinder-production.up.railway.app/review', feedbackData);
       
       // Aquí puedes despachar otra acción si lo necesitas, por ejemplo, para actualizar el estado de la aplicación
       

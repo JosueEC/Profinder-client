@@ -19,12 +19,14 @@ import {
 } from '@chakra-ui/react';
 
 import { updateFeedback } from '../../../services/redux/actions/actions';
+import SupplierSelect from './SupplierSelect'; // Importa el componente SupplierSelect desde su ubicación
 
 function FeedbackForm() {
   const dispatch = useDispatch();
 
   const [content, setContent] = useState('');
   const [rating, setRating] = useState('');
+  const [selectedSupplierId, setSelectedSupplierId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -71,8 +73,8 @@ function FeedbackForm() {
     const newData = {
       content: content,
       rating: Number(rating),
-      profesionalId: 789, // Reemplaza con el ID del profesional correspondiente
-      clientId: clientId, // Utiliza el ID del cliente de la sesión actual
+      profesionalId: selectedSupplierId, // Usamos el ID del proveedor seleccionado
+      clientId: clientId,
     };
 
     dispatch(updateFeedback(newData))
@@ -82,6 +84,7 @@ function FeedbackForm() {
         // Limpia el formulario
         setContent('');
         setRating('');
+        setSelectedSupplierId(null); // Limpiamos el ID del proveedor seleccionado
       })
       .catch(() => {
         setErrorMessage('Ha ocurrido un error. Inténtalo nuevamente.');
@@ -116,6 +119,10 @@ function FeedbackForm() {
             <Text mb={4}>
               En esta sección deberás seleccionar el usuario quien prestó los servicios y luego proceder a valorarlo según tu experiencia.
             </Text>
+
+            {/* Agregamos el componente SupplierSelect aquí */}
+            <SupplierSelect onSupplierSelect={setSelectedSupplierId} />
+
             <FormControl>
               <Box>
                 <FormLabel>Valoración</FormLabel>
