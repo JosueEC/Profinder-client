@@ -77,9 +77,9 @@ const PostsSuppliers = () => {
           >
               <EditIcon
                 position="absolute"
-                top="20px" // Ajusta la posición vertical del icono
-                right="20px" // Ajusta la posición horizontal del icono
-                cursor="pointer" // Para que el cursor cambie al pasar sobre el icono
+                top="20px" // organiza de arriba abajo
+                right="20px" // horizontal
+                cursor="pointer"
               />  
               {/* Título del post */}
               <Text fontWeight="bold" fontSize="xl" mb={2} color="black">
