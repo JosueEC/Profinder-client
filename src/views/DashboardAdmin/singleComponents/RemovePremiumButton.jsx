@@ -7,12 +7,12 @@ import { URL } from '../constants'
 export default function RemovPremiumButton ({ id }) {
   const toast = useToast()
   const {
-    postPremiumProfesional,
+    postRemovePremium,
     getProfesional
   } = useProfesionalDash()
 
   async function handleActivePremium () {
-    await postPremiumProfesional(id)
+    await postRemovePremium(id)
     await getProfesional(URL.GET_PROFESIONAL)
     toast({
       title: 'Premium desactivado',

@@ -42,9 +42,25 @@ export const useProfesionalDash = create((set) => ({
     })
   },
 
+  postUnbannedProfesional: async (userID) => {
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/reverseDelete/${userID}`, options)
+    set({
+      messageBackend: response
+    })
+  },
+
   postPremiumProfesional: async (userID) => {
     const options = { method: 'PUT' }
     const response = await fetchData(`${API.DBONLINE}/profesional/premiun/${userID}`, options)
+    set({
+      messageBackend: response
+    })
+  },
+
+  postRemovePremium: async (userID) => {
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/reversePremiun/${userID}`, options)
     set({
       messageBackend: response
     })

@@ -1,17 +1,18 @@
+/* eslint-disable react/prop-types */
 import { Button } from '@chakra-ui/button'
 import { useToast } from '@chakra-ui/toast'
 import { useProfesionalDash } from '../../../services/zustand/useProfesionalDash'
 import { URL } from '../constants'
 
-export default function UnbannedButton () {
+export default function UnbannedButton ({ id }) {
   const toast = useToast()
   const {
-    postBannedProfesional,
+    postUnbannedProfesional,
     getProfesional
   } = useProfesionalDash(state => state)
 
   async function handleUnbannedAction () {
-    await postBannedProfesional()
+    await postUnbannedProfesional(id)
     await getProfesional(URL.GET_PROFESIONAL)
     toast({
       title: 'Cuenta activada',
