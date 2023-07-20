@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Center,
@@ -14,10 +14,20 @@ import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
+import { getProfesionals } from "../../services/redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function PasarelaPagos() {
   const [preferenceId, setPreferenceId] = useState(null);
+  const dataSuppliers = useSelector((state) => state.profesionales);
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  const profile = dataSuppliers.find((user) => user.id === userSession.id);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfesionals());
+  }, []);
   initMercadoPago("TEST-6d144f52-f1d4-4a24-853e-d1b4592053fb"); //ocultar cuando este deploy
 
   const createPreference = async () => {
@@ -28,13 +38,13 @@ function PasarelaPagos() {
           description: "Bienvenido",
           price: 9,
           quantity: 1,
-          ProfesionalId: 1,
+          ProfesionalId: profile.id,
         }
       );
       console.log(response);
-      const { data } = response;
-      console.log(data);
-      return data;
+      const { preferenceId } = response.data;
+      console.log(preferenceId);
+      return preferenceId;
     } catch (error) {
       console.log(error.message);
     }

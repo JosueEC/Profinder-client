@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
 
@@ -10,12 +10,10 @@ import {
   FormControl,
   FormLabel,
   Input,
-
   Textarea,
   Stack,
   Button,
   useColorModeValue,
-
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
@@ -24,6 +22,7 @@ import {
   getAllCategories,
   postServicio,
 } from "../../services/redux/actions/actions";
+import { Link } from "react-router-dom";
 
 function FormServicio() {
   const {
@@ -40,6 +39,7 @@ function FormServicio() {
     },
   });
   const [userInfo, setUserInfo] = useState(null);
+
   // const history = useHistory()
   const dispatch = useDispatch();
 
@@ -49,8 +49,11 @@ function FormServicio() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
+  const dataSuppliers = useSelector((state) => state.profesionales);
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
-
+  const profile = dataSuppliers.find((user) => user.id === userSession.id);
+  console.log(profile.active);
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
@@ -74,10 +77,9 @@ function FormServicio() {
     };
 
     //console.log(newData);
-    dispatch(postServicio(newData)) 
+    dispatch(postServicio(newData));
 
     // history.push("/DashboardSuppliers");
-  
   };
 
   return (
@@ -86,8 +88,6 @@ function FormServicio() {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      // width="100%"
-      width="500px"
     >
       <Box
         rounded="lg"
@@ -95,7 +95,7 @@ function FormServicio() {
         boxShadow="lg"
         p={8}
         color="gray.300"
-       
+        width="500px"
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -168,21 +168,41 @@ function FormServicio() {
               )}
             </FormControl>
 
-            <FormControl>
-              <FormLabel />
+            {profile.active === false ? (
+              <Link to="/pasarela">
+                <Button
+                  type="submit"
+                  loadingText="Submitting"
+                  size="lg"
+                  bg="blue.400"
+                  color="white"
+                >
+                  Suscribite
+                </Button>
+              </Link>
+            ) : (
               <Button
-                type="submit"
-                loadingText="Submitting"
+             
+                
                 size="lg"
-                bg="blue.400"
+                bg="gray.400"
                 color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
               >
-                Enviar
+                Suscribite
               </Button>
-            </FormControl>
+            )}
+            <Button
+              type="submit"
+              loadingText="Submitting"
+              size="lg"
+              bg="blue.400"
+              color="white"
+              _hover={{
+                bg: "blue.500",
+              }}
+            >
+              Enviar
+            </Button>
           </form>
         </Stack>
       </Box>
