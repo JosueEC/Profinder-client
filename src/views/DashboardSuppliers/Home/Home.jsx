@@ -9,16 +9,16 @@ import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import { useSelector } from "react-redux";
 
 const DashboardSuppliers = () => {
-  const session = useSelector((state) => state.session);
+  //const session = useSelector((state) => state.session);
  // console.log(session); //trae el estado que tengo en redux con la info del profesional actualizada
 
-  useEffect(() => {
-    const userSession = window.localStorage.getItem("userSession");
-    //console.log(userSession);
-    if (userSession) {
-      const user = JSON.parse(userSession);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userSession = window.localStorage.getItem("userSession");
+  //   //console.log(userSession);
+  //   if (userSession) {
+  //     const user = JSON.parse(userSession);
+  //   }
+  // }, []);
 
   //! variable paar que todas las opciones del panel tengan el mismo estilo
   const linkStyle = {
