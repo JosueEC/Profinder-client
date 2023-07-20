@@ -12,7 +12,8 @@ export default function UsersTable () {
   const {
     client,
     getClients,
-    countResults
+    countResults,
+    getCountsGraphic
   } = useClientDash(state => state)
 
   const bg = useColorModeValue('white', 'gray.800')
@@ -24,7 +25,7 @@ export default function UsersTable () {
 
   useEffect(() => {
     countResults(client.length)
-    // getCountsGraphic()
+    getCountsGraphic()
   }, [client])
 
   return (

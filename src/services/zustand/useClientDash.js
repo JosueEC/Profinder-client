@@ -6,7 +6,7 @@ export const useClientDash = create((set) => ({
   client: [],
   auxClient: [],
   messageBackend: '',
-  countsGraphic: {
+  numbers: {
     clients: 0,
     clientsActive: 0,
     clientsBanned: 0
@@ -25,6 +25,12 @@ export const useClientDash = create((set) => ({
   countResults: (totalResults) => {
     set((state) => ({
       filters: { ...state.filters, results: totalResults }
+    }))
+  },
+
+  getCountsGraphic: () => {
+    set((state) => ({
+      countsGraphic: getCounts(state.numbers, state.auxClient)
     }))
   },
 
@@ -74,4 +80,13 @@ const noResultsObject = {
   active: undefined,
   softDelete: undefined,
   noResults: true
+}
+
+const getCounts = (countsGraphic, data) => {
+  countsGraphic.clients = data.length
+  countsGraphic.clientsActive = filterStatus(data, { status: 'Activo' }).length
+  countsGraphic.clientsBanned = filterStatus(data, { status: 'Baneado' }).length
+
+  console.info(countsGraphic)
+  return countsGraphic
 }
