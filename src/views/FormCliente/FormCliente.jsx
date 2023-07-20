@@ -62,16 +62,15 @@ function FormCliente(props) {
 
   return (
     <Flex
-      minH="100vh"
+      minH="80vh"
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
     >
       <Box
         rounded="lg"
         bg={useColorModeValue("blackAlpha.800", "gray800")}
-        boxShadow="lg"
+        width="500px"
         p={8}
         color="gray.300"
       >
@@ -82,9 +81,27 @@ function FormCliente(props) {
               <Input
                 type="text"
                 {...register("name", {
-                  required: "El campo nombre es requerido",
+                  required: "El campo nombre y apellido es requerido",
+                  pattern: {
+                    value: /^[a-zA-ZñÑ\s]+$/,
+                    message:
+                      "El nombre y apellido no puede contener expresiones especiales o símbolos",
+                  },
+                  minLength: {
+                    value: 2,
+                    message:
+                      "El nombre y apellido deben tener al menos 2 caracteres",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message:
+                      "El nombre y apellido no puede tener más de 100 caracteres",
+                  },
                 })}
               />
+              {errors.name && (
+                <span style={{ color: "red" }}>{errors.name.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -99,7 +116,9 @@ function FormCliente(props) {
                   },
                 })}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <span style={{ color: "red" }}>{errors.email.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -108,34 +127,42 @@ function FormCliente(props) {
                 type="password"
                 isRequired
                 {...register("password", {
-                  required: "El campo descripción es requerido",
-                })}
-              />
-            </FormControl>
-            {/* <FormControl>
-              <FormLabel>Foto de perfil</FormLabel>
-              <Input
-                type="file"
-                {...register("image", {
-                  required: "El campo imagen es requerido",
-                  validate: {
-                    isImage: (value) =>
-                      ["image/jpeg", "image/png"].includes(value[0]?.type) ||
-                      "Solo se permiten archivos de imagen JPEG o PNG",
+                  required: "El campo contraseña es requerido",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                    message:
+                      "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
                   },
                 })}
               />
-              {errors.image && <p>{errors.image.message}</p>}
-            </FormControl> */}
+              {errors.password && (
+                <span style={{ color: "red" }}>{errors.password.message}</span>
+              )}
+            </FormControl>
+
             <FormControl mb="30px">
               <FormLabel>Telefono</FormLabel>
               <Input
                 type="number"
                 {...register("phone", {
-                  required: "El campo telefono es requerido",
+                  required: "El campo teléfono es requerido",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "El teléfono solo debe contener números",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "El teléfono debe tener al menos 10 dígitos",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "El teléfono no puede tener más de 10 dígitos",
+                  },
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {errors.phone && (
+                <span style={{ color: "red" }}>{errors.phone.message}</span>
+              )}
             </FormControl>
 
             <FormControl>

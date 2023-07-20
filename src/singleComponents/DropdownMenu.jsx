@@ -9,6 +9,7 @@ export default function DropdownMenu ({ titleMenu, menuItems, onClick }) {
   return (
     <Menu>
       <MenuButton
+      borderWidth="1px"
         as={Button}
         rightIcon={<ChevronDownIcon />}
         bg={useColorModeValue('gray.100', 'gray.800')}

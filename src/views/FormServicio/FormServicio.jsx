@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
 
-
 import {
   Flex,
   Box,
@@ -45,7 +44,7 @@ function FormServicio(props) {
       content: "",
     },
   });
-// const history = useHistory()
+  // const history = useHistory()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -89,7 +88,8 @@ function FormServicio(props) {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
+      // width="100%"
+      width="500px"
     >
       <Box
         rounded="lg"
@@ -97,6 +97,7 @@ function FormServicio(props) {
         boxShadow="lg"
         p={8}
         color="gray.300"
+       
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,6 +109,9 @@ function FormServicio(props) {
                   required: "El campo nombre es requerido",
                 })}
               />
+              {errors.title && (
+                <span style={{ color: "red" }}>{errors.title.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -116,7 +120,7 @@ function FormServicio(props) {
                 type="file"
                 multiple // Allow multiple file selection
                 {...register("images", {
-                  required: "El campo imagen es requerido",
+                  required: "Solo se permiten archivos de imagen JPEG o PNG",
                   validate: {
                     isImage: (value) => {
                       if (value) {
@@ -135,6 +139,9 @@ function FormServicio(props) {
                   },
                 })}
               />
+              {errors.images && (
+                <span style={{ color: "red" }}>{errors.images.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -150,9 +157,17 @@ function FormServicio(props) {
               <Textarea
                 type="text"
                 {...register("content", {
-                  required: "El campo contraseña es requerido",
+                  required: "El campo es requerido",
+                  maxLength: {
+                    value: 250,
+                    message:
+                      "La descripción no puede tener más de 250 caracteres",
+                  },
                 })}
               />
+              {errors.content && (
+                <span style={{ color: "red" }}>{errors.content.message}</span>
+              )}
             </FormControl>
 
             <FormControl>

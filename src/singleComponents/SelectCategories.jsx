@@ -38,7 +38,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation 
   }, [])
 
   return (
-    <Stack direction='row' spacing={6}>
+    <Stack direction='row' spacing={6} >
       <DropdownMenu
         titleMenu={categoryName}
         menuItems={[{ name: 'Todas' }, ...categories]}

@@ -158,6 +158,10 @@ function FormUpdateProfile() {
     //console.log(newData);
 
     await dispatch(updateProfesionals(newData, session.id));
+    localStorage.removeItem("userSession");
+    localStorage.setItem("userSession", JSON.stringify(sessionData));
+    const userSesion = localStorage.getItem("userSession");
+    console.log(userSesion);
   };
 
   return (
