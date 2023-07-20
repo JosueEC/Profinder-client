@@ -1,16 +1,28 @@
 import { create } from 'zustand'
 import { API } from '../../utils/API/constants'
-import { filterData } from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
+import {
+  filterData,
+  filterStatus,
+  filterPlan
+} from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
 
 export const useProfesionalDash = create((set) => ({
   profesional: [],
   auxProfesional: [],
   messageBackend: '',
+  countsGraphic: {
+    profesional: 0,
+    profesionalActive: 0,
+    profesionalBanned: 0,
+    profesionalPremiumActive: 0,
+    profesionalPremiumBanned: 0
+  },
   filters: {
     category: 'Categorias',
     ocupation: 'Ocupacion',
     status: 'Estatus',
-    plan: 'Plan'
+    plan: 'Plan',
+    results: 0
   },
 
   applyFilter: (filter) => {
@@ -19,44 +31,24 @@ export const useProfesionalDash = create((set) => ({
     }))
   },
 
-  getProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional`)
+  countResults: (totalResults) => {
     set((state) => ({
-      profesional: filterData(response, state.filters),
-      auxProfesional: response
+      filters: { ...state.filters, results: totalResults }
     }))
   },
 
-  getBannedProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/delete`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
+  getCountsGraphic: () => {
+    set((state) => ({
+      countsGraphic: getCounts(state.countsGraphic, state.auxProfesional)
+    }))
   },
 
-  getActiveProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/noDelete`)
-    set({
-      profesional: response,
+  getProfesional: async (URL) => {
+    const response = await fetchData(URL)
+    set((state) => ({
+      profesional: response.message ? noResultsObject : filterData(response, state.filters),
       auxProfesional: response
-    })
-  },
-
-  getBasicProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/noPremiun`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
-  },
-
-  getPremiumProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/premiun`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
+    }))
   },
 
   postBannedProfesional: async (userID) => {
@@ -67,9 +59,25 @@ export const useProfesionalDash = create((set) => ({
     })
   },
 
+  postUnbannedProfesional: async (userID) => {
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/reverseDelete/${userID}`, options)
+    set({
+      messageBackend: response
+    })
+  },
+
   postPremiumProfesional: async (userID) => {
     const options = { method: 'PUT' }
     const response = await fetchData(`${API.DBONLINE}/profesional/premiun/${userID}`, options)
+    set({
+      messageBackend: response
+    })
+  },
+
+  postRemovePremium: async (userID) => {
+    const options = { method: 'PUT' }
+    const response = await fetchData(`${API.DBONLINE}/profesional/reversePremiun/${userID}`, options)
     set({
       messageBackend: response
     })
@@ -98,4 +106,25 @@ const noResultsObject = {
   active: undefined,
   softDelete: undefined,
   noResults: true
+}
+
+const getCounts = (countsGraphic, data) => {
+  countsGraphic.profesional = data.length
+  countsGraphic.profesionalActive = filterStatus(data, { status: 'Activo' }).length
+  countsGraphic.profesionalBanned = filterStatus(data, { status: 'Baneado' }).length
+  countsGraphic.profesionalPremium = filterPlan(data, { plan: 'Premium' }).length
+  countsGraphic.profesionalPremiumActive = filterData(data, {
+    category: 'Categorias',
+    ocupation: 'Ocupacion',
+    status: 'Activo',
+    plan: 'Premium'
+  }).length
+  countsGraphic.profesionalPremiumBanned = filterData(data, {
+    category: 'Categorias',
+    ocupation: 'Ocupacion',
+    status: 'Beneado',
+    plan: 'Premium'
+  }).length
+
+  return countsGraphic
 }

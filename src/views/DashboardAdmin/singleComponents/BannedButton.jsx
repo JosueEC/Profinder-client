@@ -2,6 +2,7 @@
 import { Button } from '@chakra-ui/button'
 import { useToast } from '@chakra-ui/toast'
 import { useProfesionalDash } from '../../../services/zustand/useProfesionalDash'
+import { URL } from '../constants'
 
 export default function BannedButton ({ id }) {
   const toast = useToast()
@@ -12,7 +13,7 @@ export default function BannedButton ({ id }) {
 
   async function handleBannedAction () {
     await postBannedProfesional(id)
-    await getProfesional()
+    await getProfesional(URL.GET_PROFESIONAL)
     toast({
       title: 'Cuenta baneada',
       description: 'La cuenta ha sido desactivada',

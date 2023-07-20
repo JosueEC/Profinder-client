@@ -7,9 +7,9 @@ export const filterData = (data, objFilters) => {
   const stateByCategory = filterCategory(data, objFilters)
   const stateByOcupation = filterOcupation(stateByCategory, objFilters)
   const stateByStatus = filterStatus(stateByOcupation, objFilters)
+  const stateByPlan = filterPlan(stateByStatus, objFilters)
 
-  console.info(stateByStatus)
-  return stateByStatus
+  return stateByPlan
 }
 
 export const filterStatus = (data, objFilters) => {
@@ -18,10 +18,10 @@ export const filterStatus = (data, objFilters) => {
   if (filter === 'Estatus' || filter === 'Todos') return data
   if (filter === 'Activo') {
     newState = data.filter(({ softDelete }) => {
-      return softDelete === false || softDelete === null
+      return (softDelete === false || softDelete === null)
     })
   } else {
-    newState.filter(({ softDelete }) => {
+    newState = data.filter(({ softDelete }) => {
       return softDelete === true
     })
   }

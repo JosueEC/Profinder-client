@@ -4,21 +4,29 @@ import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
 import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
 import { useEffect } from 'react'
+import { URL } from '../../constants'
 import FiltersDashboard from '../FiltersDashboard/FiltersDashboard'
 import UserRegister from '../../singleComponents/UserRegister'
 
 export default function UsersTable () {
   const {
     profesional,
-    getProfesional
+    getProfesional,
+    countResults,
+    getCountsGraphic
   } = useProfesionalDash(state => state)
 
   const bg = useColorModeValue('white', 'gray.800')
   const bg3 = useColorModeValue('gray.100', 'gray.700')
 
   useEffect(() => {
-    getProfesional()
+    getProfesional(URL.GET_PROFESIONAL)
   }, [])
+
+  useEffect(() => {
+    countResults(profesional.length)
+    getCountsGraphic()
+  }, [profesional])
 
   return (
     <Flex // Container tabla
