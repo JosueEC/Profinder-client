@@ -270,7 +270,7 @@ const getProfesionals = () => {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${URL}`);
-      console.log(response.data);
+    //  console.log(response.data);
       if (response.data) {
         return dispatch({
           type: GET_INFO_PROFESIONALS,

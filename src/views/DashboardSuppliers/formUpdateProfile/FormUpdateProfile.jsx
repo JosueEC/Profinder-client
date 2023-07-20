@@ -26,20 +26,15 @@ import {
 } from "@chakra-ui/react";
 import SelectCategories from "../../../singleComponents/SelectCategories";
 import { uploadFile } from "../../../utils/Firebase/config";
-//import { useSelector } from "react-redux";
-//import { useSessionState } from "../../../services/zustand/useSession";
-//import { postSessionUser } from "../../services/redux/actions/actions";
-//import { useCredentials } from "../../../utils/customHooks/useCredentials";
+
 
 function FormUpdateProfile() {
   const session = JSON.parse(localStorage.getItem("userSession"));
-  // const session = useSessionState((state) => state.session);
-  // console.log(session);  // ok // este es el dato que deseo cambiar
-  //   const session = useSelector((state) => state.session);
-  //  console.log(session); // preguntarle a josue como actualizo el estado, de zustand ya que los datos cargan ok
   //console.log(session);
-
-  // const { handleUserSession } = useCredentials();
+  // const profile  = useSelector(state=> state.profesionales)
+  // const userById = profile.filter((user)=> user.id === session.id);
+  // console.log(userById);
+ 
 
   const [genre, setGenre] = useState("male");
 
@@ -54,7 +49,7 @@ function FormUpdateProfile() {
       image: [],
       genre: "",
       years_exp: "",
-      password: "",
+      password: session.password,
       countryId: "",
       locationId: "",
       phone: "",

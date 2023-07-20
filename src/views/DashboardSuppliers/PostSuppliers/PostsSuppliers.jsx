@@ -13,11 +13,8 @@ import {
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
-   console.log(session);
-
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
-   console.log(filteredPosts);
 
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

@@ -3,22 +3,12 @@ import { Box, useColorModeValue, Button, Stack } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
-import { useSelector } from "react-redux";
 
 const DashboardSuppliers = () => {
-  //const session = useSelector((state) => state.session);
- // console.log(session); //trae el estado que tengo en redux con la info del profesional actualizada
 
-  // useEffect(() => {
-  //   const userSession = window.localStorage.getItem("userSession");
-  //   //console.log(userSession);
-  //   if (userSession) {
-  //     const user = JSON.parse(userSession);
-  //   }
-  // }, []);
 
   //! variable paar que todas las opciones del panel tengan el mismo estilo
   const linkStyle = {
@@ -102,7 +92,7 @@ const DashboardSuppliers = () => {
             </Button>
           </RouterLink>
           <ScrollLink
-            to="obtener-premium"
+            to="/pasarela"
             spy
             smooth
             duration={500}
