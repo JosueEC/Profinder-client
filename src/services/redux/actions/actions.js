@@ -111,6 +111,7 @@ const postServicio = (info) => {
       await axios.post(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
       });
+      alert("Publicacion Exitosa!")
      
     } catch (error) {
       alert(`${error.response.data.error}`);

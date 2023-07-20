@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
 
@@ -10,17 +10,12 @@ import {
   FormControl,
   FormLabel,
   Input,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+
   Textarea,
   Stack,
   Button,
   useColorModeValue,
-  Radio,
-  RadioGroup,
+
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
@@ -30,7 +25,7 @@ import {
   postServicio,
 } from "../../services/redux/actions/actions";
 
-function FormServicio(props) {
+function FormServicio() {
   const {
     register,
     formState: { errors },
@@ -44,6 +39,7 @@ function FormServicio(props) {
       content: "",
     },
   });
+  const [userInfo, setUserInfo] = useState(null);
   // const history = useHistory()
   const dispatch = useDispatch();
 
@@ -77,9 +73,11 @@ function FormServicio(props) {
       ocupation: selectedOccupations,
     };
 
-    console.log(newData);
-    dispatch(postServicio(newData));
+    //console.log(newData);
+    dispatch(postServicio(newData)) 
+
     // history.push("/DashboardSuppliers");
+  
   };
 
   return (
