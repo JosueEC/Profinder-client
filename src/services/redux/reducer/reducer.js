@@ -23,7 +23,7 @@ const initialState = {
   error: null,
   filters: {
     category: 'Categorias',
-    ocupation: 'Selecciona una categoria',
+    ocupation: 'Ocupacion',
     rating: 'Rating',
     genre: 'Genero'
   },

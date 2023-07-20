@@ -34,10 +34,12 @@ export default function FiltersDashboard () {
 
   function handleSelectCategory (value) {
     applyFilter({ name: 'category', value })
+    getProfesional()
   }
 
   function handleSelectOcupation (value) {
     applyFilter({ name: 'ocupation', value })
+    getProfesional()
   }
 
   function handleSelectStatus (event) {
@@ -108,7 +110,7 @@ export default function FiltersDashboard () {
         >
           <Text>
             {`Resultados para
-            ${category === 'Categoria' ? '' : category + '🔹'} 
+            ${category === 'Categorias' ? '' : category + '🔹'} 
             ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}`}
           </Text>
         </Container>
