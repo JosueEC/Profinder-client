@@ -2,14 +2,16 @@
 import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import { useEffect } from 'react'
 import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
+import { getActualDate } from '../../constants'
 import UsersTable from '../UsersTable/UsersTable'
 import Statistic from '../../singleComponents/Statistic'
-import { useEffect } from 'react'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function ProfesionalManagement () {
+  const date = getActualDate()
   const {
     profesional,
     profesionalActive,
@@ -68,17 +70,17 @@ export default function ProfesionalManagement () {
             <Statistic
               label='Totales'
               number={profesional}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Activos'
               number={profesionalActive}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Baneados'
               number={profesionalBanned}
-              helpText='Julio 18'
+              helpText={date}
             />
           </Stack>
           <Heading size='lg'>Profesionales Premium</Heading>
@@ -89,17 +91,17 @@ export default function ProfesionalManagement () {
             <Statistic
               label='Totales'
               number={profesionalPremium}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Activos'
               number={profesionalPremiumActive}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Baneados'
               number={profesionalPremiumBanned}
-              helpText='Julio 18'
+              helpText={date}
             />
           </Stack>
         </Stack>

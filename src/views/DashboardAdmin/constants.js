@@ -14,3 +14,13 @@ export const CLIENT = Object.freeze({
   GET_ACTIVE_CLIENTS: `${DOMAIN_CLIENT}`,
   GET_BANNED_CLIENTS: `${DOMAIN_CLIENT}/delete`
 })
+
+export const getActualDate = () => {
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
+  // const fecha = new Date();
+  // const day = fecha.getDate();
+  // const month = fecha.getMonth() + 1;
+
+  return hoy.toLocaleDateString();
+}

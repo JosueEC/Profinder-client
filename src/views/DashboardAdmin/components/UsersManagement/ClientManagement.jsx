@@ -3,6 +3,7 @@ import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { useEffect } from 'react'
+import { getActualDate } from '../../constants'
 import { useClientDash } from '../../../../services/zustand/useClientDash'
 import Statistic from '../../singleComponents/Statistic'
 import ClientUsersTable from '../UsersTable/ClientUsersTable'
@@ -10,6 +11,7 @@ import ClientUsersTable from '../UsersTable/ClientUsersTable'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function ClientManagement () {
+  const date = getActualDate()
   const {
     clients,
     clientsActive,
@@ -59,17 +61,17 @@ export default function ClientManagement () {
             <Statistic
               label='Totales'
               number={clients}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Activos'
               number={clientsActive}
-              helpText='Julio 18'
+              helpText={date}
             />
             <Statistic
               label='Baneados'
               number={clientsBanned}
-              helpText='Julio 18'
+              helpText={date}
             />
           </Stack>
         </Stack>
