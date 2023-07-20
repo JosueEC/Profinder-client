@@ -1,10 +1,12 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Box, useColorModeValue, Button, Stack } from "@chakra-ui/react";
-import { ChatIcon, ViewIcon, EditIcon } from "@chakra-ui/icons";
+import { Box, Flex, useColorModeValue, Button, Stack } from "@chakra-ui/react";
+import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
 import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import { useState } from "react";
+import { useEffect } from "react";
+import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import BarData from "../DataSuppliers/BarData";
@@ -25,19 +27,14 @@ const DashboardSuppliers = () => {
   const [showPosts, setShowPosts] = useState(false);
   const [showFormServicio, setShowFormServicio] = useState(false);
   const [showInicio, setShowInicio] = useState(false);
-
-  const handleShowInicio = () => {
-    setShowInicio(true);
-    setShowForm(false);
-    setShowPosts(false);
-    setShowFormServicio(false);
-  };
+  const [showAyuda, setShowAyuda] = useState(false);
 
   const handleShowForm = () => {
     setShowForm(true);
     setShowPosts(false);
     setShowFormServicio(false);
     setShowInicio(false);
+    setShowAyuda(false);
   };
 
   const handleShowPosts = () => {
@@ -45,6 +42,7 @@ const DashboardSuppliers = () => {
     setShowPosts(true);
     setShowFormServicio(false);
     setShowInicio(false);
+    setShowAyuda(false);
   };
 
   const handleShowFormServicio = () => {
@@ -52,11 +50,30 @@ const DashboardSuppliers = () => {
     setShowPosts(false);
     setShowFormServicio(true);
     setShowInicio(false);
+    setShowAyuda(false);
   };
+
+  const handleShowInicio = () => {
+    setShowInicio(true);
+    setShowForm(false);
+    setShowPosts(false);
+    setShowFormServicio(false);
+    setShowAyuda(false);
+  };
+  const handleShowAyuda = () => {
+    setShowInicio(false);
+    setShowForm(false);
+    setShowPosts(false);
+    setShowFormServicio(false);
+    setShowAyuda(true);
+  };
+  useEffect(() => {
+    handleShowInicio();
+  }, []);
 
   return (
     <Box height="100vh" display="flex">
-      <Box w="250px" bg="gray.600" p={4}>
+      <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
           <ScrollLink
             to="publicaciones"
@@ -127,23 +144,34 @@ const DashboardSuppliers = () => {
             style={linkStyle}
           >
             <Button variant="outline">Obtén Premium</Button>
+            <ScrollLink
+              to="/pasarela"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+              onClick={handleShowAyuda}
+            >
+              <Button variant="outline" leftIcon={<QuestionIcon />}>
+                Ayuda
+              </Button>
+            </ScrollLink>
           </ScrollLink>
         </Stack>
       </Box>
 
-      <Box flex="1">
-        {showForm ? <FormUpdate /> : null}
-        {showFormServicio ? <FormServicio /> : null}
-        {showPosts ? <PostsSuppliers /> : null}
-        {/* aca va toda la info en la primer ventana que se abre */}
-
-        <Box w="400px" h="400px" borderWidth="4px" borderColor="gray.500">
+      {showPosts ? <PostsSuppliers /> : null}
+      {showForm ? <FormUpdate /> : null}
+      {showFormServicio ? <FormServicio /> : null}
+      <Flex justifyContent="flex-start" alignItems="flex-end">
+        {showAyuda ? <CustomChatBot /> : null}
+      </Flex>
+      {showInicio ? (
+        <Flex direction="row" justifyContent="space-around">
           <DataSuppliers />
-        </Box> 
-        <Box w="400px" h="200px" borderWidth="4px" borderColor="gray.500">
           <BarData />
-        </Box>
-      </Box>
+        </Flex>
+      ) : null}
     </Box>
   );
 };
