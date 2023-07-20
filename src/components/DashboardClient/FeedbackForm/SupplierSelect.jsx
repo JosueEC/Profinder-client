@@ -35,11 +35,11 @@ const SupplierSelect = ({ onSupplierSelect }) => { // Agregamos la prop onSuppli
   return (
     <FormControl p={4}>
       <FormLabel>
-        Select Supplier <Code>size="md" (default)</Code>
+        Busca por nombre el profesional que deseas valorar:
       </FormLabel>
       <Select
         options={supplierOptions}
-        placeholder="Search and select a supplier..."
+        placeholder="Busca y selecciona un profesional..."
         isClearable
         onChange={handleSupplierSelect} // Usamos la función handleSupplierSelect
         value={selectedSupplier}

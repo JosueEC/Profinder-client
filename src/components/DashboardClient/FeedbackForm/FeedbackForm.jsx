@@ -82,7 +82,7 @@ function FeedbackForm() {
       profesionalId: selectedSupplierId, // Usamos el ID del proveedor seleccionado
       clientId: clientId,
     };
-
+      console.log("Data being sent:", newData); 
     dispatch(updateFeedback(newData))
       .then(() => {
         setSuccessMessage('Comentario enviado exitosamente.');
@@ -97,7 +97,7 @@ function FeedbackForm() {
         setShowErrorAlert(true);
       });
   };
-
+  
   const textColor = useColorModeValue('black', 'white');
 
   return (
