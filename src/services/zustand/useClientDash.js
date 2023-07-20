@@ -1,11 +1,12 @@
 import { create } from 'zustand'
 import { API } from '../../utils/API/constants'
+import { filterStatus } from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
 
 export const useClientDash = create((set) => ({
   client: [],
   auxClient: [],
   messageBackend: '',
-  countsGraphic: {
+  numbers: {
     clients: 0,
     clientsActive: 0,
     clientsBanned: 0
@@ -15,7 +16,7 @@ export const useClientDash = create((set) => ({
     results: 0
   },
 
-  applyFilters: (filter) => {
+  applyFilter: (filter) => {
     set((state) => ({
       filters: { ...state.filters, [filter.name]: filter.value }
     }))
@@ -27,12 +28,18 @@ export const useClientDash = create((set) => ({
     }))
   },
 
+  getCountsGraphic: () => {
+    set((state) => ({
+      countsGraphic: getCounts(state.numbers, state.auxClient)
+    }))
+  },
+
   getClients: async (URL) => {
     const response = await fetchData(URL)
-    set({
-      client: response,
+    set((state) => ({
+      client: response.message ? noResultsObject : filterStatus(response, state.filters),
       auxClient: response
-    })
+    }))
   },
 
   postBannedClient: async (clientID) => {
@@ -56,7 +63,6 @@ const fetchData = async (URL, options) => {
   const data = await fetch(URL, options)
     .then(response => response.json())
     .then(results => {
-      console.info(results)
       if (results.message) {
         return [noResultsObject]
       }
@@ -74,4 +80,13 @@ const noResultsObject = {
   active: undefined,
   softDelete: undefined,
   noResults: true
+}
+
+const getCounts = (countsGraphic, data) => {
+  countsGraphic.clients = data.length
+  countsGraphic.clientsActive = filterStatus(data, { status: 'Activo' }).length
+  countsGraphic.clientsBanned = filterStatus(data, { status: 'Baneado' }).length
+
+  console.info(countsGraphic)
+  return countsGraphic
 }

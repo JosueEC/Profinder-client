@@ -11,7 +11,9 @@ import UserRegisterClient from '../../singleComponents/UserRegisterClient'
 export default function UsersTable () {
   const {
     client,
-    getClients
+    getClients,
+    countResults,
+    getCountsGraphic
   } = useClientDash(state => state)
 
   const bg = useColorModeValue('white', 'gray.800')
@@ -21,10 +23,10 @@ export default function UsersTable () {
     getClients(CLIENT.GET_CLIENTS)
   }, [])
 
-  // useEffect(() => {
-  //   countResults(profesional.length)
-  //   getCountsGraphic()
-  // }, [profesional])
+  useEffect(() => {
+    countResults(client.length)
+    getCountsGraphic()
+  }, [client])
 
   return (
     <Flex // Container tabla
