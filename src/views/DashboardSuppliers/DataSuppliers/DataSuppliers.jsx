@@ -2,12 +2,14 @@ import { Doughnut } from "react-chartjs-2";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfesionals } from "../../../services/redux/actions/actions";
+import { Box,Flex } from "@chakra-ui/react"; 
+
 
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
   const profile = dataSuppliers.find((user) => user.id === userSession.id);
-  console.log(profile);
+  //console.log(profile);
 
   const dispatch = useDispatch();
 
@@ -58,16 +60,17 @@ const DataSuppliers = () => {
         position: "top",
       },
     },
-    cutout: "70%", // Cambiar este valor para controlar el tamaño del agujero en el centro
+    cutout: "50%", 
   };
 
   return (
-    <div>
-      <div>
-        {/* Renderizar la gráfica */}
-          <Doughnut data={chartData} options={chartOptions} />
-      </div>
-    </div>
+    <Flex justifyContent="flex-end" alignItems="flex-start">
+    <Box width="600px" height="600px">
+   
+        <Doughnut data={chartData} options={chartOptions} />
+  
+    </Box>
+  </Flex>
   );
 };
 

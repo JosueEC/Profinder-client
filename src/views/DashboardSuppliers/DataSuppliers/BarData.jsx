@@ -1,13 +1,15 @@
 import { BarElement, CategoryScale, Legend, LinearScale, Title } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js";
+import { Box } from "@chakra-ui/react"; 
+
 
 ChartJS.register(CategoryScale, LinearScale, Legend, Title, BarElement);
 
 const BarData = () => {
   // Datos
   const data = {
-    labels: ["Mis Datos", ],
+    labels: ["MIS DATOS", ],
     datasets: [
       {
         label: "Posts",
@@ -42,6 +44,10 @@ const BarData = () => {
     plugins: {
       legend: {
         display: false,
+        text: "MIS DATOS",
+        font: {
+          size: 30, 
+        },
       },
     },
     scales: {
@@ -60,9 +66,11 @@ const BarData = () => {
   };
 
   return (
-    <div>
+    <Box width="600px" height="200px">
+    <Box>
       <Bar data={data} options={options} />
-    </div>
+    </Box>
+  </Box>
   );
 };
 
