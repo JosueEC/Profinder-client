@@ -28,12 +28,13 @@ function PasarelaPagos() {
           description: "Bienvenido",
           price: 9,
           quantity: 1,
+          ProfesionalId: 1,
         }
       );
       console.log(response);
-      const { id } = response.data;
-      console.log(id);
-      return id;
+      const { data } = response;
+      console.log(data);
+      return data;
     } catch (error) {
       console.log(error.message);
     }

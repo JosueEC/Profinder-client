@@ -85,6 +85,9 @@ function FormCliente(props) {
                   required: "El campo nombre es requerido",
                 })}
               />
+              {errors.name && (
+                <span style={{ color: "red" }}>{errors.name.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -99,7 +102,9 @@ function FormCliente(props) {
                   },
                 })}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <span style={{ color: "red" }}>{errors.email.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -111,22 +116,11 @@ function FormCliente(props) {
                   required: "El campo descripción es requerido",
                 })}
               />
+              {errors.password && (
+                <span style={{ color: "red" }}>{errors.password.message}</span>
+              )}
             </FormControl>
-            {/* <FormControl>
-              <FormLabel>Foto de perfil</FormLabel>
-              <Input
-                type="file"
-                {...register("image", {
-                  required: "El campo imagen es requerido",
-                  validate: {
-                    isImage: (value) =>
-                      ["image/jpeg", "image/png"].includes(value[0]?.type) ||
-                      "Solo se permiten archivos de imagen JPEG o PNG",
-                  },
-                })}
-              />
-              {errors.image && <p>{errors.image.message}</p>}
-            </FormControl> */}
+
             <FormControl mb="30px">
               <FormLabel>Telefono</FormLabel>
               <Input
@@ -135,7 +129,9 @@ function FormCliente(props) {
                   required: "El campo telefono es requerido",
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {errors.phone && (
+                <span style={{ color: "red" }}>{errors.phone.message}</span>
+              )}
             </FormControl>
 
             <FormControl>

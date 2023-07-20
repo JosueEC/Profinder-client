@@ -9,13 +9,13 @@ import {
   //GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
-  POST_PROFESIONAL
+  POST_PROFESIONAL,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
 const getAllSuppliers = () => {
   // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
 
   return function (dispatch) {
     axios
@@ -30,7 +30,7 @@ const getAllSuppliers = () => {
 //! Todas las categorias con su ID
 const getAllCategories = () => {
   // const URL = `${API.LOCALHOST}/category`
-  const URL = `${API.DBONLINE}/category`
+  const URL = `${API.DBONLINE}/category`;
 
   return function (dispatch) {
     fetch(URL)
@@ -49,7 +49,7 @@ const getAllCategories = () => {
 //! action para buscar por nombre de profesion //*****Revisar si aun se esta usando si no borrar */
 const searchProfessionals = (name) => {
   // const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
-  const URL = `${API.DBONLINE}/ocupationsp?name=${name}`
+  const URL = `${API.DBONLINE}/ocupationsp?name=${name}`;
 
   return function (dispatch) {
     if (name) {
@@ -92,7 +92,7 @@ const applyFilters = (objFilters) => {
 
 const postServicio = (info) => {
   // const URL = `${API.LOCALHOST}/postprofesional`
-  const URL = `${API.DBONLINE}/postprofesional`
+  const URL = `${API.DBONLINE}/postprofesional`;
 
   return async function () {
     try {
@@ -108,10 +108,10 @@ const postServicio = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.post(URL, info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Publicacion Creada");
+      await axios.post(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+     
     } catch (error) {
       alert(`${error.response.data.error}`);
     }
@@ -127,7 +127,7 @@ const postProveedor = (info) => {
   }
 
   // const URL = `${API.LOCALHOST}/profesional/${info.id}`
-  const URL = `${API.DBONLINE}/profesional/${info.id}`
+  const URL = `${API.DBONLINE}/profesional/${info.id}`;
 
   return async function () {
     try {
@@ -148,10 +148,10 @@ const postProveedor = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(URL, info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Perfil creado");
+      await axios.put(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      
     } catch (error) {
       console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
@@ -168,7 +168,7 @@ const postCliente = (info) => {
   }
 
   // const URL = `${API.LOCALHOST}/client/${info.id}`
-  const URL = `${API.DBONLINE}/client/${info.id}`
+  const URL = `${API.DBONLINE}/client/${info.id}`;
 
   return async function () {
     try {
@@ -183,10 +183,9 @@ const postCliente = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(URL, info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Perfil creado");
+      await axios.put(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
     } catch (error) {
       alert(`${error.response.data.error}`);
     }
@@ -195,7 +194,7 @@ const postCliente = (info) => {
 
 const loginSessionGoogle = () => {
   // const URL = `${API.LOCALHOST}/auth/google`
-  const URL = `${API.DBONLINE}/auth/google`
+  const URL = `${API.DBONLINE}/auth/google`;
 
   return async function () {
     await fetch(URL)
@@ -266,7 +265,7 @@ const postSessionUser = (dataSession) => {
 //! Traigo profesionales  para renderizar sus post
 const getProfesionals = () => {
   // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
 
   return async function (dispatch) {
     try {
@@ -286,15 +285,15 @@ const getProfesionals = () => {
 
 //! Actualizar Profesionales
 const updateProfesionals = (data, id) => {
- // console.log(id);  // el id llega bien***** falta la data
+  // console.log(id);  // el id llega bien***** falta la data
   // const URL = `${API.LOCALHOST}/profesional/${id}`
-  const URL = `${API.DBONLINE}/profesional/${id}`
+  const URL = `${API.DBONLINE}/profesional/${id}`;
 
   return async function (dispatch) {
     try {
       const response = await axios.put(URL, data);
       if (response && response.data) {
-       // console.log(response.data);
+        // console.log(response.data);
         dispatch({
           type: UPDATE_PROFESIONAL,
           payload: response.data,
@@ -311,7 +310,7 @@ const updateProfesionals = (data, id) => {
 // Action para obtener todos los clientes
 const getAllClients = () => {
   // const URL = `${API.LOCALHOST}/client`
-  const URL = `${API.DBONLINE}/client`
+  const URL = `${API.DBONLINE}/client`;
 
   return function (dispatch) {
     axios
@@ -328,15 +327,14 @@ const getAllClients = () => {
 
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
-  const userSession = JSON.parse(localStorage.getItem('userSession'));
-  //console.log(userSession);  
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  //console.log(userSession);
   if (userSession) {
-      newData.id = userSession.id;
-      
-    }
+    newData.id = userSession.id;
+  }
 
   // const URL = `${API.LOCALHOST}/client/${newData.id}`
-  const URL = `${API.DBONLINE}/client/${newData.id}`
+  const URL = `${API.DBONLINE}/client/${newData.id}`;
 
   return function (dispatch) {
     axios
@@ -352,7 +350,7 @@ const updateClient = (clientId, newData) => {
 
 export const getPostProfesional = () => {
   // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
 
   return async function (dispatch) {
     try {
@@ -364,21 +362,23 @@ export const getPostProfesional = () => {
   };
 };
 
-
 // Acción para enviar el feedback al backend
- const updateFeedback = (feedbackData) => {
+const updateFeedback = (feedbackData) => {
   return async (dispatch) => {
     try {
       // Llamar a la API o endpoint correspondiente para enviar el feedback
-      const response = await axios.post('https://backprofinder-production.up.railway.app/review', feedbackData);
-      
+      const response = await axios.post(
+        "https://backprofinder-production.up.railway.app/review",
+        feedbackData
+      );
+
       // Aquí puedes despachar otra acción si lo necesitas, por ejemplo, para actualizar el estado de la aplicación
-      
+
       // Ejemplo de despacho de una acción de éxito
       dispatch(updateFeedbackSuccess(response.data));
     } catch (error) {
       // Manejar errores si es necesario
-      
+
       // Ejemplo de despacho de una acción de error
       dispatch(updateFeedbackError(error.message));
     }
@@ -386,17 +386,17 @@ export const getPostProfesional = () => {
 };
 
 // Acción para éxito del envío del feedback
- const updateFeedbackSuccess = (data) => {
+const updateFeedbackSuccess = (data) => {
   return {
-    type: 'UPDATE_FEEDBACK_SUCCESS',
+    type: "UPDATE_FEEDBACK_SUCCESS",
     payload: data,
   };
 };
 
 // Acción para error en el envío del feedback
- const updateFeedbackError = (error) => {
+const updateFeedbackError = (error) => {
   return {
-    type: 'UPDATE_FEEDBACK_ERROR',
+    type: "UPDATE_FEEDBACK_ERROR",
     payload: error,
   };
 };
@@ -419,5 +419,5 @@ export {
   updateClient,
   updateFeedback,
   updateFeedbackSuccess,
-  updateFeedbackError
+  updateFeedbackError,
 };

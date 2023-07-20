@@ -34,9 +34,13 @@ import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 
 function FormProvider() {
   const { handleUserSession } = useCredentials();
-  const [genre, setGenre] = useState('female')
+  const [genre, setGenre] = useState("female");
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -49,7 +53,7 @@ function FormProvider() {
       phone: "",
       ocupations: [],
       categories: [],
-    }
+    },
   });
 
   const dispatch = useDispatch();
@@ -104,7 +108,7 @@ function FormProvider() {
       setLocations([]);
     }
   };
- 
+
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
@@ -159,13 +163,7 @@ function FormProvider() {
       bg={useColorModeValue("gray.800", "gray.800")}
       width="100%"
     >
-      <Box
-        rounded="lg"
-   
-        boxShadow="lg"
-        p={8}
-        color="gray.300"
-      >
+      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
@@ -176,6 +174,9 @@ function FormProvider() {
                   required: "El campo nombre es requerido",
                 })}
               />
+              {errors.name && (
+                <span style={{ color: "red" }}>{errors.name.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -190,7 +191,9 @@ function FormProvider() {
                   },
                 })}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <span style={{ color: "red" }}>{errors.email.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -201,18 +204,16 @@ function FormProvider() {
                   required: "El campo telefono es requerido",
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {errors.phone && (
+                <span style={{ color: "red" }}>{errors.phone.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
               <FormLabel>País</FormLabel>
               <Select
-                {...register("country", {
-                  required: "El campo país es requerido",
-                })}
-                // bg={useColorModeValue("white", "gray.700")}
+                {...register("country")}
                 borderWidth="1px"
-                // color="gray.800"
                 onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
@@ -222,7 +223,9 @@ function FormProvider() {
                   </option>
                 ))}
               </Select>
-              {errors.country && <p>{errors.country.message}</p>}
+              {errors.country && (
+                <span style={{ color: "red" }}>{errors.country.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -242,7 +245,9 @@ function FormProvider() {
                   </option>
                 ))}
               </Select>
-              {errors.location && <p>{errors.location.message}</p>}
+              {errors.location && (
+                <span style={{ color: "red" }}>{errors.location.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -258,7 +263,9 @@ function FormProvider() {
                   },
                 })}
               />
-              {errors.image && <p>{errors.image.message}</p>}
+              {errors.image && (
+                <span style={{ color: "red" }}>{errors.image.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -267,6 +274,7 @@ function FormProvider() {
                 <Stack direction="row">
                   <Radio value="female">Femenino</Radio>
                   <Radio value="male">Masculino</Radio>
+                  <Radio value="otro">Otro</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -277,10 +285,6 @@ function FormProvider() {
                 <NumberInputField
                   {...register("years_exp", { required: true })}
                 />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
               </NumberInput>
             </FormControl>
 
@@ -300,11 +304,13 @@ function FormProvider() {
                   required: "El campo contraseña es requerido",
                   minLength: {
                     value: 8,
-                    message: 'La contraseña debe tener minimo 8 caracteres'
-                  }
+                    message: "La contraseña debe tener minimo 8 caracteres",
+                  },
                 })}
               />
-              {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && (
+                <span style={{ color: "red" }}>{errors.password.message}</span>
+              )}
             </FormControl>
 
             <FormControl>

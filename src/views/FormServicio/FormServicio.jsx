@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
 
-
 import {
   Flex,
   Box,
@@ -45,7 +44,7 @@ function FormServicio(props) {
       content: "",
     },
   });
-// const history = useHistory()
+  // const history = useHistory()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -108,6 +107,9 @@ function FormServicio(props) {
                   required: "El campo nombre es requerido",
                 })}
               />
+              {errors.title && (
+                <span style={{ color: "red" }}>{errors.title.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -135,6 +137,9 @@ function FormServicio(props) {
                   },
                 })}
               />
+              {errors.images && (
+                <span style={{ color: "red" }}>{errors.images.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -153,6 +158,9 @@ function FormServicio(props) {
                   required: "El campo contraseña es requerido",
                 })}
               />
+              {errors.content && (
+                <span style={{ color: "red" }}>{errors.content.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
