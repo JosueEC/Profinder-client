@@ -1,18 +1,63 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Container, Stack, Text } from "@chakra-ui/layout";
-import { useProfesionalDash } from "../../../../services/zustand/useProfesionalDash";
-import SelectCategories from "../../../../singleComponents/SelectCategories";
+import { useColorModeValue } from '@chakra-ui/color-mode'
+import { Box, Container, Stack, Text } from '@chakra-ui/layout'
+import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
+import SelectCategories from '../../../../singleComponents/SelectCategories'
+import DropdownMenu from '../../../../singleComponents/DropdownMenu'
 
 export default function FiltersDashboard () {
-  const applyFilter = useProfesionalDash(state => state.applyFilter)
-  const { category, ocupation } = useProfesionalDash(state => state.filters)
+  const {
+    category,
+    ocupation,
+    status,
+    plan
+  } = useProfesionalDash(state => state.filters)
+  const {
+    applyFilter,
+    getProfesional,
+    getBannedProfesional,
+    getActiveProfesional,
+    getBasicProfesional,
+    getPremiumProfesional
+  } = useProfesionalDash(state => state)
+
+  const statusItems = [
+    { name: 'Todos' },
+    { name: 'Activo' },
+    { name: 'Baneado' }
+  ]
+
+  const planItems = [
+    { name: 'Todos' },
+    { name: 'Basico' },
+    { name: 'Premium' }
+  ]
 
   function handleSelectCategory (value) {
-    applyFilter({ name: 'category', value})
+    applyFilter({ name: 'category', value })
   }
 
   function handleSelectOcupation (value) {
-    applyFilter({ name: 'ocupation', value})
+    applyFilter({ name: 'ocupation', value })
+  }
+
+  function handleSelectStatus (event) {
+    const { name } = event.target
+    applyFilter({ name: 'status', value: name })
+    name === 'Activo'
+      ? getActiveProfesional()
+      : (name === 'Baneado')
+          ? getBannedProfesional()
+          : getProfesional()
+  }
+
+  function handleSelectPlan (event) {
+    const { name } = event.target
+    applyFilter({ name: 'plan', value: name })
+    name === 'Basico'
+      ? getBasicProfesional()
+      : (name === 'Premium')
+          ? getPremiumProfesional()
+          : getProfesional()
   }
 
   return (
@@ -34,6 +79,16 @@ export default function FiltersDashboard () {
           fnSelectCategory={handleSelectCategory}
           fnSelectOcupation={handleSelectOcupation}
           // setCurrentPage={setCurrentPage}
+        />
+        <DropdownMenu
+          titleMenu={status}
+          menuItems={statusItems}
+          onClick={handleSelectStatus}
+        />
+        <DropdownMenu
+          titleMenu={plan}
+          menuItems={planItems}
+          onClick={handleSelectPlan}
         />
       </Container>
 
