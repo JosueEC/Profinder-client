@@ -3,13 +3,13 @@ import { Box, useColorModeValue, Button, Stack } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
+import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import { useState } from "react";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
+import BarData from "../DataSuppliers/BarData";
 
 const DashboardSuppliers = () => {
-
-
   //! variable paar que todas las opciones del panel tengan el mismo estilo
   const linkStyle = {
     display: "block",
@@ -24,29 +24,56 @@ const DashboardSuppliers = () => {
   const [showForm, setShowForm] = useState(false);
   const [showPosts, setShowPosts] = useState(false);
   const [showFormServicio, setShowFormServicio] = useState(false);
+  const [showInicio, setShowInicio] = useState(false);
+
+  const handleShowInicio = () => {
+    setShowInicio(true);
+    setShowForm(false);
+    setShowPosts(false);
+    setShowFormServicio(false);
+  };
 
   const handleShowForm = () => {
     setShowForm(true);
     setShowPosts(false);
     setShowFormServicio(false);
+    setShowInicio(false);
   };
 
   const handleShowPosts = () => {
     setShowForm(false);
     setShowPosts(true);
     setShowFormServicio(false);
+    setShowInicio(false);
   };
 
   const handleShowFormServicio = () => {
     setShowForm(false);
     setShowPosts(false);
     setShowFormServicio(true);
+    setShowInicio(false);
   };
 
   return (
     <Box height="100vh" display="flex">
       <Box w="250px" bg="gray.600" p={4}>
         <Stack spacing={4}>
+          <ScrollLink
+            to="publicaciones"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
+            <Button
+              variant="outline"
+              onClick={handleShowInicio}
+              bg={showInicio ? "blue.500" : ""}
+              color={showInicio ? "white" : ""}
+            >
+              Incio
+            </Button>
+          </ScrollLink>
           <ScrollLink
             to="publicaciones"
             spy
@@ -64,6 +91,7 @@ const DashboardSuppliers = () => {
               Publicar
             </Button>
           </ScrollLink>
+
           <ScrollLink
             to="nuevas-publicaciones"
             spy
@@ -108,8 +136,14 @@ const DashboardSuppliers = () => {
         {showFormServicio ? <FormServicio /> : null}
         {showPosts ? <PostsSuppliers /> : null}
         {/* aca va toda la info en la primer ventana que se abre */}
+
+        <Box w="400px" h="400px" borderWidth="4px" borderColor="gray.500">
+          <DataSuppliers />
+        </Box> 
+        <Box w="400px" h="200px" borderWidth="4px" borderColor="gray.500">
+          <BarData />
+        </Box>
       </Box>
-      <Box></Box>
     </Box>
   );
 };
