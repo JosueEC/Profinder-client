@@ -157,13 +157,18 @@ function FormProvider() {
 
   return (
     <Flex
-      minH="100vh"
+    minH="100vh"
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
      
     >
-      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300"  width="500px">
+      <Box      rounded="lg"
+        bg={useColorModeValue("blackAlpha.800", "gray800")}
+        boxShadow="lg"
+        p={8}
+        color="gray.300"
+        width="500px">
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
@@ -238,6 +243,9 @@ function FormProvider() {
               <Select
                 {...register("country")}
                 borderWidth="1px"
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
@@ -258,7 +266,9 @@ function FormProvider() {
                 {...register("location", {
                   required: "El campo provincia/estado es requerido",
                 })}
-                // bg={useColorModeValue("white", "gray.700")}
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 borderWidth="1px"
                 // color="gray.800"
               >
@@ -317,6 +327,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
+              
                 fnSelectCategory={envioCategoria}
                 fnSelectOcupation={envioOcupaciones}
               />
