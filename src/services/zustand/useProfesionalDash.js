@@ -10,7 +10,8 @@ export const useProfesionalDash = create((set) => ({
     category: 'Categorias',
     ocupation: 'Ocupacion',
     status: 'Estatus',
-    plan: 'Plan'
+    plan: 'Plan',
+    results: 0
   },
 
   applyFilter: (filter) => {
@@ -19,44 +20,18 @@ export const useProfesionalDash = create((set) => ({
     }))
   },
 
-  getProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional`)
+  countResults: (totalResults) => {
     set((state) => ({
-      profesional: filterData(response, state.filters),
-      auxProfesional: response
+      filters: { ...state.filters, results: totalResults }
     }))
   },
 
-  getBannedProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/delete`)
-    set({
-      profesional: response,
+  getProfesional: async (URL) => {
+    const response = await fetchData(URL)
+    set((state) => ({
+      profesional: response.message ? noResultsObject : filterData(response, state.filters),
       auxProfesional: response
-    })
-  },
-
-  getActiveProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/noDelete`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
-  },
-
-  getBasicProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/noPremiun`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
-  },
-
-  getPremiumProfesional: async () => {
-    const response = await fetchData(`${API.DBONLINE}/profesional/premiun`)
-    set({
-      profesional: response,
-      auxProfesional: response
-    })
+    }))
   },
 
   postBannedProfesional: async (userID) => {

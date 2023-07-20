@@ -1,6 +1,7 @@
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Box, Container, Stack, Text } from '@chakra-ui/layout'
 import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
+import { URL } from '../../constants'
 import SelectCategories from '../../../../singleComponents/SelectCategories'
 import DropdownMenu from '../../../../singleComponents/DropdownMenu'
 
@@ -9,15 +10,12 @@ export default function FiltersDashboard () {
     category,
     ocupation,
     status,
-    plan
+    plan,
+    results
   } = useProfesionalDash(state => state.filters)
   const {
     applyFilter,
-    getProfesional,
-    getBannedProfesional,
-    getActiveProfesional,
-    getBasicProfesional,
-    getPremiumProfesional
+    getProfesional
   } = useProfesionalDash(state => state)
 
   const statusItems = [
@@ -34,32 +32,33 @@ export default function FiltersDashboard () {
 
   function handleSelectCategory (value) {
     applyFilter({ name: 'category', value })
-    getProfesional()
+    applyFilter({ name: 'ocupation', value: '' })
+    getProfesional(URL.GET_PROFESIONAL)
   }
 
   function handleSelectOcupation (value) {
     applyFilter({ name: 'ocupation', value })
-    getProfesional()
+    getProfesional(URL.GET_PROFESIONAL)
   }
 
   function handleSelectStatus (event) {
     const { name } = event.target
     applyFilter({ name: 'status', value: name })
     name === 'Activo'
-      ? getActiveProfesional()
+      ? getProfesional(URL.GET_PROFESIONAL)
       : (name === 'Baneado')
-          ? getBannedProfesional()
-          : getProfesional()
+          ? getProfesional(URL.GET_PROFESIONAL)
+          : getProfesional(URL.GET_PROFESIONAL)
   }
 
   function handleSelectPlan (event) {
     const { name } = event.target
     applyFilter({ name: 'plan', value: name })
     name === 'Basico'
-      ? getBasicProfesional()
+      ? getProfesional(URL.GET_PROFESIONAL)
       : (name === 'Premium')
-          ? getPremiumProfesional()
-          : getProfesional()
+          ? getProfesional(URL.GET_PROFESIONAL)
+          : getProfesional(URL.GET_PROFESIONAL)
   }
 
   return (
@@ -78,6 +77,8 @@ export default function FiltersDashboard () {
         wrap='wrap'
       >
         <SelectCategories
+          titleCategory={category}
+          titleOcupation={ocupation}
           fnSelectCategory={handleSelectCategory}
           fnSelectOcupation={handleSelectOcupation}
           // setCurrentPage={setCurrentPage}
@@ -109,9 +110,11 @@ export default function FiltersDashboard () {
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
           <Text>
-            {`Resultados para
-            ${category === 'Categorias' ? '' : category + '🔹'} 
-            ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}`}
+            {`${results} resultados
+            ${category === 'Categorias' || category === 'Todas' ? '' : category + '🔹'} 
+            ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}
+            ${status === 'Estatus' || status === 'Todos' ? '' : status + '🔹'}
+            ${plan === 'Plan' || plan === 'Todos' ? '' : plan + '🔹'}`}
           </Text>
         </Container>
       </Box>
