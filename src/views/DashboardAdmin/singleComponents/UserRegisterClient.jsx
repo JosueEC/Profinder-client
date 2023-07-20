@@ -3,20 +3,18 @@ import { Avatar } from '@chakra-ui/avatar'
 import { ButtonGroup } from '@chakra-ui/button'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Flex, SimpleGrid } from '@chakra-ui/layout'
-import { useProfesionalDash } from '../../../services/zustand/useProfesionalDash'
-import { URL } from '../constants'
+import { useClientDash } from '../../../services/zustand/useClientDash'
+import { CLIENT } from '../constants'
 import NoPhoto from '../../../assets/defaultImages/sinfoto.webp'
-import ActivePremiumButton from './ActivePremiumButton'
-import RemovePremiumButton from './RemovePremiumButton'
 import BannedButton from './BannedButton'
 import UnbannedButton from './UnbannedButton'
 
-export default function UserRegister ({ id, name, email, image, active, softDelete }) {
+export default function UserRegister ({ id, name, email, image, softDelete }) {
   const {
-    getProfesional,
-    postBannedProfesional,
-    postUnbannedProfesional
-  } = useProfesionalDash(state => state)
+    getClients,
+    postBannedClient,
+    postUnbannedClient
+  } = useClientDash(state => state)
 
   const bg2 = useColorModeValue('white', 'gray.800')
 
@@ -62,26 +60,19 @@ export default function UserRegister ({ id, name, email, image, active, softDele
         >
           <ButtonGroup variant='solid' size='sm' spacing={3}>
             {
-              (active === true)
-                ? <RemovePremiumButton id={id} />
-                : (active === false || active === null)
-                    ? <ActivePremiumButton id={id} />
-                    : null
-            }
-            {
               (softDelete === true)
                 ? <UnbannedButton
                     id={id}
-                    bannedFunction={postUnbannedProfesional}
-                    getFunction={getProfesional}
-                    URL={URL.GET_PROFESIONAL}
+                    bannedFunction={postUnbannedClient}
+                    getFunction={getClients}
+                    URL={CLIENT.GET_CLIENTS}
                   />
                 : (softDelete === false || softDelete === null)
                     ? <BannedButton
                         id={id}
-                        bannedFunction={postBannedProfesional}
-                        getFunction={getProfesional}
-                        URL={URL.GET_PROFESIONAL}
+                        bannedFunction={postBannedClient}
+                        getFunction={getClients}
+                        URL={CLIENT.GET_CLIENTS}
                       />
                     : null
             }

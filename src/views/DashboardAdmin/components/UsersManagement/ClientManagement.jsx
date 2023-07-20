@@ -1,12 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Container, Flex, Heading, Stack } from '@chakra-ui/layout'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import { useEffect } from 'react'
+import { useClientDash } from '../../../../services/zustand/useClientDash'
 import Statistic from '../../singleComponents/Statistic'
-import UsersTable from '../UsersTable/UsersTable'
+import ClientUsersTable from '../UsersTable/ClientUsersTable'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function ClientManagement () {
+  const {
+    clients,
+    clientsActive,
+    clientsBanned
+  } = useClientDash(state => state.numbers)
+  const { getCountsGraphic } = useClientDash(state => state)
+
   const data = {
     labels: [
       'Activos',
@@ -22,6 +32,10 @@ export default function ClientManagement () {
       hoverOffset: 4
     }]
   }
+
+  useEffect(() => {
+    getCountsGraphic()
+  }, [clients])
 
   return (
     <Container maxW='7xl'>
@@ -44,17 +58,17 @@ export default function ClientManagement () {
           >
             <Statistic
               label='Totales'
-              number={130}
+              number={clients}
               helpText='Julio 18'
             />
             <Statistic
               label='Activos'
-              number={122}
+              number={clientsActive}
               helpText='Julio 18'
             />
             <Statistic
               label='Baneados'
-              number={8}
+              number={clientsBanned}
               helpText='Julio 18'
             />
           </Stack>
@@ -77,7 +91,7 @@ export default function ClientManagement () {
         </Flex>
       </Stack>
       <Heading>Gestion de clientes</Heading>
-      <UsersTable />
+      <ClientUsersTable />
     </Container>
   )
 }
