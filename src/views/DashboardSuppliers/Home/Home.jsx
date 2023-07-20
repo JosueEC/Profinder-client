@@ -1,5 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Flex, useColorModeValue, Button, Stack } from "@chakra-ui/react";
+import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
@@ -159,18 +159,23 @@ const DashboardSuppliers = () => {
           </ScrollLink>
         </Stack>
       </Box>
-
-      {showPosts ? <PostsSuppliers /> : null}
-      {showForm ? <FormUpdate /> : null}
-      {showFormServicio ? <FormServicio /> : null}
+        {showPosts ? <PostsSuppliers /> : null}
+   
+      <Flex justifyContent="center" alignItems="center">
+        {showForm ? <FormUpdate /> : null}
+        {showFormServicio ? <FormServicio /> : null}
+      </Flex>
       <Flex justifyContent="flex-start" alignItems="flex-end">
         {showAyuda ? <CustomChatBot /> : null}
       </Flex>
       {showInicio ? (
-        <Flex direction="row" justifyContent="space-around">
-          <DataSuppliers />
-          <BarData />
-        </Flex>
+         <Flex direction="column" alignItems="center"> {/* Alineamos los elementos en el centro */}
+         <Heading as="h1" size="xl" my={4}>MIS DATOS ONLINE</Heading> {/* Utilizamos un elemento Heading para el título */}
+         <Flex direction="row" justifyContent="space-around">
+           <DataSuppliers />
+           <BarData />
+         </Flex>
+       </Flex>
       ) : null}
     </Box>
   );
