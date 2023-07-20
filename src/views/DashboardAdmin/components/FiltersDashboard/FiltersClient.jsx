@@ -1,19 +1,17 @@
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { Box, Container, Stack } from '@chakra-ui/layout'
+import { Box, Container, Stack, Text } from '@chakra-ui/layout'
 import { useClientDash } from '../../../../services/zustand/useClientDash'
 import { CLIENT } from '../../constants'
 import DropdownMenu from '../../../../singleComponents/DropdownMenu'
 
 export default function FiltersDashboard () {
-  // const {
-  //   category,
-  //   ocupation,
-  //   status,
-  //   plan,
-  //   results
-  // } = useProfesionalDash(state => state.filters)
   const {
-    getClients
+    status,
+    results
+  } = useClientDash(state => state.filters)
+  const {
+    getClients,
+    applyFilter
   } = useClientDash(state => state)
 
   const statusItems = [
@@ -24,7 +22,7 @@ export default function FiltersDashboard () {
 
   function handleSelectStatus (event) {
     const { name } = event.target
-    // applyFilter({ name: 'status', value: name })
+    applyFilter({ name: 'status', value: name })
     name === 'Activo'
       ? getClients(CLIENT.GET_CLIENTS)
       : (name === 'Baneado')
@@ -68,13 +66,10 @@ export default function FiltersDashboard () {
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
-          {/* <Text>
+          <Text>
             {`${results} resultados
-            ${category === 'Categorias' || category === 'Todas' ? '' : category + '🔹'}
-            ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}
-            ${status === 'Estatus' || status === 'Todos' ? '' : status + '🔹'}
-            ${plan === 'Plan' || plan === 'Todos' ? '' : plan + '🔹'}`}
-          </Text> */}
+            ${status === 'Estatus' || status === 'Todos' ? '' : status + '🔹'}`}
+          </Text>
         </Container>
       </Box>
     </Box>

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { API } from '../../utils/API/constants'
+import { filterStatus } from '../../views/DashboardAdmin/components/FiltersDashboard/filters'
 
 export const useClientDash = create((set) => ({
   client: [],
@@ -15,7 +16,7 @@ export const useClientDash = create((set) => ({
     results: 0
   },
 
-  applyFilters: (filter) => {
+  applyFilter: (filter) => {
     set((state) => ({
       filters: { ...state.filters, [filter.name]: filter.value }
     }))
@@ -29,10 +30,10 @@ export const useClientDash = create((set) => ({
 
   getClients: async (URL) => {
     const response = await fetchData(URL)
-    set({
-      client: response,
+    set((state) => ({
+      client: response.message ? noResultsObject : filterStatus(response, state.filters),
       auxClient: response
-    })
+    }))
   },
 
   postBannedClient: async (clientID) => {
@@ -56,7 +57,6 @@ const fetchData = async (URL, options) => {
   const data = await fetch(URL, options)
     .then(response => response.json())
     .then(results => {
-      console.info(results)
       if (results.message) {
         return [noResultsObject]
       }
