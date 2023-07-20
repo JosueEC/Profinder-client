@@ -15,14 +15,13 @@ import {
   Divider
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { getSessionUser } from '../../services/redux/actions/actions'
 import { emailRules, passwordRules } from './loginValidations'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
-import jwt_decode from 'jwt-decode'
+import GoogleAuthButton from '../../singleComponents/GooglAuthButton'
 
 export default function UserLogin () {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -49,31 +48,6 @@ export default function UserLogin () {
       handleUserSession('Sesion iniciada', 'Algo salio mal')
     } else setErrorRol(true)
   }
-
-  async function handleCallbackResponse (response) {
-    const userObject = jwt_decode(response.credential)
-    const dataSessionGoogle = {
-      email: userObject.email,
-      password: userObject.sub,
-      usuario: userRol
-    }
-    await dispatch(getSessionUser(dataSessionGoogle))
-    handleUserSession('Sesion iniciada', 'Algo salio mal')
-    setErrorRol(false)
-  }
-
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    google.accounts.id.initialize({
-      client_id: '298712469496-c4b7dmru4gl62him455vjft5a9k9hb98.apps.googleusercontent.com',
-      callback: handleCallbackResponse
-    })
-    // eslint-disable-next-line no-undef
-    google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
-    )
-  }, [])
 
   return (
     <Flex
@@ -136,23 +110,7 @@ export default function UserLogin () {
                 <Text color='red.500'>{errorRol && 'Selecciona un tipo de usuario'}</Text>
                 <Divider />
                 <Stack spacing={5}>
-                  {/* <Button
-                    bg='teal.50'
-                    color='black'
-                    _hover={{ bg: 'teal.100' }}
-                  >
-                    Google
-                  </Button> */}
-                  <div
-                    id='signInDiv'
-                    style={{ 
-                      width: '100%',
-                      backgroundColor: 'white',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      borderRadius: '0.3rem'
-                    }}
-                  />
+                  <GoogleAuthButton />
                   <Button
                     bg='teal.400'
                     color='white'

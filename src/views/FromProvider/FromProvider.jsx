@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +26,9 @@ import {
   RadioGroup,
   Select,
   CircularProgress,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
@@ -35,6 +39,10 @@ import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 function FormProvider() {
   const { handleUserSession } = useCredentials();
   const [genre, setGenre] = useState("female");
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const {
     register,
@@ -169,6 +177,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
+                value={name}
                 type="text"
                 {...register("name", {
                   required: "El campo nombre y apellido es requerido",
@@ -194,6 +203,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
+                value={email}
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -325,6 +335,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
+                value={password}
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
@@ -349,21 +360,28 @@ function FormProvider() {
                   color="blue.500"
                 />
               ) : (
-                <>
+                <ButtonGroup
+                  flexWrap='wrap-reverse'
+                  justifyContent='center'
+                  spacing={5}
+                  mt={3}
+                >
                   <Button
                     type="submit"
                     loadingText="Creando cuenta"
                     size="lg"
                     bg="blue.400"
                     color="white"
+                    mt={5}
                     _hover={{
                       bg: "blue.500",
                     }}
                   >
                     Registrarme
                   </Button>
+                  <GoogleAuthButton />
                   <PrivacyNotice />
-                </>
+                </ButtonGroup>
               )}
             </FormControl>
           </form>
