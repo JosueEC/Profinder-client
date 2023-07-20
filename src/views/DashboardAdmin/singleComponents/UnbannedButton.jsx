@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/button'
 import { useToast } from '@chakra-ui/toast'
 import { useProfesionalDash } from '../../../services/zustand/useProfesionalDash'
+import { URL } from '../constants'
 
 export default function UnbannedButton () {
   const toast = useToast()
@@ -11,7 +12,7 @@ export default function UnbannedButton () {
 
   async function handleUnbannedAction () {
     await postBannedProfesional()
-    await getProfesional()
+    await getProfesional(URL.GET_PROFESIONAL)
     toast({
       title: 'Cuenta activada',
       description: 'La cuenta ha sido restaurada',

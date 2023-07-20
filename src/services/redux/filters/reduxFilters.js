@@ -27,7 +27,7 @@ export const filterCategory = (suppliers, objFilters) => {
   if (selectedCategory === '' || selectedCategory === 'Todas' || selectedCategory === 'Categorias') return suppliers
   suppliers.forEach(supplier => {
     const card = supplier
-    supplier.professions.forEach(({ category }) => {
+    supplier?.professions?.forEach(({ category }) => {
       if (category === objFilters.category) newState.push(card)
     })
   })
