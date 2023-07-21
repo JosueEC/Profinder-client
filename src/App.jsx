@@ -28,6 +28,7 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
+import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -85,6 +86,8 @@ function App() {
         <Route path="/pasarela" element={<PasarelaPagos />} />
         <Route path="/viewPosts" element={<PostsSuppliers />} />
         <Route path="/help" element={<CustomChatBot />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+
 
 
       </Routes>

@@ -10,7 +10,7 @@ const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
   const profile = dataSuppliers.find((user) => user.id === userSession.id);
-  console.log(profile);
+  //console.log(profile);
 
   const dispatch = useDispatch();
 
