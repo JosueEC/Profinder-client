@@ -11,6 +11,7 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 import {
   postSessionUser,
@@ -76,7 +77,16 @@ function FormCliente(props) {
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
@@ -168,14 +178,12 @@ function FormCliente(props) {
             <FormControl>
               <FormLabel />
               <Button
-                type="submit"
-                loadingText="Submitting"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
+               bg='teal.400'
+               color='white'
+               _hover={{ bg: 'teal.500' }}
+               loadingText='Ingresando'
+               type='submit'
+               size='lg'
               >
                 Registrarme
               </Button>

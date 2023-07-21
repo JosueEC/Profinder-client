@@ -24,6 +24,7 @@ import {
   RadioGroup,
   Select,
   CircularProgress,
+  Heading,
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
@@ -169,9 +170,20 @@ function FormProvider() {
         p={8}
         color="gray.300"
         width="500px">
-        <Stack spacing={4}>
+          
+        <Stack spacing={4} >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+            
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
@@ -362,14 +374,12 @@ function FormProvider() {
               ) : (
                 <>
                   <Button
-                    type="submit"
-                    loadingText="Creando cuenta"
-                    size="lg"
-                    bg="blue.400"
-                    color="white"
-                    _hover={{
-                      bg: "blue.500",
-                    }}
+                    bg='teal.400'
+                    color='white'
+                    _hover={{ bg: 'teal.500' }}
+                    loadingText='Ingresando'
+                    type='submit'
+                    size='lg'
                   >
                     Registrarme
                   </Button>

@@ -175,12 +175,13 @@ function PasarelaPagos() {
           </List>
           <Stack>
             <Button
-              mt={10}
-              w={"full"}
-              bg={"blue.600"}
-              color={"white"}
-              rounded={"xl"}
-              boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+        loadingText="Submitting"
+        bg="teal.400"
+        color="white"
+        _hover={{ bg: "teal.500" }}
+        type="submit"
+        size="lg"
+        marginTop="5"
               onClick={handleBuy}
             >
               Obtene premium
