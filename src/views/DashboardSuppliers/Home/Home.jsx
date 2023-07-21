@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Flex, useColorModeValue, Button, Stack, Heading, Text, Grid} from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
@@ -9,6 +9,8 @@ import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import BarData from "../DataSuppliers/BarData";
+import { useSelector } from "react-redux";
+
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 
 const linkStyle = {
@@ -18,6 +20,11 @@ const linkStyle = {
 };
 
 const DashboardSuppliers = () => {
+  const dataSuppliers = useSelector((state) => state.profesionales);
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  const profile = dataSuppliers.find((user) => user.id === userSession.id);
+  const numPosts = profile && profile.posts ? profile.posts.length : 0;
+
   const [currentPage, setCurrentPage] = useState("Inicio");
 
   const handlePageChange = (page) => {
@@ -96,15 +103,40 @@ const DashboardSuppliers = () => {
             <Heading as="h1" size="xl" my={4} color="white">
               MIS DATOS ONLINE
             </Heading>
+            <Grid
+        templateColumns="1fr 1fr"
+        gap={3}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box textAlign="center"  bg="rgba(75, 192, 192, 0.6)"  borderRadius="10px">
+          <Text fontSize="30px">Mis Posts</Text>
+          <Box fontSize="24px">{numPosts}</Box>
+        </Box>
+
+        <Box textAlign="center"  bg="rgba(3, 75, 75, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Terminados</Text>
+          <Box fontSize="24px">15</Box>
+        </Box>
+
+        <Box textAlign="center"  bg="rgba(192, 75, 75, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Activos</Text>
+          <Box fontSize="24px">15</Box>
+        </Box>
+
+        <Box textAlign="center"  bg= "rgba(200, 200, 20, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Cancelados</Text>
+          <Box fontSize="24px">{numPosts}</Box>
+        </Box>
+      </Grid>
             <Flex direction="row" justifyContent="space-around">
               <DataSuppliers />
-              <BarData />
             </Flex>
           </Flex>
-        )}
+        )}      
 
         {currentPage === "FormServicio" && (
-          <Flex justifyContent="center" alignItems="center" flex="1"> {/* Centramos el contenido */}
+          <Flex justifyContent="center" alignItems="center" flex="1"> 
             <FormServicio />
           </Flex>
         )}
@@ -116,7 +148,7 @@ const DashboardSuppliers = () => {
         )}
 
         {currentPage === "FormUpdate" && (
-          <Flex justifyContent="center" alignItems="center" flex="1"> {/* Centramos el contenido */}
+          <Flex justifyContent="center" alignItems="center" flex="1"> 
             <FormUpdate />
           </Flex>
         )}

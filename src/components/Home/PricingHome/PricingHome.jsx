@@ -1,3 +1,4 @@
+
 import {
   Box,
   Button,
@@ -19,9 +20,11 @@ const options = [
 ];
 
 const PackageTier = ({ title, options, typePlan, checked = false }) => {
-  const colorTextLight = checked ? 'white' : 'purple.600';
+  // Colores en modo light (mismos que en el componente TopPro)
+  const colorTextLight = checked ? 'black' : 'purple.600';
   const bgColorLight = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
 
+  // Colores en modo dark (mismos que en el componente TopPro)
   const colorTextDark = checked ? 'white' : 'purple.500';
   const bgColorDark = checked ? 'purple.400' : 'gray.100'; // Cambio a gris claro
 
@@ -44,7 +47,7 @@ const PackageTier = ({ title, options, typePlan, checked = false }) => {
         {options.map((desc) => (
           <ListItem key={desc.id}>
             <ListIcon as={FaCheckCircle} color="green.500" />
-            <Text color={useColorModeValue('white', 'gray.100')}>{desc.desc}</Text> {/* Cambio a color blanco o gris claro */}
+            <Text color={useColorModeValue('black', 'gray.100')}>{desc.desc}</Text> {/* Cambio a color blanco o gris claro */}
           </ListItem>
         ))}
       </List>
@@ -63,6 +66,14 @@ const PackageTier = ({ title, options, typePlan, checked = false }) => {
 };
 
 const PricingHome = () => {
+  // Colores en modo light (mismos que en el componente TopPro)
+  const bgColorLight = 'gray.50';
+  const textColorLight = 'gray.600';
+
+  // Colores en modo dark (mismos que en el componente TopPro)
+  const bgColorDark = 'gray.800';
+  const textColorDark = 'gray.300';
+
   return (
     <Box py={6} px={5} min={'100vh'}>
       <Stack spacing={4} width={'100%'} direction={'column'}>
@@ -85,7 +96,7 @@ const PricingHome = () => {
             }}
             textAlign={'center'}
           >
-            <Heading size={'lg'}>
+            <Heading size={'lg'} color={useColorModeValue('black', 'white')}>
               The Right Plan for <Text color="purple.400">Your Business</Text>
             </Heading>
           </Stack>
@@ -95,7 +106,7 @@ const PricingHome = () => {
               md: '60%',
             }}
           >
-            <Text textAlign={'center'} color={useColorModeValue('white', 'gray.100')}>
+            <Text textAlign={'center'} color={useColorModeValue(textColorLight, textColorDark)}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
               quod in iure vero. Facilis magnam, sed officiis commodi labore
               odit.
