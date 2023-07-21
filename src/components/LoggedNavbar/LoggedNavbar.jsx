@@ -97,8 +97,8 @@ export default function LoggedNavbar () {
               fontWeight='bold'
             >
               <NavLink textLink='¿COMO FUNCIONA?' routeLink='/comofunciona' />
-              <NavLink textLink='CATEGORIAS' routeLink='/categories' />
-              <NavLink textLink='CONTACTO' routeLink='/' />
+              <NavLink textLink='PROFESIONALES' routeLink='/categories' />
+              <NavLink textLink='CONTACTO' routeLink='/feedback' />
               <NavLink textLink='ACERCA DE' routeLink='/' />
             </HStack>
           </HStack>
@@ -145,8 +145,8 @@ export default function LoggedNavbar () {
             >
               <Stack as='nav' spacing={4}>
                 <NavLink textLink='¿Como funciona?' routeLink='/comofunciona' />
-                <NavLink textLink='Categorias' routeLink='/categories' />
-                <NavLink textLink='Contacto' routeLink='/' />
+                <NavLink textLink='Profesionales' routeLink='/categories' />
+                <NavLink textLink='Contacto' routeLink='/feedback' />
                 <NavLink textLink='Acerca de' routeLink='/' />
               </Stack>
             </Box>
