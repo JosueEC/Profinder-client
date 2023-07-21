@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Flex, useColorModeValue,Text, Button, Stack, Heading,Grid } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
@@ -8,8 +8,11 @@ import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
-import BarData from "../DataSuppliers/BarData";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
+import { useSelector } from "react-redux";
+
+
+
 
 const linkStyle = {
   display: "block",
@@ -19,6 +22,12 @@ const linkStyle = {
 
 const DashboardSuppliers = () => {
   const [currentPage, setCurrentPage] = useState("Inicio");
+  const dataSuppliers = useSelector((state) => state.profesionales);
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  const profile = dataSuppliers.find((user) => user.id === userSession.id);
+  // console.log(profile);
+  const numPosts = profile && profile.posts ? profile.posts.length : 0;
+  // console.log(numPosts);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -29,7 +38,7 @@ const DashboardSuppliers = () => {
       <Box w="250px" bg="gray.600" p={2} >
         <Stack spacing={4}>
           <ScrollLink to="publicaciones" spy smooth duration={500} style={linkStyle}>
-            <Button
+              <Button 
               variant="outline"
               onClick={() => handlePageChange("Inicio")}
               bg={currentPage === "Inicio" ? "blue.500" : ""}
@@ -85,12 +94,46 @@ const DashboardSuppliers = () => {
             Obtén Premium
             </Button>
           </ScrollLink>
+          <RouterLink to="/help" spy smooth duration={500} style={linkStyle}>
+              <Button
+                variant="outline"
+                leftIcon={<QuestionIcon />}
+              >
+                Ayuda
+              </Button>
+            </RouterLink>
                 
 
         </Stack>
       </Box>
 
       <Flex direction="column" alignItems="center" flex="1" > {/* Alineamos el contenido en el centro */}
+      <Grid
+        templateColumns="1fr 1fr"
+        gap={3}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box textAlign="center"  bg="rgba(75, 192, 192, 0.6)"  borderRadius="10px">
+          <Text fontSize="30px">Mis Posts</Text>
+          <Box fontSize="24px">{numPosts}</Box>
+        </Box>
+
+        <Box textAlign="center"  bg="rgba(3, 75, 75, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Terminados</Text>
+          <Box fontSize="24px">15</Box>
+        </Box>
+
+        <Box textAlign="center"  bg="rgba(192, 75, 75, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Activos</Text>
+          <Box fontSize="24px">15</Box>
+        </Box>
+
+        <Box textAlign="center"  bg= "rgba(200, 200, 20, 0.6)" borderRadius="10px">
+          <Text fontSize="30px">Servicios Cancelados</Text>
+          <Box fontSize="24px">{numPosts}</Box>
+        </Box>
+      </Grid>
         {currentPage === "Inicio" && (
           <Flex direction="column" alignItems="center">
             <Heading as="h1" size="xl" my={4} color="white">
@@ -98,7 +141,6 @@ const DashboardSuppliers = () => {
             </Heading>
             <Flex direction="row" justifyContent="space-around">
               <DataSuppliers />
-              <BarData />
             </Flex>
           </Flex>
         )}
