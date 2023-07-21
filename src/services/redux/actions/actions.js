@@ -199,13 +199,12 @@ const loginSessionGoogle = () => {
 
   return async function () {
     await fetch(URL)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) console.info('google-auth')
+      })
       .then((results) => {
         return results;
       })
-      .catch((error) => console.error(error.message));
-    // localStorage.setItem("userSession", JSON.stringify(data));
-    // data.status = data.email && !data.message.includes("No pertenece") ? true : false;
   };
 };
 

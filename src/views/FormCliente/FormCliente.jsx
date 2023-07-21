@@ -12,6 +12,7 @@ import {
   Button,
   useColorModeValue,
   Heading,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import {
   postSessionUser,
@@ -19,13 +20,16 @@ import {
 } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
 import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 // import { uploadFile } from "../../utils/Firebase/config";
 
 function FormCliente(props) {
   const dispatch = useDispatch();
   const { handleUserSession } = useCredentials();
+
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -177,17 +181,29 @@ function FormCliente(props) {
 
             <FormControl>
               <FormLabel />
-              <Button
-               bg='teal.400'
-               color='white'
-               _hover={{ bg: 'teal.500' }}
-               loadingText='Ingresando'
-               type='submit'
-               size='lg'
+              <ButtonGroup
+                flexWrap='wrap-reverse'
+                justifyContent='center'
+                spacing={5}
               >
-                Registrarme
-              </Button>
-              <PrivacyNotice />
+                <Button
+                  type="submit"
+                  loadingText="Submitting"
+                  size="lg"
+                  bg="blue.400"
+                  color="white"
+                  mt={4}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Registrarme
+                </Button>
+                <GoogleAuthButton
+                  setValue={setValue}
+                />
+                <PrivacyNotice />
+              </ButtonGroup>
             </FormControl>
           </form>
         </Stack>
