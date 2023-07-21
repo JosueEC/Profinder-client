@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -8,33 +9,40 @@ import {
   useColorModeValue,
   Container,
   Stack,
-  // useDisclosure,
-  // Button,
+  Icon,
+  Button,
   Flex,
   ScaleFade,
+  Center,
 } from "@chakra-ui/react";
 import {
   FaUserAlt,
   FaRegPaperPlane,
   FaMailBulk,
   FaPhone,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../utils/customHooks/useFetch";
 import { API } from "../../utils/API/constants";
 import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
-import Tag from "../../singleComponents/Tag";
 import InfoLabel from "../../singleComponents/InfoLabel";
 import SupplierPost from "../../components/SupplierPost/SupplierPost";
-// import ModalNewPost from '../../components/NewPost/ModalNewPost'
+import ClieProfChatBot from "./ChatClieProf";
 
 const ArticleList = () => {
   const { supplierID } = useParams();
   const { data, isLoading } = useFetch(
     `${API.DBONLINE}/profesional/${supplierID}`
   );
-  // const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+  const { name, email, image, ubication, years_exp, phone } = data;
+  const hoverStyles = {
+    transform: "scale(1.01)",
+    cursor: "pointer",
+  };
 
   return (
     <Container
@@ -43,120 +51,131 @@ const ArticleList = () => {
       maxW="100%"
       py="5"
       px={{ base: "8", md: "8", lg: "10rem" }}
+      align={"center"}
+      justify={"center"}
     >
-      {data && <Heading as="h1">{data.name || "Sin nombre"}</Heading>}
       {isLoading ? (
         <h2>Cargando</h2>
       ) : (
         <ScaleFade initialScale={0.9} in>
-          <Box
-            p={7}
-            bg="blackAlpha.800"
-            marginTop={{ base: "1", sm: "5" }}
-            display="flex"
-            flexDirection={{ base: "column", sm: "row" }}
-            justifyContent="space-between"
+          <Flex
+            justify="center"
+            align="center"
+            mt={8}
+            width="500px"
+            gap={{ md: "3rem", lg: "3rem" }}
+            direction={{ base: "column", md: "row", lg: "row" }}
           >
-            <Box
-              display="flex"
-              flex="1"
-              marginRight="3"
-              position="relative"
-              alignItems="center"
+            <Flex
+              rounded={"md"}
+              boxShadow={"2xl"}
+              align={"center"}
+              bg="gray.900"
+              _hover={hoverStyles}
             >
-              <Box
-                width={{ base: "100%", sm: "85%" }}
-                zIndex="2"
-                marginLeft={{ base: "0", sm: "5%" }}
-                marginTop="5%"
-              >
-                <Image
-                  borderRadius="50%"
-                  boxSize="300px"
-                  src={data.image}
-                  fallback={NoAvatar}
-                  loading="lazy"
-                  alt="avatar supplier"
-                  objectFit="contain"
-                />
+              <Box>
+                <Flex
+                  direction={{ base: "column", md: "row" }}
+                  justify="center"
+                  mt={8}
+                  marginTop="5"
+                  width="1000px"
+                >
+                  <Box marginTop="5">
+                    <Image
+                      borderRadius="50%"
+                      boxSize="350px"
+                      src={image}
+                      fallback={NoAvatar}
+                      loading="lazy"
+                      alt="avatar supplier"
+                      objectFit="contain"
+                    />
+                  </Box>
+                  <Stack
+                    direction="column"
+                    spacing={4}
+                    ml={{ base: "0", md: "5%" }}
+                    mt={{ base: "5%", md: "0" }}
+                    align="flex-start"
+                    textTransform={"uppercase"}
+                    fontWeight={700}
+                    fontSize={"2xl"}
+                    letterSpacing={1.1}
+                  >
+                    <Heading
+                      marginBottom="2rem"
+                      marginTop="5"
+                      as="h1"
+                      textTransform="uppercase"
+                    >
+                      {name || "Sin nombre"}
+                    </Heading>
+                    <InfoLabel textLabel={data.genre} iconLabel={FaUserAlt} />
+                    <InfoLabel
+                      textLabel={years_exp}
+                      iconLabel={FaRegPaperPlane}
+                    />
+                    <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
+                    <InfoLabel textLabel={phone} iconLabel={FaPhone} />
+                    <Button
+                      marginTop="5"
+                      marginBottom="2rem"
+                      onClick={handleChatToggle}
+                      bg={useColorModeValue("teal.500", "teal.400")}
+                      color="white"
+                      _hover={{ bg: "teal.600" }}
+                      leftIcon={<Icon as={FaRegPaperPlane} />}
+                    >
+                      Contactar
+                    </Button>
+                  </Stack>
+                </Flex>
               </Box>
-              <Box zIndex="1" width="100%" position="absolute" height="100%">
-                <Box
-                  bgGradient="radial(teal.300 1px, transparent 1px)"
-                  backgroundSize="20px 20px"
-                  opacity="0.4"
-                  height="100%"
-                />
-              </Box>
-            </Box>
+            </Flex>
             <Box
-              display="flex"
-              flex="1"
-              flexDirection="column"
-              justifyContent="center"
-              marginTop={{ base: "3", sm: "0" }}
+              w={{ base: "100%", md: "300px" }}
+              ml={{ base: 0, md: "20px" }}
+              mt={{ base: "20px", md: 0 }}
+              textAlign={{ base: "center", md: "left" }}
             >
-              <Stack align="center" justify="center" direction="row" my={4}>
-                {data.professions &&
-                  data.professions.map(({ ocupations }) => {
-                    return ocupations.map(({ id, name }) => {
-                      return <Tag key={id} textTag={name} />;
-                    });
-                  })}
-              </Stack>
-              <Text as="p" marginTop="2" color="gray.500" fontSize="lg" mb={5}>
-                {data.description}
-              </Text>
-              <InfoLabel textLabel={data.genre} iconLabel={FaUserAlt} />
-              <InfoLabel
-                textLabel={data.years_exp}
-                iconLabel={FaRegPaperPlane}
-              />
-              <InfoLabel textLabel={data.email} iconLabel={FaMailBulk} />
-              <InfoLabel textLabel={data.phone} iconLabel={FaPhone} />
-              {/* <InfoLabel
-                textLabel={data.ubication}
-                iconLabel={FaMapMarkerAlt}
-              /> */}
+              {isChatOpen && <ClieProfChatBot />}
             </Box>
-          </Box>
+          </Flex>
+          
+          <Divider my={50} />
+          <Flex
+            align="center"
+            gap={{ md: "3rem", lg: "3rem" }}
+            direction={{ base: "column", md: "row", lg: "row" }}
+            justifyContent="center"
+          >
+            
+            <Heading as="h2" marginTop="50" textTransform="uppercase">
+              Trabajos Recientes
+            </Heading>
+          </Flex>
+          <Divider my={20} />
+
+          <Wrap spacing="50px" marginTop="5" justify="center">
+            {data.posts ? (
+              data.posts.map(({ image, content, title, id }) => {
+                return (
+                  <SupplierPost
+                    key={id}
+                    imagePost={image[0]}
+                    titularPost={title}
+                    descriptionPost={content}
+                  />
+                );
+              })
+            ) : (
+              <Heading>No hay ninguna publicacion</Heading>
+            )}
+          </Wrap>
         </ScaleFade>
       )}
-      <Flex
-        align="center"
-        gap={{ md: "3rem", lg: "3rem" }}
-        direction={{ base: "column", md: "row", lg: "row" }}
-      >
-        <Heading as="h2" marginTop="5">
-          Trabajos Recientes
-        </Heading>
-        {/* <Button
-          onClick={onOpen}
-          mt={{ base: '5', lg: '5' }}
-          bg={useColorModeValue('blue.500', 'blue.400')}
-          color='gray.50'
-          _hover={{ bg: 'blue.600' }}
-        >Crear publicación
-        </Button> */}
-      </Flex>
-      <Divider marginTop="5" />
-      {/* <ModalNewPost isOpen={isOpen} onClose={onClose} /> */}
-      <Wrap spacing="30px" marginTop="5" justify="center">
-        {data.posts ? (
-          data.posts.map(({ image, content, title, id }) => {
-            return (
-              <SupplierPost
-                key={id}
-                imagePost={image[0]}
-                titularPost={title}
-                descriptionPost={content}
-              />
-            );
-          })
-        ) : (
-          <Heading>No hay ninguna publicacion</Heading>
-        )}
-      </Wrap>
+       <Divider my={20} />
     </Container>
   );
 };
