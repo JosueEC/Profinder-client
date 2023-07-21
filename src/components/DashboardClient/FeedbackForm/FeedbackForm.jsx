@@ -15,9 +15,10 @@ import {
   CloseButton,
   Heading,
   Text,
+  Flex,
   useColorModeValue,
 } from '@chakra-ui/react';
-
+import { CheckIcon, AddIcon } from '@chakra-ui/icons';
 import { updateFeedback } from '../../../services/redux/actions/actions';
 import SupplierSelect from './SupplierSelect'; // Importa el componente SupplierSelect desde su ubicación
 
@@ -105,6 +106,34 @@ function FeedbackForm() {
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
           <VStack as="form" alignItems="center" textAlign="center" onSubmit={handleSubmit}>
+            
+            <Heading as="h1" size="2xl" mb={4} color="blue.600">
+              ¡Valora tu experiencia con los servicios contratados en el sitio!
+            </Heading>
+            <Text mb={4}>
+              En esta sección deberás seleccionar al profesional que prestó los servicios y valorar tu experiencia con ellos.
+              Haremos un breve recorrido por el formulario:
+            </Text>
+            <VStack alignItems="flex-start" spacing={4}>
+              <Flex alignItems="center">
+                <CheckIcon color="green.500" mr={2} />
+                <Text>Primero selecciona al profesional que deseas valorar.</Text>
+              </Flex>
+              <Flex alignItems="center">
+                <CheckIcon color="green.500" mr={2} />
+                <Text>Luego, escoge la calificación de "Malo" a "Excelente".</Text>
+              </Flex>
+              <Flex alignItems="center">
+                <CheckIcon color="green.500" mr={2} />
+                <Text>Finalmente, agrega un comentario sobre tu experiencia con el servicio prestado.</Text>
+                
+              </Flex>
+              <Flex alignItems="center">
+                <CheckIcon color="green.500" mr={2} />
+                <Text>Dale a enviar feedback!</Text>
+                
+              </Flex>
+            </VStack>
             {showSuccessAlert && (
               <Alert status="success" mb={4} rounded="md">
                 <AlertIcon />
@@ -119,14 +148,6 @@ function FeedbackForm() {
                 <CloseButton ml={2} onClick={() => setShowErrorAlert(false)} />
               </Alert>
             )}
-            <Heading as="h1" size="xl" mb={4}>
-              Formulario de devolución de servicio
-            </Heading>
-            <Text mb={4}>
-              En esta sección deberás seleccionar el usuario quien prestó los servicios y luego proceder a valorarlo según tu experiencia.
-            </Text>
-
-            {/* Agregamos el componente SupplierSelect aquí */}
             <SupplierSelect onSupplierSelect={setSelectedSupplierId} />
 
             <FormControl>

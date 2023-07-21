@@ -200,7 +200,7 @@ function EditClient() {
   }, [client]);
 
   return (
-    <Center p={4} bg={"gray.900"} color={"gray.300"} h="100vh" w="100%">
+    <Center p={4}  h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
           <VStack
@@ -243,6 +243,7 @@ function EditClient() {
                   placeholder="Nombre y apellido"
                   value={name}
                   onChange={handleNameChange}
+                  
                 />
               </Box>
             </FormControl>
@@ -275,7 +276,7 @@ function EditClient() {
               <Box>
                 <FormLabel>Género</FormLabel>
                 <Select
-                  placeholder="Género"
+                  
                   value={genre}
                   onChange={handleGenreChange}
                 >
