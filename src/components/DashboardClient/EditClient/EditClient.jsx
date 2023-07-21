@@ -122,6 +122,7 @@ function EditClient() {
     setImageUrl(e.target.files[0]);
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -282,6 +283,7 @@ function EditClient() {
                 >
                   <option value="male">Masculino</option>
                   <option value="female">Femenino</option>
+                  
                   
                 </Select>
               </Box>
