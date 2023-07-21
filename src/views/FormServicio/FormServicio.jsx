@@ -166,40 +166,48 @@ function FormServicio() {
               {errors.content && (
                 <span style={{ color: "red" }}>{errors.content.message}</span>
               )}
+
+              <Flex justify="space-between" align="center">
+                {profile.posts.length <= 1 || profile.active === true ? (
+                  <Button
+                    loadingText="Submitting"
+                    bg="teal.400"
+                    color="white"
+                    _hover={{ bg: "teal.500" }}
+                    type="submit"
+                    size="lg"
+                    marginTop="5"
+                  >
+                    Enviar
+                  </Button>
+                ) : (
+                  <>
+                    <Button size="lg" bg="grey.400" my={2}  marginTop="5">
+                      Enviar
+                    </Button>
+                    <Box display="inline" fontSize="lg" color="red.500" ml={2}>
+                      Se terminaron tus publicaciones
+                    </Box>
+                  </>
+                )}
+              </Flex>
             </FormControl>
 
-            { profile.active === false ? (
+            {profile.active === false ? (
               <Link to="/pasarela">
                 <Button
-                  type="submit"
                   loadingText="Submitting"
-                  size="lg"
-                  bg="blue.400"
+                  bg="teal.400"
                   color="white"
+                  _hover={{ bg: "teal.500" }}
+                  type="submit"
+                  size="lg"
+                  marginTop="5"
                 >
                   Suscribite a premium
                 </Button>
               </Link>
             ) : null}
-
-            {profile.posts.length <= 1 || profile.active === true ? (
-              <Button
-                type="submit"
-                loadingText="Submitting"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Enviar
-              </Button>
-            ) : (
-              <Button size="lg" bg="grey.400">
-                Enviar
-              </Button>
-            )}
           </form>
         </Stack>
       </Box>

@@ -58,15 +58,19 @@ function PasarelaPagos() {
   };
 
   return (
-    <Center py={6}>
-      <Box>
+    <Center py={6} style={{ height: "100vh" }}>
+      
+      <Box   >
         <Box
-          maxW={"330px"}
-          w={"full"}
+        
+    
+        
           bg={useColorModeValue("white", "gray.800")}
           boxShadow={"2xl"}
           rounded={"md"}
           overflow={"hidden"}
+          maxW={"500px"} w={"full"} py={6}
+         
         >
           <Stack
             textAlign={"center"}
@@ -95,12 +99,12 @@ function PasarelaPagos() {
           </Stack>
 
           <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
-            <List spacing={3}>
-              <ListItem>
+            <List spacing={3} align={"center"}>
+              <ListItem  >
                 <ListIcon as={CloseIcon} color="red.400" />
                 Mejor posicionamiento
               </ListItem>
-              <ListItem>
+              <ListItem >
                 <ListIcon as={CheckIcon} color="green.400" />
                 Primer publicacion gratis
               </ListItem>
@@ -121,12 +125,12 @@ function PasarelaPagos() {
         </Box>
       </Box>
       <Box
-        maxW={"330px"}
-        w={"full"}
+      
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={"2xl"}
         rounded={"md"}
         overflow={"hidden"}
+        maxW={"500px"} w={"full"} py={6}
       >
         <Stack
           textAlign={"center"}
@@ -155,28 +159,29 @@ function PasarelaPagos() {
         </Stack>
 
         <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
-          <List spacing={3}>
-            <ListItem>
+          <List spacing={3}  align={"center"} >
+            <ListItem  fontSize="lg">
               <ListIcon as={CheckIcon} color="green.400" />
               Mejor posicionamiento
             </ListItem>
-            <ListItem>
+            <ListItem  fontSize="lg">
               <ListIcon as={CheckIcon} color="green.400" />
               Publicaciones ilimitadas
             </ListItem>
-            <ListItem>
+            <ListItem  fontSize="lg">
               <ListIcon as={CheckIcon} color="green.400" />
               Todas las caracteristicas
             </ListItem>
           </List>
           <Stack>
             <Button
-              mt={10}
-              w={"full"}
-              bg={"blue.600"}
-              color={"white"}
-              rounded={"xl"}
-              boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+        loadingText="Submitting"
+        bg="teal.400"
+        color="white"
+        _hover={{ bg: "teal.500" }}
+        type="submit"
+        size="lg"
+        marginTop="5"
               onClick={handleBuy}
             >
               Obtene premium

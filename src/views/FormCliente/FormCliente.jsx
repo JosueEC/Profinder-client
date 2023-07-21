@@ -11,6 +11,7 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Heading,
   ButtonGroup,
 } from "@chakra-ui/react";
 import {
@@ -80,7 +81,16 @@ function FormCliente(props) {
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
