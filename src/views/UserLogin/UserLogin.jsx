@@ -15,6 +15,7 @@ import {
   Divider,
   useToast
 } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react-use-disclosure'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -23,9 +24,11 @@ import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { getSessionUser } from '../../services/redux/actions/actions'
 import { emailRules } from './loginValidations'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
+import ModalForgotPassword from '../../components/ModalForgotPassword/ModalForgotPassword'
 import jwt_decode from 'jwt-decode'
 
 export default function UserLogin () {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [usuario, setUsuario] = useState('Tipo de usuario')
   const [rol, setRol] = useState('')
@@ -74,7 +77,7 @@ export default function UserLogin () {
       const dataSessionGoogle = {
         name: userObject.name,
         email: userObject.email,
-        password: userObject.email === 'profinder943@gmail.com' ? 'P1234567' : `${userObject.given_name.toLowerCase()}GOOAT0` ,
+        password: userObject.email === 'profinder943@gmail.com' ? 'P1234567' : `${userObject.given_name.toLowerCase()}GOOAT0`,
         usuario: userObject.email === 'profinder943@gmail.com' ? 'a' : rol
       }
 
@@ -166,12 +169,6 @@ export default function UserLogin () {
                 <Text color='red.500'>{errorRol && 'Selecciona un tipo de usuario'}</Text>
                 <Divider />
                 <Stack spacing={5}>
-                  {/* <GoogleAuthButton
-                    usuario={userRol}
-                    action={getSessionUser}
-                    succesMessage='Sesion iniciada'
-                    errorMessage='Algo salio mal'
-                  /> */}
                   <Button
                     id='g_id_onload'
                     bg='gray.50'
@@ -186,12 +183,14 @@ export default function UserLogin () {
                     _hover={{ bg: 'teal.500' }}
                     loadingText='Ingresando'
                     type='submit'
+                    onClick={handleSubmit(customSubmit)}
                   >
                     Ingresar
                   </Button>
                   <Text color='gray.300' letterSpacing='0.5px'>
-                    Aun no tienes una cuenta? Registrate gratis <Link to='/userRegister' style={{ color: 'cyan' }}>aqui</Link>
+                    ¿Olvidaste tu contraseña? click <Link to='#' style={{ color: 'cyan' }} onClick={onOpen}>aqui</Link>
                   </Text>
+                  <ModalForgotPassword isOpen={isOpen} onClose={onClose} />
                 </Stack>
               </Stack>
             </Stack>
