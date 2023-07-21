@@ -13,3 +13,11 @@ export const passwordRules = {
     message: 'La contrseña debe tener minimo 8 caracteres'
   }
 }
+
+export const passwordBackRules = {
+  required: 'El campo contraseña es requerido',
+  pattern: {
+    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+    message: 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número'
+  }
+}

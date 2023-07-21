@@ -10,6 +10,7 @@ import HowDoesItWork from "../src/components/HowDoesItWork/HowDoesItWork";
 import Footer from "./components/Footer/Footer";
 import DetailSupplier from "./views/DetailsSupplier/DetailsSupplier";
 import UserLogin from "./views/UserLogin/UserLogin";
+import ResetPassword from './components/ResetPassword/ResetPassword'
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import FormCliente from "./views/FormCliente/FormCliente.jsx";
 import DashboardAdmin from "./views/DashboardAdmin/DashboardAdmin";
@@ -80,6 +81,7 @@ function App() {
         <Route path="/createPost" element={<FormServicio />} />
         <Route path="/detail/:id" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin/manageClient" element={<DashboardAdmin />} />
         <Route path="/dashboardAdmin/manageProfesional" element={<DashboardAdmin />} />
