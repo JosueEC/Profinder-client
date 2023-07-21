@@ -9,6 +9,7 @@ import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import BarData from "../DataSuppliers/BarData";
+import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 
 const linkStyle = {
   display: "block",
@@ -73,21 +74,18 @@ const DashboardSuppliers = () => {
             </Button>
           </RouterLink>
 
-          <ScrollLink to="/pasarela" spy smooth duration={500} style={linkStyle}>
-            <Button variant="outline">Obtén Premium</Button>
-          </ScrollLink>
-
-          <ScrollLink to="/pasarela" spy smooth duration={500} style={linkStyle}>
+          <ScrollLink to="pasarela" spy smooth duration={500} style={linkStyle}>
             <Button
               variant="outline"
-              onClick={() => handlePageChange("Ayuda")}
-              bg={currentPage === "Ayuda" ? "blue.500" : ""}
-              color={currentPage === "Ayuda" ? "white" : ""}
-              leftIcon={<QuestionIcon />}
+              onClick={() => handlePageChange("PasarelaPagos")}
+              bg={currentPage === "PasarelaPagos" ? "blue.500" : ""}
+              color={currentPage === "PasarelaPagos" ? "white" : ""}
+              leftIcon={<ViewIcon />}
             >
-              Ayuda
+            Obtén Premium
             </Button>
           </ScrollLink>
+                
 
         </Stack>
       </Box>
@@ -127,6 +125,11 @@ const DashboardSuppliers = () => {
           <Flex justifyContent="flex-start" alignItems="flex-end">
             <CustomChatBot />
           </Flex>
+        )}
+        {currentPage === "PasarelaPagos" && (
+          <Box>
+            <PasarelaPagos />
+          </Box>
         )}
       </Flex>
     </Box>
