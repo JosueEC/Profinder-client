@@ -139,7 +139,7 @@ const ArticleList = () => {
               mt={{ base: "20px", md: 0 }}
               textAlign={{ base: "center", md: "left" }}
             >
-              {isChatOpen && <ClieProfChatBot />}
+              {isChatOpen && <ClieProfChatBot data={data}/>}
             </Box>
           </Flex>
           

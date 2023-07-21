@@ -114,6 +114,7 @@ const postServicio = (info) => {
       alert("Publicacion Exitosa!")
      
     } catch (error) {
+      console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
     }
   };
