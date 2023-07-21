@@ -123,12 +123,16 @@ export default function LoggedNavbar () {
                 {
                 (session.usuario === 'c')
                   ? <MenuItem onClick={() => navigate('/dashboardClient')}>Dashboard</MenuItem>
-                  : <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
+                  : session.usuario === 'p'
+                    ? <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
+                    : session.usuario === 'a'
+                      ? <MenuItem onClick={() => navigate('/dashboardAdmin/manageProfesional')}>Dashboard</MenuItem>
+                      : null
                 }
                 {
-                  (session.usuario === 'c')
+                  (session.usuario === 'p')
                     ? <MenuItem onClick={() => navigate('/registerCliente')}>Ver mi perfil</MenuItem>
-                    : <MenuItem onClick={() => navigate('/registerProvider')}>Ver mi perfil</MenuItem>
+                    : null
                 }
                 <MenuDivider />
                 <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>

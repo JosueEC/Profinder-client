@@ -42,7 +42,14 @@ export const useCredentials = () => {
         left: 0,
         behavior: 'smooth'
       })
-      navigate((session.usuario === 'c') ? '/dashboardClient' : '/dashboardSuppliers')
+      const dashboard = session.usuario === 'c'
+        ? '/dashboardClient'
+        : session.usuario === 'p'
+          ? '/dashboardSuppliers'
+          : session.usuario === 'a'
+            ? '/dashboardAdmin/manageProfesional'
+            : '/'
+      navigate(dashboard)
     } else {
       toast({
         title: errorTitle,

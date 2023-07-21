@@ -117,12 +117,6 @@ const Navbar = () => {
               >
                 Registrarse profesional
               </MenuItem>
-              <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/dashboardAdmin/manageProfesional")}
-              >
-                Dashboard Admin
-              </MenuItem>
             </MenuList>
           </Menu>
         </Box>
@@ -169,14 +163,6 @@ const Navbar = () => {
                 fontWeight="bold"
               >
                 Soy cliente
-              </MenuItem>
-              <MenuItem
-                color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/dashboardAdmin/manageProfesional")}
-                fontSize="1.2rem"
-            fontWeight="bold"
-              >
-                Dashboard Admin
               </MenuItem>
             </MenuList>
           </Menu>
