@@ -25,8 +25,10 @@ import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 function FormCliente(props) {
   const dispatch = useDispatch();
   const { handleUserSession } = useCredentials();
+
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -187,7 +189,9 @@ function FormCliente(props) {
                 >
                   Registrarme
                 </Button>
-                <GoogleAuthButton />
+                <GoogleAuthButton
+                  setValue={setValue}
+                />
                 <PrivacyNotice />
               </ButtonGroup>
             </FormControl>

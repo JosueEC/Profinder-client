@@ -40,12 +40,9 @@ function FormProvider() {
   const { handleUserSession } = useCredentials();
   const [genre, setGenre] = useState("female");
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -169,7 +166,7 @@ function FormProvider() {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-     
+    
     >
       <Box rounded="lg" boxShadow="lg" p={8} color="gray.300"  width="500px">
         <Stack spacing={4}>
@@ -177,7 +174,6 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
-                value={name}
                 type="text"
                 {...register("name", {
                   required: "El campo nombre y apellido es requerido",
@@ -203,7 +199,6 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
-                value={email}
                 type="email"
                 {...register("email", {
                   required: "El campo email es requerido",
@@ -335,7 +330,6 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Contraseña</FormLabel>
               <Input
-                value={password}
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
@@ -379,7 +373,9 @@ function FormProvider() {
                   >
                     Registrarme
                   </Button>
-                  <GoogleAuthButton />
+                  <GoogleAuthButton
+                    setValue={setValue}
+                  />
                   <PrivacyNotice />
                 </ButtonGroup>
               )}

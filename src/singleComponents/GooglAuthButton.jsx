@@ -1,24 +1,32 @@
+/* eslint-disable camelcase */
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
-import jwt_decode from 'jwt-decode'
-import { getSessionUser } from '../services/redux/actions/actions'
-import { useDispatch } from 'react-redux'
-import { useCredentials } from '../utils/customHooks/useCredentials'
+import { useToast } from '@chakra-ui/toast'
 import { Button } from '@chakra-ui/button'
+import { useDispatch } from 'react-redux'
+import { loginSessionGoogle } from '../services/redux/actions/actions'
+import jwt_decode from 'jwt-decode'
 
-export default function GoogleAuthButton () {
+export default function GoogleAuthButton ({ setValue }) {
   const dispatch = useDispatch()
-  const { handleUserSession } = useCredentials()
+  const toast = useToast()
 
   async function handleCallbackResponse (response) {
+    dispatch(loginSessionGoogle())
     const userObject = jwt_decode(response.credential)
-    const dataSessionGoogle = {
-      email: userObject.email,
-      password: userObject.sub,
-      usuario: ''
-    }
-    await dispatch(getSessionUser(dataSessionGoogle))
-    handleUserSession('Sesion iniciada', 'Algo salio mal')
+
+    setValue('name', userObject.name)
+    setValue('email', userObject.email)
+    setValue('password', `${userObject.given_name.toLowerCase()}GOOAT0`)
+    userObject && toast({
+      title: 'Cuenta vinculada',
+      description: 'Completa los demas campos para finalizar el registro',
+      status: 'success',
+      position: 'bottom-right',
+      duration: 5000,
+      isClosable: true
+    })
   }
 
   useEffect(() => {

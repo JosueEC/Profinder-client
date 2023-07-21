@@ -32,7 +32,6 @@ export const useCredentials = () => {
         title: succesTitle,
         description: session.message,
         status: 'success',
-        variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
         isClosable: true
@@ -49,7 +48,6 @@ export const useCredentials = () => {
         title: errorTitle,
         description: session.message || session.error,
         status: 'error',
-        variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
         isClosable: true
