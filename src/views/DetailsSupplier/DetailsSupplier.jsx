@@ -23,7 +23,7 @@ import {
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../utils/customHooks/useFetch";
-import { API } from "../../utils/API/constants";
+
 import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
 import InfoLabel from "../../singleComponents/InfoLabel";
 import SupplierPost from "../../components/SupplierPost/SupplierPost";
