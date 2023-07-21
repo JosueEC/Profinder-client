@@ -14,18 +14,34 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
-export async function uploadFile(file) {
-  const fileName = v4() + ".jpg";
-  const storageRef = ref(storage, fileName);
-  await uploadBytes(storageRef, file);
-  const url = await getDownloadURL(storageRef);
-  return url;
+export async function uploadFile(files) {
+  const urls = [];
+  for (const file of files) {
+    const fileName = v4() + ".jpg";
+    const storageRef = ref(storage, "registros/" + fileName); // Update the storage reference to the "posteos" folder
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    urls.push(url);
+  }
+  return urls;
 }
 export async function uploadFiles2(files) {
   const urls = [];
   for (const file of files) {
     const fileName = v4() + ".jpg";
     const storageRef = ref(storage, "posteos/" + fileName); // Update the storage reference to the "posteos" folder
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    urls.push(url);
+  }
+  return urls;
+}
+export async function uploadFiles3(files) {
+  const urls = [];
+  for (const file of files) {
+    const fileName = v4() + ".jpg";
+    const storageRef = ref(storage, "cliente/" + fileName);
+    // Specify the contentType as "image/jpeg"
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
     urls.push(url);

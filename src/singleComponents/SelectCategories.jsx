@@ -6,7 +6,7 @@ import { getAllCategories } from '../services/redux/actions/actions'
 import { Stack } from '@chakra-ui/layout'
 import DropdownMenu from './DropdownMenu'
 
-export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation }) {
+export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation, titleCategory, titleOcupation }) {
   const filters = useSelector(state => state.filters)
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories)
@@ -40,12 +40,12 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation 
   return (
     <Stack direction='row' spacing={6}>
       <DropdownMenu
-        titleMenu={categoryName}
+        titleMenu={titleCategory || categoryName}
         menuItems={[{ name: 'Todas' }, ...categories]}
         onClick={handleClickCategory}
       />
       <DropdownMenu
-        titleMenu={ocupationName}
+        titleMenu={titleOcupation || ocupationName}
         menuItems={ocupationsArray}
         onClick={handleClickOcupation}
       />

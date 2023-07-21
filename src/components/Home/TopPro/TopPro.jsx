@@ -30,7 +30,7 @@ const Card = ({ supplier, cardBgColor, textColor }) => {
             Categoría: {supplier.professions[0].category}
           </Text>
           <Text fontWeight={600} color={textColor} fontSize="sm" mb={2}>
-            Valoración:
+            Valoracion:
             <Flex align="center" ml={2}>
               {ratingStars}
             </Flex>
@@ -56,7 +56,7 @@ const TopPro = ({ cardBgColor, textColor, linkColor }) => {
   const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
 
   return (
-    <Center p={4} bg={useColorModeValue('gray.900', 'gray.900')} color={useColorModeValue('gray.300', 'gray.300')} h="100vh" w="100%">
+    <Center p={4}  h="100vh" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
         <Box textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15}>

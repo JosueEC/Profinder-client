@@ -19,6 +19,7 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
       p={5}
       bg={cardBgColor}
       color={textColor}
+      boxShadow="2xl" // Agregar sombra al igual que en el componente TopPro
     >
       <Stack align="start" spacing={2}>
         <Flex
@@ -49,13 +50,15 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
 };
 
 const CategoriesSection = () => {
-  const cardBgColor = useColorModeValue('blackAlpha.500', 'gray.900');
-  const textColor = useColorModeValue('gray.300', 'gray.300');
+  // Colores en modo light (mismos que en el componente TopPro)
+  const cardBgColor = useColorModeValue('gray.50', 'gray.800');
+  const textColor = useColorModeValue('gray.600', 'gray.300');
   const linkColor = useColorModeValue('teal.400', 'teal.400');
   const iconBgColor = useColorModeValue('gray.900', 'gray.700');
 
+  // Resto del código del componente
   return (
-    <Box p={4} bg="gray.900" color="gray.300" h="100vh" width="100%">
+    <Box p={4} h="100vh" width="100%">
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold">

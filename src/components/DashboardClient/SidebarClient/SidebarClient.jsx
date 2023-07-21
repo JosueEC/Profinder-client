@@ -30,13 +30,13 @@ const SidebarClient = () => {
         >
           <Text>Editar perfil</Text>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/dashboardClient/favorites"
           style={linkStyle}
           activeClassName="active"
         >
           <Text>Favoritos</Text>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/dashboardClient/recomended"
           style={linkStyle}
@@ -86,13 +86,13 @@ const SidebarClient = () => {
           >
             <Text>Editar perfil</Text>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/dashboardClient/favorites"
             style={linkStyle}
             activeClassName="active"
           >
             <Text>Favoritos</Text>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/dashboardClient/recomended"
             style={linkStyle}

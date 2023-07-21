@@ -23,23 +23,30 @@ import { useSessionState } from '../../services/zustand/useSession'
 import NavLink from '../../singleComponents/NavLink'
 import Logo from '../../assets/categoriesIcons/Logo.png'
 import SinFoto from '../../assets/defaultImages/sinfoto.webp'
-import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle';
+import DarkModeToggle from '../../utils/Darkmode/DarkmodeToggle'
+// import { useSelector } from "react-redux";
 
 export default function LoggedNavbar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
   const toast = useToast()
   const session = useSessionState(state => state.session)
+  // console.log(session);
   const removeSessionState = useSessionState(state => state.removeSessionState)
+
+  // const profesionalesimg = useSelector((state) => state.profesionales);
+  // console.log(profesionalesimg);
+
+  // const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
 
   function handleLogout () {
     removeSessionState()
     window.localStorage.removeItem('userSession')
+    window.localStorage.removeItem('rol')
     toast({
       title: 'Sesion finalizada',
       description: 'Esperamos verte de nuevo',
       status: 'success',
-      variant: 'top-accent',
       position: 'bottom-right',
       duration: 5000,
       isClosable: true
@@ -90,8 +97,8 @@ export default function LoggedNavbar () {
               fontWeight='bold'
             >
               <NavLink textLink='¿COMO FUNCIONA?' routeLink='/comofunciona' />
-              <NavLink textLink='CATEGORIAS' routeLink='/categories' />
-              <NavLink textLink='CONTACTO' routeLink='/' />
+              <NavLink textLink='PROFESIONALES' routeLink='/categories' />
+              <NavLink textLink='CONTACTO' routeLink='/feedback' />
               <NavLink textLink='ACERCA DE' routeLink='/' />
             </HStack>
           </HStack>
@@ -116,12 +123,16 @@ export default function LoggedNavbar () {
                 {
                 (session.usuario === 'c')
                   ? <MenuItem onClick={() => navigate('/dashboardClient')}>Dashboard</MenuItem>
-                  : <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
+                  : session.usuario === 'p'
+                    ? <MenuItem onClick={() => navigate('/dashboardSuppliers')}>Dashboard</MenuItem>
+                    : session.usuario === 'a'
+                      ? <MenuItem onClick={() => navigate('/dashboardAdmin/manageProfesional')}>Dashboard</MenuItem>
+                      : null
                 }
                 {
-                  (session.usuario === 'c')
+                  (session.usuario === 'p')
                     ? <MenuItem onClick={() => navigate('/registerCliente')}>Ver mi perfil</MenuItem>
-                    : <MenuItem onClick={() => navigate('/registerProvider')}>Ver mi perfil</MenuItem>
+                    : null
                 }
                 <MenuDivider />
                 <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>
@@ -129,7 +140,6 @@ export default function LoggedNavbar () {
             </Menu>
           </Flex>
         </Flex>
-
 
         {isOpen
           ? (
@@ -139,8 +149,8 @@ export default function LoggedNavbar () {
             >
               <Stack as='nav' spacing={4}>
                 <NavLink textLink='¿Como funciona?' routeLink='/comofunciona' />
-                <NavLink textLink='Categorias' routeLink='/categories' />
-                <NavLink textLink='Contacto' routeLink='/' />
+                <NavLink textLink='Profesionales' routeLink='/categories' />
+                <NavLink textLink='Contacto' routeLink='/feedback' />
                 <NavLink textLink='Acerca de' routeLink='/' />
               </Stack>
             </Box>

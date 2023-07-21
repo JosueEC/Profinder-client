@@ -5,12 +5,14 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/menu'
 
 export default function DropdownMenu ({ titleMenu, menuItems, onClick }) {
+  const colorMenuItem = useColorModeValue('gray.800', 'gra.300')
   return (
     <Menu>
       <MenuButton
+      borderWidth="1px"
         as={Button}
         rightIcon={<ChevronDownIcon />}
-        bg={useColorModeValue('gray.100', 'gray.100')}
+        bg={useColorModeValue('gray.100', 'gray.800')}
       >
         {titleMenu || 'Sin titulo'}
       </MenuButton>
@@ -23,7 +25,7 @@ export default function DropdownMenu ({ titleMenu, menuItems, onClick }) {
                     <MenuItem
                       key={name}
                       name={name}
-                      color='gray.800'
+                      color={colorMenuItem}
                       onClick={onClick}
                     >{name}
                     </MenuItem>

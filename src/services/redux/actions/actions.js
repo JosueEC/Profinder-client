@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { API, LOCAL } from "../../../utils/API/constants";
+import { API } from "../../../utils/API/constants";
 import axios from "axios";
 import {
   GET_ALL_SUPPLIERS,
@@ -9,14 +9,17 @@ import {
   //GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
-  POST_PROFESIONAL
+  POST_PROFESIONAL,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
 const getAllSuppliers = () => {
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
+
   return function (dispatch) {
     axios
-      .get(`https://backprofinder-production.up.railway.app/profesional`)
+      .get(URL)
       .then((response) => {
         dispatch({ type: GET_ALL_SUPPLIERS, payload: response.data });
       })
@@ -26,7 +29,9 @@ const getAllSuppliers = () => {
 
 //! Todas las categorias con su ID
 const getAllCategories = () => {
-  const URL = LOCAL.category;
+  // const URL = `${API.LOCALHOST}/category`
+  const URL = `${API.DBONLINE}/category`;
+
   return function (dispatch) {
     fetch(URL)
       .then((response) => response.json())
@@ -43,12 +48,14 @@ const getAllCategories = () => {
 
 //! action para buscar por nombre de profesion //*****Revisar si aun se esta usando si no borrar */
 const searchProfessionals = (name) => {
-  const URL = API.DOMAIN;
+  // const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
+  const URL = `${API.DBONLINE}/ocupationsp?name=${name}`;
+
   return function (dispatch) {
     if (name) {
       // Verificar si name no es undefined
       axios
-        .get(`${URL}/ocupations?name=${name}`)
+        .get(URL)
         .then((response) => {
           console.info(response.data);
           dispatch({
@@ -84,6 +91,9 @@ const applyFilters = (objFilters) => {
 };
 
 const postServicio = (info) => {
+  // const URL = `${API.LOCALHOST}/postprofesional`
+  const URL = `${API.DBONLINE}/postprofesional`;
+
   return async function () {
     try {
       // Verificación
@@ -92,19 +102,19 @@ const postServicio = (info) => {
         info.ocupation === "" ||
         info.category === "" ||
         info.image === "" ||
-        info.profesionalId === "" ||
+        info.ProfesionalId === "" ||
         info.content === 0
       ) {
         throw new Error("Faltan datos");
       }
 
-      await axios.post(
-        "https://backprofinder-production.up.railway.app/postprofesional",
-        info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Publicacion Creada");
+      await axios.post(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      alert("Publicacion Exitosa!")
+     
     } catch (error) {
+      console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
     }
   };
@@ -117,6 +127,9 @@ const postProveedor = (info) => {
     const user = JSON.parse(userSession);
     info.id = user.id;
   }
+
+  // const URL = `${API.LOCALHOST}/profesional/${info.id}`
+  const URL = `${API.DBONLINE}/profesional/${info.id}`;
 
   return async function () {
     try {
@@ -137,12 +150,10 @@ const postProveedor = (info) => {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(
-        `https://backprofinder-production.up.railway.app/profesional/${info.id}`,
-        info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Perfil creado");
+      await axios.put(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      
     } catch (error) {
       console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
@@ -158,6 +169,9 @@ const postCliente = (info) => {
     info.id = user.id;
   }
 
+  // const URL = `${API.LOCALHOST}/client/${info.id}`
+  const URL = `${API.DBONLINE}/client/${info.id}`;
+
   return async function () {
     try {
       // Verificación
@@ -165,17 +179,15 @@ const postCliente = (info) => {
         info.name === "" ||
         info.email === "" ||
         info.phone === "" ||
+        // info.image === "" ||
         info.password === 0
       ) {
         throw new Error("Faltan datos");
       }
 
-      await axios.put(
-        `https://backprofinder-production.up.railway.app/client/${info.id}`,
-        info,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
-      );
-      alert("Perfil creado");
+      await axios.put(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
     } catch (error) {
       alert(`${error.response.data.error}`);
     }
@@ -183,18 +195,17 @@ const postCliente = (info) => {
 };
 
 const loginSessionGoogle = () => {
-  return async function () {
-    const URL = "http://localhost:3001/auth/google";
-    // const URL = LOCAL.register
+  // const URL = `${API.LOCALHOST}/auth/google`
+  const URL = `${API.DBONLINE}/auth/google`;
 
+  return async function () {
     await fetch(URL)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) console.info('google-auth')
+      })
       .then((results) => {
         return results;
       })
-      .catch((error) => console.error(error.message));
-    // localStorage.setItem("userSession", JSON.stringify(data));
-    // data.status = data.email && !data.message.includes("No pertenece") ? true : false;
   };
 };
 
@@ -210,7 +221,7 @@ const getSessionUser = (dataSession) => {
 
   return async function () {
     // const URL = `${API.LOCALHOST}/login`
-    const URL = `${API.DOMAIN}/login`;
+    const URL = `${API.DBONLINE}/login`;
 
     try {
       const response = await fetch(URL, options);
@@ -235,10 +246,10 @@ const postSessionUser = (dataSession) => {
     body: JSON.stringify(dataSession),
   };
 
-  return async function () {
-    // const URL = `${API.LOCALHOST}/register`
-    const URL = `${API.DOMAIN}/register`;
+  // const URL = `${API.LOCALHOST}/register`
+  const URL = `${API.DBONLINE}/register`;
 
+  return async function () {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
@@ -254,11 +265,13 @@ const postSessionUser = (dataSession) => {
 
 //! Traigo profesionales  para renderizar sus post
 const getProfesionals = () => {
-  const URL = "https://backprofinder-production.up.railway.app/profesional";
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
+
   return async function (dispatch) {
     try {
       let response = await axios.get(`${URL}`);
-      console.log(response.data);
+    //  console.log(response.data);
       if (response.data) {
         return dispatch({
           type: GET_INFO_PROFESIONALS,
@@ -272,14 +285,16 @@ const getProfesionals = () => {
 };
 
 //! Actualizar Profesionales
-const updateProfesionals = (id, data) => {
-  //console.log(id);  // el id llega bien***** falta la data
-  const URL = `https://backprofinder-production.up.railway.app/profesional/${id}`;
+const updateProfesionals = (data, id) => {
+  // console.log(id);  // el id llega bien***** falta la data
+  // const URL = `${API.LOCALHOST}/profesional/${id}`
+  const URL = `${API.DBONLINE}/profesional/${id}`;
 
   return async function (dispatch) {
     try {
       const response = await axios.put(URL, data);
       if (response && response.data) {
+        // console.log(response.data);
         dispatch({
           type: UPDATE_PROFESIONAL,
           payload: response.data,
@@ -295,9 +310,12 @@ const updateProfesionals = (id, data) => {
 
 // Action para obtener todos los clientes
 const getAllClients = () => {
+  // const URL = `${API.LOCALHOST}/client`
+  const URL = `${API.DBONLINE}/client`;
+
   return function (dispatch) {
     axios
-      .get("https://backprofinder-production.up.railway.app/client")
+      .get(URL)
       .then((response) => {
         console.log(response.data);
         dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
@@ -310,18 +328,18 @@ const getAllClients = () => {
 
 // Action para modificar los datos de un cliente
 const updateClient = (clientId, newData) => {
-  const userSession = JSON.parse(localStorage.getItem('userSession'));
-  console.log(userSession);  
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  //console.log(userSession);
   if (userSession) {
-      newData.id = userSession.id;
-      
-    }
+    newData.id = userSession.id;
+  }
+
+  // const URL = `${API.LOCALHOST}/client/${newData.id}`
+  const URL = `${API.DBONLINE}/client/${newData.id}`;
+
   return function (dispatch) {
     axios
-      .put(
-        `https://backprofinder-production.up.railway.app/client/${newData.id}`,
-        newData
-      )
+      .put(URL, newData)
       .then((response) => {
         dispatch({ type: "UPDATE_CLIENT", payload: response.data });
       })
@@ -330,16 +348,57 @@ const updateClient = (clientId, newData) => {
       });
   };
 };
+
 export const getPostProfesional = () => {
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/profesional`;
+
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `https://backprofinder-production.up.railway.app/profesional`
-      );
+      const response = await axios.get(URL);
       dispatch({ type: POST_PROFESIONAL, payload: response.data });
     } catch (error) {
       console.error(error.message);
     }
+  };
+};
+
+// Acción para enviar el feedback al backend
+const updateFeedback = (feedbackData) => {
+  return async (dispatch) => {
+    try {
+      // Llamar a la API o endpoint correspondiente para enviar el feedback
+      const response = await axios.post(
+        "https://backprofinder-production.up.railway.app/review",
+        feedbackData
+      );
+
+      // Aquí puedes despachar otra acción si lo necesitas, por ejemplo, para actualizar el estado de la aplicación
+
+      // Ejemplo de despacho de una acción de éxito
+      dispatch(updateFeedbackSuccess(response.data));
+    } catch (error) {
+      // Manejar errores si es necesario
+
+      // Ejemplo de despacho de una acción de error
+      dispatch(updateFeedbackError(error.message));
+    }
+  };
+};
+
+// Acción para éxito del envío del feedback
+const updateFeedbackSuccess = (data) => {
+  return {
+    type: "UPDATE_FEEDBACK_SUCCESS",
+    payload: data,
+  };
+};
+
+// Acción para error en el envío del feedback
+const updateFeedbackError = (error) => {
+  return {
+    type: "UPDATE_FEEDBACK_ERROR",
+    payload: error,
   };
 };
 
@@ -359,4 +418,7 @@ export {
   getProfesionals,
   updateProfesionals,
   updateClient,
+  updateFeedback,
+  updateFeedbackSuccess,
+  updateFeedbackError,
 };

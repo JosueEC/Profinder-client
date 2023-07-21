@@ -5,7 +5,8 @@ import {
   APPLY_FILTERS,
   GET_OCUPATION_BY_NAME,
   UPDATE_PROFESIONAL,
-  POST_PROFESIONAL
+  POST_PROFESIONAL,
+  GET_INFO_PROFESIONALS,
 } from '../actionsTypes/actionsType'
 import { filterSuppliers } from '../filters/reduxFilters'
 
@@ -19,9 +20,11 @@ const initialState = {
   filteredSuppliers: [],
   suppliersByname:[],
   profesionales:[],
+  feedback: null,
+  error: null,
   filters: {
     category: 'Categorias',
-    ocupation: 'Selecciona una categoria',
+    ocupation: 'Ocupacion',
     rating: 'Rating',
     genre: 'Genero'
   },
@@ -80,7 +83,24 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           profesionales: action.payload,
-        } 
+        }
+      case 'UPDATE_FEEDBACK_SUCCESS':
+        return {
+          ...state,
+          feedback: action.payload,
+          error: null,
+        };
+      case 'UPDATE_FEEDBACK_ERROR':
+        return {
+          ...state,
+          feedback: null,
+          error: action.payload,
+        }; case GET_INFO_PROFESIONALS:
+        return {
+          ...state,
+          profesionales: action.payload,
+        }
+
     //! caso por default
     default:
       return { ...state }

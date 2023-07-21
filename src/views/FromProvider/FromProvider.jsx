@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +26,10 @@ import {
   RadioGroup,
   Select,
   CircularProgress,
+  Heading,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
@@ -34,13 +39,18 @@ import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 
 function FormProvider() {
   const { handleUserSession } = useCredentials();
-  const [genre, setGenre] = useState('female')
+  const [genre, setGenre] = useState("female");
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       email: "",
-      image: "",
+      image: [],
       genre: "",
       years_exp: "",
       password: "",
@@ -49,7 +59,7 @@ function FormProvider() {
       phone: "",
       ocupations: [],
       categories: [],
-    }
+    },
   });
 
   const dispatch = useDispatch();
@@ -104,7 +114,7 @@ function FormProvider() {
       setLocations([]);
     }
   };
- 
+
   const envioCategoria = (value) => {
     setSelectedCategory([value]);
   };
@@ -153,29 +163,54 @@ function FormProvider() {
 
   return (
     <Flex
-      minH="100vh"
+    minH="100vh"
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
+    
     >
-      <Box
-        rounded="lg"
+      <Box      rounded="lg"
         bg={useColorModeValue("blackAlpha.800", "gray800")}
         boxShadow="lg"
         p={8}
         color="gray.300"
-      >
-        <Stack spacing={4}>
+        width="500px">
+          
+        <Stack spacing={4} >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+            
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
                 {...register("name", {
-                  required: "El campo nombre es requerido",
+                  required: "El campo nombre y apellido es requerido",
+                  pattern: {
+                    value: /^[a-zA-ZñÑ\s]+$/,
+                    message: "El nombre y apellido no puede contener expresiones especiales o símbolos",
+                  },
+                  minLength: {
+                    value: 2,
+                    message: "El nombre y apellido deben tener al menos 2 caracteres",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "El nombre y apellido no puede tener más de 100 caracteres",
+                  },
                 })}
               />
+              {errors.name && (
+                <span style={{ color: "red" }}>{errors.name.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -190,7 +225,9 @@ function FormProvider() {
                   },
                 })}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <span style={{ color: "red" }}>{errors.email.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -198,21 +235,34 @@ function FormProvider() {
               <Input
                 type="number"
                 {...register("phone", {
-                  required: "El campo telefono es requerido",
+                  required: "El campo teléfono es requerido",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "El teléfono solo debe contener números",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "El teléfono debe tener al menos 10 dígitos",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "El teléfono no puede tener más de 10 dígitos",
+                  },
                 })}
               />
-              {errors.phone && <p>{errors.phone.message}</p>}
+              {errors.phone && (
+                <span style={{ color: "red" }}>{errors.phone.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
               <FormLabel>País</FormLabel>
               <Select
-                {...register("country", {
-                  required: "El campo país es requerido",
-                })}
-                bg={useColorModeValue("white", "gray.700")}
+                {...register("country")}
                 borderWidth="1px"
-                color="gray.800"
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
@@ -222,7 +272,9 @@ function FormProvider() {
                   </option>
                 ))}
               </Select>
-              {errors.country && <p>{errors.country.message}</p>}
+              {errors.country && (
+                <span style={{ color: "red" }}>{errors.country.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -231,9 +283,11 @@ function FormProvider() {
                 {...register("location", {
                   required: "El campo provincia/estado es requerido",
                 })}
-                bg={useColorModeValue("white", "gray.700")}
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 borderWidth="1px"
-                color="gray.800"
+                // color="gray.800"
               >
                 <option value="">Seleccionar provincia/estado</option>
                 {locations.map((location) => (
@@ -242,15 +296,18 @@ function FormProvider() {
                   </option>
                 ))}
               </Select>
-              {errors.location && <p>{errors.location.message}</p>}
+              {errors.location && (
+                <span style={{ color: "red" }}>{errors.location.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
               <FormLabel>Foto de perfil</FormLabel>
               <Input
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("image", {
-                  required: "El campo imagen es requerido",
+                  required: "Solo se permiten archivos de imagen JPEG o PNG",
                   validate: {
                     isImage: (value) =>
                       ["image/jpeg", "image/png"].includes(value[0]?.type) ||
@@ -258,7 +315,10 @@ function FormProvider() {
                   },
                 })}
               />
-              {errors.image && <p>{errors.image.message}</p>}
+              
+              {errors.image && (
+                <span style={{ color: "red" }}>{errors.image.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -267,6 +327,7 @@ function FormProvider() {
                 <Stack direction="row">
                   <Radio value="female">Femenino</Radio>
                   <Radio value="male">Masculino</Radio>
+                  <Radio value="otro">Otro</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -277,16 +338,13 @@ function FormProvider() {
                 <NumberInputField
                   {...register("years_exp", { required: true })}
                 />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
               </NumberInput>
             </FormControl>
 
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
+              
                 fnSelectCategory={envioCategoria}
                 fnSelectOcupation={envioOcupaciones}
               />
@@ -298,13 +356,16 @@ function FormProvider() {
                 type="password"
                 {...register("password", {
                   required: "El campo contraseña es requerido",
-                  minLength: {
-                    value: 8,
-                    message: 'La contraseña debe tener minimo 8 caracteres'
-                  }
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                    message:
+                      "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
+                  },
                 })}
               />
-              {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && (
+                <span style={{ color: "red" }}>{errors.password.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -316,21 +377,28 @@ function FormProvider() {
                   color="blue.500"
                 />
               ) : (
-                <>
+                <ButtonGroup
+                  flexWrap='wrap-reverse'
+                  justifyContent='center'
+                  spacing={5}
+                  mt={3}
+                >
                   <Button
-                    type="submit"
-                    loadingText="Creando cuenta"
-                    size="lg"
-                    bg="blue.400"
-                    color="white"
-                    _hover={{
-                      bg: "blue.500",
-                    }}
+                    bg='teal.400'
+                    color='white'
+                    mt={5}
+                    _hover={{ bg: 'teal.500' }}
+                    loadingText='Ingresando'
+                    type='submit'
+                    size='lg'
                   >
                     Registrarme
                   </Button>
+                  <GoogleAuthButton
+                    setValue={setValue}
+                  />
                   <PrivacyNotice />
-                </>
+                </ButtonGroup>
               )}
             </FormControl>
           </form>

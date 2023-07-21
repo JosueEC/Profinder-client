@@ -12,7 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "../../utils/Darkmode/DarkmodeToggle";
 import Logo from "../../assets/categoriesIcons/Logo.png";
 //import SearchBar from '../SearchBar/SearchBar'
@@ -27,8 +27,16 @@ const Navbar = () => {
   // const isCategoriesRoute = location.pathname === '/categories'
 
   return (
-    <nav>
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+      }}
+    >
       <Flex
+        position="sticky"
+        top="0px"
         justifyContent="space-between"
         alignItems="center"
         padding={4}
@@ -54,10 +62,11 @@ const Navbar = () => {
             display={{ base: "none", md: "flex" }}
             fontSize="1.2rem"
             fontWeight="bold"
+            color={useColorModeValue("gray.900", "gray.100")}
           >
             <NavLink textLink="¿Como funciona?" routeLink="/comofunciona" />
-            <NavLink textLink="Categorias" routeLink="/categories" />
-            <NavLink textLink="Contacto" routeLink="/" />
+            <NavLink textLink="Profesionales" routeLink="/categories" />
+            <NavLink textLink="Contacto" routeLink="/feedback" />
             <NavLink textLink="Acerca de" routeLink="/" />
           </HStack>
         </HStack>
@@ -71,22 +80,41 @@ const Navbar = () => {
               variant="ghost"
               textDecoration="none"
             />
-            <MenuList>
-              <MenuItem onClick={() => navigate("/comofunciona")}>
+            <MenuList >
+              <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/comofunciona")} >
                 ¿Como funciona?
               </MenuItem>
-              <MenuItem onClick={() => navigate("/categories")}>
-                Categorias
+              <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/categories")}>
+                Profesionales
               </MenuItem>
-              <MenuItem onClick={() => navigate("/")}>Contacto</MenuItem>
-              <MenuItem onClick={() => navigate("/")}>Acerca de</MenuItem>
-              <MenuItem onClick={() => navigate("/userLogin")}>
+              <MenuItem
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/feedback")}
+              >
+                Contacto
+              </MenuItem>
+              <MenuItem
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/")}
+              >
+                Acerca de
+              </MenuItem>
+              <MenuItem
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/userLogin")}
+              >
                 Iniciar sesion
               </MenuItem>
-              <MenuItem onClick={() => navigate("/registerCliente")}>
+              <MenuItem
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/registerCliente")}
+              >
                 Registrarse cliente
               </MenuItem>
-              <MenuItem onClick={() => navigate("/registerProvider")}>
+              <MenuItem
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/registerProvider")}
+              >
                 Registrarse profesional
               </MenuItem>
             </MenuList>
@@ -113,24 +141,26 @@ const Navbar = () => {
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
-              bg={useColorModeValue("blue.500", "blue.700")}
-              color="gray.100"
-              _hover={{
-                bg: "blue.600",
-              }}
+              // bg={useColorModeValue("blue.500", "blue.700")}
+              // color="gray.100"
+              // _hover={{
+              //   bg: "blue.600",
+              // }}
             >
               Registrarse
             </MenuButton>
             <MenuList>
               <MenuItem
-                color="gray.800"
-                onClick={() => navigate("/registerProvider")}
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/registerProvider")} fontSize="1.2rem"
+                fontWeight="bold"
               >
                 Soy profesional
               </MenuItem>
               <MenuItem
-                color="gray.800"
-                onClick={() => navigate("/registerCliente")}
+                color={useColorModeValue("gray.900", "gray.100")}
+                onClick={() => navigate("/registerCliente")} fontSize="1.2rem"
+                fontWeight="bold"
               >
                 Soy cliente
               </MenuItem>

@@ -32,7 +32,6 @@ export const useCredentials = () => {
         title: succesTitle,
         description: session.message,
         status: 'success',
-        variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
         isClosable: true
@@ -43,13 +42,19 @@ export const useCredentials = () => {
         left: 0,
         behavior: 'smooth'
       })
-      navigate((session.usuario === 'c') ? '/dashboardClient' : '/dashboardSuppliers')
+      const dashboard = session.usuario === 'c'
+        ? '/dashboardClient'
+        : session.usuario === 'p'
+          ? '/dashboardSuppliers'
+          : session.usuario === 'a'
+            ? '/dashboardAdmin/manageProfesional'
+            : '/'
+      navigate(dashboard)
     } else {
       toast({
         title: errorTitle,
         description: session.message || session.error,
         status: 'error',
-        variant: 'top-accent',
         position: 'bottom-right',
         duration: 5000,
         isClosable: true

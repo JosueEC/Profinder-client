@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSessionState } from "../../services/zustand/useSession";
 // import { useHistory } from 'react-router-dom';
-
 
 import {
   Flex,
@@ -11,17 +10,10 @@ import {
   FormControl,
   FormLabel,
   Input,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Textarea,
   Stack,
   Button,
   useColorModeValue,
-  Radio,
-  RadioGroup,
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
@@ -30,8 +22,9 @@ import {
   getAllCategories,
   postServicio,
 } from "../../services/redux/actions/actions";
+import { Link } from "react-router-dom";
 
-function FormServicio(props) {
+function FormServicio() {
   const {
     register,
     formState: { errors },
@@ -45,7 +38,9 @@ function FormServicio(props) {
       content: "",
     },
   });
-// const history = useHistory()
+  const [userInfo, setUserInfo] = useState(null);
+
+  // const history = useHistory()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,8 +49,11 @@ function FormServicio(props) {
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
+  const dataSuppliers = useSelector((state) => state.profesionales);
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
-
+  const profile = dataSuppliers.find((user) => user.id === userSession.id);
+  console.log(profile.active);
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
@@ -71,16 +69,15 @@ function FormServicio(props) {
 
     const newData = {
       title: data.title,
-      ocupation: selectedOccupations,
-      category: selectedCategory,
       image: imageUrls,
       content: data.content,
-      profesionalId: session.id,
+      ProfesionalId: session.id,
+      category: selectedCategory,
+      ocupation: selectedOccupations,
     };
 
-    console.log(newData);
+    //console.log(newData);
     dispatch(postServicio(newData));
-    // history.push("/DashboardSuppliers");
   };
 
   return (
@@ -89,7 +86,6 @@ function FormServicio(props) {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width="100%"
     >
       <Box
         rounded="lg"
@@ -97,6 +93,7 @@ function FormServicio(props) {
         boxShadow="lg"
         p={8}
         color="gray.300"
+        width="500px"
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,6 +105,9 @@ function FormServicio(props) {
                   required: "El campo nombre es requerido",
                 })}
               />
+              {errors.title && (
+                <span style={{ color: "red" }}>{errors.title.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -116,7 +116,7 @@ function FormServicio(props) {
                 type="file"
                 multiple // Allow multiple file selection
                 {...register("images", {
-                  required: "El campo imagen es requerido",
+                  required: "Solo se permiten archivos de imagen JPEG o PNG",
                   validate: {
                     isImage: (value) => {
                       if (value) {
@@ -135,6 +135,9 @@ function FormServicio(props) {
                   },
                 })}
               />
+              {errors.images && (
+                <span style={{ color: "red" }}>{errors.images.message}</span>
+              )}
             </FormControl>
 
             <FormControl>
@@ -150,26 +153,62 @@ function FormServicio(props) {
               <Textarea
                 type="text"
                 {...register("content", {
-                  required: "El campo contraseña es requerido",
+                  required: "El campo es requerido",
+                  maxLength: {
+                    value: 250,
+                    message:
+                      "La descripción no puede tener más de 250 caracteres",
+                  },
                 })}
               />
+              {errors.content && (
+                <span style={{ color: "red" }}>{errors.content.message}</span>
+              )}
+
+              <Flex justify="space-between" align="center">
+                {profile.posts.length === 1 && profile.active === false ? (
+                  <>
+                    <Button size="lg" bg="grey.400" my={2} marginTop="5">
+                      Enviar
+                    </Button>
+                    <Box display="inline" fontSize="lg" color="red.500" ml={2}>
+                      {/* Mostrar el mensaje */}
+                      {profile.active === false &&
+                        "Se terminaron tus publicaciones"}{" "}
+                      {/* Mostrar mensaje alternativo */}
+                    </Box>
+                  </>
+                ) : (
+                  <Button
+                    loadingText="Submitting"
+                    bg="teal.400"
+                    color="white"
+                    _hover={{ bg: "teal.500" }}
+                    type="submit"
+                    size="lg"
+                    marginTop="5"
+                  >
+                    Enviar
+                  </Button>
+                )}
+              </Flex>
             </FormControl>
 
-            <FormControl>
-              <FormLabel />
-              <Button
-                type="submit"
-                loadingText="Submitting"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Enviar
-              </Button>
-            </FormControl>
+            {profile.active === false ? (
+              <Link to="/pasarela">
+                <Button
+                  loadingText="Submitting"
+                  bg="teal.400"
+                  color="white"
+                  _hover={{ bg: "teal.500" }}
+                  type="submit"
+                  size="lg"
+                  marginTop="5"
+                >
+                  Suscribite a premium
+                </Button>
+              </Link>
+            ) : null}
           </form>
         </Stack>
       </Box>
