@@ -65,8 +65,8 @@ const Navbar = () => {
             color={useColorModeValue("gray.900", "gray.100")}
           >
             <NavLink textLink="¿Como funciona?" routeLink="/comofunciona" />
-            <NavLink textLink="Categorias" routeLink="/categories" />
-            <NavLink textLink="Contacto" routeLink="/" />
+            <NavLink textLink="Profesionales" routeLink="/categories" />
+            <NavLink textLink="Contacto" routeLink="/feedback" />
             <NavLink textLink="Acerca de" routeLink="/" />
           </HStack>
         </HStack>
@@ -85,7 +85,7 @@ const Navbar = () => {
                 ¿Como funciona?
               </MenuItem>
               <MenuItem color={useColorModeValue("gray.900", "gray.100")} onClick={() => navigate("/categories")}>
-                Categorias
+                Profesionales
               </MenuItem>
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}

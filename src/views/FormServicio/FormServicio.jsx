@@ -78,8 +78,6 @@ function FormServicio() {
 
     //console.log(newData);
     dispatch(postServicio(newData));
-
-    // history.push("/DashboardSuppliers");
   };
 
   return (
@@ -168,7 +166,19 @@ function FormServicio() {
               )}
 
               <Flex justify="space-between" align="center">
-                {profile.posts.length <= 1 || profile.active === true ? (
+                {profile.posts.length === 1 && profile.active === false ? (
+                  <>
+                    <Button size="lg" bg="grey.400" my={2} marginTop="5">
+                      Enviar
+                    </Button>
+                    <Box display="inline" fontSize="lg" color="red.500" ml={2}>
+                      {/* Mostrar el mensaje */}
+                      {profile.active === false &&
+                        "Se terminaron tus publicaciones"}{" "}
+                      {/* Mostrar mensaje alternativo */}
+                    </Box>
+                  </>
+                ) : (
                   <Button
                     loadingText="Submitting"
                     bg="teal.400"
@@ -180,15 +190,6 @@ function FormServicio() {
                   >
                     Enviar
                   </Button>
-                ) : (
-                  <>
-                    <Button size="lg" bg="grey.400" my={2}  marginTop="5">
-                      Enviar
-                    </Button>
-                    <Box display="inline" fontSize="lg" color="red.500" ml={2}>
-                      Se terminaron tus publicaciones
-                    </Box>
-                  </>
                 )}
               </Flex>
             </FormControl>
