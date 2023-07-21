@@ -1,23 +1,26 @@
-import React from "react";
+
 import ChatBot from "react-simple-chatbot";
-const chatbotStyle = {
-  background: "#f5f8fb", // Change the background color
-  fontFamily: "Arial, sans-serif", // Change the font family
-  headerBgColor: "#4CAF50", // Change the header background color
-  headerFontColor: "#fff", // Change the header font color
-  headerFontSize: "24px", // Change the header font size
-  botBubbleColor: "#008080", // Change the bot's bubble background color
-  botFontColor: "#fff", // Change the bot's bubble font color
-  userBubbleColor: "#008080", // Change the user's bubble background color
-  userFontColor: "#4CAF50", // Change the user's bubble font color
+import  { ThemeProvider } from "styled-components";
+
+const theme = {
+  background: "#F2F2F2", // este es el fondo del chat
+  fontFamily: "Arial, sans-serif", // Fuente de los textos
+  botBubbleColor: "#41BFB3", // Color de fondo de los mensajes del bot
+  headerBgColor: "#255959", //este es el bg del encabezado
+  headerFontColor: "#ffffff", // este es el color del texto del encabezado
+  botBubbleColor: "#37A69B", // Color de fondo de los mensajes del bot
+  botFontColor: "#000000", // Color del texto de los mensajes del bot
+  userBubbleColor: "#506266", // Color de fondo de los mensajes del usuario
+  userFontColor: "#000000", // Color del texto de los mensajes del usuario
 };
 
-const ClieProfChatBot = () => {
+
+const ClieProfChatBot = ({data}) => {
   // Definimos los pasos del chatbot
   const steps = [
     {
       id: "1",
-      message: "¡Hola! ¿Cómo te llamas?",
+      message:` ¡Hola! Soy ${data.name} ¿Cómo te llamas?`,
       trigger: "2",
     },
     {
@@ -27,7 +30,7 @@ const ClieProfChatBot = () => {
     },
     {
       id: "3",
-      message: "Hola {previousValue}! ¿Que horario deseas agendar?",
+      message: "Hola {previousValue}! ¿Que horario deseas que pase?",
       trigger: "4",
     },
     {
@@ -40,17 +43,17 @@ const ClieProfChatBot = () => {
     },
     {
       id: "5",
-      message: "Te visitaremos entre el horario de 9 a 12 ",
+      message: "Te visitare entre el horario de 9 a 12 ",
       trigger: "8",
     },
     {
       id: "6",
-      message: "Te visitaremos entre el horario de 12 a 14 ",
+      message: "Te visitare entre el horario de 12 a 14 ",
       trigger: "8",
     },
     {
       id: "7",
-      message: "Te visitaremos entre el horario de 14 a 18 ",
+      message: "Te visitare entre el horario de 14 a 18 ",
       trigger: "8",
     },
     {
@@ -67,12 +70,12 @@ const ClieProfChatBot = () => {
     },
     {
       id: "byee",
-      message: "Adios!",
+      message: `Gracias, ${data.name}`,
       trigger: "restartChatbot",
     },
     {
       id: "restartChatbot",
-      message: "¿Te gustaría reiniciar la conversación?",
+      message: "¿Te gustaría volver a contactarte?",
       trigger: "restartOptions",
     },
     {
@@ -83,14 +86,12 @@ const ClieProfChatBot = () => {
       ],
     },
   ];
-  const chatbotHeaderTitle = "Asistente de ";
+  const chatbotHeaderTitle = `${data.name}` ;
 
   return (
-    <ChatBot
-      steps={steps}
-      headerTitle={chatbotHeaderTitle}
-      style={chatbotStyle}
-    />
+       <ThemeProvider theme={theme}>
+      <ChatBot steps={steps} headerTitle={chatbotHeaderTitle} />
+    </ThemeProvider>
   );
 };
 
