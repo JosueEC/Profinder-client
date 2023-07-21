@@ -13,6 +13,9 @@ import {
   Box,
   Center,
   CircularProgress,
+  Alert,
+  AlertIcon,
+  CloseButton,
 } from "@chakra-ui/react";
 
 import {
@@ -35,6 +38,7 @@ function EditClient() {
   const [countries, setCountries] = useState([]);
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
@@ -140,7 +144,6 @@ function EditClient() {
         LocationId: parseInt(locationId),
       };
 
-      console.log(newData)
       // Dispatch the updateClient action with the newData object
       dispatch(updateClient(userSession.clientId, newData));
 
@@ -156,15 +159,17 @@ function EditClient() {
         description: newData.description,
         image: newData.image, 
       };
-
-      console.log(updatedSession)
       localStorage.setItem("userSession", JSON.stringify(updatedSession));
 
-    
       setIsLoading(false);
-      // alert("Client information updated successfully!");
+      setShowSuccessAlert(true);
+
+      // Recargar la página después de 1 segundo (1000 milisegundos) para dar tiempo al usuario de leer el mensaje
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
-      // Handle errors during the image upload or updateClient dispatch
       setIsLoading(false);
       console.error("Error updating client information:", error);
       alert(
@@ -173,6 +178,7 @@ function EditClient() {
     }
   };
 
+  
   const clients = useSelector((state) => state.clients);
   const client = clients.find((client) => client.id === userSession.clientId);
 
@@ -219,7 +225,16 @@ function EditClient() {
                 />
               </Box>
             </FormControl>
-
+            {showSuccessAlert && (
+              <Alert status="success" mt={4} w="100%">
+                <AlertIcon />
+                Cambios modificados con éxito
+                <CloseButton
+                  ml="auto"
+                  onClick={() => setShowSuccessAlert(false)}
+                />
+              </Alert>
+            )}
             <FormControl>
               <Box>
                 <FormLabel>Nombre y apellido</FormLabel>
@@ -316,6 +331,7 @@ function EditClient() {
             </FormControl>
             <Spacer />
             <Button type="submit">Guardar cambios</Button>
+            
           </VStack>
         </Center>
       </Box>
