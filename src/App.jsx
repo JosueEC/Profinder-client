@@ -78,7 +78,7 @@ function App() {
         <Route path="/registerProvider" element={<FromProvider />} />
         <Route path="/registerCliente" element={<FormCliente />} />
         <Route path="/createPost" element={<FormServicio />} />
-        <Route path="/detail/:supplierID" element={<DetailSupplier />} />
+        <Route path="/detail/:id" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin/manageClient" element={<DashboardAdmin />} />
