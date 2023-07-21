@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +26,9 @@ import {
   RadioGroup,
   Select,
   CircularProgress,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
@@ -38,6 +42,7 @@ function FormProvider() {
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -161,7 +166,7 @@ function FormProvider() {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-     
+    
     >
       <Box rounded="lg" boxShadow="lg" p={8} color="gray.300"  width="500px">
         <Stack spacing={4}>
@@ -349,21 +354,30 @@ function FormProvider() {
                   color="blue.500"
                 />
               ) : (
-                <>
+                <ButtonGroup
+                  flexWrap='wrap-reverse'
+                  justifyContent='center'
+                  spacing={5}
+                  mt={3}
+                >
                   <Button
                     type="submit"
                     loadingText="Creando cuenta"
                     size="lg"
                     bg="blue.400"
                     color="white"
+                    mt={5}
                     _hover={{
                       bg: "blue.500",
                     }}
                   >
                     Registrarme
                   </Button>
+                  <GoogleAuthButton
+                    setValue={setValue}
+                  />
                   <PrivacyNotice />
-                </>
+                </ButtonGroup>
               )}
             </FormControl>
           </form>
