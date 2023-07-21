@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
@@ -29,7 +29,7 @@ const DashboardSuppliers = () => {
       <Box w="250px" bg="gray.600" p={2} >
         <Stack spacing={4}>
           <ScrollLink to="publicaciones" spy smooth duration={500} style={linkStyle}>
-            <Button
+              <Button 
               variant="outline"
               onClick={() => handlePageChange("Inicio")}
               bg={currentPage === "Inicio" ? "blue.500" : ""}
@@ -85,6 +85,14 @@ const DashboardSuppliers = () => {
             Obtén Premium
             </Button>
           </ScrollLink>
+          <RouterLink to="/help" spy smooth duration={500} style={linkStyle}>
+              <Button
+                variant="outline"
+                leftIcon={<QuestionIcon />}
+              >
+                Ayuda
+              </Button>
+            </RouterLink>
                 
 
         </Stack>
