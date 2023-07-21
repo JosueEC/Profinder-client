@@ -281,7 +281,7 @@ function EditClient() {
                 >
                   <option value="male">Masculino</option>
                   <option value="female">Femenino</option>
-                  <option value="otro">Otro</option>
+                  
                 </Select>
               </Box>
             </FormControl>
