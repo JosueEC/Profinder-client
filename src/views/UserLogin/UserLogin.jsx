@@ -12,38 +12,55 @@ import {
   Text,
   useColorModeValue,
   FormErrorMessage,
-  Divider
+  Divider,
+  useToast
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useCredentials } from '../../utils/customHooks/useCredentials'
 import { getSessionUser } from '../../services/redux/actions/actions'
-import { emailRules, passwordRules } from './loginValidations'
+import { emailRules } from './loginValidations'
 import DropdownMenu from '../../singleComponents/DropdownMenu'
 import jwt_decode from 'jwt-decode'
 
 export default function UserLogin () {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const [usuario, setUsuario] = useState('Tipo de usuario')
+  const [rol, setRol] = useState('')
+
+  const toast = useToast()
   const dispatch = useDispatch()
   const {
     userTypes,
-    usuario,
-    userRol,
     errorRol,
     setErrorRol,
-    handleSelectUser,
     handleUserSession
   } = useCredentials()
 
+  function handleSelectUser (event) {
+    const { name } = event.target
+    let rolUser
+    if (name === 'Cliente') {
+      setRol('c')
+      rolUser = 'c'
+    }
+    if (name === 'Profesional') {
+      setRol('p')
+      rolUser = 'p'
+    }
+    setUsuario(name)
+    window.localStorage.setItem('rol', JSON.stringify(rolUser))
+  }
+
   const customSubmit = async (data) => {
-    if (userRol !== '') {
+    if (rol !== '') {
       setErrorRol(false)
       const dataSession = {
         email: data.email,
         password: data.password,
-        usuario: userRol
+        usuario: rol
       }
       await dispatch(getSessionUser(dataSession))
       handleUserSession('Sesion iniciada', 'Algo salio mal')
@@ -51,15 +68,28 @@ export default function UserLogin () {
   }
 
   async function handleCallbackResponse (response) {
-    const userObject = jwt_decode(response.credential)
-    const dataSessionGoogle = {
-      email: userObject.email,
-      password: userObject.sub,
-      usuario: userRol
+    const rol = JSON.parse(window.localStorage.getItem('rol'))
+    if (rol) {
+      const userObject = jwt_decode(response.credential)
+      const dataSessionGoogle = {
+        name: userObject.name,
+        email: userObject.email,
+        password: `${userObject.given_name.toLowerCase()}GOOAT0`,
+        usuario: rol
+      }
+
+      await dispatch(getSessionUser(dataSessionGoogle))
+      handleUserSession('Sesion iniciada', 'Algo salio mal')
+    } else {
+      toast({
+        title: 'Usuario no especificado',
+        description: 'Debes seleccionar el tipo de usuario con el que estas registrado',
+        status: 'info',
+        position: 'bottom-right',
+        duration: 5000,
+        isClosable: true
+      })
     }
-    await dispatch(getSessionUser(dataSessionGoogle))
-    handleUserSession('Sesion iniciada', 'Algo salio mal')
-    setErrorRol(false)
   }
 
   useEffect(() => {
@@ -70,8 +100,8 @@ export default function UserLogin () {
     })
     // eslint-disable-next-line no-undef
     google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
+      document.getElementById('g_id_onload'),
+      { theme: 'outline', size: 'large', data_width: '220px' }
     )
   }, [])
 
@@ -123,7 +153,7 @@ export default function UserLogin () {
                 <Input
                   type='password'
                   focusBorderColor={errors.password ? 'red.500' : 'teal.400'}
-                  {...register('password', passwordRules)}
+                  {...register('password')}
                 />
                 <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
               </FormControl>
@@ -136,21 +166,18 @@ export default function UserLogin () {
                 <Text color='red.500'>{errorRol && 'Selecciona un tipo de usuario'}</Text>
                 <Divider />
                 <Stack spacing={5}>
-                  {/* <Button
-                    bg='teal.50'
-                    color='black'
-                    _hover={{ bg: 'teal.100' }}
-                  >
-                    Google
-                  </Button> */}
-                  <div
-                    id='signInDiv'
-                    style={{ 
-                      width: '100%',
-                      backgroundColor: 'white',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      borderRadius: '0.3rem'
+                  {/* <GoogleAuthButton
+                    usuario={userRol}
+                    action={getSessionUser}
+                    succesMessage='Sesion iniciada'
+                    errorMessage='Algo salio mal'
+                  /> */}
+                  <Button
+                    id='g_id_onload'
+                    bg='gray.50'
+                    h='50px'
+                    _hover={{
+                      bg: 'gray.50'
                     }}
                   />
                   <Button

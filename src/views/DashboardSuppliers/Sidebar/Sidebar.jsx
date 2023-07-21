@@ -1,28 +1,17 @@
 import { Grid } from "@chakra-ui/react";
 import {
   Box,
-  Flex,
   useColorModeValue,
   Button,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
-import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import { useState } from "react";
 import { useEffect } from "react";
-import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-const DashboardSuppliers = () => {
-  const dataSuppliers = useSelector((state) => state.profesionales);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
-  const profile = dataSuppliers.find((user) => user.id === userSession.id);
-  // console.log(profile);
-  const numPosts = profile && profile.posts ? profile.posts.length : 0;
-  // console.log(numPosts);
 
+const Sidebar = () => {
   const linkStyle = {
     display: "block",
     padding: "10px",
@@ -111,50 +100,9 @@ const DashboardSuppliers = () => {
             </RouterLink>
           </Stack>
         </Box>
-
-        {/* Contenido principal */}
-
-        <Flex flexDirection="column" alignItems="center">
-        <Box textAlign="center" my={2}>
-        <Text fontSize="30px" fontWeight="bold">
-          MIS DATOS ONLINE
-        </Text>
-      </Box>
-      <Grid
-        templateColumns="1fr 1fr"
-        gap={3}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box textAlign="center"  bg="rgba(75, 192, 192, 0.6)"  borderRadius="10px">
-          <Text fontSize="30px">Mis Posts</Text>
-          <Box fontSize="24px">{numPosts}</Box>
-        </Box>
-
-        <Box textAlign="center"  bg="rgba(3, 75, 75, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Terminados</Text>
-          <Box fontSize="24px">15</Box>
-        </Box>
-
-        <Box textAlign="center"  bg="rgba(192, 75, 75, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Activos</Text>
-          <Box fontSize="24px">15</Box>
-        </Box>
-
-        <Box textAlign="center"  bg= "rgba(200, 200, 20, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Cancelados</Text>
-          <Box fontSize="24px">{numPosts}</Box>
-        </Box>
-      </Grid>
-
-      <DataSuppliers />
-
-      {/* Mostrar CustomChatBot solo si showAyuda es verdadero */}
-      {showAyuda && <CustomChatBot />}
-    </Flex>
       </Grid>
     </Box>
   );
 };
 
-export default DashboardSuppliers;
+export default Sidebar;

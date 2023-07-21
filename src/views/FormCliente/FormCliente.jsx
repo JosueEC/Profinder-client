@@ -11,6 +11,8 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Heading,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import {
   postSessionUser,
@@ -18,13 +20,16 @@ import {
 } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
 import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 // import { uploadFile } from "../../utils/Firebase/config";
 
 function FormCliente(props) {
   const dispatch = useDispatch();
   const { handleUserSession } = useCredentials();
+
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -76,7 +81,16 @@ function FormCliente(props) {
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
@@ -167,19 +181,29 @@ function FormCliente(props) {
 
             <FormControl>
               <FormLabel />
-              <Button
-                type="submit"
-                loadingText="Submitting"
-                size="lg"
-                bg="blue.400"
-                color="white"
-                _hover={{
-                  bg: "blue.500",
-                }}
+              <ButtonGroup
+                flexWrap='wrap-reverse'
+                justifyContent='center'
+                spacing={5}
               >
-                Registrarme
-              </Button>
-              <PrivacyNotice />
+                <Button
+                  type="submit"
+                  loadingText="Submitting"
+                  size="lg"
+                  bg="blue.400"
+                  color="white"
+                  mt={4}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Registrarme
+                </Button>
+                <GoogleAuthButton
+                  setValue={setValue}
+                />
+                <PrivacyNotice />
+              </ButtonGroup>
             </FormControl>
           </form>
         </Stack>

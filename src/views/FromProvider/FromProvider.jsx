@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +26,10 @@ import {
   RadioGroup,
   Select,
   CircularProgress,
+  Heading,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import GoogleAuthButton from "../../singleComponents/GooglAuthButton";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
@@ -38,6 +43,7 @@ function FormProvider() {
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -157,16 +163,32 @@ function FormProvider() {
 
   return (
     <Flex
-      minH="100vh"
+    minH="100vh"
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-     
+    
     >
-      <Box rounded="lg" boxShadow="lg" p={8} color="gray.300"  width="500px">
-        <Stack spacing={4}>
+      <Box      rounded="lg"
+        bg={useColorModeValue("blackAlpha.800", "gray800")}
+        boxShadow="lg"
+        p={8}
+        color="gray.300"
+        width="500px">
+          
+        <Stack spacing={4} >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+            
+          <Heading
+            fontSize='4xl'
+            bgGradient='linear(to-l, teal.300, green.400)'
+            bgClip='text'
+            align='center'
+
+          >
+            REGISTRATE
+          </Heading>
+            <FormControl marginTop="5">
               <FormLabel>Nombre y apellido</FormLabel>
               <Input
                 type="text"
@@ -238,6 +260,9 @@ function FormProvider() {
               <Select
                 {...register("country")}
                 borderWidth="1px"
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 onChange={(e) => handleCountryChange(parseInt(e.target.value))}
               >
                 <option value="">Seleccionar país</option>
@@ -258,7 +283,9 @@ function FormProvider() {
                 {...register("location", {
                   required: "El campo provincia/estado es requerido",
                 })}
-                // bg={useColorModeValue("white", "gray.700")}
+                color={useColorModeValue("gray.800", "gray.100")}
+                bg={useColorModeValue("white", "gray.600")}
+                borderColor={useColorModeValue("gray.200", "gray.600")}
                 borderWidth="1px"
                 // color="gray.800"
               >
@@ -317,6 +344,7 @@ function FormProvider() {
             <FormControl>
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
+              
                 fnSelectCategory={envioCategoria}
                 fnSelectOcupation={envioOcupaciones}
               />
@@ -349,21 +377,28 @@ function FormProvider() {
                   color="blue.500"
                 />
               ) : (
-                <>
+                <ButtonGroup
+                  flexWrap='wrap-reverse'
+                  justifyContent='center'
+                  spacing={5}
+                  mt={3}
+                >
                   <Button
-                    type="submit"
-                    loadingText="Creando cuenta"
-                    size="lg"
-                    bg="blue.400"
-                    color="white"
-                    _hover={{
-                      bg: "blue.500",
-                    }}
+                    bg='teal.400'
+                    color='white'
+                    mt={5}
+                    _hover={{ bg: 'teal.500' }}
+                    loadingText='Ingresando'
+                    type='submit'
+                    size='lg'
                   >
                     Registrarme
                   </Button>
+                  <GoogleAuthButton
+                    setValue={setValue}
+                  />
                   <PrivacyNotice />
-                </>
+                </ButtonGroup>
               )}
             </FormControl>
           </form>

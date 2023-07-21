@@ -2,7 +2,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
-// import FormUpdate from "./views/DashboardSuppliers/FormUpdateProfile";
+ import FormUpdate from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -26,6 +26,9 @@ import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClient
 import DashboardClientHelp from "./views/DashboardClient/DashboardClientHelp/DashboardClientHelp";
 import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
+import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
+import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
+import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -46,7 +49,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/feedback" element={<FeedbackForm />} />
-        {/* <Route path="/formUpdate" element={<FormUpdate />} /> */}
+         <Route path="/updateprofile" element={<FormUpdate />} /> 
         <Route path="/dashboardSuppliers" element={<DashboardSuppliers />} />
         <Route path="/dashboardClient" element={<DashboardClient />} />
         <Route
@@ -74,13 +77,19 @@ function App() {
         <Route path="/comofunciona" element={<HowDoesItWork />} />
         <Route path="/registerProvider" element={<FromProvider />} />
         <Route path="/registerCliente" element={<FormCliente />} />
-        <Route path="/formservicio" element={<FormServicio />} />
+        <Route path="/createPost" element={<FormServicio />} />
         <Route path="/detail/:supplierID" element={<DetailSupplier />} />
         <Route path="/userLogin" element={<UserLogin />} />
         <Route path="/userRegister" element={<UserRegister />} />
         <Route path="/dashboardAdmin/manageClient" element={<DashboardAdmin />} />
         <Route path="/dashboardAdmin/manageProfesional" element={<DashboardAdmin />} />
         <Route path="/pasarela" element={<PasarelaPagos />} />
+        <Route path="/viewPosts" element={<PostsSuppliers />} />
+        <Route path="/help" element={<CustomChatBot />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+
+
+
       </Routes>
       {!isHomePage && <Footer />}
     </div>
