@@ -89,7 +89,7 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function TestimonialCarrousel () {
   return (
-    <Box  h='100vh'>
+    <Box  h='100%'>
       <Container py={16} as={Stack} spacing={12} w='100%' maxW='100%'>
         <Stack spacing={0} align='center'>
           <Heading color={useColorModeValue('gray.300', 'white')}>
