@@ -11,6 +11,7 @@ import manualidadesIcon from '../../../assets/categoriesIcons/artesanias.png';
 const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, iconBgColor }) => {
   return (
     <Box
+      
       maxW={{ base: 'full', md: '275px' }}
       w="full"
       borderWidth="1px"
