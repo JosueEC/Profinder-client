@@ -18,14 +18,16 @@ const HomePage = () => {
     dispatch(getAllCategories())
   }, [dispatch])
 
+  
   return (
-    <Box height="100vh">
+    <Box height="100vh" width="100vw">
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
         height="100%" // Ajuste de altura a 50vh
+        width="100vw"
      
       >
         <HowItWorks />
@@ -42,16 +44,17 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         height={{ 
-          sm: "28.8rem",
-          md: "auto",
-          lg: "140vh"  }} // Altura 180vh en md y 100vh en lg //
+          sm: "auto",
+          md: "70.5em",
+          lg: "100vh" 
+         }}
+           // Altura 180vh en md y 100vh en lg //
       >
         <FeaturesGrid />
        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
         <TestimonialCarrousel />
-          {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
-        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
+        
         
 
       </Box>
@@ -66,9 +69,10 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         height={{ 
-          sm: "180vh ",
-          //md: "160vh !important", 
-          lg: "155vh" }}
+          sm: "auto",
+          md: "110em", 
+          lg: "155vh" 
+        }}
       >
         <CategoriesSection />
         {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
