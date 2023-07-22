@@ -41,7 +41,10 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height={{ md: "180vh", lg: "100%" }} // Altura 180vh en md y 100vh en lg
+        height={{ 
+          sm: "180vh",
+          md: "200vh !important",
+          lg: "100%" }} // Altura 180vh en md y 100vh en lg
       >
         <FeaturesGrid />
        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
@@ -62,7 +65,10 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height={{ md: "180vh", lg: "120%" }}
+        height={{ 
+          sm: "180vh",
+          md: "160vh", 
+          lg: "120%" }}
       >
         <CategoriesSection />
         {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
