@@ -56,7 +56,7 @@ const TopPro = ({ cardBgColor, textColor, linkColor }) => {
   const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
 
   return (
-    <Center p={4}  h="100%" w="100%">
+    <Center p={4}  h="100%" w="100%" marginBottom="1.5rem" >
       <Box mx="auto" maxW="5xl" w="100%">
         <Box textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15}>
