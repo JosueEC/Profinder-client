@@ -180,7 +180,7 @@ function FormServicio() {
                       {/* Mostrar mensaje alternativo */}
                     </Box>
                   </>
-                ) : (
+                ) : (null)}
                   <Button
                     loadingText="Submitting"
                     bg="teal.400"
@@ -192,7 +192,7 @@ function FormServicio() {
                   >
                     Enviar
                   </Button>
-                )}
+                
               </Flex>
             </FormControl>
 

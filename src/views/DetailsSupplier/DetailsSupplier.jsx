@@ -87,9 +87,9 @@ const ArticleList = () => {
               >
                 <Box marginTop="5">
                   <Image
+                    src={image}
                     borderRadius="50%"
                     boxSize="350px"
-                    src={image}
                     fallback={NoAvatar}
                     loading="lazy"
                     alt="avatar supplier"
@@ -164,6 +164,7 @@ const ArticleList = () => {
               return (
                 <SupplierPost
                   key={id}
+                  identificador={id}
                   imagePost={image[0]}
                   titularPost={title}
                   descriptionPost={content}

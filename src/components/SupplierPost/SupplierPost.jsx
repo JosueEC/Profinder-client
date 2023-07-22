@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
-import { Image } from "@chakra-ui/image";
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { getPostProfesional } from "../../../services/redux/actions/actions";
+import { EditIcon } from "@chakra-ui/icons";
+
+import { getPostProfesional } from "./../../services/redux/actions/actions";
 import {
   Box,
-  Heading,
   Text,
-  Stack,
-  Avatar,
+  VStack,
+  Image,
+  Grid,
+  Button,
+  Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -13,55 +21,150 @@ export default function SupplierPost({
   imagePost,
   titularPost,
   descriptionPost,
+  identificador,
 }) {
-  const responsiveWidth = {
-    base: "100%",
-    sm: "45%",
-    md: "45%",
-    lg: "30%",
+  const profesionales = useSelector((state) => state.profesionales);
+  const filteredPosts = profesionales.filter(
+    (post) => post.id === identificador
+  );
+
+  const dispatch = useDispatch();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showFullContent, setShowFullContent] = useState(false);
+
+  useEffect(() => {
+    dispatch(getPostProfesional());
+  }, [dispatch]);
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => {
+      const imageCount = filteredPosts[0].posts[0].image.length;
+      const nextIndex = (prevIndex + 1) % imageCount;
+      return nextIndex;
+    });
   };
 
-  const hoverStyles = {
-    transform: "scale(1.05)",
-    cursor: "pointer",
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) => {
+      const imageCount = filteredPosts[0].posts[0].image.length;
+      const prevIndexValue = (prevIndex - 1 + imageCount) % imageCount;
+      return prevIndexValue;
+    });
+  };
+
+  const handleToggleContent = () => {
+    setShowFullContent((prevValue) => !prevValue);
   };
 
   return (
-    <Box
-      maxW={"445px"}
-      w={"full"}
-      bg={useColorModeValue("white", "gray.900")}
-      boxShadow={"2xl"}
-      rounded={"md"}
-      overflow={"hidden"}
-      p={6}
-      width={responsiveWidth}
-    >
-      {/* Imagen post */}
-      <Box position="relative" h={"210px"} bg={"gray.100"} mb={6}>
-        <Image
-          src={imagePost || SinImagen}
-          layout="fill"
-          objectFit="cover"
-          borderRadius="lg"
-          transition="0.3s ease-in-out"
-          _hover={hoverStyles}
-        />
-      </Box>
-      <Stack>
-        <Text
-          color={"green.500"}
-          textTransform={"uppercase"}
-          fontWeight={800}
-          fontSize={"2xl"}
-          letterSpacing={1.1}
-        >
-          {titularPost || "Sin titular"}
-        </Text>
+    <VStack spacing={10} align="center">
+      <Flex>
+        {filteredPosts.map((professional) =>
+          professional.posts.map((post) => (
+            <Box
+              key={post.id}
+              maxW={"500px"}
+              w={"full"}
+              bg={useColorModeValue("white", "gray.900")}
+              boxShadow={"2xl"}
+              rounded={"md"}
+              overflow={"hidden"}
+              p={6}
+              marginLeft="10px"
+            >
+              <Box justifyContent="center">
+                <EditIcon
+                  position="absolute"
+                  top="20px" // organiza de arriba abajo
+                  right="20px" // horizontal
+                  cursor="pointer"
+                />
+              </Box>
+              <Box justifyContent="center" marginTop="5">
+                {/* Título del post */}
+                <Text
+                  color={"green.500"}
+                  textTransform={"uppercase"}
+                  fontWeight={700}
+                  fontSize={"xl"}
+                  letterSpacing={1.1}
+                >
+                  {post.title}
+                </Text>
+              </Box>
 
-        {/* Descripción post */}
-        <Text color={"gray.500"}>{descriptionPost || "Sin descripcion"}</Text>
-      </Stack>
-    </Box>
+          
+
+              {/* Botón Leer más / Ver menos */}
+              {post.content.length > 100 && (
+                <Button
+                  colorScheme="blue"
+                  size="sm"
+                  mt={2}
+                  onClick={handleToggleContent}
+                >
+                  {showFullContent ? "Ver menos" : "Leer más"}
+                </Button>
+              )}
+              <Box justifyContent="center">
+                {/* Imagen actual */}
+                <Grid
+                  justifyContent="center"
+                  templateColumns="repeat(2, 1fr)"
+                  gap={2}
+                  alignItems="center"
+                >
+                  <Image
+                    justifyContent="center"
+                    src={post.image[currentImageIndex]}
+                    alt={`Image ${currentImageIndex}`}
+                    boxSize="300px"
+                    maxW="300px"
+                    maxH="300px"
+                    objectFit="contain"
+                    // gridColumn="1 / span 3"
+                    // color="black"
+                    // layout="fill"
+
+                    borderRadius="lg"
+                    marginTop="5"
+                    marginLeft="10px"
+                  />
+                  <Box>
+                    <Button
+                      onClick={handlePrevImage}
+                      size="sm"
+                      fontSize="xl"
+                      marginTop="5"
+                    >
+                      &lt;
+                    </Button>
+                    <Text fontSize="sm" color={"gray.500"} marginTop="5">
+                      Imagen {currentImageIndex + 1} de {post.image.length}
+                    </Text>
+                    <Button
+                      onClick={handleNextImage}
+                      size="sm"
+                      fontSize="xl"
+                      marginTop="5"
+                    >
+                      &gt;
+                    </Button>
+                  </Box>
+                </Grid>
+              
+                {/* Contenido del post */}
+                <Text color={"gray.500"}>
+                  {showFullContent
+                    ? post.content
+                    : post.content.substring(0, 100)}
+                </Text>
+            
+              </Box>
+            </Box>
+          ))
+        )}
+      </Flex>
+    </VStack>
   );
 }
