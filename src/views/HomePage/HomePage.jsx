@@ -52,7 +52,7 @@ const HomePage = () => {
         <TestimonialCarrousel />
           {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
         <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
-        <PricingHome />
+        
 
       </Box>
 
