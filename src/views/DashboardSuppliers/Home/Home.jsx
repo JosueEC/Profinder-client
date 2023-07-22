@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Box, Flex, useColorModeValue,Text, Button, Stack, Heading,Grid } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
@@ -8,11 +8,9 @@ import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
+import BarData from "../DataSuppliers/BarData";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
-import { useSelector } from "react-redux";
-
-
-
+import Data from "../Data/Data";
 
 const linkStyle = {
   display: "block",
@@ -22,23 +20,27 @@ const linkStyle = {
 
 const DashboardSuppliers = () => {
   const [currentPage, setCurrentPage] = useState("Inicio");
-  const dataSuppliers = useSelector((state) => state.profesionales);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
-  const profile = dataSuppliers.find((user) => user.id === userSession.id);
-  // console.log(profile);
-  const numPosts = profile && profile.posts ? profile.posts.length : 0;
-  // console.log(numPosts);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   return (
-    <Box height="100vh" display="flex"   bg={useColorModeValue("gray.800", "gray.800")}>
-      <Box w="250px" bg="gray.600" p={2} >
+    <Box
+      height="100vh"
+      display="flex"
+      bg={useColorModeValue("gray.800", "gray.800")}
+    >
+      <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
-          <ScrollLink to="publicaciones" spy smooth duration={500} style={linkStyle}>
-              <Button 
+          <ScrollLink
+            to="publicaciones"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
+            <Button
               variant="outline"
               onClick={() => handlePageChange("Inicio")}
               bg={currentPage === "Inicio" ? "blue.500" : ""}
@@ -48,7 +50,13 @@ const DashboardSuppliers = () => {
             </Button>
           </ScrollLink>
 
-          <ScrollLink to="publicaciones" spy smooth duration={500} style={linkStyle}>
+          <ScrollLink
+            to="publicaciones"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
             <Button
               variant="outline"
               onClick={() => handlePageChange("FormServicio")}
@@ -60,7 +68,13 @@ const DashboardSuppliers = () => {
             </Button>
           </ScrollLink>
 
-          <ScrollLink to="nuevas-publicaciones" spy smooth duration={500} style={linkStyle}>
+          <ScrollLink
+            to="nuevas-publicaciones"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
             <Button
               variant="outline"
               onClick={() => handlePageChange("PostsSuppliers")}
@@ -72,7 +86,11 @@ const DashboardSuppliers = () => {
             </Button>
           </ScrollLink>
 
-          <RouterLink to="" style={linkStyle} onClick={() => handlePageChange("FormUpdate")}>
+          <RouterLink
+            to=""
+            style={linkStyle}
+            onClick={() => handlePageChange("FormUpdate")}
+          >
             <Button
               variant="outline"
               bg={currentPage === "FormUpdate" ? "blue.500" : ""}
@@ -94,59 +112,32 @@ const DashboardSuppliers = () => {
             Obtén Premium
             </Button>
           </ScrollLink>
-          <RouterLink to="/help" spy smooth duration={500} style={linkStyle}>
-              <Button
-                variant="outline"
-                leftIcon={<QuestionIcon />}
-              >
-                Ayuda
-              </Button>
-            </RouterLink>
                 
 
         </Stack>
       </Box>
 
-      <Flex direction="column" alignItems="center" flex="1" > {/* Alineamos el contenido en el centro */}
-      <Grid
-        templateColumns="1fr 1fr"
-        gap={3}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box textAlign="center"  bg="rgba(75, 192, 192, 0.6)"  borderRadius="10px">
-          <Text fontSize="30px">Mis Posts</Text>
-          <Box fontSize="24px">{numPosts}</Box>
-        </Box>
-
-        <Box textAlign="center"  bg="rgba(3, 75, 75, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Terminados</Text>
-          <Box fontSize="24px">15</Box>
-        </Box>
-
-        <Box textAlign="center"  bg="rgba(192, 75, 75, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Activos</Text>
-          <Box fontSize="24px">15</Box>
-        </Box>
-
-        <Box textAlign="center"  bg= "rgba(200, 200, 20, 0.6)" borderRadius="10px">
-          <Text fontSize="30px">Servicios Cancelados</Text>
-          <Box fontSize="24px">{numPosts}</Box>
-        </Box>
-      </Grid>
+      <Flex direction="column" alignItems="center" flex="1">
+        {" "}
+        {/* Alineamos el contenido en el centro */}
         {currentPage === "Inicio" && (
           <Flex direction="column" alignItems="center">
             <Heading as="h1" size="xl" my={4} color="white">
               MIS DATOS ONLINE
             </Heading>
             <Flex direction="row" justifyContent="space-around">
+              <Data />
+
               <DataSuppliers />
+              <BarData />
             </Flex>
           </Flex>
         )}
 
         {currentPage === "FormServicio" && (
-          <Flex justifyContent="center" alignItems="center" flex="1"> {/* Centramos el contenido */}
+          <Flex justifyContent="center" alignItems="center" flex="1">
+            {" "}
+            {/* Centramos el contenido */}
             <FormServicio />
           </Flex>
         )}
@@ -158,7 +149,9 @@ const DashboardSuppliers = () => {
         )}
 
         {currentPage === "FormUpdate" && (
-          <Flex justifyContent="center" alignItems="center" flex="1"> {/* Centramos el contenido */}
+          <Flex justifyContent="center" alignItems="center" flex="1">
+            {" "}
+            {/* Centramos el contenido */}
             <FormUpdate />
           </Flex>
         )}
@@ -168,7 +161,7 @@ const DashboardSuppliers = () => {
             <CustomChatBot />
           </Flex>
         )}
-        {currentPage === "PasarelaPagos" && (
+       {currentPage === "PasarelaPagos" && (
           <Box>
             <PasarelaPagos />
           </Box>

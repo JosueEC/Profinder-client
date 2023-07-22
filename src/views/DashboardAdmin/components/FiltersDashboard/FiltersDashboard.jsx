@@ -6,6 +6,8 @@ import SelectCategories from '../../../../singleComponents/SelectCategories'
 import DropdownMenu from '../../../../singleComponents/DropdownMenu'
 
 export default function FiltersDashboard () {
+  const bg = useColorModeValue('white', 'gray.800')
+
   const {
     category,
     ocupation,
@@ -63,7 +65,7 @@ export default function FiltersDashboard () {
 
   return (
     <Box
-      bg={useColorModeValue('gray.800', 'gray.800')}
+      bg={bg}
       color={useColorModeValue('gray.50', 'gray.200')}
     >
       <Container
@@ -109,7 +111,9 @@ export default function FiltersDashboard () {
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
-          <Text>
+          <Text
+            border='solid 2px red'
+          >
             {`${results} resultados
             ${category === 'Categorias' || category === 'Todas' ? '' : category + '🔹'} 
             ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}

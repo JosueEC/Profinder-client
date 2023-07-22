@@ -2,7 +2,7 @@ import { useSessionState } from "../../../services/zustand/useSession";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostProfesional } from "../../../services/redux/actions/actions";
-import {  EditIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 
 import {
   Box,
@@ -11,14 +11,15 @@ import {
   Image,
   Grid,
   Button,
-  Flex
+  Flex,
+  useColorModeValue,
+  Stack,
 } from "@chakra-ui/react";
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
-  console.log(filteredPosts);
 
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -49,50 +50,48 @@ const PostsSuppliers = () => {
   };
 
   return (
-    <VStack spacing={4} align="stretch">
-    {/* Título de las publicaciones */}
-    <Text fontSize="xl" fontWeight="bold" mb={4} textAlign="center" p={4}>
-      MIS PUBLICACIONES
-    </Text>
+    <Stack mt={12} justify="center" spacing={10} align="center">
+      {/* <Flex > */}
+      <Grid
+        templateColumns={["1fr", "1fr", "1fr", "repeat(3, 1fr)"]} // Esto mostrará una columna en dispositivos pequeños, 2 columnas en medianos y 3 columnas en grandes
+        gap={5}
+        justifyContent="center"
+      >
+        {filteredPosts.map((professional) =>
+          professional.posts.map((post) => (
+            <Box
+              key={post.id}
+              maxW={"500px"}
+              w={"full"}
+              bg={useColorModeValue("white", "gray.900")}
+              boxShadow={"2xl"}
+              rounded={"md"}
+              overflow={"hidden"}
+              p={6}
+              marginLeft="10px"
+            >
+              <Box justifyContent="center">
+                <EditIcon
+                  position="absolute"
+                  top="20px" // organiza de arriba abajo
+                  right="20px" // horizontal
+                  cursor="pointer"
+                />
+              </Box>
+              <Box justifyContent="center" marginTop="5">
+                {/* Título del post */}
+                <Text
+                  color={"green.500"}
+                  textTransform={"uppercase"}
+                  fontWeight={700}
+                  fontSize={"xl"}
+                  letterSpacing={1.1}
+                >
+                  {post.title}
+                </Text>
+              </Box>
 
-    {/* Recorre las publicaciones filtradas */}
-    <Flex flexWrap="wrap" justifyContent="space-around"> 
-      {filteredPosts.map((professional) =>
-        professional.posts.map((post) => (
-          <Box
-            key={post.id}
-            borderWidth="1px"
-            borderRadius="md"
-            p={2}
-            m={2}
-            textAlign="center"
-            w="300px"
-            h="300px"
-            bg="lightgray"
-            flexDirection="column"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            mx={2} // Ajusta el margen entre las publicaciones
-            position="relative"
-          >
-              <EditIcon
-                position="absolute"
-                top="20px" // organiza de arriba abajo
-                right="20px" // horizontal
-                cursor="pointer"
-              />  
-              {/* Título del post */}
-              <Text fontWeight="bold" fontSize="xl" mb={2} color="black">
-                {post.title}
-              </Text>
-
-              {/* Contenido del post */}
-              <Text color="black">
-                {showFullContent
-                  ? post.content
-                  : post.content.substring(0, 100)}
-              </Text>
+          
 
               {/* Botón Leer más / Ver menos */}
               {post.content.length > 100 && (
@@ -105,38 +104,66 @@ const PostsSuppliers = () => {
                   {showFullContent ? "Ver menos" : "Leer más"}
                 </Button>
               )}
+              <Box justifyContent="center">
+                {/* Imagen actual */}
+                <Grid
+                  justifyContent="center"
+                  templateColumns="repeat(2, 1fr)"
+                  gap={2}
+                  alignItems="center"
+                >
+                  <Image
+                    justifyContent="center"
+                    src={post.image[currentImageIndex]}
+                    alt={`Image ${currentImageIndex}`}
+                    boxSize="300px"
+                    maxW="300px"
+                    maxH="300px"
+                    objectFit="contain"
+                    // gridColumn="1 / span 3"
+                    // color="black"
+                    // layout="fill"
 
-              {/* Imagen actual */}
-              <Grid
-                templateColumns="repeat(3, 1fr)"
-                gap={2}
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Image
-                  src={post.image[currentImageIndex]}
-                  alt={`Image ${currentImageIndex}`}
-                  objectFit="cover"
-                  maxW="400px"
-                  maxH="200px"
-                  gridColumn="1 / span 3"
-                  color="black"
-                />
-                <Button onClick={handlePrevImage} size="sm" fontSize="xl">
-                  &lt;
-                </Button>
-                <Text fontSize="sm" color="black">
-                  Imagen {currentImageIndex + 1} de {post.image.length}
+                    borderRadius="lg"
+                    marginTop="5"
+                    marginLeft="10px"
+                  />
+                  <Box>
+                    <Button
+                      onClick={handlePrevImage}
+                      size="sm"
+                      fontSize="xl"
+                      marginTop="5"
+                    >
+                      &lt;
+                    </Button>
+                    <Text fontSize="sm" color={"gray.500"} marginTop="5">
+                      Imagen {currentImageIndex + 1} de {post.image.length}
+                    </Text>
+                    <Button
+                      onClick={handleNextImage}
+                      size="sm"
+                      fontSize="xl"
+                      marginTop="5"
+                    >
+                      &gt;
+                    </Button>
+                  </Box>
+                </Grid>
+              
+                {/* Contenido del post */}
+                <Text color={"gray.500"}>
+                  {showFullContent
+                    ? post.content
+                    : post.content.substring(0, 100)}
                 </Text>
-                <Button onClick={handleNextImage} size="sm" fontSize="xl">
-                  &gt;
-                </Button>
-              </Grid>
+            
+              </Box>
             </Box>
           ))
         )}
-      </Flex>
-    </VStack>
+      </Grid>
+    </Stack>
   );
 };
 
