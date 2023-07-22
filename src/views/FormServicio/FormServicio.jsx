@@ -78,7 +78,7 @@ function FormServicio() {
       ocupation: selectedOccupations,
     };
 
-    //console.log(newData);
+    console.log(newData);
     dispatch(postServicio(newData));
   };
 
@@ -168,19 +168,7 @@ function FormServicio() {
               )}
 
               <Flex justify="space-between" align="center">
-                {profile.posts.length === 1 && profile.active === false ? (
-                  <>
-                    <Button size="lg" bg="grey.400" my={2} marginTop="5">
-                      Enviar
-                    </Button>
-                    <Box display="inline" fontSize="lg" color="red.500" ml={2}>
-                      {/* Mostrar el mensaje */}
-                      {profile.active === false &&
-                        "Se terminaron tus publicaciones"}{" "}
-                      {/* Mostrar mensaje alternativo */}
-                    </Box>
-                  </>
-                ) : (null)}
+              
                   <Button
                     loadingText="Submitting"
                     bg="teal.400"
@@ -197,7 +185,7 @@ function FormServicio() {
             </FormControl>
 
             {profile.active === false ? (
-              <Link to="/pasarela">
+              <Link to="/dashboardSuppliers/pasarela">
                 <Button
                   loadingText="Submitting"
                   bg="teal.400"

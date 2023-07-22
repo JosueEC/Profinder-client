@@ -11,6 +11,7 @@ import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import BarData from "../DataSuppliers/BarData";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
+import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 
 const linkStyle = {
   display: "block",
@@ -31,6 +32,7 @@ const DashboardSuppliers = () => {
       display="flex"
       bg={useColorModeValue("gray.800", "gray.800")}
     >
+       
       <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
           <ScrollLink
@@ -86,10 +88,10 @@ const DashboardSuppliers = () => {
             </Button>
           </ScrollLink>
 
-          <RouterLink
-            to="/dashboardSuppliers"
+          <ScrollLink
+            to="/dashboardSuppliers/updateprofile"
             style={linkStyle}
-            onClick={() => handlePageChange("FormUpdate")}
+            onClick={() => handlePageChange("FormUpdateProfile")}
           >
             <Button
               variant="outline"
@@ -99,7 +101,7 @@ const DashboardSuppliers = () => {
             >
               Editar mi Perfil
             </Button>
-          </RouterLink>
+          </ScrollLink>
 
           <ScrollLink to="/dashboardSuppliers/pasarela" spy smooth duration={500} style={linkStyle}>
             <Button
@@ -148,11 +150,11 @@ const DashboardSuppliers = () => {
           </Box>
         )}
 
-        {currentPage === "FormUpdate" && (
+        {currentPage === "FormUpdateProfile" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {" "}
             {/* Centramos el contenido */}
-            <FormUpdate />
+            <FormUpdateProfile/>
           </Flex>
         )}
 

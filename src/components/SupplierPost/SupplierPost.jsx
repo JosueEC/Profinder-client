@@ -1,8 +1,5 @@
-/* eslint-disable react/prop-types */
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { getPostProfesional } from "../../../services/redux/actions/actions";
 import { EditIcon } from "@chakra-ui/icons";
 
 import { getPostProfesional } from "./../../services/redux/actions/actions";
@@ -58,7 +55,11 @@ export default function SupplierPost({
 
   return (
     <VStack spacing={10} align="center">
-      <Flex>
+      <Flex
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems={{ base: "center", md: "flex-start" }}
+       
+      >
         {filteredPosts.map((professional) =>
           professional.posts.map((post) => (
             <Box
@@ -70,18 +71,20 @@ export default function SupplierPost({
               rounded={"md"}
               overflow={"hidden"}
               p={6}
-              marginLeft="10px"
+              marginLeft={{ base: "0", md: "10px" }}
+              minH="200px"
+              maxH="500px"
             >
               <Box justifyContent="center">
                 <EditIcon
                   position="absolute"
-                  top="20px" // organiza de arriba abajo
-                  right="20px" // horizontal
+                  top="20px"
+                  right="20px"
                   cursor="pointer"
+
                 />
               </Box>
               <Box justifyContent="center" marginTop="5">
-                {/* Título del post */}
                 <Text
                   color={"green.500"}
                   textTransform={"uppercase"}
@@ -92,45 +95,39 @@ export default function SupplierPost({
                   {post.title}
                 </Text>
               </Box>
+              <Box
+                justifyContent="center"
+                maxHeight="150px"
+                overflow="hidden"
+                marginTop="5"
+              >
+                <Text color={"gray.500"} noOfLines={4}>
+                  {showFullContent ? post.content : post.content}
+                </Text>
+              </Box>
 
-          
-
-              {/* Botón Leer más / Ver menos */}
-              {post.content.length > 100 && (
-                <Button
-                  colorScheme="blue"
-                  size="sm"
-                  mt={2}
-                  onClick={handleToggleContent}
-                >
-                  {showFullContent ? "Ver menos" : "Leer más"}
-                </Button>
-              )}
-              <Box justifyContent="center">
-                {/* Imagen actual */}
+              {/* <Box justifyContent="center"   alignItems="center">
                 <Grid
                   justifyContent="center"
                   templateColumns="repeat(2, 1fr)"
                   gap={2}
                   alignItems="center"
-                >
-                  <Image
-                    justifyContent="center"
-                    src={post.image[currentImageIndex]}
-                    alt={`Image ${currentImageIndex}`}
-                    boxSize="300px"
-                    maxW="300px"
-                    maxH="300px"
-                    objectFit="contain"
-                    // gridColumn="1 / span 3"
-                    // color="black"
-                    // layout="fill"
-
-                    borderRadius="lg"
-                    marginTop="5"
-                    marginLeft="10px"
-                  />
-                  <Box>
+                > */}
+              <Image
+                justifyContent="center"
+                src={post.image[currentImageIndex]}
+                alt={`Image ${currentImageIndex}`}
+                boxSize="300px"
+                maxW="300px"
+                maxH="300px"
+                objectFit="contain"
+                borderRadius="lg"
+                marginTop="5"
+                // marginLeft="10px"
+                alignItems="center"
+                mx="auto"
+              />
+              {/* <Box>
                     <Button
                       onClick={handlePrevImage}
                       size="sm"
@@ -150,17 +147,9 @@ export default function SupplierPost({
                     >
                       &gt;
                     </Button>
-                  </Box>
-                </Grid>
-              
-                {/* Contenido del post */}
-                <Text color={"gray.500"}>
-                  {showFullContent
-                    ? post.content
-                    : post.content.substring(0, 100)}
-                </Text>
-            
-              </Box>
+                  </Box> */}
+              {/* </Grid>
+              </Box> */}
             </Box>
           ))
         )}
