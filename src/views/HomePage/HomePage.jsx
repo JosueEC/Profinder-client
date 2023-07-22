@@ -40,27 +40,15 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100%"
-        
+        height={{ md: "180vh", lg: "100vh" }} // Altura 180vh en md y 100vh en lg
+
       >
         <FeaturesGrid />
         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
         <TestimonialCarrousel />
-      </Box>
-
-      <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-      </Box>
-
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="50vh"
-        
-      >
+         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
         <PricingHome />
+
       </Box>
 
       <Box >

@@ -37,7 +37,7 @@ const features = [
 
 export default function FeaturesGrid () {
   return (
-    <Box p={4}  h='100vh' width='100%'>
+    <Box p={4}  h='100%' width='100%'>
       <Stack spacing={4} as={Container} maxW='3xl' textAlign='center'>
         <Heading fontSize='3xl'>Una solucion para cada necesidad.</Heading>
         <Text color='gray.600' fontSize='xl'>
