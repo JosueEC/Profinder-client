@@ -58,7 +58,7 @@ const CategoriesSection = () => {
 
   // Resto del código del componente
   return (
-    <Box p={4} h="100vh" width="100%">
+    <Box p={4} h="100%" width="100%">
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold">

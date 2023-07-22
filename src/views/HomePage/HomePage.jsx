@@ -60,26 +60,15 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100%"
-        
+        height={{ md: "180vh", lg: "100vh" }}
       >
         <CategoriesSection />
-      </Box>
-
-      <Box >
         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+
+        <TopPro />
+
       </Box>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-        
-      >
-        <TopPro />
-      </Box>
       <Footer />
     </Box>
   )
