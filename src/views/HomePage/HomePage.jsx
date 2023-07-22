@@ -41,7 +41,6 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         height={{ md: "180vh", lg: "100%" }} // Altura 180vh en md y 100vh en lg
-
       >
         <FeaturesGrid />
         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
@@ -64,7 +63,6 @@ const HomePage = () => {
       >
         <CategoriesSection />
         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-
         <TopPro />
 
       </Box>
