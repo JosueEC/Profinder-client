@@ -43,7 +43,7 @@ const Sidebar = () => {
         <Box bg="gray.600" p={2}>
           <Stack spacing={4}>
             <RouterLink
-              to="publicaciones"
+              to="/dashboardSuppliers/publicaciones"
               spy
               smooth
               duration={500}
@@ -54,7 +54,7 @@ const Sidebar = () => {
               </Button>
             </RouterLink>
             <RouterLink
-              to="/createPost"
+              to="/dashboardSuppliers/createPost"
               spy
               smooth
               duration={500}
@@ -65,7 +65,7 @@ const Sidebar = () => {
               </Button>
             </RouterLink>
             <RouterLink
-              to="/viewPosts"
+              to="/dashboardSuppliers/viewPosts"
               spy
               smooth
               duration={500}
@@ -76,7 +76,7 @@ const Sidebar = () => {
               </Button>
             </RouterLink>
             <RouterLink
-              to="/updateprofile"
+              to="/dashboardSuppliers/updateprofile"
               spy
               smooth
               duration={500}
@@ -89,7 +89,7 @@ const Sidebar = () => {
             <RouterLink to="#" spy smooth duration={500} style={linkStyle}>
               <Button variant="outline">Obtén Premium</Button>
             </RouterLink>
-            <RouterLink to="/help" spy smooth duration={500} style={linkStyle}>
+            <RouterLink to="/dashboardSuppliers/help" spy smooth duration={500} style={linkStyle}>
               <Button
                 variant="outline"
                 leftIcon={<QuestionIcon />}
