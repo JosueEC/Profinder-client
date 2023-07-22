@@ -34,7 +34,7 @@ const DashboardSuppliers = () => {
       <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
           <ScrollLink
-            to="publicaciones"
+            to="/dashboardSuppliers/publicaciones"
             spy
             smooth
             duration={500}
@@ -51,7 +51,7 @@ const DashboardSuppliers = () => {
           </ScrollLink>
 
           <ScrollLink
-            to="publicaciones"
+            to="/dashboardSuppliers/publicaciones"
             spy
             smooth
             duration={500}
@@ -69,7 +69,7 @@ const DashboardSuppliers = () => {
           </ScrollLink>
 
           <ScrollLink
-            to="nuevas-publicaciones"
+            to="/dashboardSuppliers/nuevas-publicaciones"
             spy
             smooth
             duration={500}
@@ -87,7 +87,7 @@ const DashboardSuppliers = () => {
           </ScrollLink>
 
           <RouterLink
-            to=""
+            to="/dashboardSuppliers"
             style={linkStyle}
             onClick={() => handlePageChange("FormUpdate")}
           >
@@ -101,7 +101,7 @@ const DashboardSuppliers = () => {
             </Button>
           </RouterLink>
 
-          <ScrollLink to="pasarela" spy smooth duration={500} style={linkStyle}>
+          <ScrollLink to="/dashboardSuppliers/pasarela" spy smooth duration={500} style={linkStyle}>
             <Button
               variant="outline"
               onClick={() => handlePageChange("PasarelaPagos")}
