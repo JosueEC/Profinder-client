@@ -90,6 +90,7 @@ const applyFilters = (objFilters) => {
   return { type: APPLY_FILTERS, payload: objFilters };
 };
 
+//! post servicio
 const postServicio = (info) => {
   // const URL = `${API.LOCALHOST}/postprofesional`
   const URL = `${API.DBONLINE}/postprofesional`;
@@ -115,7 +116,7 @@ const postServicio = (info) => {
      
     } catch (error) {
       console.error(error.response.data.error);
-      alert(`${error.response.data.error}`);
+      // alert(`${error.response.data.error}`);
     }
   };
 };

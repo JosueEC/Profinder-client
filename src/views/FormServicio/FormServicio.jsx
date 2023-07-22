@@ -53,7 +53,7 @@ function FormServicio() {
   const dataSuppliers = useSelector((state) => state.profesionales);
   // const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
-  
+
   const profile = dataSuppliers.find((user) => user.id === session.id);
   console.log(profile.active);
   const [value, setValue] = useState("");
@@ -166,9 +166,8 @@ function FormServicio() {
               {errors.content && (
                 <span style={{ color: "red" }}>{errors.content.message}</span>
               )}
-
-              <Flex justify="space-between" align="center">
-              
+              {profile.posts.length === 0 || profile.active === true ? (
+                <Flex justify="space-between" align="center">
                   <Button
                     loadingText="Submitting"
                     bg="teal.400"
@@ -180,8 +179,22 @@ function FormServicio() {
                   >
                     Enviar
                   </Button>
-                
-              </Flex>
+                </Flex>
+              ) : null}
+
+              {profile.posts.length === 1 && profile.active === false ? (
+                <>
+                  <Button bg="grey.200" color="white" size="lg" marginTop="5">
+                    Enviar
+                  </Button>
+                  <Box display="inline" fontSize="lg" color="red.500" ml={2}>
+                    {/* Mostrar el mensaje */}
+                    {profile.active === false &&
+                      "Se terminaron tus publicaciones"}{" "}
+                    {/* Mostrar mensaje alternativo */}
+                  </Box>
+                </>
+              ) : null}
             </FormControl>
 
             {profile.active === false ? (
