@@ -27,6 +27,7 @@ const TestimonialContent = ({ children }) => {
       rounded='xl'
       align='center'
       pos='relative'
+      maxWidth="20rem"
       _after={{
         content: '""',
         w: 0,
