@@ -12,7 +12,7 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
   return (
     <Box
 
-      maxW={{ base: 'full', md: '275px' }}
+      maxW={{ base: 'full', sm: '275px' }}
       w="full"
       borderWidth="1px"
       borderRadius="lg"
@@ -42,7 +42,7 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
         </Box>
         
           <Button as={Link} to="/categories" variant="link" color={linkColor} size="sm">
-            Learn more
+            Leer más
           </Button>
         
       </Stack>

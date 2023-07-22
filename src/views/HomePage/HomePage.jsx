@@ -32,7 +32,8 @@ const HomePage = () => {
       </Box>
 
       <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
       </Box>
 
       <Box
@@ -43,16 +44,18 @@ const HomePage = () => {
         height={{ md: "180vh", lg: "100%" }} // Altura 180vh en md y 100vh en lg
       >
         <FeaturesGrid />
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+       {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+       <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
         <TestimonialCarrousel />
-         <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+          {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
         <PricingHome />
 
       </Box>
 
       <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-      </Box>
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />      </Box>
 
       <Box
         display="flex"
@@ -62,9 +65,10 @@ const HomePage = () => {
         height={{ md: "180vh", lg: "120%" }}
       >
         <CategoriesSection />
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-        <TopPro />
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
 
+        <TopPro />
       </Box>
 
       <Footer />
