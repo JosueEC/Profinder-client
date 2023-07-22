@@ -61,8 +61,8 @@ export default function LoggedNavbar () {
 
   return (
     <nav style={{
-      // position: "sticky",
-      position: "fixed",
+       position: "sticky",
+      //position: "fixed",
       width: '100%',
       top: 0,
       zIndex: 100,
