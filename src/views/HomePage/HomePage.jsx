@@ -43,7 +43,7 @@ const HomePage = () => {
         alignItems="center"
         height={{ 
           sm: "28.8rem",
-          //md: "160vh ",
+          md: "auto",
           lg: "140vh"  }} // Altura 180vh en md y 100vh en lg //
       >
         <FeaturesGrid />
