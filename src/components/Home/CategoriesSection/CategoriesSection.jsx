@@ -11,7 +11,8 @@ import manualidadesIcon from '../../../assets/categoriesIcons/artesanias.png';
 const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, iconBgColor }) => {
   return (
     <Box
-      maxW={{ base: 'full', md: '275px' }}
+
+      maxW={{ base: 'full', sm: '275px' }}
       w="full"
       borderWidth="1px"
       borderRadius="lg"
@@ -41,7 +42,7 @@ const Card = ({ heading, description, icon, cardBgColor, textColor, linkColor, i
         </Box>
         
           <Button as={Link} to="/categories" variant="link" color={linkColor} size="sm">
-            Learn more
+            Leer más
           </Button>
         
       </Stack>
@@ -58,11 +59,11 @@ const CategoriesSection = () => {
 
   // Resto del código del componente
   return (
-    <Box p={4} h="100vh" width="100%">
+    <Box p={4} h="100%" width="100%">
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold">
-            NUESTRAS CATEGORíAS
+            NUESTRAS CATEGORÍAS
           </Heading>
           <Text color="gray.600" fontSize={{ base: 'sm', sm: 'lg' }}>
             Estas son nuestras categorias donde puedes encontrar las ocupaciones de los servicios que procuras!

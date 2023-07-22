@@ -18,21 +18,24 @@ const HomePage = () => {
     dispatch(getAllCategories())
   }, [dispatch])
 
+  
   return (
-    <Box height="100vh">
+    <Box height="100vh" width="100vw">
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
         height="100%" // Ajuste de altura a 50vh
+        width="100vw"
      
       >
         <HowItWorks />
       </Box>
 
       <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
       </Box>
 
       <Box
@@ -40,58 +43,44 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100%"
-        
+        height={{ 
+          sm: "auto",
+          md: "70.5em",
+          lg: "100vh" 
+         }}
+           // Altura 180vh en md y 100vh en lg //
       >
         <FeaturesGrid />
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
+       {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+       <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
         <TestimonialCarrousel />
+        
+        
+
       </Box>
 
       <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-      </Box>
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />      </Box>
 
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="50vh"
-        
-      >
-        <PricingHome />
-      </Box>
-
-      <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-      </Box>
-
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-        
+        height={{ 
+          sm: "auto",
+          md: "110em", 
+          lg: "155vh" 
+        }}
       >
         <CategoriesSection />
-      </Box>
+        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
+        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
 
-      <Box >
-        <Divider height="3px" borderColor="gray.900" width="40%" mx="auto" />
-      </Box>
-
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-        
-      >
         <TopPro />
       </Box>
+
       <Footer />
     </Box>
   )

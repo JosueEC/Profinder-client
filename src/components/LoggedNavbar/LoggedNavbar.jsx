@@ -60,7 +60,13 @@ export default function LoggedNavbar () {
   }
 
   return (
-    <>
+    <nav style={{
+       position: "sticky",
+      //position: "fixed",
+      width: '100%',
+      top: 0,
+      zIndex: 100,
+    }}>
       <Box
         bg={useColorModeValue('gray.200', 'gray.900')}
         px='40px'
@@ -157,6 +163,6 @@ export default function LoggedNavbar () {
             )
           : null}
       </Box>
-    </>
+    </nav>
   )
 }
