@@ -49,10 +49,12 @@ function FormServicio() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
+
   const dataSuppliers = useSelector((state) => state.profesionales);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  // const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
-  const profile = dataSuppliers.find((user) => user.id === userSession.id);
+  
+  const profile = dataSuppliers.find((user) => user.id === session.id);
   console.log(profile.active);
   const [value, setValue] = useState("");
 

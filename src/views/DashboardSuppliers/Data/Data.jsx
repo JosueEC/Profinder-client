@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Grid, Box, Text } from "@chakra-ui/react";
 
 const Data = () => {
-  const dataSuppliers = useSelector((state) => state.profesionales);
+  const dataSuppliers = useSelector((state) => state.backup);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
   const profile = dataSuppliers.find((user) => user.id === userSession.id);
   console.log(profile);

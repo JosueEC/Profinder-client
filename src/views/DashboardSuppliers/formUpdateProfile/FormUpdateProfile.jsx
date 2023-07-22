@@ -26,10 +26,11 @@ import {
 } from "@chakra-ui/react";
 import SelectCategories from "../../../singleComponents/SelectCategories";
 import { uploadFile } from "../../../utils/Firebase/config";
+import { useSessionState } from "../../../services/zustand/useSession";
 
 
 function FormUpdateProfile() {
-  const session = JSON.parse(localStorage.getItem("userSession"));
+  const session =  useSessionState((state) => state.session);
   //console.log(session);
   // const profile  = useSelector(state=> state.profesionales)
   // const userById = profile.filter((user)=> user.id === session.id);

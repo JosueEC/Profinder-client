@@ -5,7 +5,7 @@ import  { ThemeProvider } from "styled-components";
 const theme = {
   background: "#F2F2F2", // este es el fondo del chat
   fontFamily: "Arial, sans-serif", // Fuente de los textos
-  botBubbleColor: "#41BFB3", // Color de fondo de los mensajes del bot
+  // botBubbleColor: "#41BFB3", // Color de fondo de los mensajes del bot
   headerBgColor: "#255959", //este es el bg del encabezado
   headerFontColor: "#ffffff", // este es el color del texto del encabezado
   botBubbleColor: "#37A69B", // Color de fondo de los mensajes del bot

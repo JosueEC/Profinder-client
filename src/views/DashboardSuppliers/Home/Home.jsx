@@ -1,14 +1,5 @@
-import { useState } from "react";
-import {
-  Box,
-  Flex,
-  useColorModeValue,
-  //Text,
-  Button,
-  Stack,
-  Heading,
-  // Grid,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
@@ -17,6 +8,7 @@ import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
 import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
+import BarData from "../DataSuppliers/BarData";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 
@@ -117,14 +109,11 @@ const DashboardSuppliers = () => {
               color={currentPage === "PasarelaPagos" ? "white" : ""}
               leftIcon={<ViewIcon />}
             >
-              Obtén Premium
+            Obtén Premium
             </Button>
           </ScrollLink>
-          <RouterLink to="/help" spy smooth duration={500} style={linkStyle}>
-            <Button variant="outline" leftIcon={<QuestionIcon />}>
-              Ayuda
-            </Button>
-          </RouterLink>
+                
+
         </Stack>
       </Box>
 
@@ -140,9 +129,11 @@ const DashboardSuppliers = () => {
               <Data />
 
               <DataSuppliers />
+              <BarData />
             </Flex>
           </Flex>
         )}
+
         {currentPage === "FormServicio" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {" "}
@@ -150,11 +141,13 @@ const DashboardSuppliers = () => {
             <FormServicio />
           </Flex>
         )}
+
         {currentPage === "PostsSuppliers" && (
           <Box>
             <PostsSuppliers />
           </Box>
         )}
+
         {currentPage === "FormUpdate" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {" "}
@@ -162,12 +155,13 @@ const DashboardSuppliers = () => {
             <FormUpdate />
           </Flex>
         )}
+
         {currentPage === "Ayuda" && (
           <Flex justifyContent="flex-start" alignItems="flex-end">
             <CustomChatBot />
           </Flex>
         )}
-        {currentPage === "PasarelaPagos" && (
+       {currentPage === "PasarelaPagos" && (
           <Box>
             <PasarelaPagos />
           </Box>

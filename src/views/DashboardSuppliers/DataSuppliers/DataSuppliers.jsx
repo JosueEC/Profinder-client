@@ -4,13 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProfesionals } from "../../../services/redux/actions/actions";
 import axios from "axios";
 import { Box,Flex } from "@chakra-ui/react"; 
+import { useSessionState } from "../../../services/zustand/useSession";
+
 
 
 const DataSuppliers = () => {
+
   const dataSuppliers = useSelector((state) => state.profesionales);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
-  const profile = dataSuppliers.find((user) => user.id === userSession.id);
-  //console.log(profile);
+  // const userSession = JSON.parse(localStorage.getItem("userSession"));
+  const session = useSessionState((state) => state.session);
+  
+  const profile = dataSuppliers.find((user) => user.id === session.id);
+  console.log(profile);
 
   const dispatch = useDispatch();
 
@@ -21,7 +26,7 @@ const DataSuppliers = () => {
 
   useEffect(() => {
     // Obtén la URL actual
-    dispatch(getProfesionals());
+
     const currentUrl = window.location.href;
 
     // Extrae los parámetros de la URL
@@ -38,6 +43,7 @@ const DataSuppliers = () => {
     // Verifica si collectionStatus es "approved"
     if (collectionStatus === 'approved') {
       // Enviar los datos al backend en un JSON mediante una solicitud POST
+      alert("Eres premium")
       axios.post('https://backprofinder-production.up.railway.app/premium', {
         collectionStatus: collectionStatus,
         preferenceId: preferenceId,
