@@ -15,7 +15,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Tag from "../../singleComponents/Tag";
 import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
-import { useSessionState } from "../../services/zustand/useSession";
+
+import { useSessionState } from './../../services/zustand/useSession';
 
 export default function SocialProfileSimple({
   id,
@@ -80,7 +81,7 @@ export default function SocialProfileSimple({
       </Stack>
 
       <Stack mt={8} direction="row" spacing={4} align="center" justify="center">
-        {state.session ? (
+        {session.status === true ? (
           <Link to={`/userLogin`}>
             {" "}
             <Button
