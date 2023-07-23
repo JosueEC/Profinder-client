@@ -8,7 +8,8 @@ import {
   Stack,
   HStack,
   VStack,
-  useColorMode // Importar useColorMode
+  useColorMode,
+  useColorModeValue // Importar useColorMode
 } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 
@@ -40,13 +41,14 @@ export default function FeaturesGrid() {
   const { colorMode } = useColorMode();
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.600';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (
     <Box p={4} h='100%' width='100%' backgroundColor={backgroundColor}>
-      <Stack spacing={4} as={Container} maxW='3xl' textAlign='center' color="gray.300">
+      <Stack spacing={4} as={Container} maxW='3xl' textAlign='center' color="gray.100">
         <Heading fontSize='3xl'>Una solucion para cada necesidad.</Heading>
-        <Text color='blue.400' fontSize='xl'>
+        <Text color={textColor} fontSize='xl'>
           Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
         </Text>
       </Stack>
@@ -55,14 +57,14 @@ export default function FeaturesGrid() {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
           {features.map((feature) => (
             <HStack key={feature.id} align='top'>
-              <Box color='teal.400' px={2}>
+              <Box color='teal.600' px={2}>
                 <Icon as={CheckIcon} />
               </Box>
               <VStack align='start'>
-                <Text fontWeight={600} color='gray.300'>
+                <Text fontWeight={600} color='gray.100'>
                   {feature.title}
                 </Text>
-                <Text color='gray.300'>{feature.text}</Text>
+                <Text color='gray.100'>{feature.text}</Text>
               </VStack>
             </HStack>
           ))}

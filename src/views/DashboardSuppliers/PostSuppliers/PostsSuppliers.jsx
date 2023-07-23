@@ -1,9 +1,12 @@
 import { useSessionState } from "../../../services/zustand/useSession";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostProfesional } from "../../../services/redux/actions/actions";
-import { EditIcon } from "@chakra-ui/icons";
-
+import {
+  getPostProfesional,
+  deletePost,
+} from "../../../services/redux/actions/actions";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Box,
   Text,
@@ -20,6 +23,8 @@ const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
+ // console.log(filteredPosts);
+
 
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -48,12 +53,29 @@ const PostsSuppliers = () => {
   const handleToggleContent = () => {
     setShowFullContent((prevValue) => !prevValue);
   };
+  
+  const navigate = useNavigate();
+
+  const handleEditPost = (postId) => {
+   // console.log("ID del posteo a editar:", postId);
+    navigate(`/dashboardSuppliers/updatepost/${postId}`);
+  };
+
+  const handleDeletePost = async (postId) => {
+    console.log("ID del posteo a eliminar:", postId);
+    try {
+      await dispatch(deletePost(postId));
+      navigate("/dashboardSuppliers"); 
+    } catch (error) {
+      console.error("Error al eliminar el post:", error);
+    }
+  };
 
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
       {/* <Flex > */}
       <Grid
-        templateColumns={["1fr", "1fr", "1fr", "repeat(3, 1fr)"]} // Esto mostrará una columna en dispositivos pequeños, 2 columnas en medianos y 3 columnas en grandes
+        templateColumns={["1fr", "1fr", "1fr", "repeat(3, 1fr)"]} 
         gap={5}
         justifyContent="center"
       >
@@ -70,14 +92,6 @@ const PostsSuppliers = () => {
               p={6}
               marginLeft="10px"
             >
-              <Box justifyContent="center">
-                <EditIcon
-                  position="absolute"
-                  top="20px" // organiza de arriba abajo
-                  right="20px" // horizontal
-                  cursor="pointer"
-                />
-              </Box>
               <Box justifyContent="center" marginTop="5">
                 {/* Título del post */}
                 <Text
@@ -90,8 +104,6 @@ const PostsSuppliers = () => {
                   {post.title}
                 </Text>
               </Box>
-
-          
 
               {/* Botón Leer más / Ver menos */}
               {post.content.length > 100 && (
@@ -150,15 +162,26 @@ const PostsSuppliers = () => {
                     </Button>
                   </Box>
                 </Grid>
-              
+
                 {/* Contenido del post */}
                 <Text color={"gray.500"}>
                   {showFullContent
                     ? post.content
                     : post.content.substring(0, 100)}
                 </Text>
-            
               </Box>
+              <Box justifyContent="center">
+      <Link to={`/dashboardSuppliers/updatepost/${post.id}`}>
+        <EditIcon cursor="pointer" bg="red" />
+      </Link>
+      <DeleteIcon
+        cursor="pointer"
+        onClick={() => handleDeletePost(post.id)}
+        color="red.500"
+        w={6}
+        h={6}
+      />
+    </Box>
             </Box>
           ))
         )}
