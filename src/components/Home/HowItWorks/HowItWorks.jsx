@@ -17,12 +17,12 @@ export default function HowItWorks() {
 
   // Set text color based on the color mode
   const proTextColor = useColorModeValue('black', 'white');
-  const finderTextColor = useColorModeValue('teal.500', 'teal.400');
+  const finderTextColor = useColorModeValue('teal.400', 'teal.400');
 
   // Set the border color for Finder in dark mode
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? 'gray.900' : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? 'gray.900' : 'gray.500';
 
   return (
     <Flex

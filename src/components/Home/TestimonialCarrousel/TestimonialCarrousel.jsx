@@ -62,23 +62,24 @@ const TestimonialHeading = ({ children }) => {
 
 const TestimonialText = ({ children }) => {
   return (
-    <Text textAlign='center' color={useColorModeValue('gray.600', 'gray.400')} fontSize='sm'>
+    <Text textAlign='center' color={useColorModeValue('gray.600', 'gray.200')} fontSize='sm'>
       {children}
     </Text>
   );
 };
 
 const TestimonialAvatar = ({ src, name, title }) => {
+  const textColor2 = useColorModeValue('blue.900', 'blue.400');
   return (
     <Flex align='center' mt={8} direction='column'>
       <Avatar src={src} alt={name} mb={2} />
       <Stack spacing={-1} align='center'>
         <Text fontWeight={600}>
-          <Text as='span' color='gray.300'>
+          <Text as='span' color='gray.100'>
             {name}
           </Text>
         </Text>
-        <Text fontSize='sm' color={useColorModeValue('gray.600', 'gray.400')}>
+        <Text fontSize='sm' color={textColor2}>
           {title}
         </Text>
       </Stack>
@@ -88,7 +89,7 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function TestimonialCarrousel() {
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.500';
   const textColor = useColorModeValue('blue.900', 'blue.400');
   return (
     <Box h='100%' w='100%' backgroundColor={backgroundColor}>
@@ -116,27 +117,32 @@ export default function TestimonialCarrousel() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading color='gray.300'>Intuitive Design</TestimonialHeading>
+              <TestimonialHeading color='gray.300'>Diseño intuitivo!</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh lectus feugiat nunc sem.
+                El sitio tiene un diseño elegante y de fácil navegación. 
+                Hace excelente la experiencia del usuario!
+                <br />
+                Pensado para todos los dispositivos!
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src='https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              name='Jane Cooper'
+              src='https://vivolabs.es/wp-content/uploads/2022/03/perfil-hombre-vivo.png'
+              name='Jim Morrison'
               title='CEO at ABC Corporation'
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading color='gray.300'>Mindblowing Service</TestimonialHeading>
+              <TestimonialHeading color='gray.300'>Servicios cerca de casa!</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh lectus feugiat nunc sem.
+                 Ahora puedo acceder a los servicios que estan cerca de mi unicación!
+                 <br />
+                 Nunca fue tan fácil contactar un trabajo con garantía de confianza!
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src='https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              name='Jane Cooper'
+              src='https://plus.unsplash.com/premium_photo-1687832783320-35671afbf484?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80'
+              name='Soledad Silveira'
               title='CEO at ABC Corporation'
             />
           </Testimonial>

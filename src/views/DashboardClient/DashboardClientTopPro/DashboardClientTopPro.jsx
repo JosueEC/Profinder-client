@@ -1,16 +1,17 @@
-import { Flex, Spacer } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import TopPro from '../../../components/Home/TopPro/TopPro';
-
-
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 
 const DashboardClient = () => {
+  const backgroundColor = useColorModeValue('gray.400', 'gray.800');
+
   return (
-    <Flex >       
+    <Flex bg={backgroundColor}>
       <SidebarClient />
-        <Spacer  />
+      <Flex justifyContent="center" alignItems="center" height="100%" width="100%" >
         <TopPro />
       </Flex>
+    </Flex>
   );
 };
 
