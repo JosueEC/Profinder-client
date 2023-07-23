@@ -20,7 +20,7 @@ const HomePage = () => {
   }, [dispatch])
 
   // Definir el color de fondo general según el modo de color
-  const backgroundColor = colorMode === 'dark' ? 'gray.400' : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.600';
 
   // Definir los colores para los dividers en ambos modos
   const dividerColor = colorMode === 'dark' ? 'gray.100' : 'black';
