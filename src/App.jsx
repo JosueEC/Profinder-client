@@ -20,7 +20,7 @@ import FeedbackForm from "./components/Feedback/FormFeedback.jsx";
 import LoggedNavbar from "./components/LoggedNavbar/LoggedNavbar.jsx";
 import Navbar from "./components/navBar/Navbar";
 import DashboardClientEditForm from "./views/DashboardClient/DashboarClientEditForm/DashboardClientEditForm";
-import DashboardClientFav from "./views/DashboardClient/DashboardClientFav/DashboardClientFav";
+
 import DashboardClientTopPro from "./views/DashboardClient/DashboardClientTopPro/DashboardClientTopPro";
 import DashboardClientCategories from "./views/DashboardClient/DashboardClientCategories/DashboardClientCategories";
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
@@ -118,11 +118,7 @@ function App() {
           path="/dashboardClient/editForm"
           element={<DashboardClientEditForm />}
         />
-        <Route
-          exact
-          path="/dashboardClient/favorites"
-          element={<DashboardClientFav />}
-        />
+    
         <Route
           exact
           path="/dashboardClient/recomended"

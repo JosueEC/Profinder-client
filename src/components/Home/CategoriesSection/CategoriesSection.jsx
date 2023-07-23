@@ -57,7 +57,8 @@ const CategoriesSection = () => {
   const linkColor = useColorModeValue('teal.400', 'teal.400');
   const iconBgColor = useColorModeValue('gray.900', 'gray.700');
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.600';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const textColor2 = useColorModeValue('blue.900', 'blue.400');
 
   // Resto del código del componente
   return (
@@ -67,7 +68,7 @@ const CategoriesSection = () => {
           <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" color="gray.100">
             NUESTRAS CATEGORÍAS
           </Heading>
-          <Text color="blue.400" fontSize={{ base: 'sm', sm: 'lg' }}>
+          <Text color={textColor2} fontSize={{ base: 'sm', sm: 'lg' }}>
             Estas son nuestras categorias donde puedes encontrar las ocupaciones de los servicios que procuras!
           </Text>
         </Stack>

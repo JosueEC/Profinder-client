@@ -102,7 +102,7 @@ function FeedbackForm() {
   const textColor = useColorModeValue('black', 'white');
 
   return (
-    <Center p={4} color={textColor} h="100vh" w="100%">
+    <Center p={4} color={textColor} h="100%" w="100%">
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
           <VStack as="form" alignItems="center" textAlign="center" onSubmit={handleSubmit}>
@@ -121,7 +121,7 @@ function FeedbackForm() {
               </Flex>
               <Flex alignItems="center">
                 <CheckIcon color="green.500" mr={2} />
-                <Text>Luego, escoge la calificación de "Malo" a "Excelente".</Text>
+                <Text>Luego, escoge la calificación de Malo a Excelente.</Text>
               </Flex>
               <Flex alignItems="center">
                 <CheckIcon color="green.500" mr={2} />

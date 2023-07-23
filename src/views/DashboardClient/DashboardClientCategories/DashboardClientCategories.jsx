@@ -5,15 +5,11 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClient = () => {
   return (
-    <div>
-      
-      
-      <Flex>
+    <Flex >
         <SidebarClient />
         
         <Categories />
       </Flex>
-    </div>
   );
 };
 
