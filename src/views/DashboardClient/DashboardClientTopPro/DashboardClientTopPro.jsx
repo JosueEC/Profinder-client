@@ -1,22 +1,17 @@
-import { Flex,Grid,Box, Spacer } from '@chakra-ui/react';
+import { Flex,Grid,Box,useColorModeValue } from '@chakra-ui/react';
 import TopPro from '../../../components/Home/TopPro/TopPro';
-
-
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 
 const DashboardClient = () => {
+  const backgroundColor = useColorModeValue('gray.400', 'gray.800');
+
   return (
-    <Flex >       
+    <Flex bg={backgroundColor}>
       <SidebarClient />
-        <Spacer  />
+      <Flex justifyContent="center" alignItems="center" height="100%" width="100%" >
         <TopPro />
       </Flex>
-  //   <Box display={{ base: 'grid', lg: 'flex' }} height="100vh">
-  //     <Grid templateRows="5% 95%" display={{ base: 'grid', sm: 'grid',md: 'flex', lg: 'flex'}} width='100%'>
-  //       <SidebarClient />
-  //       <TopPro />
-  //     </Grid>
-  // </Box>
+    </Flex>
   );
 };
 

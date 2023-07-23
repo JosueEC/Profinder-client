@@ -57,7 +57,7 @@ const CategoriesSection = () => {
   const linkColor = useColorModeValue('teal.400', 'teal.400');
   const iconBgColor = useColorModeValue('gray.900', 'gray.700');
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.500';
   const textColor2 = useColorModeValue('blue.900', 'blue.400');
 
   // Resto del código del componente
