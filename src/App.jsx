@@ -2,7 +2,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
-import FormUpdate from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -31,8 +30,8 @@ import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppli
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
 import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
 import SupplierPost from "./components/SupplierPost/SupplierPost";
-import FormUpdateProfile from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
+import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -53,7 +52,6 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/feedback" element={<FeedbackForm />} />
-        <Route exact path="/updateprofile" element={<FormUpdate />} />
         <Route exact path="/categories" element={<Categories />} />
         <Route exact path="/comofunciona" element={<HowDoesItWork />} />
         <Route exact path="/registerProvider" element={<FromProvider />} />
@@ -86,7 +84,7 @@ function App() {
         />
          <Route
           exact
-          path="/dashboardSuppliers/updateprofile"
+          path="dashboardSuppliers/updateprofile"
           element={<FormUpdateProfile />}
         />
         
