@@ -16,7 +16,7 @@ export default function HowItWorks() {
   const { colorMode } = useColorMode();
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? 'gray.900' : 'gray.400';
   const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (
@@ -60,10 +60,10 @@ export default function HowItWorks() {
               as={Link}
               to='/registerProvider'
               rounded='full'
-              bg={textColor}
+              bg='blue.400'
               color='white'
               _hover={{
-                bg: 'blue.600'
+                bg: 'blue.400'
               }}
               className={`${styles['bounce-top']} ${styles.boton}`}
             >
@@ -74,8 +74,11 @@ export default function HowItWorks() {
               as={Link}
               to='/comofunciona'
               rounded='full'
-              bg='teal.600'
+              bg='teal.400'
               color='white'
+              _hover={{
+                bg: 'teal.600'
+              }}
               className={styles['bounce-top']}
             >
               Como funciona?
