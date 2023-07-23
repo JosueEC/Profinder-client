@@ -7,7 +7,8 @@ import {
   Text,
   Stack,
   HStack,
-  VStack
+  VStack,
+  useColorMode // Importar useColorMode
 } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 
@@ -33,14 +34,19 @@ const features = [
     title: 'Tu opinion importa',
     text: 'Nuestro sitio es una experiencia basada en el usuario. Por lo que tu interaccion es muy valiosa para nosotros'
   }
-]
+];
 
-export default function FeaturesGrid () {
+export default function FeaturesGrid() {
+  const { colorMode } = useColorMode();
+
+  // Definir el color de fondo según el modo de color
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.600';
+
   return (
-    <Box p={4}  h='100%' width='100%'>
-      <Stack spacing={4} as={Container} maxW='3xl' textAlign='center'>
+    <Box p={4} h='100%' width='100%' backgroundColor={backgroundColor}>
+      <Stack spacing={4} as={Container} maxW='3xl' textAlign='center' color="gray.300">
         <Heading fontSize='3xl'>Una solucion para cada necesidad.</Heading>
-        <Text color='gray.600' fontSize='xl'>
+        <Text color='blue.400' fontSize='xl'>
           Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
         </Text>
       </Stack>
