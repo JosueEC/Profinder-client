@@ -81,7 +81,7 @@ export default function SocialProfileSimple({
       </Stack>
 
       <Stack mt={8} direction="row" spacing={4} align="center" justify="center">
-        {session.status === true ? (
+        {session.status === false ? (
           <Link to={`/userLogin`}>
             {" "}
             <Button
