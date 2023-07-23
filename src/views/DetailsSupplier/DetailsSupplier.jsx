@@ -63,120 +63,97 @@ const ArticleList = () => {
     >
       <ScaleFade initialScale={0.9} in>
         <Flex
+          direction={{ base: "column", md: "row" }}
           justify="center"
           align="center"
           mt={8}
-          width="500px"
-          gap={{ md: "3rem", lg: "3rem" }}
-          direction={{ base: "column", md: "row", lg: "row" }}
+          gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
         >
-          <Flex
+          <Box
             rounded={"md"}
             boxShadow={"2xl"}
             align={"center"}
             bg="gray.900"
             _hover={hoverStyles}
+            mb={{ base: "3rem", md: "0" }}
+            flex={{ base: "1", md: "2" }}
           >
-            <Box>
-              <Flex
-                direction={{ base: "column", md: "row" }}
-                justify="center"
-                mt={8}
-                marginTop="5"
-                width="1000px"
+            <Image
+              src={image}
+              borderRadius="50%"
+              boxSize="350px"
+              fallback={NoAvatar}
+              loading="lazy"
+              alt="avatar supplier"
+              objectFit="contain"
+            />
+            <Stack
+              direction="column"
+              spacing={4}
+              p={8}
+              align="center"
+              textTransform={"uppercase"}
+              fontWeight={700}
+              fontSize={{ base: "lg", md: "2xl" }}
+              letterSpacing={1.1}
+              textAlign="center"
+            >
+              <Heading as="h1" textTransform="uppercase">
+                {name || "Sin nombre"}
+              </Heading>
+              <InfoLabel textLabel={data?.genre} iconLabel={FaUserAlt} />
+              <InfoLabel textLabel={years_exp} iconLabel={FaRegPaperPlane} />
+              <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
+              <InfoLabel textLabel={phone} iconLabel={FaPhone} />
+              <Button
+                onClick={handleChatToggle}
+                bg={useColorModeValue("teal.500", "teal.400")}
+                color="white"
+                _hover={{ bg: "teal.600" }}
+                leftIcon={<Icon as={FaRegPaperPlane} />}
               >
-                <Box marginTop="5">
-                  <Image
-                    src={image}
-                    borderRadius="50%"
-                    boxSize="350px"
-                    fallback={NoAvatar}
-                    loading="lazy"
-                    alt="avatar supplier"
-                    objectFit="contain"
-                  />
-                </Box>
-                <Stack
-                  direction="column"
-                  spacing={4}
-                  ml={{ base: "0", md: "5%" }}
-                  mt={{ base: "5%", md: "0" }}
-                  align="flex-start"
-                  textTransform={"uppercase"}
-                  fontWeight={700}
-                  fontSize={"2xl"}
-                  letterSpacing={1.1}
-                >
-                  <Heading
-                    marginBottom="2rem"
-                    marginTop="5"
-                    as="h1"
-                    textTransform="uppercase"
-                  >
-                    {name || "Sin nombre"}
-                  </Heading>
-                  <InfoLabel textLabel={data?.genre} iconLabel={FaUserAlt} />
-                  <InfoLabel
-                    textLabel={years_exp}
-                    iconLabel={FaRegPaperPlane}
-                  />
-                  <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
-                  <InfoLabel textLabel={phone} iconLabel={FaPhone} />
-                  <Button
-                    marginTop="5"
-                    marginBottom="2rem"
-                    onClick={handleChatToggle}
-                    bg={useColorModeValue("teal.500", "teal.400")}
-                    color="white"
-                    _hover={{ bg: "teal.600" }}
-                    leftIcon={<Icon as={FaRegPaperPlane} />}
-                  >
-                    Contactar
-                  </Button>
-                </Stack>
-              </Flex>
-            </Box>
-          </Flex>
-          <Box
-            w={{ base: "100%", md: "300px" }}
-            ml={{ base: 0, md: "20px" }}
-            mt={{ base: "20px", md: 0 }}
-            textAlign={{ base: "center", md: "left" }}
-          >
+                Contactar
+              </Button>
+            </Stack>
+          </Box>
+
+          <Box flex={{ base: "1", md: "1" }}>
             {isChatOpen && <ClieProfChatBot data={data} />}
           </Box>
         </Flex>
-        <Divider my={50} />
+
+        <Divider my={{ base: 8, md: 16 }} />
+
         <Flex
+          direction="column"
           align="center"
-          gap={{ md: "3rem", lg: "3rem" }}
-          direction={{ base: "column", md: "row", lg: "row" }}
-          justifyContent="center"
+          justify="center"
+          gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
         >
-          <Heading as="h2" marginTop="50" textTransform="uppercase">
+          <Heading as="h2" textTransform="uppercase">
             Trabajos Recientes
           </Heading>
+          <Divider my={2} />
+          <Wrap spacing="50px" justify="center">
+            {data?.posts ? (
+              data.posts.map(({ image, content, title, id }) => {
+                return (
+                  <SupplierPost
+                    key={id}
+                    identificador={id}
+                    imagePost={image[0]}
+                    titularPost={title}
+                    descriptionPost={content}
+                  />
+                );
+              })
+            ) : (
+              <Heading>No hay ninguna publicación</Heading>
+            )}
+          </Wrap>
         </Flex>
-        <Divider my={20} />
-        <Wrap spacing="50px" marginTop="5" justify="center">
-          {data?.posts ? (
-            data.posts.map(({ image, content, title, id }) => {
-              return (
-                <SupplierPost
-                  key={id}
-                  identificador={id}
-                  imagePost={image[0]}
-                  titularPost={title}
-                  descriptionPost={content}
-                />
-              );
-            })
-          ) : (
-            <Heading>No hay ninguna publicacion</Heading>
-          )}
-        </Wrap>
       </ScaleFade>
-      <Divider my={20} />
+      <Divider my={{ base: 8, md: 16 }} />
     </Container>
   );
 };
