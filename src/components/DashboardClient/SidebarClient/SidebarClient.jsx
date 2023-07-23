@@ -29,6 +29,7 @@ const SidebarClient = () => {
     }} 
     h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2} >
       {!isLargerThanMd ? (
+        // Flex y tenía el iconButton y todo Collapse
         <IconButton
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           variant="ghost"
@@ -48,14 +49,14 @@ const SidebarClient = () => {
             activeClassName="active"
           >
             <Text>Recomendados</Text>
-          </NavLink>    
-          <NavLink
+          </NavLink>
+          {/* <NavLink
             to="/categories"
             style={linkStyle}
             activeClassName="active"
           >
             <Text>Profesionales</Text>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/dashboardClient/feedbackform"
             style={linkStyle}
@@ -72,7 +73,6 @@ const SidebarClient = () => {
           </NavLink>
         </Stack>
       )}
-
       <Collapse in={isOpen}>
         <Stack spacing={4}>
           <NavLink to="/dashboardClient/editForm" style={linkStyle} activeClassName="active">
@@ -86,11 +86,11 @@ const SidebarClient = () => {
               <StarIcon />
             </Tooltip>
           </NavLink>
-          <NavLink to="/categories" style={linkStyle} activeClassName="active">
+          {/* <NavLink to="/categories" style={linkStyle} activeClassName="active">
             <Tooltip label="Profesionales" aria-label="Profesionales">
               <SearchIcon/>
             </Tooltip>
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/dashboardClient/feedbackform" style={linkStyle} activeClassName="active">
             <Tooltip label="Feedback" aria-label="Feedback">
               <ChatIcon />
