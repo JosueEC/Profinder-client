@@ -8,7 +8,6 @@ import TopPro from '../../components/Home/TopPro/TopPro'
 import FeaturesGrid from '../../components/Home/FeaturesGrid/FeaturesGrid'
 import TestimonialCarrousel from '../../components/Home/TestimonialCarrousel/TestimonialCarrousel'
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks'
-import PricingHome from '../../components/Home/PricingHome/PricingHome'
 import CategoriesSection from '../../components/Home/CategoriesSection/CategoriesSection'
 
 const HomePage = () => {

@@ -6,15 +6,11 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClient = () => {
   return (
-    <div>
-      
-      
-      <Flex>
-        <SidebarClient />
+    <Flex >       
+      <SidebarClient />
         <Spacer  />
-        <TopPro />
-      </Flex>
-    </div>
+      <TopPro />
+    </Flex>
   );
 };
 
