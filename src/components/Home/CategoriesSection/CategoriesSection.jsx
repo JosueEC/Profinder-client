@@ -64,7 +64,7 @@ const CategoriesSection = () => {
     <Box p={4} h="100%" width="100%" backgroundColor={backgroundColor}>
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
-          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" color="gray.300">
+          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" color="gray.100">
             NUESTRAS CATEGORÍAS
           </Heading>
           <Text color="blue.400" fontSize={{ base: 'sm', sm: 'lg' }}>
