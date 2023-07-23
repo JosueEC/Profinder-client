@@ -89,7 +89,7 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function TestimonialCarrousel() {
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.500';
   const textColor = useColorModeValue('blue.900', 'blue.400');
   return (
     <Box h='100%' w='100%' backgroundColor={backgroundColor}>
