@@ -26,7 +26,7 @@ export default function ResetPassword () {
       password: data.password
     }
 
-    const response = await axios.put('http://localhost:3001/login', info)
+    const response = await axios.put('https://backprofinder-production.up.railway.app/login', info)
 
     if (response.data.message === 'Contraseña restablecida') {
       toast({

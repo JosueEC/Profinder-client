@@ -29,12 +29,13 @@ export default function ModalForgotPassword ({ isOpen, onClose }) {
     console.info(data)
     setTextButton('Enviar de nuevo')
     setTextModal(`Hemos enviado un enlace para recuperar tu contraseña a ${data.email} revisa tu bandeja de entrada`)
-    const response = await axios.post(`http://localhost:3001/login?forgotPassword=${data.email}`)
+    const response = await axios.post(`https://backprofinder-production.up.railway.app/login?forgotPassword=${data.email}`)
     toast({
       title: `Enlace enviado a ${data.email}`,
       description: 'Revisa tu bandeja de entra y/o spam',
       status: 'success',
       duration: 5000,
+      position: 'bottom-right',
       isClosable: true
     })
     console.info(response.data)
