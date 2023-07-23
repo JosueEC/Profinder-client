@@ -5,7 +5,7 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClient = () => {
   return (
-    <div>
+    
       
       
       <Flex>
@@ -13,7 +13,7 @@ const DashboardClient = () => {
         <Spacer  />
         <IntroductionDash/>
       </Flex>
-    </div>
+   
   );
 };
 

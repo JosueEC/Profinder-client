@@ -9,8 +9,8 @@ const DashboardClient = () => {
     <Flex >       
       <SidebarClient />
         <Spacer  />
-      <TopPro />
-    </Flex>
+        <TopPro />
+      </Flex>
   );
 };
 

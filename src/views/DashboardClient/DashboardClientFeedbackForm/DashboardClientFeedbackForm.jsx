@@ -11,6 +11,7 @@ const DashboardClient = () => {
         <Spacer  />
         <FeedbackForm/>
       </Flex>
+ 
   );
 };
 
