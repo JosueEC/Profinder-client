@@ -1,6 +1,7 @@
-import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery } from '@chakra-ui/react';
+import { AiOutlineUsergroupAdd} from 'react-icons/ai'
+import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip  } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon} from '@chakra-ui/icons';
 import { useState } from 'react';
 
 const SidebarClient = () => {
@@ -22,7 +23,11 @@ const SidebarClient = () => {
   };
 
   return (
-    <Box as="aside" w="200px" h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2}>
+    <Box as="aside" width={{
+      md: "100px",
+      lg:"200px"
+    }} 
+    h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2} >
       {!isLargerThanMd ? (
         <IconButton
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -59,58 +64,50 @@ const SidebarClient = () => {
             <Text>Formulario de feedback</Text>
           </NavLink>
           <NavLink
-            to="/dashboardClient/categories"
+            to="/categories"
             style={linkStyle}
             activeClassName="active"
           >
-            <Text>Categorías</Text>
+            <Text>Profesionales</Text>
           </NavLink>
         </Stack>
       )}
 
-      <Collapse in={isOpen && !isLargerThanMd}>
+      <Collapse in={isOpen}>
         <Stack spacing={4}>
-          <NavLink
-            to="/dashboardClient/editForm"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Editar perfil</Text>
+          <NavLink to="/dashboardClient/editForm" style={linkStyle} activeClassName="active">
+            <Tooltip label="Editar perfil" aria-label="Editar perfil">
+              <EditIcon />
+            </Tooltip>
           </NavLink>
           {/* <NavLink
             to="/dashboardClient/favorites"
             style={linkStyle}
             activeClassName="active"
           >
-            <Text>Favoritos</Text>
+            <Tooltip label="Favoritos" aria-label="Favoritos">
+              <StarIcon />
+            </Tooltip>
           </NavLink> */}
-          <NavLink
-            to="/dashboardClient/recomended"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Recomendados</Text>
+          <NavLink to="/dashboardClient/recomended" style={linkStyle} activeClassName="active">
+            <Tooltip label="Recomendados" aria-label="Recomendados">
+              <StarIcon />
+            </Tooltip>
           </NavLink>
-          <NavLink
-            to="/dashboardClient/help"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Ayuda</Text>
+          <NavLink to="/dashboardClient/help" style={linkStyle} activeClassName="active">
+            <Tooltip label="Ayuda" aria-label="Ayuda">
+              <QuestionOutlineIcon />
+            </Tooltip>
           </NavLink>
-          <NavLink
-            to="/dashboardClient/feedbackform"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Formulario de feedback</Text>
+          <NavLink to="/dashboardClient/feedbackform" style={linkStyle} activeClassName="active">
+            <Tooltip label="Feedback" aria-label="Feedback">
+              <ChatIcon />
+            </Tooltip>
           </NavLink>
-          <NavLink
-            to="/dashboardClient/categories"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Text>Categorías</Text>
+          <NavLink to="/categories" style={linkStyle} activeClassName="active">
+            <Tooltip label="Profesionales" aria-label="Profesionales">
+              <AiOutlineUsergroupAdd />
+            </Tooltip>
           </NavLink>
         </Stack>
       </Collapse>

@@ -6,9 +6,7 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClient = () => {
   return (
-    <Flex 
-    // flexDirection={{ base: 'column', md: 'row' }}
-    >
+    <Flex >
         <SidebarClient />
         <Spacer  />
         <FeedbackForm/>

@@ -4,9 +4,7 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClientEditForm = () => {
   return (   
-    <Flex 
-    // flexDirection={{ base: 'column', md: 'row' }}
-    >
+    <Flex >
 
       <SidebarClient />
 
