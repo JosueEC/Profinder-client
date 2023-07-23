@@ -28,7 +28,7 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
-import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+//import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
 import SupplierPost from "./components/SupplierPost/SupplierPost";
 import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
@@ -108,7 +108,7 @@ function App() {
           path="/dashboardSuppliers/updatepost/:id"
           element={<UpdatePost />}
         />
-        <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} />
+        {/* <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} /> */}
         {/* Dash cliente */}
         <Route exact path="/dashboardClient" element={<DashboardClient />} />
         <Route

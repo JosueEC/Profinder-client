@@ -1,20 +1,21 @@
-import { Flex, Spacer, useMediaQuery } from '@chakra-ui/react';
+import { Flex,Box,Grid, Spacer} from '@chakra-ui/react';
 import HelpClient from '../../../components/DashboardClient/HelpClient/HelpClient';
 import SidebarClient from '../../../components/DashboardClient/SidebarClient/SidebarClient';
 
 const DashboardClient = () => {
-  const [isLargerThanMd] = useMediaQuery("(min-width: 768px)");
 
   return (
     <Flex h="100vh">
-      {isLargerThanMd ? (
-        <>
-          <SidebarClient />
-          <Spacer />
-        </>
-      ) : <SidebarClient/>}
+      <SidebarClient />
+      <Spacer />
       <HelpClient />
     </Flex>
+//   <Box display={{ base: 'grid', lg: 'flex' }} height="100vh">
+  //   <Grid templateRows="5% 95%" display={{ base: 'grid', sm: 'grid',md: 'flex', lg: 'flex'}} width='100%'>
+  //     <SidebarClient />
+  //     <HelpClient />
+  //   </Grid>
+  // </Box>
   );
 };
 

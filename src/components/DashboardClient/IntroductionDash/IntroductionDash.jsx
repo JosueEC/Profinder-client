@@ -28,8 +28,7 @@ const IntroductionDash = () => {
             <Text fontSize="md" color="gray.600">
               <Icon as={MdStar} boxSize={5} color={iconColor} /> Editar todas tus preferencias.
             </Text>
-           
-            <Text fontSize="md" color="gray.600">
+<Text fontSize="md" color="gray.600">
               <Icon as={MdStar} boxSize={5} color={iconColor} /> Consultar las categorías disponibles.
             </Text>
             <Text fontSize="md" color="gray.600">
