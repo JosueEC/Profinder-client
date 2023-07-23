@@ -26,9 +26,11 @@ const HomePage = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100%" // Ajuste de altura a 50vh
-        width="100vw"
-     
+        height={{ 
+          sm: "auto",
+          md: "70.5em",
+          lg: "58em" 
+         }}
       >
         <HowItWorks />
       </Box>
@@ -46,7 +48,7 @@ const HomePage = () => {
         height={{ 
           sm: "auto",
           md: "70.5em",
-          lg: "100vh" 
+          lg: "60em" 
          }}
            // Altura 180vh en md y 100vh en lg //
       >
@@ -71,7 +73,7 @@ const HomePage = () => {
         height={{ 
           sm: "auto",
           md: "110em", 
-          lg: "155vh" 
+          lg: "100em" 
         }}
       >
         <CategoriesSection />
