@@ -145,4 +145,9 @@
       opacity: 1;
     }
   }
-  
+  .tracking-in-contract {
+  @supports (-webkit-text-stroke: 1px blue) {
+    color: blue;
+    -webkit-text-stroke: 1px blue;
+  }
+}
