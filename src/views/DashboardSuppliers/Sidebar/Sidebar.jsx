@@ -37,7 +37,7 @@ const Sidebar = () => {
         <Box bg="gray.600" p={2}>
           <Stack spacing={4}>
             <RouterLink
-              to="/dashboardSuppliers/publicaciones"
+              to="/dashboardSuppliers"
               spy
               smooth
               duration={500}
@@ -48,7 +48,7 @@ const Sidebar = () => {
               </Button>
             </RouterLink>
             <RouterLink
-              to="/dashboardSuppliers/createPost"
+              to="/dashboardSuppliers/publicaciones"
               spy
               smooth
               duration={500}
@@ -59,7 +59,7 @@ const Sidebar = () => {
               </Button>
             </RouterLink>
             <RouterLink
-              to="/dashboardSuppliers/viewPosts"
+              to="/dashboardSuppliers/nuevas-publicaciones"
               spy
               smooth
               duration={500}

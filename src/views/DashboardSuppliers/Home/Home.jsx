@@ -26,6 +26,7 @@ import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
+import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
 
 const linkStyle = {
@@ -48,13 +49,7 @@ const DashboardSuppliers = () => {
       display="flex"
       bg={useColorModeValue("gray.800", "gray.800")}
     >
-      {/* Barra de navegación */}
-      <Box
-        w="250px"
-        bg="gray.600"
-        p={2}
-        display={{ base: "none", md: "block" }}
-      >
+      <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
           <ScrollLink
             to="/dashboardSuppliers/publicaciones"
@@ -122,32 +117,9 @@ const DashboardSuppliers = () => {
             >
               Editar mi Perfil
             </Button>
-          </ScrollLink>
-          <ScrollLink
-            to="/dashboardSuppliers/updatepost"
-            spy
-            smooth
-            duration={500}
-            style={linkStyle}
-          >
-            <Button
-              variant="outline"
-              onClick={() => handlePageChange("updatepost")}
-              bg={currentPage === "updatepost" ? "blue.500" : ""}
-              color={currentPage === "updatepost" ? "white" : ""}
-              leftIcon={<ViewIcon />}
-            >
-              Editar Post
-            </Button>
-          </ScrollLink>
+          </RouterLink>
 
-          <ScrollLink
-            to="/dashboardSuppliers/pasarela"
-            spy
-            smooth
-            duration={500}
-            style={linkStyle}
-          >
+          <ScrollLink to="pasarela" spy smooth duration={500} style={linkStyle}>
             <Button
               variant="outline"
               onClick={() => handlePageChange("PasarelaPagos")}
@@ -323,10 +295,11 @@ const DashboardSuppliers = () => {
             <PostsSuppliers />
           </Box>
         )}
-        {currentPage === "FormUpdateProfile" && (
+
+        {currentPage === "FormUpdate" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {/* Centramos el contenido */}
-            <FormUpdateProfile />
+            <FormUpdate />
           </Flex>
         )}
         {currentPage === "Ayuda" && (

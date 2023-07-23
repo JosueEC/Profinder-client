@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllCategories } from '../../services/redux/actions/actions'
-import { Box, Divider } from '@chakra-ui/react'
+import { Box, Divider, useColorMode } from '@chakra-ui/react'
 import Footer from '../../components/Footer/Footer'
 
 import TopPro from '../../components/Home/TopPro/TopPro'
@@ -13,29 +13,37 @@ import CategoriesSection from '../../components/Home/CategoriesSection/Categorie
 
 const HomePage = () => {
   const dispatch = useDispatch()
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     dispatch(getAllCategories())
   }, [dispatch])
 
+  // Definir el color de fondo general según el modo de color
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.600';
+
+  // Definir los colores para los dividers en ambos modos
+  const dividerColor = colorMode === 'dark' ? 'gray.100' : 'black';
   
+
   return (
-    <Box height="100vh" width="100vw">
+    <Box height="100vh" width="100vw" backgroundColor={backgroundColor}>
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100%" // Ajuste de altura a 50vh
-        width="100vw"
-     
+        height={{ 
+          sm: "auto",
+          md: "70.5em",
+          lg: "58em" 
+        }}
       >
         <HowItWorks />
       </Box>
 
-      <Box >
-        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
-        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
+      <Box backgroundColor={backgroundColor}>
+        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
       </Box>
 
       <Box
@@ -46,22 +54,18 @@ const HomePage = () => {
         height={{ 
           sm: "auto",
           md: "70.5em",
-          lg: "100vh" 
-         }}
-           // Altura 180vh en md y 100vh en lg //
+          lg: "60em" 
+        }}
+        backgroundColor={backgroundColor}
       >
         <FeaturesGrid />
-       {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
-       <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
+        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
         <TestimonialCarrousel />
-        
-        
-
       </Box>
 
-      <Box >
-        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
-        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />      </Box>
+      <Box backgroundColor={backgroundColor}>
+        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
+      </Box>
 
       <Box
         display="flex"
@@ -71,13 +75,13 @@ const HomePage = () => {
         height={{ 
           sm: "auto",
           md: "110em", 
-          lg: "155vh" 
+          lg: "100em" 
         }}
+        backgroundColor={backgroundColor}
       >
         <CategoriesSection />
-        {/* <Divider height="3px" borderColor="gray.900" width="80%" mx="auto" /> */}
-        <Divider height="3px" borderColor="gray.100" width="80%" mx="auto" />
-
+        
+        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
         <TopPro />
       </Box>
 

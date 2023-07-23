@@ -30,6 +30,8 @@ import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
 import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+import SupplierPost from "./components/SupplierPost/SupplierPost";
+import FormUpdateProfile from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 
 function App() {
@@ -57,6 +59,7 @@ function App() {
         <Route exact path="/registerProvider" element={<FromProvider />} />
         <Route exact path="/registerCliente" element={<FormCliente />} />
         <Route exact path="/detail/:id" element={<DetailSupplier />} />
+        <Route exact path="/detail/suplier/:id" element={<SupplierPost />} />
         <Route exact path="/userLogin" element={<UserLogin />} />
         <Route exact path="/resetPassword" element={<ResetPassword />} />
         <Route exact path="/userRegister" element={<UserRegister />} />
@@ -78,9 +81,15 @@ function App() {
         />
         <Route
           exact
-          path="/dashboardSuppliers/createPost"
+          path="/dashboardSuppliers/publicaciones"
           element={<FormServicio />}
         />
+         <Route
+          exact
+          path="/dashboardSuppliers/updateprofile"
+          element={<FormUpdateProfile />}
+        />
+        
         <Route
           exact
           path="/dashboardSuppliers/pasarela"
@@ -88,7 +97,7 @@ function App() {
         />
         <Route
           exact
-          path="/dashboardSuppliers/viewPosts"
+          path="/dashboardSuppliers/nuevas-publicaciones"
           element={<PostsSuppliers />}
         />
         <Route
