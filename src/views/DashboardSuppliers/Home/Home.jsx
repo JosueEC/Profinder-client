@@ -26,7 +26,6 @@ import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
-import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
 
 const linkStyle = {
@@ -117,7 +116,7 @@ const DashboardSuppliers = () => {
             >
               Editar mi Perfil
             </Button>
-          </RouterLink>
+          </ScrollLink>
 
           <ScrollLink to="pasarela" spy smooth duration={500} style={linkStyle}>
             <Button
