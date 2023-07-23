@@ -406,9 +406,9 @@ const updateFeedbackError = (error) => {
 };
 
 //!actions para actualizar post
-const updatePosts = (info) => {
-  const URL = 'https:backprofinder-production.up.railway.app/postProfesional/:id';
-console.log(info);
+const updatePosts = (info, id) => {
+  const URL = `https:backprofinder-production.up.railway.app/postProfesional/${id}`;
+console.log(id);
   return async function (dispatch) {
     try {
     
