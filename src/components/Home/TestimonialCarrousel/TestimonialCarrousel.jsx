@@ -7,17 +7,19 @@ import {
   Stack,
   Container,
   Avatar,
-  useColorModeValue
-} from '@chakra-ui/react'
+  useColorModeValue,
+  useColorMode
+} from '@chakra-ui/react';
 
 const Testimonial = ({ children }) => {
-  return <Box>{children}</Box>
-}
+  return <Box>{children}</Box>;
+};
 
 const TestimonialContent = ({ children }) => {
-  const gradientStart = useColorModeValue('gray.200', 'gray.600')
-  const gradientEnd = useColorModeValue('gray.300', 'gray.700')
-  const gradient = `linear(to-r, ${gradientStart}, ${gradientEnd})`
+  const { colorMode } = useColorMode();
+  const gradientStart = useColorModeValue('gray.200', 'gray.600');
+  const gradientEnd = useColorModeValue('gray.300', 'gray.700');
+  const gradient = `linear(to-r, ${gradientStart}, ${gradientEnd})`;
 
   return (
     <Stack
@@ -27,7 +29,7 @@ const TestimonialContent = ({ children }) => {
       rounded='xl'
       align='center'
       pos='relative'
-      maxWidth="20rem"
+      maxWidth='20rem'
       _after={{
         content: '""',
         w: 0,
@@ -42,33 +44,29 @@ const TestimonialContent = ({ children }) => {
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',
-        transform: 'translateX(-50%)'
+        transform: 'translateX(-50%)',
       }}
     >
       {children}
     </Stack>
-  )
-}
+  );
+};
 
 const TestimonialHeading = ({ children }) => {
   return (
     <Heading as='h3' fontSize='xl'>
       {children}
     </Heading>
-  )
-}
+  );
+};
 
 const TestimonialText = ({ children }) => {
   return (
-    <Text
-      textAlign='center'
-      color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize='sm'
-    >
+    <Text textAlign='center' color={useColorModeValue('gray.600', 'gray.400')} fontSize='sm'>
       {children}
     </Text>
-  )
-}
+  );
+};
 
 const TestimonialAvatar = ({ src, name, title }) => {
   return (
@@ -85,30 +83,26 @@ const TestimonialAvatar = ({ src, name, title }) => {
         </Text>
       </Stack>
     </Flex>
-  )
-}
+  );
+};
 
-export default function TestimonialCarrousel () {
+export default function TestimonialCarrousel() {
+  const { colorMode } = useColorMode();
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.600';
   return (
-    <Box  h='100%'>
-      <Container py={16} as={Stack} spacing={12} w='100%' maxW='100%'>
-        <Stack spacing={0} align='center'>
-          <Heading color={useColorModeValue('gray.300', 'white')}>
-            Nuestros usuarios opinan!
-          </Heading>
-          <Text color={useColorModeValue('gray.600', 'gray.400')}>
+    <Box h='100%' w='100%' backgroundColor={backgroundColor}>
+      <Container py={16} as={Flex} justify='center' align='center' direction='column' w='100%' maxW='100%'>
+        <Stack spacing={0} align='center' mb={12}>
+          <Heading color={useColorModeValue('gray.300', 'white')}>Nuestros usuarios opinan!</Heading>
+          <Text color='blue.400'>
             Tenemos usuarios alrededor de todo el mundo
           </Text>
         </Stack>
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 10, md: 4, lg: 10 }}
-        >
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 10, md: 4, lg: 10 }}>
+          <br />
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>
-                Un cambio significativo en mi vida!
-              </TestimonialHeading>
+              <TestimonialHeading>Un cambio significativo en mi vida!</TestimonialHeading>
               <TestimonialText color='gray.300'>
                 Esta aplicación ha podido contactarme con muchas soluciones a los conflictos de la vida cotidiana.
               </TestimonialText>
@@ -123,8 +117,7 @@ export default function TestimonialCarrousel () {
             <TestimonialContent>
               <TestimonialHeading color='gray.300'>Intuitive Design</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh lectus feugiat nunc sem.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -137,8 +130,7 @@ export default function TestimonialCarrousel () {
             <TestimonialContent>
               <TestimonialHeading color='gray.300'>Mindblowing Service</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh lectus feugiat nunc sem.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -150,5 +142,5 @@ export default function TestimonialCarrousel () {
         </Stack>
       </Container>
     </Box>
-  )
+  );
 }
