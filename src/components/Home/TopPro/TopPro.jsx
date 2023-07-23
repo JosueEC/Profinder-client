@@ -60,7 +60,7 @@ const TopPro = ({ cardBgColor,  linkColor }) => {
   // Ordena los proveedores por rating de mayor a menor
   const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.500';
   const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (

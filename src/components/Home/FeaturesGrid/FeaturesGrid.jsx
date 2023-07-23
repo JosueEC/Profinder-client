@@ -41,7 +41,7 @@ export default function FeaturesGrid() {
   const { colorMode } = useColorMode();
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.500';
   const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (
@@ -57,7 +57,7 @@ export default function FeaturesGrid() {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
           {features.map((feature) => (
             <HStack key={feature.id} align='top'>
-              <Box color='teal.600' px={2}>
+              <Box color='teal.400' px={2}>
                 <Icon as={CheckIcon} />
               </Box>
               <VStack align='start'>
