@@ -61,13 +61,13 @@ const TopPro = ({ cardBgColor,  linkColor }) => {
   const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
   const { colorMode } = useColorMode();
   const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
-  const textColor = useColorModeValue('blue.700', 'blue.400');
+  const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (
     <Center p={4}  h="100%" w="100%"   backgroundColor={backgroundColor}>
       <Box mx="auto" maxW="5xl" w="100%" >
         <Box textAlign="center">
-          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color="gray.100">
+          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color="gray.100" borderColor='blue.900'>
             PROFESIONALES MEJOR PUNTUADOS
           </Heading>
           <Text mt={4} color={textColor} >

@@ -6,7 +6,8 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-  useColorMode // Importar useColorMode
+  useColorMode,
+  useColorModeValue // Importar useColorMode
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import styles from './HowItWorks.module.css'
@@ -15,7 +16,8 @@ export default function HowItWorks() {
   const { colorMode } = useColorMode();
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.600';
+  const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const textColor = useColorModeValue('blue.900', 'blue.400');
 
   return (
     <Flex
@@ -39,16 +41,16 @@ export default function HowItWorks() {
                 zIndex: -1
               }}
               className={styles['tracking-in-contract']}
-              color='gray.300'
+              color='gray.100'
             >
               ProFinder
             </Text>
             <br />
-            <Text color='blue.400' as='span'>
+            <Text color={textColor} as='span'>
               Ante una necesidad hay una solucion!
             </Text>
           </Heading>
-          <Text fontSize={{ base: 'md', lg: 'lg' }} color='gray.300'>
+          <Text fontSize={{ base: 'md', lg: 'lg' }} color='gray.100'>
             Este sitio es un nexo entre problemas y soluciones. Tienes una necesidad, contactas con quien pueda solucionar y listo! Problema resuelto!!
             <br />
             Muchos profesionales nos eligen para postular sus servicios, al igual que muchos clientes satisfechos por el uso de nuestra plataforma.
@@ -58,10 +60,10 @@ export default function HowItWorks() {
               as={Link}
               to='/registerProvider'
               rounded='full'
-              bg='blue.400'
+              bg={textColor}
               color='white'
               _hover={{
-                bg: 'blue.500'
+                bg: 'blue.600'
               }}
               className={`${styles['bounce-top']} ${styles.boton}`}
             >
@@ -72,7 +74,7 @@ export default function HowItWorks() {
               as={Link}
               to='/comofunciona'
               rounded='full'
-              bg='teal.400'
+              bg='teal.600'
               color='white'
               className={styles['bounce-top']}
             >
