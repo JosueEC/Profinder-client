@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { Box, Flex, useColorModeValue, Button, Stack, Heading } from "@chakra-ui/react";
+import { useState } from "react";
+import {
+  Box,
+  Flex,
+  useColorModeValue,
+  Button,
+  Stack,
+  Heading,
+} from "@chakra-ui/react";
 import { ChatIcon, ViewIcon, EditIcon, QuestionIcon } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
-import FormUpdate from "../formUpdateProfile/FormUpdateProfile";
+//import { Link as RouterLink } from "react-router-dom";
 import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
@@ -11,6 +17,8 @@ import PostsSuppliers from "../PostSuppliers/PostsSuppliers";
 import BarData from "../DataSuppliers/BarData";
 import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
+import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
+import UpdatePost from "../UpdatePost/UpdatePost";
 
 const linkStyle = {
   display: "block",
@@ -34,7 +42,7 @@ const DashboardSuppliers = () => {
       <Box w="250px" bg="gray.600" p={2}>
         <Stack spacing={4}>
           <ScrollLink
-            to="publicaciones"
+            to="/dashboardSuppliers/publicaciones"
             spy
             smooth
             duration={500}
@@ -51,7 +59,7 @@ const DashboardSuppliers = () => {
           </ScrollLink>
 
           <ScrollLink
-            to="publicaciones"
+            to="/dashboardSuppliers/publicaciones"
             spy
             smooth
             duration={500}
@@ -69,7 +77,7 @@ const DashboardSuppliers = () => {
           </ScrollLink>
 
           <ScrollLink
-            to="nuevas-publicaciones"
+            to="/dashboardSuppliers/nuevas-publicaciones"
             spy
             smooth
             duration={500}
@@ -86,10 +94,10 @@ const DashboardSuppliers = () => {
             </Button>
           </ScrollLink>
 
-          <RouterLink
-            to=""
+          <ScrollLink
+            to="/dashboardSuppliers/updateprofile"
             style={linkStyle}
-            onClick={() => handlePageChange("FormUpdate")}
+            onClick={() => handlePageChange("FormUpdateProfile")}
           >
             <Button
               variant="outline"
@@ -99,9 +107,32 @@ const DashboardSuppliers = () => {
             >
               Editar mi Perfil
             </Button>
-          </RouterLink>
+          </ScrollLink>
+          <ScrollLink
+            to="/dashboardSuppliers/updatepost"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
+            <Button
+              variant="outline"
+              onClick={() => handlePageChange("updatepost")}
+              bg={currentPage === "updatepost" ? "blue.500" : ""}
+              color={currentPage === "updatepost" ? "white" : ""}
+              leftIcon={<ViewIcon />}
+            >
+              Editar Post
+            </Button>
+          </ScrollLink>
 
-          <ScrollLink to="pasarela" spy smooth duration={500} style={linkStyle}>
+          <ScrollLink
+            to="/dashboardSuppliers/pasarela"
+            spy
+            smooth
+            duration={500}
+            style={linkStyle}
+          >
             <Button
               variant="outline"
               onClick={() => handlePageChange("PasarelaPagos")}
@@ -109,11 +140,9 @@ const DashboardSuppliers = () => {
               color={currentPage === "PasarelaPagos" ? "white" : ""}
               leftIcon={<ViewIcon />}
             >
-            Obtén Premium
+              Obtén Premium
             </Button>
           </ScrollLink>
-                
-
         </Stack>
       </Box>
 
@@ -133,7 +162,6 @@ const DashboardSuppliers = () => {
             </Flex>
           </Flex>
         )}
-
         {currentPage === "FormServicio" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {" "}
@@ -141,29 +169,31 @@ const DashboardSuppliers = () => {
             <FormServicio />
           </Flex>
         )}
-
         {currentPage === "PostsSuppliers" && (
           <Box>
             <PostsSuppliers />
           </Box>
         )}
-
-        {currentPage === "FormUpdate" && (
+        {currentPage === "FormUpdateProfile" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {" "}
             {/* Centramos el contenido */}
-            <FormUpdate />
+            <FormUpdateProfile />
           </Flex>
         )}
-
         {currentPage === "Ayuda" && (
           <Flex justifyContent="flex-start" alignItems="flex-end">
             <CustomChatBot />
           </Flex>
         )}
-       {currentPage === "PasarelaPagos" && (
+        {currentPage === "PasarelaPagos" && (
           <Box>
             <PasarelaPagos />
+          </Box>
+        )}
+         {currentPage === "updatepost" && (
+          <Box>
+            <UpdatePost />
           </Box>
         )}
       </Flex>

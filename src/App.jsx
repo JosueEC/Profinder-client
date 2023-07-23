@@ -30,6 +30,7 @@ import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
 import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -94,6 +95,11 @@ function App() {
           exact
           path="/dashboardSuppliers/help"
           element={<CustomChatBot />}
+        />
+                <Route
+          exact
+          path="/dashboardSuppliers/updatepost"
+          element={<UpdatePost />}
         />
         <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} />
         {/* Dash cliente */}

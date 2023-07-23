@@ -402,6 +402,68 @@ const updateFeedbackError = (error) => {
   };
 };
 
+//!actions para actualizar post
+const updatePosts = (info) => {
+  // const URL = `${API.LOCALHOST}/postprofesional`
+  const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
+
+  return async function () {
+    try {
+      // Verificación
+      if (
+        info.title === "" ||
+        info.ocupation === "" ||
+        info.category === "" ||
+        info.image === "" ||
+        info.ProfesionalId === "" ||
+        info.content === 0
+      ) {
+        throw new Error("Faltan datos");
+      }
+
+      await axios.put(URL, info, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      alert("Publicacion Exitosa!")
+     
+    } catch (error) {
+      console.error(error.response.data.error);
+      alert(`${error.response.data.error}`);
+    }
+  };
+};
+
+
+// const deletePosts = (info) => {
+//   // const URL = `${API.LOCALHOST}/postprofesional`
+//   const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
+
+//   return async function () {
+//     try {
+//       // Verificación
+//       if (
+//         info.title === "" ||
+//         info.ocupation === "" ||
+//         info.category === "" ||
+//         info.image === "" ||
+//         info.ProfesionalId === "" ||
+//         info.content === 0
+//       ) {
+//         throw new Error("Faltan datos");
+//       }
+
+//       await axios.put(URL, info, {
+//         headers: { "Access-Control-Allow-Origin": "*" },
+//       });
+//       alert("Publicacion Exitosa!")
+     
+//     } catch (error) {
+//       console.error(error.response.data.error);
+//       alert(`${error.response.data.error}`);
+//     }
+//   };
+// };
+
 export {
   getAllSuppliers,
   getAllCategories,
@@ -421,4 +483,5 @@ export {
   updateFeedback,
   updateFeedbackSuccess,
   updateFeedbackError,
+  updatePosts
 };
