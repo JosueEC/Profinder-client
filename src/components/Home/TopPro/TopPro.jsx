@@ -49,7 +49,7 @@ const Card = ({ supplier, cardBgColor, textColor }) => {
   );
 };
 
-const TopPro = ({ cardBgColor, textColor, linkColor }) => {
+const TopPro = ({ cardBgColor,  linkColor }) => {
   const dispatch = useDispatch();
   const suppliers = useSelector((state) => state.suppliers);
 
@@ -61,14 +61,16 @@ const TopPro = ({ cardBgColor, textColor, linkColor }) => {
   const sortedSuppliers = [...suppliers].sort((a, b) => b.rating - a.rating);
   const { colorMode } = useColorMode();
   const backgroundColor = colorMode === 'dark' ? undefined : 'gray.400';
+  const textColor = useColorModeValue('blue.700', 'blue.400');
+
   return (
     <Center p={4}  h="100%" w="100%"   backgroundColor={backgroundColor}>
       <Box mx="auto" maxW="5xl" w="100%" >
         <Box textAlign="center">
-          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color="gray.300">
+          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color="gray.100">
             PROFESIONALES MEJOR PUNTUADOS
           </Heading>
-          <Text mt={4} color="blue.400" >
+          <Text mt={4} color={textColor} >
             En esta sección encontrarás los profesionales con mejores calificaciones de nuestro sitio.
           </Text>
         </Box>
