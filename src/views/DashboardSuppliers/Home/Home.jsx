@@ -295,10 +295,10 @@ const DashboardSuppliers = () => {
           </Box>
         )}
 
-        {currentPage === "FormUpdate" && (
+        {currentPage === "FormUpdateProfile" && (
           <Flex justifyContent="center" alignItems="center" flex="1">
             {/* Centramos el contenido */}
-            <FormUpdate />
+            <FormUpdateProfile />
           </Flex>
         )}
         {currentPage === "Ayuda" && (
