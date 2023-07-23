@@ -1,7 +1,7 @@
-import { AiOutlineUsergroupAdd} from 'react-icons/ai'
-import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip  } from '@chakra-ui/react';
+// import { AiOutlineUsergroupAdd} from 'react-icons/ai'
+import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip} from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
-import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon} from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon, SearchIcon} from '@chakra-ui/icons';
 import { useState } from 'react';
 
 const SidebarClient = () => {
@@ -48,13 +48,13 @@ const SidebarClient = () => {
             activeClassName="active"
           >
             <Text>Recomendados</Text>
-          </NavLink>
+          </NavLink>    
           <NavLink
-            to="/dashboardClient/help"
+            to="/categories"
             style={linkStyle}
             activeClassName="active"
           >
-            <Text>Ayuda</Text>
+            <Text>Profesionales</Text>
           </NavLink>
           <NavLink
             to="/dashboardClient/feedbackform"
@@ -64,11 +64,11 @@ const SidebarClient = () => {
             <Text>Formulario de feedback</Text>
           </NavLink>
           <NavLink
-            to="/categories"
+            to="/dashboardClient/help"
             style={linkStyle}
             activeClassName="active"
           >
-            <Text>Profesionales</Text>
+            <Text>Ayuda</Text>
           </NavLink>
         </Stack>
       )}
@@ -80,23 +80,15 @@ const SidebarClient = () => {
               <EditIcon />
             </Tooltip>
           </NavLink>
-          {/* <NavLink
-            to="/dashboardClient/favorites"
-            style={linkStyle}
-            activeClassName="active"
-          >
-            <Tooltip label="Favoritos" aria-label="Favoritos">
-              <StarIcon />
-            </Tooltip>
-          </NavLink> */}
+
           <NavLink to="/dashboardClient/recomended" style={linkStyle} activeClassName="active">
             <Tooltip label="Recomendados" aria-label="Recomendados">
               <StarIcon />
             </Tooltip>
           </NavLink>
-          <NavLink to="/dashboardClient/help" style={linkStyle} activeClassName="active">
-            <Tooltip label="Ayuda" aria-label="Ayuda">
-              <QuestionOutlineIcon />
+          <NavLink to="/categories" style={linkStyle} activeClassName="active">
+            <Tooltip label="Profesionales" aria-label="Profesionales">
+              <SearchIcon/>
             </Tooltip>
           </NavLink>
           <NavLink to="/dashboardClient/feedbackform" style={linkStyle} activeClassName="active">
@@ -104,9 +96,9 @@ const SidebarClient = () => {
               <ChatIcon />
             </Tooltip>
           </NavLink>
-          <NavLink to="/categories" style={linkStyle} activeClassName="active">
-            <Tooltip label="Profesionales" aria-label="Profesionales">
-              <AiOutlineUsergroupAdd />
+          <NavLink to="/dashboardClient/help" style={linkStyle} activeClassName="active">
+            <Tooltip label="Ayuda" aria-label="Ayuda">
+              <QuestionOutlineIcon />
             </Tooltip>
           </NavLink>
         </Stack>
