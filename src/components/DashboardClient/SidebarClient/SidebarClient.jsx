@@ -1,5 +1,5 @@
 // import { AiOutlineUsergroupAdd} from 'react-icons/ai'
-import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip} from '@chakra-ui/react';
+import { Box, Flex,Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip} from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon, SearchIcon} from '@chakra-ui/icons';
 import { useState } from 'react';
@@ -26,17 +26,50 @@ const SidebarClient = () => {
     <Box as="aside" width={{
       md: "100px",
       lg:"200px"
-    }} 
+    }}
     h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2} >
       {!isLargerThanMd ? (
-        <IconButton
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          variant="ghost"
-          size="md"
-          onClick={toggleCollapse}
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          alignSelf="flex-end"
-        />
+        <Flex direction='row'>
+          <IconButton
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            variant="ghost"
+            size="md"
+            onClick={toggleCollapse}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            alignSelf="flex-end"
+          />
+          <Collapse in={isOpen}>
+            <Flex justifyContent='space-evenly'>
+            <Stack spacing={4} direction="row">
+              <NavLink to="/dashboardClient/editForm" style={linkStyle} activeClassName="active">
+                <Tooltip label="Editar perfil" aria-label="Editar perfil">
+                  <EditIcon />
+                </Tooltip>
+              </NavLink>
+              <NavLink to="/dashboardClient/recomended" style={linkStyle} activeClassName="active">
+                <Tooltip label="Recomendados" aria-label="Recomendados">
+                  <StarIcon />
+                </Tooltip>
+              </NavLink>
+              <NavLink to="/categories" style={linkStyle} activeClassName="active">
+                <Tooltip label="Profesionales" aria-label="Profesionales">
+                  <SearchIcon/>
+                </Tooltip>
+              </NavLink>
+              <NavLink to="/dashboardClient/feedbackform" style={linkStyle} activeClassName="active">
+                <Tooltip label="Feedback" aria-label="Feedback">
+                  <ChatIcon />
+                </Tooltip>
+              </NavLink>
+              <NavLink to="/dashboardClient/help" style={linkStyle} activeClassName="active">
+                <Tooltip label="Ayuda" aria-label="Ayuda">
+                  <QuestionOutlineIcon />
+                </Tooltip>
+              </NavLink>
+            </Stack>
+            </Flex>
+          </Collapse>
+        </Flex>
       ) : (
         <Stack spacing={4}>
           <NavLink to="/dashboardClient/editForm" style={linkStyle} activeClassName="active">
@@ -72,37 +105,6 @@ const SidebarClient = () => {
           </NavLink>
         </Stack>
       )}
-
-      <Collapse in={isOpen}>
-        <Stack spacing={4}>
-          <NavLink to="/dashboardClient/editForm" style={linkStyle} activeClassName="active">
-            <Tooltip label="Editar perfil" aria-label="Editar perfil">
-              <EditIcon />
-            </Tooltip>
-          </NavLink>
-
-          <NavLink to="/dashboardClient/recomended" style={linkStyle} activeClassName="active">
-            <Tooltip label="Recomendados" aria-label="Recomendados">
-              <StarIcon />
-            </Tooltip>
-          </NavLink>
-          <NavLink to="/categories" style={linkStyle} activeClassName="active">
-            <Tooltip label="Profesionales" aria-label="Profesionales">
-              <SearchIcon/>
-            </Tooltip>
-          </NavLink>
-          <NavLink to="/dashboardClient/feedbackform" style={linkStyle} activeClassName="active">
-            <Tooltip label="Feedback" aria-label="Feedback">
-              <ChatIcon />
-            </Tooltip>
-          </NavLink>
-          <NavLink to="/dashboardClient/help" style={linkStyle} activeClassName="active">
-            <Tooltip label="Ayuda" aria-label="Ayuda">
-              <QuestionOutlineIcon />
-            </Tooltip>
-          </NavLink>
-        </Stack>
-      </Collapse>
     </Box>
   );
 };
