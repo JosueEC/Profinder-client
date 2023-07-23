@@ -10,6 +10,8 @@ import {
   UPDATE_PROFESIONAL,
   GET_INFO_PROFESIONALS,
   POST_PROFESIONAL,
+  DELETE_POST,
+  UPDATE_POST
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -404,33 +406,46 @@ const updateFeedbackError = (error) => {
 
 //!actions para actualizar post
 const updatePosts = (info) => {
-  // const URL = `${API.LOCALHOST}/postprofesional`
-  const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
-
-  return async function () {
+  const URL = 'https:backprofinder-production.up.railway.app/postProfesional/:id';
+console.log(info);
+  return async function (dispatch) {
     try {
-      // Verificación
-      if (
-        info.title === "" ||
-        info.ocupation === "" ||
-        info.category === "" ||
-        info.image === "" ||
-        info.ProfesionalId === "" ||
-        info.content === 0
-      ) {
-        throw new Error("Faltan datos");
-      }
-
+    
       await axios.put(URL, info, {
+        
         headers: { "Access-Control-Allow-Origin": "*" },
       });
-      alert("Publicacion Exitosa!")
-     
+      dispatch({
+        type: UPDATE_POST,
+        payload: { post: info }, 
+      });
+      alert("Publicacion Actualizada!");
     } catch (error) {
-      console.error(error.response.data.error);
-      alert(`${error.response.data.error}`);
+      // ...
     }
   };
+}
+
+
+//Action para "eliminar el post"
+const deletePost = (id) => async (dispatch) => {
+  const URL = 'https://backprofinder-production.up.railway.app/postProfesional';
+
+  try {
+    if (!id) {
+      throw new Error("ID inválido");
+    }
+    const response = await axios.put(`${URL}/delete/${id}`);
+    console.log(response.data);
+    dispatch({
+      type: DELETE_POST,
+      payload: { postId: id }, // paso directamente el id
+    });
+    window.location.reload();
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 
@@ -483,5 +498,6 @@ export {
   updateFeedback,
   updateFeedbackSuccess,
   updateFeedbackError,
+  deletePost,
   updatePosts
 };

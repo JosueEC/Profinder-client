@@ -98,7 +98,7 @@ function App() {
         />
                 <Route
           exact
-          path="/dashboardSuppliers/updatepost"
+          path="/dashboardSuppliers/updatepost/:id"
           element={<UpdatePost />}
         />
         <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} />

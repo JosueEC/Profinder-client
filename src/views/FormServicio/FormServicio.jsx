@@ -29,6 +29,7 @@ function FormServicio() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     defaultValues: {
       title: "",
@@ -55,7 +56,7 @@ function FormServicio() {
   const session = useSessionState((state) => state.session);
   
   const profile = dataSuppliers.find((user) => user.id === session.id);
-  console.log(profile.active);
+ // console.log(profile.active);
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
@@ -80,9 +81,11 @@ function FormServicio() {
 
     //console.log(newData);
     dispatch(postServicio(newData));
+    reset();
   };
 
   return (
+   
     <Flex
       minH="100vh"
       align="center"
@@ -95,7 +98,7 @@ function FormServicio() {
         boxShadow="lg"
         p={8}
         color="gray.300"
-        width="500px"
+        width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
       >
         <Stack spacing={4}>
           <form onSubmit={handleSubmit(onSubmit)}>

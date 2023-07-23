@@ -107,11 +107,9 @@ const DataSuppliers = () => {
   };
 
   return (
-    <Flex justifyContent="flex-end" alignItems="flex-start">
-    <Box width="600px" height="600px">
-   
-        <Doughnut data={chartData} options={chartOptions} />
-  
+    <Flex justifyContent="center" alignItems="center">
+    <Box width={{ base: "90%", md: "600px" }} height={{ base: "90%", md: "600px" }}>
+      <Doughnut data={chartData} options={chartOptions} />
     </Box>
   </Flex>
   );

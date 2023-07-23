@@ -19,8 +19,9 @@ import {
 } from "../../../services/redux/actions/actions";
 import { useSessionState } from "../../../services/zustand/useSession";
 import SelectCategories from "../../../singleComponents/SelectCategories";
+import { useNavigate } from "react-router-dom";
 
-function UpdatePost() {
+function UpdatePost({ id }) {
   const {
     register,
     formState: { errors },
@@ -45,21 +46,20 @@ function UpdatePost() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
   const dataSuppliers = useSelector((state) => state.profesionales);
- // console.log(dataSuppliers);
+  // console.log(dataSuppliers);
   // const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
-//const profile = dataSuppliers.find((user) => user.id === session.id);
- //console.log(profile);
+  const profile = dataSuppliers.find((user) => user.id === session.id);
+  //console.log(profile);
 
- const profesionales = useSelector((state) => state.profesionales);
- const filteredPosts = profesionales.filter(
-   (post) => post.id
- ); 
-console.log(filteredPosts);
+  //  const profesionales = useSelector((state) => state.profesionales);
+  //  const filteredPosts = profesionales.filter(
+  //    (post) => post.id
+  //  );
+  console.log(profile);
 
-//const postIguales = dataSuppliers.find((p) => p.post.id === dataSuppliers[0].id)
-//console.log(postIguales);
-
+  //const postIguales = dataSuppliers.find((p) => p.post.id === dataSuppliers[0].id)
+  //console.log(postIguales);
 
   const envioCategoria = (value) => {
     setSelectedCategory(value);
@@ -69,9 +69,10 @@ console.log(filteredPosts);
     setSelectedOccupations(value);
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     const imageUrls = await uploadFiles2(data.images);
-
     const newData = {
       title: data.title,
       image: imageUrls,
@@ -79,105 +80,114 @@ console.log(filteredPosts);
       ProfesionalId: session.id,
       category: selectedCategory,
       ocupation: selectedOccupations,
+      id: id,
     };
 
-    //console.log(newData);
+    console.log(newData);
     dispatch(updatePosts(newData));
+    navigate("/dashboardSuppliers");
   };
 
   return (
     <Flex
-      minH="100vh"
-      align="center"
-      justify="center"
-      bg={useColorModeValue("gray.800", "gray.800")}
+    minH="100vh"
+    align="center"
+    justify="center"
+    bg={useColorModeValue("gray.800", "gray.800")}
+  >
+    <Box
+      rounded="lg"
+      bg={useColorModeValue("blackAlpha.800", "gray800")}
+      boxShadow="lg"
+      p={8}
+      color="gray.300"
+      width={{ base: "90%", sm: "80%", md: "70%", lg: "50%" }}
     >
-      <Box
-        rounded="lg"
-        bg={useColorModeValue("blackAlpha.800", "gray800")}
-        boxShadow="lg"
-        p={8}
-        color="gray.300"
-        width="500px"
-      >
-        <Stack spacing={4}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
-              <FormLabel>Titulo</FormLabel>
-              <Input
-                type="text"
-                {...register("title", {
-                  required: "El campo nombre es requerido",
-                })}
-              />
-              {errors.title && (
-                <span style={{ color: "red" }}>{errors.title.message}</span>
-              )}
-            </FormControl>
+      <Stack spacing={4}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl>
+            <FormLabel>Titulo</FormLabel>
+            <Input
+              type="text"
+              {...register("title", {
+                required: "El campo nombre es requerido",
+              })}
+            />
+            {errors.title && (
+              <span style={{ color: "red" }}>{errors.title.message}</span>
+            )}
+          </FormControl>
 
-            <FormControl>
-              <FormLabel>Fotos de trabajos</FormLabel>
-              <Input
-                type="file"
-                multiple // Allow multiple file selection
-                {...register("images", {
-                  required: "Solo se permiten archivos de imagen JPEG o PNG",
-                  validate: {
-                    isImage: (value) => {
-                      if (value) {
-                        const acceptedFormats = [".jpg", ".jpeg", ".png"];
-                        for (const file of value) {
-                          const fileExtension = file.name.substring(
-                            file.name.lastIndexOf(".")
-                          );
-                          if (!acceptedFormats.includes(fileExtension)) {
-                            return false;
-                          }
+          <FormControl>
+            <FormLabel>Fotos de trabajos</FormLabel>
+            <Input
+              type="file"
+              multiple // Allow multiple file selection
+              {...register("images", {
+                required: "Solo se permiten archivos de imagen JPEG o PNG",
+                validate: {
+                  isImage: (value) => {
+                    if (value) {
+                      const acceptedFormats = [".jpg", ".jpeg", ".png"];
+                      for (const file of value) {
+                        const fileExtension = file.name.substring(
+                          file.name.lastIndexOf(".")
+                        );
+                        if (!acceptedFormats.includes(fileExtension)) {
+                          return false;
                         }
                       }
-                      return true;
-                    },
+                    }
+                    return true;
                   },
-                })}
-              />
-              {errors.images && (
-                <span style={{ color: "red" }}>{errors.images.message}</span>
-              )}
-            </FormControl>
+                },
+              })}
+            />
+            {errors.images && (
+              <span style={{ color: "red" }}>{errors.images.message}</span>
+            )}
+          </FormControl>
 
-            <FormControl>
-              <FormLabel>Categorías</FormLabel>
-              <SelectCategories
-                fnSelectCategory={envioCategoria}
-                fnSelectOcupation={envioOcupaciones}
-              />
-            </FormControl>
+          <FormControl>
+            <FormLabel>Categorías</FormLabel>
+            <SelectCategories
+              fnSelectCategory={envioCategoria}
+              fnSelectOcupation={envioOcupaciones}
+            />
+          </FormControl>
 
-            <FormControl>
-              <FormLabel>Descripcion Trabajo</FormLabel>
-              <Textarea
-                type="text"
-                {...register("content", {
-                  required: "El campo es requerido",
-                  maxLength: {
-                    value: 250,
-                    message:
-                      "La descripción no puede tener más de 250 caracteres",
-                  },
-                })}
-              />
-              {errors.content && (
-                <span style={{ color: "red" }}>{errors.content.message}</span>
-              )}
+          <FormControl>
+            <FormLabel>Descripcion Trabajo</FormLabel>
+            <Textarea
+              type="text"
+              {...register("content", {
+                required: "El campo es requerido",
+                maxLength: {
+                  value: 250,
+                  message:
+                    "La descripción no puede tener más de 250 caracteres",
+                },
+              })}
+            />
+            {errors.content && (
+              <span style={{ color: "red" }}>{errors.content.message}</span>
+            )}
 
-              <Button size="lg" bg="grey.400" my={2} marginTop="5">
-                Actualizar
-              </Button> 
-            </FormControl>
-          </form>
-        </Stack>
-      </Box>
-    </Flex>
+            <Button
+              size="lg"
+              bg="grey.400"
+              color="white"
+              _hover={{ bg: "grey.500" }}
+              type="submit"
+              my={2}
+            >
+              Actualizar
+            </Button>
+          </FormControl>
+        </form>
+      </Stack>
+    </Box>
+  </Flex>
   );
 }
 
