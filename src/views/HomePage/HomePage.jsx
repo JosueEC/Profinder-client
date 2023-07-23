@@ -27,7 +27,7 @@ const HomePage = () => {
   
 
   return (
-    <Box height="100vh" width="100vw" backgroundColor={backgroundColor}>
+    <Box height="100vh" width="100%" backgroundColor={backgroundColor}>
       <Box
         display="flex"
         flexDirection="column"
