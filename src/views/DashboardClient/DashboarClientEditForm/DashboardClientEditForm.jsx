@@ -5,7 +5,7 @@ import SidebarClient from '../../../components/DashboardClient/SidebarClient/Sid
 
 const DashboardClientEditForm = () => {
   return (
-    <div>
+    
       
       
       <Flex>
@@ -13,7 +13,7 @@ const DashboardClientEditForm = () => {
         <Spacer  />
         <EditClient/>
       </Flex>
-    </div>
+    
   );
 };
 
