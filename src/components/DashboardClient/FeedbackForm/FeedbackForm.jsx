@@ -121,7 +121,7 @@ function FeedbackForm() {
               </Flex>
               <Flex alignItems="center">
                 <CheckIcon color="green.500" mr={2} />
-                <Text>Luego, escoge la calificación de "Malo" a "Excelente".</Text>
+                <Text>Luego, escoge la calificación de Malo a Excelente.</Text>
               </Flex>
               <Flex alignItems="center">
                 <CheckIcon color="green.500" mr={2} />
