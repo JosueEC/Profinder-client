@@ -20,7 +20,6 @@ export default function HowItWorks() {
   const finderTextColor = useColorModeValue('teal.500', 'teal.400');
 
   // Set the border color for Finder in dark mode
-  const finderBorderColor = colorMode === 'dark' ? 'teal.500' : 'teal.400';
 
   // Definir el color de fondo según el modo de color
   const backgroundColor = colorMode === 'dark' ? 'gray.900' : 'gray.400';
