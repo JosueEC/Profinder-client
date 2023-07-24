@@ -174,7 +174,7 @@ function FormProvider() {
         boxShadow="lg"
         p={8}
         color="gray.300"
-        width="500px"
+      
         width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}>
           
         <Stack spacing={4} >
