@@ -15,9 +15,12 @@ import {
   Grid,
   Button,
   Flex,
-  useColorModeValue,
   Stack,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
@@ -35,22 +38,6 @@ const PostsSuppliers = () => {
     dispatch(getPostProfesional());
   }, [dispatch]);
 
-  const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => {
-      const imageCount = filteredPosts[0].posts[0].image.length;
-      const nextIndex = (prevIndex + 1) % imageCount;
-      return nextIndex;
-    });
-  };
-
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => {
-      const imageCount = filteredPosts[0].posts[0].image.length;
-      const prevIndexValue = (prevIndex - 1 + imageCount) % imageCount;
-      return prevIndexValue;
-    });
-  };
-
   const handleToggleContent = () => {
     setShowFullContent((prevValue) => !prevValue);
   };
@@ -65,6 +52,14 @@ const PostsSuppliers = () => {
     } catch (error) {
       console.error("Error al eliminar el post:", error);
     }
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   return (
@@ -86,12 +81,12 @@ const PostsSuppliers = () => {
               overflow={"hidden"}
               p={6}
               marginLeft="10px"
-              bg="gray.200"
+              bg={useColorModeValue("blackAlpha.800", "gray.800")}
             >
               <Box justifyContent="center" marginTop="5">
                 {/* Título del post */}
                 <Text
-                  color={"green.500"}
+                  color={"teal.400"}
                   textTransform={"uppercase"}
                   fontWeight={700}
                   fontSize={"xl"}
@@ -102,51 +97,24 @@ const PostsSuppliers = () => {
               </Box>
 
               <Box justifyContent="center">
-                {/* Imagen actual */}
-                <Grid
-                  justifyContent="center"
-                  templateColumns="repeat(2, 1fr)"
-                  gap={2}
-                  alignItems="center"
-                >
-                  <Image
-                    justifyContent="center"
-                    src={post.image[currentImageIndex]}
-                    alt={`Image ${currentImageIndex}`}
-                    boxSize="300px"
-                    maxW="300px"
-                    maxH="300px"
-                    objectFit="contain"
-                    // gridColumn="1 / span 3"
-                    // color="black"
-                    // layout="fill"
+                <Slider {...settings}>
+                  {post.image.map((img, index) => (
+                    <Image
+                      key={index}
+                      justifyContent="center"
+                      src={img}
+                      alt={`Image ${index}`}
+                      boxSize={{ base: "300px", md: "auto" }}
+                      maxW={{ base: "300px", md: "100%" }}
+                      maxH="300px"
+                      objectFit="contain"
+                      borderRadius="xl"
+                      marginTop="5"
+                      bg="gray.800"
+                    />
+                  ))}
+                </Slider>
 
-                    borderRadius="lg"
-                    marginTop="5"
-                    marginLeft="10px"
-                  />
-                  <Box>
-                    <Button
-                      onClick={handlePrevImage}
-                      size="sm"
-                      fontSize="xl"
-                      marginTop="5"
-                    >
-                      &lt;
-                    </Button>
-                    <Text fontSize="sm" color={"gray.500"} marginTop="5">
-                      Imagen {currentImageIndex + 1} de {post.image.length}
-                    </Text>
-                    <Button
-                      onClick={handleNextImage}
-                      size="sm"
-                      fontSize="xl"
-                      marginTop="5"
-                    >
-                      &gt;
-                    </Button>
-                  </Box>
-                </Grid>
                 {/* Botón Leer más / Ver menos */}
                 {post.content.length > 100 && (
                   <Button
@@ -154,6 +122,9 @@ const PostsSuppliers = () => {
                     size="sm"
                     mt={2}
                     onClick={handleToggleContent}
+                    bg="teal.400"
+                    color="white"
+                    _hover={{ bg: "teal.500" }}
                   >
                     {showFullContent ? "Ver menos" : "Leer más"}
                   </Button>
@@ -166,16 +137,18 @@ const PostsSuppliers = () => {
                     : post.content.substring(0, 100)}
                 </Text>
               </Box>
-              <Box justifyContent="center">
+              <Box justifyContent="flex-end">
                 <Link to={`/dashboardSuppliers/updatepost/${post.id}`}>
-                  <EditIcon cursor="pointer" bg="red" />
+                  <EditIcon cursor="pointer" bg="gray.500" />
                 </Link>
                 <DeleteIcon
                   cursor="pointer"
                   onClick={() => handleDeletePost(post.id)}
-                  color="red.500"
+                  color="gray.500"
                   w={6}
                   h={6}
+                  ml={2}
+                  p={1}
                 />
               </Box>
             </Box>
