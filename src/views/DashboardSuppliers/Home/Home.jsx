@@ -27,7 +27,6 @@ import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
-import Footer from "../../../components/Footer/Footer";
 
 const linkStyle = {
   display: "block",
