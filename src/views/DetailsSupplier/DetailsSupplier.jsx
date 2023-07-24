@@ -58,16 +58,14 @@ const ArticleList = () => {
     <Container
       key={profesionalId.id}
       color="gray.300"
-      bg={useColorModeValue("gray.800", "gray.800")}
+      bg={useColorModeValue("gray.800", "gray.500")}
       maxW="100%"
       py="5"
       px={{ base: "8", md: "8", lg: "10rem" }}
       align={"center"}
       justify={"center"}
-      
     >
       <ScaleFade initialScale={0.9} in>
-       
         <Flex
           direction={{ base: "column", md: "row" }}
           justify="center"
@@ -96,17 +94,21 @@ const ArticleList = () => {
                 rounded={"md"}
                 boxShadow={"2xl"}
                 align={"center"}
-                bg="gray.900"
                 _hover={hoverStyles}
                 mb={{ base: "3rem", md: "0" }}
                 flex={{ base: "1", md: "2" }}
+                bg={useColorModeValue("blackAlpha.800", "gray.800")}
               >
-                <Avatar
+                <Image
                   src={image || NoAvatar}
                   loading="lazy"
-                  alt="Avatar"
-                  mb={4}
-                  pos="relative"
+                  alt="Image"
+                  boxSize={{ base: "300px", md: "auto" }}
+                  maxW={{ base: "300px", md: "100%" }}
+                  maxH="300px"
+                  objectFit="contain"
+                  marginTop="5"
+                  borderRadius="10px"
                 />
                 <Stack
                   direction="column"
@@ -163,7 +165,7 @@ const ArticleList = () => {
           </Heading>
           <Divider my={2} />
           <Wrap spacing="50px" justify="center">
-            <SupplierPost id={profesionalId.id}  key={profesionalId.id}/>
+            <SupplierPost id={profesionalId.id} key={profesionalId.id} />
           </Wrap>
         </Flex>
       </ScaleFade>
