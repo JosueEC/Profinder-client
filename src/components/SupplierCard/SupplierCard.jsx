@@ -15,7 +15,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Tag from "../../singleComponents/Tag";
 import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
-import StarRating from "./StarRating";
+import StarRating from "./StartRating";
 
 import { useSessionState } from "./../../services/zustand/useSession";
 
