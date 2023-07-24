@@ -430,19 +430,17 @@ console.log(id);
 
 //Action para "eliminar el post"
 const deletePost = (id) => async (dispatch) => {
-  const URL = 'https://backprofinder-production.up.railway.app/postProfesional';
-
+  const URL = `https://backprofinder-production.up.railway.app/postProfesional/delete/${id}`;
   try {
     if (!id) {
       throw new Error("ID inválido");
     }
-    const response = await axios.put(`${URL}/delete/${id}`);
-    console.log(response.data);
+    const response = await axios.put(URL);
+    //console.log(response.data);
     dispatch({
       type: DELETE_POST,
-      payload: { postId: id }, // paso directamente el id
+      payload: { postId: id },
     });
-    window.location.reload();
     return response;
   } catch (error) {
     console.error(error);
@@ -450,35 +448,7 @@ const deletePost = (id) => async (dispatch) => {
 };
 
 
-// const deletePosts = (info) => {
-//   // const URL = `${API.LOCALHOST}/postprofesional`
-//   const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
 
-//   return async function () {
-//     try {
-//       // Verificación
-//       if (
-//         info.title === "" ||
-//         info.ocupation === "" ||
-//         info.category === "" ||
-//         info.image === "" ||
-//         info.ProfesionalId === "" ||
-//         info.content === 0
-//       ) {
-//         throw new Error("Faltan datos");
-//       }
-
-//       await axios.put(URL, info, {
-//         headers: { "Access-Control-Allow-Origin": "*" },
-//       });
-//       alert("Publicacion Exitosa!")
-     
-//     } catch (error) {
-//       console.error(error.response.data.error);
-//       alert(`${error.response.data.error}`);
-//     }
-//   };
-// };
 
 export {
   getAllSuppliers,
