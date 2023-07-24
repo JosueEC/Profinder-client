@@ -14,6 +14,8 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 
 import SelectCategories from "../../singleComponents/SelectCategories";
@@ -50,13 +52,14 @@ function FormServicio() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedOccupations, setSelectedOccupations] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const dataSuppliers = useSelector((state) => state.profesionales);
   // const userSession = JSON.parse(localStorage.getItem("userSession"));
   const session = useSessionState((state) => state.session);
 
   const profile = dataSuppliers.find((user) => user.id === session.id);
- // console.log(profile.active);
+  // console.log(profile.active);
   const [value, setValue] = useState("");
 
   const envioCategoria = (value) => {
@@ -82,15 +85,16 @@ function FormServicio() {
     console.log(newData);
     dispatch(postServicio(newData));
     reset();
+    setIsSubmitted(true);
   };
 
   return (
-   
     <Flex
       minH="100vh"
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
+      width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
     >
       <Box
         rounded="lg"
@@ -145,7 +149,7 @@ function FormServicio() {
               )}
             </FormControl>
 
-            <FormControl>
+            <FormControl w="100%">
               <FormLabel>Categorías</FormLabel>
               <SelectCategories
                 fnSelectCategory={envioCategoria}
@@ -179,6 +183,7 @@ function FormServicio() {
                     type="submit"
                     size="lg"
                     marginTop="5"
+                    w="100%"
                   >
                     Enviar
                   </Button>
@@ -210,11 +215,18 @@ function FormServicio() {
                   type="submit"
                   size="lg"
                   marginTop="5"
+                  w="100%"
                 >
                   Suscribite a premium
                 </Button>
               </Link>
             ) : null}
+          {isSubmitted && (
+            <Alert status="success"  size="sm" maxW="xs" borderRadius="md"color="gray.800" mt={4} bg= "gray.200" >
+              <AlertIcon  />
+              ¡Publicado!
+            </Alert>
+          )}
           </form>
         </Stack>
       </Box>

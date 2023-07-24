@@ -38,13 +38,15 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation,
   }, [])
 
   return (
-    <Stack direction='row' spacing={6}>
+    <Stack direction='row' spacing={6} width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}>
       <DropdownMenu
+      width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
         titleMenu={titleCategory || categoryName}
         menuItems={[{ name: 'Todas' }, ...categories]}
         onClick={handleClickCategory}
       />
       <DropdownMenu
+      width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
         titleMenu={titleOcupation || ocupationName}
         menuItems={ocupationsArray}
         onClick={handleClickOcupation}
