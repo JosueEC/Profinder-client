@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Box,
   Heading,
@@ -75,6 +75,20 @@ const ArticleList = () => {
           maxW={{ base: "full", md: "900px" }}
           w={{ base: "full", md: "900px" }}
         >
+          <Box>
+            <Link to="/categories">
+              <Button
+                bg="teal.400"
+                color="white"
+                _hover={{ bg: "teal.500" }}
+                size="lg"
+                marginTop="5"
+                w="100%"
+              >
+                Volver
+              </Button>
+            </Link>
+          </Box>
           {profesionalId.map(
             ({
               id,
@@ -160,7 +174,7 @@ const ArticleList = () => {
           justify="center"
           gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
         >
-          <Heading as="h2" textTransform="uppercase">
+          <Heading as="h2" textTransform="uppercase" color="blackAlpha.800">
             Trabajos Recientes
           </Heading>
           <Divider my={2} />
