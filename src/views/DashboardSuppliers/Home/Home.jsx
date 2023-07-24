@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import {
   Box,
   Flex,
@@ -27,6 +27,7 @@ import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
+import Footer from "../../../components/Footer/Footer";
 
 const linkStyle = {
   display: "block",
@@ -37,6 +38,12 @@ const linkStyle = {
 const DashboardSuppliers = () => {
   const [currentPage, setCurrentPage] = useState("Inicio");
   const { isOpen, onOpen, onClose } = useDisclosure();
+ // const [showFooter, setShowFooter] = useState(false);
+
+    const currentPath = window.location.pathname;
+//    setShowFooter(currentPath !== "/dashboardSuppliers"); 
+
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -274,10 +281,10 @@ const DashboardSuppliers = () => {
 
         {/* Contenido de la página */}
         {currentPage === "Inicio" && (
-          <Flex direction="column" alignItems="center" flex="1">
+          <Flex direction="column" alignItems="center" >
             <Heading
               as="h1"
-              size={isTabletOrMobile ? "lg" : "md"}
+              size={isTabletOrMobile ? "lg" : "sm"}
               my={4}
               color="white"
             >
