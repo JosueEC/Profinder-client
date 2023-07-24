@@ -17,7 +17,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-
+ //!ULTIMO CAMBIO
 // Función auxiliar para obtener el ID de forma asíncrona
 async function fetchPostId() {
   // Simulamos una pausa con setTimeout (puedes reemplazarlo con tu lógica de obtención de ID asincrónico)
