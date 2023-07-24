@@ -68,12 +68,12 @@ const peopleData = [
   
   }, {
     name: 'Nathaly Quiva',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
+    email: 'nathalyquiva2@gmail.com',
+    linkedinURL: 'https://www.linkedin.com/in/nathalyquiva/',
     githubURL: 'https://github.com/NathalyQuiva',
-    title: 'Software Engineer',
+    title: 'Desarrollador FullStack y Máster en Ingeniería',
     country: 'Colombia',
-    imageUrl: 'path/to/john_doe_image.jpg',
+    imageUrl: 'https://media.licdn.com/dms/image/D4E03AQEurNuSEj2-Ug/profile-displayphoto-shrink_200_200/0/1690206522703?e=1695859200&v=beta&t=JSmlkhkSnSpGgq2CqIL4gpxh8l9hmA6gz6JZ0Gqs15g',
     
   }
  
