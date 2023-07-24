@@ -3,7 +3,7 @@ import { Box, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, A
 
 const HelpClient = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: 'gray.400', dark: 'gray.900' };
+  const bgColor = { light: 'gray.400', dark: 'gray.800' };
   const titleColor = { light: 'gray.100', dark: 'gray.100' };
   const descriptionColor = { light: 'blue.900', dark: 'blue.400' };
 
