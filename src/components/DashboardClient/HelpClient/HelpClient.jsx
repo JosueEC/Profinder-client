@@ -4,11 +4,17 @@ import { Box, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, A
 const HelpClient = () => {
   const { colorMode } = useColorMode();
   const bgColor = { light: 'gray.400', dark: 'gray.900' };
+  const titleColor = { light: 'gray.100', dark: 'gray.100' };
+  const descriptionColor = { light: 'blue.900', dark: 'blue.400' };
+
 
   return (
     <Box width="100%" bg={bgColor[colorMode]} border="1px solid black" borderRadius="md" p={4}>
-      <Text fontSize="xl" fontWeight="bold" textAlign="center" color="teal.500">
+      <Text fontSize="3xl" fontWeight="bold" textAlign="center" color={titleColor[colorMode]}>
         Ayuda y Q & A
+      </Text>
+      <Text fontSize="md" textAlign="center" color={descriptionColor[colorMode]} my={4}>
+        Bienvenidos a la sección ayuda y Q&A, aquí podrás despejar tus dudas más frecuentes.
       </Text>
       <Accordion allowMultiple maxH={{ base: "60vh", md: "80vh", lg: "none" }}>
         {/* Pregunta 1 */}
