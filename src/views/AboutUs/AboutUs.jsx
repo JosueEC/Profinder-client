@@ -10,7 +10,7 @@ const peopleData = [
     githubURL: ' https://github.com/johpaz/',
     title: 'Software Engineer',
     country: ' Colombia',
-    imageUrl: 'https://media.licdn.com/dms/image/D4E35AQEsj0xPQRTxDw/profile-framedphoto-shrink_800_800/0/1687668913157?e=1690812000&v=beta&t=SRqgpd0YlzwVlLc5cYoK9iF-TSjNInBPtrkIFogrrDU',
+    imageUrl: 'https://media.licdn.com/dms/image/D4E03AQEkKxpfNHYmYQ/profile-displayphoto-shrink_800_800/0/1665264047527?e=1695859200&v=beta&t=vcGjlxunEMY0Y2BeUFflgz5Z7GmSUsYGma3a6Qs0mI0',
     
   }, {
     name: 'Christian Valentin Maidana',
@@ -19,7 +19,7 @@ const peopleData = [
     githubURL: ' https://github.com/Christian5262',
     title: 'Software Engineer',
     country: 'Argentina',
-    imageUrl: 'https://media.licdn.com/dms/image/D4D35AQFkqPI7qoEOcQ/profile-framedphoto-shrink_800_800/0/1690153548113?e=1690812000&v=beta&t=vP7lLBizA1b489C4pd8SZYKkOn2ORbJkLKW5wjvLRkc',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D03AQEPHQvfl3lIgw/profile-displayphoto-shrink_800_800/0/1690153547052?e=1695859200&v=beta&t=6J1VfkyQgyoFN8CqJPmm8UDT-d4QiemEUolOoZ6K028',
     
   }, {
     name: 'Josue Evangelista Cruz',
@@ -64,7 +64,7 @@ const peopleData = [
     githubURL: 'https://github.com/agustinboasso',
     title: 'Software Engineer',
     country: 'Argentina',
-    imageUrl: 'https://media.licdn.com/dms/image/D4D35AQE7AZs5NFxCgg/profile-framedphoto-shrink_200_200/0/1670810748548?e=1690812000&v=beta&t=PwNrFJr6F_Gjtscoz_MgsNsiYwwGFOTg3OrpfN4EK4w',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D03AQEO8Bj8Ae5HDQ/profile-displayphoto-shrink_800_800/0/1670810727142?e=1695859200&v=beta&t=OOt7RIfxK3MhWQ6E-OVZdbMt9FGNERfa4VTU9Xm7C0k',
   
   }, {
     name: 'Nathaly Quiva',
