@@ -112,7 +112,7 @@ export default function TestimonialCarrousel() {
             <TestimonialAvatar
               src='https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               name='Jane Cooper'
-              title='CEO at ABC Corporation'
+              title='Usuaria de Mexico'
             />
           </Testimonial>
           <Testimonial>
@@ -128,7 +128,7 @@ export default function TestimonialCarrousel() {
             <TestimonialAvatar
               src='https://vivolabs.es/wp-content/uploads/2022/03/perfil-hombre-vivo.png'
               name='Jim Morrison'
-              title='CEO at ABC Corporation'
+              title='Usuario de Colombia'
             />
           </Testimonial>
           <Testimonial>
@@ -143,7 +143,7 @@ export default function TestimonialCarrousel() {
             <TestimonialAvatar
               src='https://plus.unsplash.com/premium_photo-1687832783320-35671afbf484?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80'
               name='Soledad Silveira'
-              title='CEO at ABC Corporation'
+              title='Usuaria de Argentina'
             />
           </Testimonial>
         </Stack>
