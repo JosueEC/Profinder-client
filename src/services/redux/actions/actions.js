@@ -403,11 +403,10 @@ const updateFeedbackError = (error) => {
 };
 
 //!actions para actualizar post
-const updatePosts = (info) => {
-  const URL =
-    "https:backprofinder-production.up.railway.app/postProfesional/:id";
-  console.log(info);
-  return async function(dispatch) {
+const updatePosts = (info, id) => {
+  const URL = `https:backprofinder-production.up.railway.app/postProfesional/${id}`;
+console.log(id);
+  return async function (dispatch) {
     try {
       await axios.put(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -425,19 +424,17 @@ const updatePosts = (info) => {
 
 //Action para "eliminar el post"
 const deletePost = (id) => async (dispatch) => {
-  const URL = "https://backprofinder-production.up.railway.app/postProfesional";
-
+  const URL = `https://backprofinder-production.up.railway.app/postProfesional/delete/${id}`;
   try {
     if (!id) {
       throw new Error("ID inválido");
     }
-    const response = await axios.put(`${URL}/delete/${id}`);
-    console.log(response.data);
+    const response = await axios.put(URL);
+    //console.log(response.data);
     dispatch({
       type: DELETE_POST,
-      payload: { postId: id }, // paso directamente el id
+      payload: { postId: id },
     });
-    window.location.reload();
     return response;
   } catch (error) {
     console.error(error);
@@ -466,7 +463,7 @@ const deletePost = (id) => async (dispatch) => {
 //         headers: { "Access-Control-Allow-Origin": "*" },
 //       });
 //       alert("Publicacion Exitosa!")
-
+     
 //     } catch (error) {
 //       console.error(error.response.data.error);
 //       alert(`${error.response.data.error}`);

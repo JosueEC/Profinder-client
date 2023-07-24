@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getPostProfesional,
   deletePost,
+
 } from "../../../services/redux/actions/actions";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useNavigate, Link } from "react-router-dom";
@@ -23,8 +24,7 @@ const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
- // console.log(filteredPosts);
-
+  // console.log(filteredPosts);
 
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -53,29 +53,27 @@ const PostsSuppliers = () => {
   const handleToggleContent = () => {
     setShowFullContent((prevValue) => !prevValue);
   };
-  
+
   const navigate = useNavigate();
 
-  const handleEditPost = (postId) => {
-   // console.log("ID del posteo a editar:", postId);
-    navigate(`/dashboardSuppliers/updatepost/${postId}`);
-  };
+
 
   const handleDeletePost = async (postId) => {
     console.log("ID del posteo a eliminar:", postId);
     try {
       await dispatch(deletePost(postId));
-      navigate("/dashboardSuppliers"); 
+      navigate("/dashboardSuppliers");
     } catch (error) {
       console.error("Error al eliminar el post:", error);
     }
   };
 
+
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
       {/* <Flex > */}
       <Grid
-        templateColumns={["1fr", "1fr", "1fr", "repeat(3, 1fr)"]} 
+        templateColumns={["1fr", "1fr", "1fr", "repeat(3, 1fr)"]}
         gap={5}
         justifyContent="center"
       >
@@ -85,7 +83,6 @@ const PostsSuppliers = () => {
               key={post.id}
               maxW={"500px"}
               w={"full"}
-              bg={useColorModeValue("white", "gray.900")}
               boxShadow={"2xl"}
               rounded={"md"}
               overflow={"hidden"}
@@ -171,17 +168,17 @@ const PostsSuppliers = () => {
                 </Text>
               </Box>
               <Box justifyContent="center">
-      <Link to={`/dashboardSuppliers/updatepost/${post.id}`}>
-        <EditIcon cursor="pointer" bg="red" />
-      </Link>
-      <DeleteIcon
-        cursor="pointer"
-        onClick={() => handleDeletePost(post.id)}
-        color="red.500"
-        w={6}
-        h={6}
-      />
-    </Box>
+                <Link to={`/dashboardSuppliers/updatepost/${post.id}`}>
+                  <EditIcon cursor="pointer" bg="red" />
+                </Link>
+                <DeleteIcon
+                  cursor="pointer"
+                  onClick={() => handleDeletePost(post.id)}
+                  color="red.500"
+                  w={6}
+                  h={6}
+                />
+              </Box>
             </Box>
           ))
         )}

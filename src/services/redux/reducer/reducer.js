@@ -121,10 +121,9 @@ const reducer = (state = initialState, action) => {
   
       case DELETE_POST: {
         const { postId } = action.payload;
-  
         const updatedProfesionalesForDelete = state.profesionales.map(
           (profesional) => {
-            if (profesional.id === postId) {
+            if (profesional.posts.find((post) => post.id === postId)) {
               const updatedPosts = profesional.posts.filter(
                 (post) => post.id !== postId
               );

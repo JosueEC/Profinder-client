@@ -19,7 +19,6 @@ import FeedbackForm from "./components/Feedback/FormFeedback.jsx";
 import LoggedNavbar from "./components/LoggedNavbar/LoggedNavbar.jsx";
 import Navbar from "./components/navBar/Navbar";
 import DashboardClientEditForm from "./views/DashboardClient/DashboarClientEditForm/DashboardClientEditForm";
-
 import DashboardClientTopPro from "./views/DashboardClient/DashboardClientTopPro/DashboardClientTopPro";
 import DashboardClientCategories from "./views/DashboardClient/DashboardClientCategories/DashboardClientCategories";
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
@@ -84,7 +83,7 @@ function App() {
         />
          <Route
           exact
-          path="dashboardSuppliers/updateprofile"
+          path="dashboardSuppliers/updateprofile/:id"
           element={<FormUpdateProfile />}
         />
         
