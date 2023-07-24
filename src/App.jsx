@@ -2,7 +2,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useSessionState } from "./services/zustand/useSession";
-import FormUpdate from "../src/views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import Categories from "./views/Categories/Categories";
 import HomePage from "../src/views/HomePage/HomePage";
 import FromProvider from "./views/FromProvider/FromProvider";
@@ -20,7 +19,6 @@ import FeedbackForm from "./components/Feedback/FormFeedback.jsx";
 import LoggedNavbar from "./components/LoggedNavbar/LoggedNavbar.jsx";
 import Navbar from "./components/navBar/Navbar";
 import DashboardClientEditForm from "./views/DashboardClient/DashboarClientEditForm/DashboardClientEditForm";
-import DashboardClientFav from "./views/DashboardClient/DashboardClientFav/DashboardClientFav";
 import DashboardClientTopPro from "./views/DashboardClient/DashboardClientTopPro/DashboardClientTopPro";
 import DashboardClientCategories from "./views/DashboardClient/DashboardClientCategories/DashboardClientCategories";
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
@@ -29,7 +27,11 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
-import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+//import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
+import SupplierPost from "./components/SupplierPost/SupplierPost";
+import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
+import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
+import AboutUs from "./views/AboutUs/AboutUs";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -44,18 +46,20 @@ function App() {
     }
   }, []);
   const isHomePage = location.pathname === "/";
+  const isDashboardSuppliers = location.pathname.includes("/dashboardSuppliers");
   return (
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
       <Routes>
         <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/feedback" element={<FeedbackForm />} />
-        <Route exact path="/updateprofile" element={<FormUpdate />} />
         <Route exact path="/categories" element={<Categories />} />
         <Route exact path="/comofunciona" element={<HowDoesItWork />} />
         <Route exact path="/registerProvider" element={<FromProvider />} />
         <Route exact path="/registerCliente" element={<FormCliente />} />
         <Route exact path="/detail/:id" element={<DetailSupplier />} />
+        <Route exact path="/detail/suplier/:id" element={<SupplierPost />} />
         <Route exact path="/userLogin" element={<UserLogin />} />
         <Route exact path="/resetPassword" element={<ResetPassword />} />
         <Route exact path="/userRegister" element={<UserRegister />} />
@@ -77,9 +81,15 @@ function App() {
         />
         <Route
           exact
-          path="/dashboardSuppliers/createPost"
+          path="/dashboardSuppliers/publicaciones"
           element={<FormServicio />}
         />
+         <Route
+          exact
+          path="dashboardSuppliers/updateprofile/:id"
+          element={<FormUpdateProfile />}
+        />
+        
         <Route
           exact
           path="/dashboardSuppliers/pasarela"
@@ -87,7 +97,7 @@ function App() {
         />
         <Route
           exact
-          path="/dashboardSuppliers/viewPosts"
+          path="/dashboardSuppliers/nuevas-publicaciones"
           element={<PostsSuppliers />}
         />
         <Route
@@ -95,7 +105,12 @@ function App() {
           path="/dashboardSuppliers/help"
           element={<CustomChatBot />}
         />
-        <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} />
+                <Route
+          exact
+          path="/dashboardSuppliers/updatepost/:id"
+          element={<UpdatePost />}
+        />
+        {/* <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} /> */}
         {/* Dash cliente */}
         <Route exact path="/dashboardClient" element={<DashboardClient />} />
         <Route
@@ -103,11 +118,7 @@ function App() {
           path="/dashboardClient/editForm"
           element={<DashboardClientEditForm />}
         />
-        <Route
-          exact
-          path="/dashboardClient/favorites"
-          element={<DashboardClientFav />}
-        />
+    
         <Route
           exact
           path="/dashboardClient/recomended"
@@ -130,7 +141,7 @@ function App() {
           element={<DashboardClientHelp />}
         />
       </Routes>
-      {!isHomePage && <Footer />}
+      {!isHomePage && !isDashboardSuppliers && <Footer />}
     </div>
   );
 }
