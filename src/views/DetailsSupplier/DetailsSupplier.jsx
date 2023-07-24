@@ -14,12 +14,16 @@ import {
   Flex,
   ScaleFade,
   Center,
+  Avatar,
+  IconButton,
+  Tag,
 } from "@chakra-ui/react";
 import {
   FaUserAlt,
   FaRegPaperPlane,
   FaMailBulk,
   FaPhone,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../utils/customHooks/useFetch";
@@ -28,6 +32,9 @@ import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
 import InfoLabel from "../../singleComponents/InfoLabel";
 import SupplierPost from "../../components/SupplierPost/SupplierPost";
 import ClieProfChatBot from "./ChatClieProf";
+import StarRatingComponent from "react-star-rating-component";
+import { IconBase } from "react-icons/lib";
+import { AtSignIcon, CheckCircleIcon, CheckIcon } from "@chakra-ui/icons";
 
 const ArticleList = () => {
   const { id } = useParams();
@@ -49,7 +56,16 @@ const ArticleList = () => {
     return <h2>Cargando</h2>;
   }
 
-  const { name, email, image, ubication, years_exp, phone } = data || {};
+  const {
+    name,
+    email,
+    image,
+    ubication,
+    years_exp,
+    phone,
+    professions,
+    rating,
+  } = data || {};
 
   return (
     <Container
@@ -78,14 +94,13 @@ const ArticleList = () => {
             mb={{ base: "3rem", md: "0" }}
             flex={{ base: "1", md: "2" }}
           >
-            <Image
-              src={image}
-              borderRadius="50%"
-              boxSize="350px"
-              fallback={NoAvatar}
+            <Avatar
+              size="10xl"
+              src={image || NoAvatar}
               loading="lazy"
-              alt="avatar supplier"
-              objectFit="contain"
+              alt="Avatar"
+              mb={4}
+              pos="relative"
             />
             <Stack
               direction="column"
@@ -101,8 +116,31 @@ const ArticleList = () => {
               <Heading as="h1" textTransform="uppercase">
                 {name || "Sin nombre"}
               </Heading>
+              <Box>
+                <StarRatingComponent
+                  name="rating"
+                  starCount={5}
+                  value={rating}
+                  starColor="#FFD700"
+                  emptyStarColor="#CCCCCC"
+                  editing={false}
+                />
+              </Box>
+              <Text  color="gray.500" mb={4} fontSize="16px">
+                <Icon as={FaMapMarkerAlt} mr={2} color="teal.400" />
+                {`${ubication.country}, ${ubication.location}` ||
+                  "Sin ubicacion"}
+              </Text>
               <InfoLabel textLabel={data?.genre} iconLabel={FaUserAlt} />
-              <InfoLabel textLabel={years_exp} iconLabel={FaRegPaperPlane} />
+              <Box>
+                <Text fontSize="16px">Años de experiencia:</Text>
+                <InfoLabel
+                  fontSize="20px"
+                  textLabel={years_exp}
+                  iconLabel={CheckIcon}
+                />
+              </Box>
+
               <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
               <InfoLabel textLabel={phone} iconLabel={FaPhone} />
               <Button

@@ -15,7 +15,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Tag from "../../singleComponents/Tag";
 import NoAvatar from "../../assets/defaultImages/sinfoto.webp";
-import StarRating from "./StartRating";
+import StarRatingComponent from "react-star-rating-component";
 
 import { useSessionState } from "./../../services/zustand/useSession";
 
@@ -26,9 +26,11 @@ export default function SocialProfileSimple({
   image,
   ubication,
   professions,
-  rating,
+ rating
+ 
 }) {
   const session = useSessionState((state) => state.session);
+
   console.log(rating);
   return (
     <Box
@@ -52,10 +54,16 @@ export default function SocialProfileSimple({
       <Heading fontSize="2xl" fontFamily="body" color="gray.300">
         {name}
       </Heading>
-      <StarRating
-        rating={rating}
-        onChange={(newRating) => console.log(newRating)}
-      />
+      <Box>
+        <StarRatingComponent
+          name="rating"
+          starCount={5}
+          value={rating}
+          starColor="#FFD700"
+          emptyStarColor="#CCCCCC"
+          editing={false}
+        />
+      </Box>
 
       <Text fontWeight={600} color="gray.500" noOfLines={1}>
         <AtSignIcon mr={2} color="teal.400" />
