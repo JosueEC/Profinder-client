@@ -14,6 +14,7 @@ export default function Tag ({ textTag }) {
       bg={bgAccentElement}
       color={txtColor}
       fontWeight='400'
+      
     >
       {textTag}
     </Badge>

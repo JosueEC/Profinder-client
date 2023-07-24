@@ -15,6 +15,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Tag from '../../singleComponents/Tag'
 import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
+import StarRatingComponent from 'react-star-rating-component'
 
 import { useSessionState } from './../../services/zustand/useSession'
 
@@ -24,9 +25,13 @@ export default function SocialProfileSimple ({
   email,
   image,
   ubication,
-  professions
+  professions,
+  rating
+
 }) {
   const session = useSessionState((state) => state.session)
+
+  console.log(rating)
 
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
@@ -59,15 +64,19 @@ export default function SocialProfileSimple ({
       >
         {name}
       </Heading>
-      <Text
-        fontWeight={600}
-        color='gray.500'
-        noOfLines={1}
-      >
-        <AtSignIcon
-          mr={2}
-          color='teal.400'
+      <Box>
+        <StarRatingComponent
+          name='rating'
+          starCount={5}
+          value={rating}
+          starColor='#FFD700'
+          emptyStarColor='#CCCCCC'
+          editing={false}
         />
+      </Box>
+
+      <Text fontWeight={600} color='gray.500' noOfLines={1}>
+        <AtSignIcon mr={2} color='teal.400' />
         {email}
       </Text>
       <Text
@@ -111,7 +120,7 @@ export default function SocialProfileSimple ({
         align='center'
         justify='center'
       >
-        {session.status === true
+        {session.status === false
           ? (
             <Link to='/userLogin'>
               {' '}

@@ -11,7 +11,7 @@ import {
   GET_INFO_PROFESIONALS,
   POST_PROFESIONAL,
   DELETE_POST,
-  UPDATE_POST
+  UPDATE_POST,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -19,7 +19,7 @@ const getAllSuppliers = () => {
   // const URL = `${API.LOCALHOST}/profesional`
   const URL = `${API.DBONLINE}/profesional`;
 
-  return function (dispatch) {
+  return function(dispatch) {
     axios
       .get(URL)
       .then((response) => {
@@ -34,7 +34,7 @@ const getAllCategories = () => {
   // const URL = `${API.LOCALHOST}/category`
   const URL = `${API.DBONLINE}/category`;
 
-  return function (dispatch) {
+  return function(dispatch) {
     fetch(URL)
       .then((response) => response.json())
       .then((results) => {
@@ -53,7 +53,7 @@ const searchProfessionals = (name) => {
   // const URL = `${API.LOCALHOST}/ocupationsp/?name=${name}`
   const URL = `${API.DBONLINE}/ocupationsp?name=${name}`;
 
-  return function (dispatch) {
+  return function(dispatch) {
     if (name) {
       // Verificar si name no es undefined
       axios
@@ -97,7 +97,7 @@ const postServicio = (info) => {
   // const URL = `${API.LOCALHOST}/postprofesional`
   const URL = `${API.DBONLINE}/postprofesional`;
 
-  return async function () {
+  return async function() {
     try {
       // Verificación
       if (
@@ -114,11 +114,9 @@ const postServicio = (info) => {
       await axios.post(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
       });
-      alert("Publicacion Exitosa!")
-     
     } catch (error) {
       console.error(error.response.data.error);
-      // alert(`${error.response.data.error}`);
+      alert(`${error.response.data.error}`);
     }
   };
 };
@@ -134,7 +132,7 @@ const postProveedor = (info) => {
   // const URL = `${API.LOCALHOST}/profesional/${info.id}`
   const URL = `${API.DBONLINE}/profesional/${info.id}`;
 
-  return async function () {
+  return async function() {
     try {
       // Verificación
       if (
@@ -156,7 +154,6 @@ const postProveedor = (info) => {
       await axios.put(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
       });
-      
     } catch (error) {
       console.error(error.response.data.error);
       alert(`${error.response.data.error}`);
@@ -175,7 +172,7 @@ const postCliente = (info) => {
   // const URL = `${API.LOCALHOST}/client/${info.id}`
   const URL = `${API.DBONLINE}/client/${info.id}`;
 
-  return async function () {
+  return async function() {
     try {
       // Verificación
       if (
@@ -201,14 +198,14 @@ const loginSessionGoogle = () => {
   // const URL = `${API.LOCALHOST}/auth/google`
   const URL = `${API.DBONLINE}/auth/google`;
 
-  return async function () {
+  return async function() {
     await fetch(URL)
       .then((response) => {
-        if (!response.ok) console.info('google-auth')
+        if (!response.ok) console.info("google-auth");
       })
       .then((results) => {
         return results;
-      })
+      });
   };
 };
 
@@ -222,7 +219,7 @@ const getSessionUser = (dataSession) => {
     body: JSON.stringify(dataSession),
   };
 
-  return async function () {
+  return async function() {
     // const URL = `${API.LOCALHOST}/login`
     const URL = `${API.DBONLINE}/login`;
 
@@ -252,7 +249,7 @@ const postSessionUser = (dataSession) => {
   // const URL = `${API.LOCALHOST}/register`
   const URL = `${API.DBONLINE}/register`;
 
-  return async function () {
+  return async function() {
     try {
       const response = await fetch(URL, options);
       const data = await response.json();
@@ -271,10 +268,10 @@ const getProfesionals = () => {
   // const URL = `${API.LOCALHOST}/profesional`
   const URL = `${API.DBONLINE}/profesional`;
 
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let response = await axios.get(`${URL}`);
-    //  console.log(response.data);
+      //  console.log(response.data);
       if (response.data) {
         return dispatch({
           type: GET_INFO_PROFESIONALS,
@@ -293,7 +290,7 @@ const updateProfesionals = (data, id) => {
   // const URL = `${API.LOCALHOST}/profesional/${id}`
   const URL = `${API.DBONLINE}/profesional/${id}`;
 
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       const response = await axios.put(URL, data);
       if (response && response.data) {
@@ -316,7 +313,7 @@ const getAllClients = () => {
   // const URL = `${API.LOCALHOST}/client`
   const URL = `${API.DBONLINE}/client`;
 
-  return function (dispatch) {
+  return function(dispatch) {
     axios
       .get(URL)
       .then((response) => {
@@ -340,7 +337,7 @@ const updateClient = (clientId, newData) => {
   // const URL = `${API.LOCALHOST}/client/${newData.id}`
   const URL = `${API.DBONLINE}/client/${newData.id}`;
 
-  return function (dispatch) {
+  return function(dispatch) {
     axios
       .put(URL, newData)
       .then((response) => {
@@ -356,7 +353,7 @@ export const getPostProfesional = () => {
   // const URL = `${API.LOCALHOST}/profesional`
   const URL = `${API.DBONLINE}/profesional`;
 
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       const response = await axios.get(URL);
       dispatch({ type: POST_PROFESIONAL, payload: response.data });
@@ -411,22 +408,19 @@ const updatePosts = (info, id) => {
 console.log(id);
   return async function (dispatch) {
     try {
-    
       await axios.put(URL, info, {
-        
         headers: { "Access-Control-Allow-Origin": "*" },
       });
       dispatch({
         type: UPDATE_POST,
-        payload: { post: info }, 
+        payload: { post: info },
       });
       alert("Publicacion Actualizada!");
     } catch (error) {
       // ...
     }
   };
-}
-
+};
 
 //Action para "eliminar el post"
 const deletePost = (id) => async (dispatch) => {
@@ -449,8 +443,35 @@ const deletePost = (id) => async (dispatch) => {
   }
 };
 
+// const deletePosts = (info) => {
+//   // const URL = `${API.LOCALHOST}/postprofesional`
+//   const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
 
+//   return async function () {
+//     try {
+//       // Verificación
+//       if (
+//         info.title === "" ||
+//         info.ocupation === "" ||
+//         info.category === "" ||
+//         info.image === "" ||
+//         info.ProfesionalId === "" ||
+//         info.content === 0
+//       ) {
+//         throw new Error("Faltan datos");
+//       }
 
+//       await axios.put(URL, info, {
+//         headers: { "Access-Control-Allow-Origin": "*" },
+//       });
+//       alert("Publicacion Exitosa!")
+     
+//     } catch (error) {
+//       console.error(error.response.data.error);
+//       alert(`${error.response.data.error}`);
+//     }
+//   };
+// };
 
 export {
   getAllSuppliers,
@@ -472,5 +493,5 @@ export {
   updateFeedbackSuccess,
   updateFeedbackError,
   deletePost,
-  updatePosts
+  updatePosts,
 };
