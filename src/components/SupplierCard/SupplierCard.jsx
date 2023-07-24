@@ -31,7 +31,7 @@ export default function SocialProfileSimple ({
 }) {
   const session = useSessionState((state) => state.session)
 
-  console.log(rating)
+ // console.log(rating)
 
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
