@@ -29,7 +29,7 @@ export default function SocialProfileSimple({
   rating,
 }) {
   const session = useSessionState((state) => state.session);
-  console.log(session);
+  console.log(rating);
   return (
     <Box
       maxW="350px"

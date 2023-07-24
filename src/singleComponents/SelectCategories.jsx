@@ -38,7 +38,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation,
   }, [])
 
   return (
-    <Stack direction='row' spacing={6} width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}>
+    <Stack direction='row' spacing={6}>
       <DropdownMenu
       width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
         titleMenu={titleCategory || categoryName}
