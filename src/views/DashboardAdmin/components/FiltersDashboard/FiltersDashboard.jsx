@@ -68,10 +68,15 @@ export default function FiltersDashboard () {
     <Box
       bg={bgColor}
       color={useColorModeValue('gray.50', 'gray.200')}
+      mb={{
+        base: '-90px',
+        md: '0px'
+      }}
     >
       <Container
         as={Stack}
         maxW='6xl'
+        width=''
         py={4}
         spacing={4}
         justify='center'

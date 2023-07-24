@@ -58,12 +58,20 @@ export default function ProfesionalManagement () {
         justify='center'
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 10 }}
-        direction={{ base: 'column', md: 'row' }}
+        direction={{
+          base: 'column',
+          md: 'column',
+          lg: 'row'
+        }}
       >
         <Stack // Contenedor stats
           flex={1}
           spacing={{ base: 5, md: 10 }}
           width={{ base: '100%', md: '50%' }}
+          mt={{
+            base: '-60px',
+            md: '-20px'
+          }}
         >
           <Heading
             size='lg'

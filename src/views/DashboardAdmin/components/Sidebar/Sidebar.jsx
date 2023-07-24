@@ -27,7 +27,11 @@ export default function Sidebar () {
       <SidebarContent
         bg={bgElement}
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }}
+        display={{
+          base: 'none',
+          md: 'none',
+          lg: 'block'
+        }}
       />
       <Drawer
         autoFocus={false}
@@ -36,16 +40,26 @@ export default function Sidebar () {
         onClose={onClose}
         returnFocusOnClose={false}
         onOverlayClick={onClose}
-        size='xs'
       >
         <DrawerContent>
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      <MobileNav
+        display={{
+          base: 'flex',
+          md: 'flex',
+          lg: 'none'
+        }}
+        onOpen={onOpen}
+      />
       <Box
-        ml={{ base: 0, md: 60 }}
+        ml={{
+          base: 0,
+          md: 0,
+          lg: 60
+        }}
         p='4'
       >
         {
