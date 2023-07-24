@@ -32,6 +32,7 @@ const linkStyle = {
   display: "block",
   padding: "10px",
   textDecoration: "none",
+  color: "white",
 };
 
 const DashboardSuppliers = () => {
@@ -54,11 +55,14 @@ const DashboardSuppliers = () => {
     <Box
       height="100vh"
       display="flex"
-      bg={useColorModeValue("gray.800", "gray.800")}
+      bg={useColorModeValue("gray.800", "gray.500")}
+      
     >
       {/* Barra lateral */}
       {!isMobile && (
-        <Box w="250px" bg="gray.600" p={2}>
+        <Box w="250px" p={2}
+        bg={useColorModeValue("blackAlpha.800", "gray.800")}
+        >
           <Stack spacing={4}>
             <ScrollLink
               to="/dashboardSuppliers/publicaciones"
@@ -71,7 +75,7 @@ const DashboardSuppliers = () => {
                 variant="outline"
                 onClick={() => handlePageChange("Inicio")}
                 bg={currentPage === "Inicio" ? "blue.500" : ""}
-                color={currentPage === "Inicio" ? "white" : ""}
+                color={currentPage === "Inicio" ? "White" : ""}
               >
                 Inicio
               </Button>

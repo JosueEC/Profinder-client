@@ -35,7 +35,7 @@ export default function SupplierPost() {
   const [showFullContent, setShowFullContent] = useState(false);
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.profesionalId);
-  console.log(professional);
+ // console.log(professional);
 
   useEffect(() => {
     // Función asincrónica para obtener el ID
