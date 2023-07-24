@@ -101,16 +101,16 @@ function FeedbackForm() {
 
   const textColor = useColorModeValue('black', 'white');
   const bgColor = useColorModeValue('gray.500', 'gray.800'); // Fondo: gay.500 en light y gray.900 en dark
-
+  const textColor2 = useColorModeValue('blue.900', 'blue.400');
   return (
     <Center p={4} color={textColor} h="100%" w="100%" bg={bgColor}>
       <Box mx="auto" maxW="5xl" w="100%">
         <Center>
           <VStack as="form" alignItems="center" textAlign="center" onSubmit={handleSubmit} bg={bgColor} color={textColor}>
-            <Heading as="h1" size="2xl" mb={4} color="blue.600">
+            <Heading as="h1" size="2xl" mb={4} color="gray.100">
               ¡Valora tu experiencia con los servicios contratados en el sitio!
             </Heading>
-            <Text mb={4}>
+            <Text mb={4} color={textColor2}>
               En esta sección deberás seleccionar al profesional que prestó los servicios y valorar tu experiencia con ellos.
               Haremos un breve recorrido por el formulario:
             </Text>

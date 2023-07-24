@@ -105,7 +105,7 @@ export default function LoggedNavbar () {
               <NavLink textLink='¿COMO FUNCIONA?' routeLink='/comofunciona' />
               <NavLink textLink='PROFESIONALES' routeLink='/categories' />
               <NavLink textLink='CONTACTO' routeLink='/feedback' />
-              <NavLink textLink='ACERCA DE' routeLink='/' />
+              <NavLink textLink='ACERCA DE' routeLink='/aboutus' />
             </HStack>
           </HStack>
           <DarkModeToggle />

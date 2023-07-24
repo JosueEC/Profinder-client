@@ -31,6 +31,7 @@ import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
 import SupplierPost from "./components/SupplierPost/SupplierPost";
 import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
+import AboutUs from "./views/AboutUs/AboutUs";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -51,6 +52,7 @@ function App() {
       {session.status ? <LoggedNavbar /> : <Navbar />}
       <Routes>
         <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/feedback" element={<FeedbackForm />} />
         <Route exact path="/categories" element={<Categories />} />
         <Route exact path="/comofunciona" element={<HowDoesItWork />} />
