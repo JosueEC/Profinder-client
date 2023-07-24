@@ -35,8 +35,7 @@ export default function LoggedNavbar () {
   const removeSessionState = useSessionState(state => state.removeSessionState)
   const profesionalesimg = useSelector((state) => state.profesionales);
 
-   const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
-   console.log(filteredImage);
+  const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
 
   function handleLogout () {
     removeSessionState()
