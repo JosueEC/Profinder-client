@@ -6,7 +6,8 @@ import SelectCategories from '../../../../singleComponents/SelectCategories'
 import DropdownMenu from '../../../../singleComponents/DropdownMenu'
 
 export default function FiltersDashboard () {
-  const bg = useColorModeValue('white', 'gray.800')
+  const bgColor = useColorModeValue('white', 'gray.800')
+  const txtColor = useColorModeValue('gray.600', 'gray.100')
 
   const {
     category,
@@ -65,7 +66,7 @@ export default function FiltersDashboard () {
 
   return (
     <Box
-      bg={bg}
+      bg={bgColor}
       color={useColorModeValue('gray.50', 'gray.200')}
     >
       <Container
@@ -83,7 +84,6 @@ export default function FiltersDashboard () {
           titleOcupation={ocupation}
           fnSelectCategory={handleSelectCategory}
           fnSelectOcupation={handleSelectOcupation}
-          // setCurrentPage={setCurrentPage}
         />
         <DropdownMenu
           titleMenu={status}
@@ -112,13 +112,13 @@ export default function FiltersDashboard () {
           align={{ base: 'start', md: 'start', lg: 'start' }}
         >
           <Text
-            border='solid 2px red'
+            color={txtColor}
           >
             {`${results} resultados
-            ${category === 'Categorias' || category === 'Todas' ? '' : category + '🔹'} 
-            ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + '🔹'}
-            ${status === 'Estatus' || status === 'Todos' ? '' : status + '🔹'}
-            ${plan === 'Plan' || plan === 'Todos' ? '' : plan + '🔹'}`}
+            ${category === 'Categorias' || category === 'Todas' ? '' : category + ' 🔹'} 
+            ${ocupation === 'Ocupacion' || ocupation === '' ? '' : ocupation + ' 🔹'}
+            ${status === 'Estatus' || status === 'Todos' ? '' : status + ' 🔹'}
+            ${plan === 'Plan' || plan === 'Todos' ? '' : plan + ' 🔹'}`}
           </Text>
         </Container>
       </Box>

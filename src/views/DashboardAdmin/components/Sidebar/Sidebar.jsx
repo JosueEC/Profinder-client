@@ -16,12 +16,16 @@ export default function Sidebar () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { pathname } = useLocation()
 
+  const bgColor = useColorModeValue('gray.100', 'gray.900')
+  const bgElement = useColorModeValue('white', 'gray.800')
+
   return (
     <Box // contenedor principal
       minH='100vh'
-      bg={useColorModeValue('gray.100', 'gray.900')}
+      bg={bgColor}
     >
       <SidebarContent
+        bg={bgElement}
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
       />
