@@ -1,88 +1,80 @@
-import { Grid, Box, Text, Image, Link, Icon, Heading, useMediaQuery } from '@chakra-ui/react';
+import { Grid, Box, Text, Image, Link, Icon, Heading, useMediaQuery, useColorModeValue, useColorMode} from '@chakra-ui/react';
 import { FiLinkedin, FiGithub } from 'react-icons/fi';
 
 
 const peopleData = [
   {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    name: 'John Alexander Paez Arias',
+    email: 'johpaz252@gmail.com',
+    linkedinURL: ' https://www.linkedin.com/in/john-alexander-paez-arias-543b0254/',
+    githubURL: ' https://github.com/johpaz/',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    country: ' Colombia',
+    imageUrl: 'https://media.licdn.com/dms/image/D4E35AQEsj0xPQRTxDw/profile-framedphoto-shrink_800_800/0/1687668913157?e=1690812000&v=beta&t=SRqgpd0YlzwVlLc5cYoK9iF-TSjNInBPtrkIFogrrDU',
+    
   }, {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    name: 'Christian Valentin Maidana',
+    email: 'chrismai1020162016@hotmail.com',
+    linkedinURL: 'https://www.linkedin.com/in/christian-maidana-260611217/',
+    githubURL: ' https://github.com/Christian5262',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    country: 'Argentina',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D35AQFkqPI7qoEOcQ/profile-framedphoto-shrink_800_800/0/1690153548113?e=1690812000&v=beta&t=vP7lLBizA1b489C4pd8SZYKkOn2ORbJkLKW5wjvLRkc',
+    
   }, {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
-    title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    name: 'Josue Evangelista Cruz',
+    email: 'josueev.cruz@gmail.com',
+    linkedinURL: 'https://www.linkedin.com/in/josue-evangelista-cruz-213461264/',
+    githubURL: 'https://github.com/JosueEC',
+    title: 'Backend Developer',
+    country: 'México',
+    imageUrl: 'https://media.licdn.com/dms/image/D4E03AQHbd9Z6oDfV0g/profile-displayphoto-shrink_800_800/0/1680539371902?e=1695859200&v=beta&t=ezOQflgMedBCZ3afw7ykQqNreulJSXWq6AUACdSJ0p4',
+    
   }, {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    name: 'Maria José Olaechea',
+    email: 'olaecheamariajose@gmail.com',
+    linkedinURL: 'https://www.linkedin.com/in/mjolaechea/',
+    githubURL: 'https://github.com/OLAEMJO8',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    country: 'Argetina',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D03AQFM8yYaQS8S4Q/profile-displayphoto-shrink_800_800/0/1666745756157?e=1695859200&v=beta&t=1JB53SXVkTq6Rshgwkt9_RU-eWXx5zAq5riuREjKrZU',
+   
   }, {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
+    name: 'José Alberto Brito Sevilla',
+    email: 'josealbritose@gmail.com',
     linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    githubURL: 'https://github.com/josebritop',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
+    country: 'Argentina',
     imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+   
   }, {
-    name: 'John Doe',
+    name: 'Cristian Cuesta',
     email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    linkedinURL: 'https://www.linkedin.com/in/cristiancuestabenitez/',
+    githubURL: 'https://github.com/CristianCuesta14',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    country: 'Colombia',
+    imageUrl: 'https://media.licdn.com/dms/image/D4E03AQHoUuviieQLnw/profile-displayphoto-shrink_800_800/0/1683424883157?e=1695859200&v=beta&t=bUy3yZ92IUi3o0aiAng1v9JccZURUKOo4siCPXqb8Yg',
+   
   },, {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
-    githubURL: 'https://github.com/NathalyQuiva',
+    name: 'Agustin Boasso',
+    email: 'boassoagustin@gmail.com',
+    linkedinURL: 'https://www.linkedin.com/in/agustin-boasso-/',
+    githubURL: 'https://github.com/agustinboasso',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
-    imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    country: 'Argentina',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D35AQE7AZs5NFxCgg/profile-framedphoto-shrink_200_200/0/1670810748548?e=1690812000&v=beta&t=PwNrFJr6F_Gjtscoz_MgsNsiYwwGFOTg3OrpfN4EK4w',
+  
   }, {
-    name: 'John Doe',
+    name: 'Nathaly Quiva',
     email: 'john.doe@example.com',
     linkedinURL: 'https://www.linkedin.com/in/johndoe/',
     githubURL: 'https://github.com/NathalyQuiva',
     title: 'Software Engineer',
-    phoneNumber: '+1 (123) 456-7890',
-    country: 'United States',
+    country: 'Colombia',
     imageUrl: 'path/to/john_doe_image.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+    
   }
  
 ];
@@ -90,10 +82,14 @@ const peopleData = [
 
 
 const AboutUs = () => {
+    const { colorMode } = useColorMode();
+    const bgColor = useColorModeValue('gray.400', 'gray.800');
+
     const [isLargerThanSm] = useMediaQuery("(min-width: 30em)");
     const [isLargerThanMd] = useMediaQuery("(min-width: 48em)");
     const [isLargerThanLg] = useMediaQuery("(min-width: 62em)");
-  
+    const cardBgColor = colorMode === 'light' ? 'white' : bgColor;
+
     let columnCount;
     if (isLargerThanLg) {
       columnCount = 4;
@@ -107,7 +103,7 @@ const AboutUs = () => {
   
   
         return (
-          <Box py={{ base: 8, md: 18 }} px={4} textAlign="center">
+          <Box py={{ base: 8, md: 18 }} px={4} textAlign="center" bg={bgColor}>
             <Heading fontSize={{ base: "3xl", md: "4xl" }} color="teal.600" mb={4}>
               Conoce a nuestro equipo
             </Heading>
@@ -117,7 +113,7 @@ const AboutUs = () => {
       
             <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6}>
               {peopleData.map((person, index) => (
-                <Box key={index} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+                <Box key={index} p={4} borderWidth="1px" borderRadius="md" boxShadow="md" bg={cardBgColor}>
                   <Image src={person.imageUrl} alt={person.name} borderRadius="full" boxSize="150px" mx="auto" mb={4} />
       
                   <Text fontWeight="bold" fontSize="xl" mb={2}>
