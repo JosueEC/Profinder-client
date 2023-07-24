@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Box,
   Heading,
@@ -16,6 +16,7 @@ import {
   Flex,
   ScaleFade,
   Avatar,
+  Spacer,
 } from "@chakra-ui/react";
 import {
   FaUserAlt,
@@ -55,13 +56,16 @@ const ArticleList = () => {
   }
 
   return (
+    <>
+  
+    <Spacer h="100px" />
     <Container
       key={profesionalId.id}
       color="gray.300"
       bg={useColorModeValue("gray.800", "gray.500")}
       maxW="100%"
       py="5"
-      px={{ base: "8", md: "8", lg: "10rem" }}
+      px={{ base: "2", md: "8", lg: "10rem" }}
       align={"center"}
       justify={"center"}
     >
@@ -75,6 +79,20 @@ const ArticleList = () => {
           maxW={{ base: "full", md: "900px" }}
           w={{ base: "full", md: "900px" }}
         >
+          <Box>
+            <Link to="/categories">
+              <Button
+                bg="teal.400"
+                color="white"
+                _hover={{ bg: "teal.500" }}
+                size="lg"
+                marginTop="5"
+                w="100%"
+              >
+                Volver
+              </Button>
+            </Link>
+          </Box>
           {profesionalId.map(
             ({
               id,
@@ -112,7 +130,7 @@ const ArticleList = () => {
                 />
                 <Stack
                   direction="column"
-                  spacing={4}
+                  
                   p={8}
                   align="center"
                   textTransform={"uppercase"}
@@ -120,6 +138,7 @@ const ArticleList = () => {
                   fontSize={{ base: "lg", md: "2xl" }}
                   letterSpacing={1.1}
                   textAlign="center"
+                  spacing={{ base: "1rem", md: "3rem", lg: "3rem" }}
                 >
                   <Heading as="h1" textTransform="uppercase">
                     {name || "Sin nombre"}
@@ -160,17 +179,18 @@ const ArticleList = () => {
           justify="center"
           gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
         >
-          <Heading as="h2" textTransform="uppercase">
+          <Heading as="h2" textTransform="uppercase" color="blackAlpha.800">
             Trabajos Recientes
           </Heading>
           <Divider my={2} />
           <Wrap spacing="50px" justify="center">
-            <SupplierPost id={profesionalId.id} key={profesionalId.id} />
+            <SupplierPost profesionalId={id} key={profesionalId.id} />
           </Wrap>
         </Flex>
       </ScaleFade>
       <Divider my={{ base: 8, md: 16 }} />
     </Container>
+    </>
   );
 };
 

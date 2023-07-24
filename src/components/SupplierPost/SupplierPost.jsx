@@ -101,7 +101,7 @@ export default function SupplierPost() {
               </Box>
               <Box justifyContent="center" marginTop="5">
                 <Text
-                  color={"green.500"}
+                  color={"teal.500"}
                   textTransform={"uppercase"}
                   fontWeight={700}
                   letterSpacing={1.1}

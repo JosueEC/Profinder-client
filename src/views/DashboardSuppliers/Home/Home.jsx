@@ -1,4 +1,4 @@
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -16,7 +16,13 @@ import {
   DrawerBody,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { HamburgerIcon, ChatIcon, ViewIcon, EditIcon } from "@chakra-ui/icons";
+import {
+  HamburgerIcon,
+  ChatIcon,
+  ViewIcon,
+  EditIcon,
+  QuestionIcon,
+} from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
 //import { Link as RouterLink } from "react-router-dom";
 import DataSuppliers from "../DataSuppliers/DataSuppliers";
@@ -38,12 +44,10 @@ const linkStyle = {
 const DashboardSuppliers = () => {
   const [currentPage, setCurrentPage] = useState("Inicio");
   const { isOpen, onOpen, onClose } = useDisclosure();
- // const [showFooter, setShowFooter] = useState(false);
+  // const [showFooter, setShowFooter] = useState(false);
 
-    const currentPath = window.location.pathname;
-//    setShowFooter(currentPath !== "/dashboardSuppliers"); 
-
-
+  const currentPath = window.location.pathname;
+  //    setShowFooter(currentPath !== "/dashboardSuppliers");
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -56,12 +60,13 @@ const DashboardSuppliers = () => {
       height="100vh"
       display="flex"
       bg={useColorModeValue("gray.800", "gray.500")}
-      
     >
       {/* Barra lateral */}
       {!isMobile && (
-        <Box w="250px" p={2}
-        bg={useColorModeValue("blackAlpha.800", "gray.800")}
+        <Box
+          w="250px"
+          p={2}
+          bg={useColorModeValue("blackAlpha.800", "gray.800")}
         >
           <Stack spacing={4}>
             <ScrollLink
@@ -149,12 +154,35 @@ const DashboardSuppliers = () => {
                 Obtén Premium
               </Button>
             </ScrollLink>
+            <ScrollLink
+              to="/dashboardSuppliers/help"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+            >
+              <Button
+                variant="outline"
+                onClick={() => handlePageChange("help")}
+                bg={currentPage === "help" ? "blue.500" : ""}
+                color={currentPage === "help" ? "white" : ""}
+                leftIcon={<QuestionIcon />}
+              >
+                Ayuda
+              </Button>
+            </ScrollLink>
           </Stack>
         </Box>
       )}
 
       {/* Contenido principal */}
-      <Box flex="1" display="flex" flexDirection="column" alignItems="center">
+      <Box
+        flex="1"
+        display="flex"
+        flexDirection="column"
+        alignItems="left"
+        justifyContent="left"
+      >
         {/* Botón Hamburguesa (visible en pantallas pequeñas) */}
         {isMobile && (
           <IconButton
@@ -274,6 +302,23 @@ const DashboardSuppliers = () => {
                     Obtén Premium
                   </Button>
                 </ScrollLink>
+                <ScrollLink
+                  to="/dashboardSuppliers/help"
+                  spy
+                  smooth
+                  duration={500}
+                  style={linkStyle}
+                >
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange("help")}
+                    bg={currentPage === "help" ? "blue.500" : ""}
+                    color={currentPage === "help" ? "white" : ""}
+                    leftIcon={<QuestionIcon />}
+                  >
+                    Ayuda
+                  </Button>
+                </ScrollLink>
               </Stack>
             </DrawerHeader>
             <DrawerBody>
@@ -284,12 +329,14 @@ const DashboardSuppliers = () => {
 
         {/* Contenido de la página */}
         {currentPage === "Inicio" && (
-          <Flex direction="column" alignItems="center" >
+          <Flex direction="column" alignItems="center">
             <Heading
               as="h1"
               size={isTabletOrMobile ? "lg" : "sm"}
               my={4}
               color="white"
+              fontFamily='body'
+
             >
               MIS DATOS ONLINE
             </Heading>
@@ -318,8 +365,8 @@ const DashboardSuppliers = () => {
             <FormUpdateProfile />
           </Flex>
         )}
-        {currentPage === "Ayuda" && (
-          <Flex justifyContent="flex-start" alignItems="flex-end">
+        {currentPage === "help" && (
+          <Flex justifyContent="center" alignItems="center" marginTop="10">
             <CustomChatBot />
           </Flex>
         )}
