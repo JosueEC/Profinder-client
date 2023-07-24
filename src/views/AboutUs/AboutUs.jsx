@@ -36,7 +36,7 @@ const peopleData = [
     linkedinURL: 'https://www.linkedin.com/in/mjolaechea/',
     githubURL: 'https://github.com/OLAEMJO8',
     title: 'Software Engineer',
-    country: 'Argetina',
+    country: 'Argentina',
     imageUrl: 'https://media.licdn.com/dms/image/D4D03AQFM8yYaQS8S4Q/profile-displayphoto-shrink_800_800/0/1666745756157?e=1695859200&v=beta&t=1JB53SXVkTq6Rshgwkt9_RU-eWXx5zAq5riuREjKrZU',
    
   }, {
