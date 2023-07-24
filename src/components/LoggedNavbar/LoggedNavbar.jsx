@@ -31,7 +31,7 @@ export default function LoggedNavbar () {
   const navigate = useNavigate()
   const toast = useToast()
   const session = useSessionState(state => state.session)
-  console.log(session);
+
   const removeSessionState = useSessionState(state => state.removeSessionState)
   const profesionalesimg = useSelector((state) => state.profesionales);
 
