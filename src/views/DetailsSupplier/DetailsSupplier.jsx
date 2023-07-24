@@ -95,7 +95,6 @@ const ArticleList = () => {
             flex={{ base: "1", md: "2" }}
           >
             <Avatar
-              size="10xl"
               src={image || NoAvatar}
               loading="lazy"
               alt="Avatar"
@@ -116,7 +115,7 @@ const ArticleList = () => {
               <Heading as="h1" textTransform="uppercase">
                 {name || "Sin nombre"}
               </Heading>
-              <Box>
+              {/* <Box>
                 <StarRatingComponent
                   name="rating"
                   starCount={5}
@@ -125,8 +124,8 @@ const ArticleList = () => {
                   emptyStarColor="#CCCCCC"
                   editing={false}
                 />
-              </Box>
-              <Text  color="gray.500" mb={4} fontSize="16px">
+              </Box> */}
+              <Text color="gray.500" mb={4} fontSize="16px">
                 <Icon as={FaMapMarkerAlt} mr={2} color="teal.400" />
                 {`${ubication.country}, ${ubication.location}` ||
                   "Sin ubicacion"}
@@ -174,7 +173,7 @@ const ArticleList = () => {
           <Divider my={2} />
           <Wrap spacing="50px" justify="center">
             {data?.posts ? (
-              data.posts.map(({ image, content, title, id }) => {
+              data.posts.map(({ image, content, title, id}) => {
                 return (
                   <SupplierPost
                     key={id}

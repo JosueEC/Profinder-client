@@ -21,10 +21,6 @@ export default function SupplierPost({
   identificador,
 }) {
   const profesionales = useSelector((state) => state.profesionales);
-  const filteredPosts = profesionales.filter(
-    (post) => post.id === identificador
-  );
-
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
@@ -33,29 +29,20 @@ export default function SupplierPost({
     dispatch(getPostProfesional());
   }, [dispatch]);
 
-  const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => {
-      const imageCount = filteredPosts[0].posts[0].image.length;
-      const nextIndex = (prevIndex + 1) % imageCount;
-      return nextIndex;
-    });
-  };
+  
+  const professional = profesionales.find(
+    (profesional) => profesional.id === identificador
+  );
 
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => {
-      const imageCount = filteredPosts[0].posts[0].image.length;
-      const prevIndexValue = (prevIndex - 1 + imageCount) % imageCount;
-      return prevIndexValue;
-    });
-  };
-
-  const handleToggleContent = () => {
-    setShowFullContent((prevValue) => !prevValue);
-  };
 
   return (
-    <VStack spacing={10} align="center">
-      {filteredPosts.map((professional) =>
+    <Grid
+      templateColumns="repeat(3, 1fr)"
+      gap={4}
+      justifyContent="center"
+      alignItems="center"
+    >
+      {professional ? (
         professional.posts.map((post) => (
           <Flex
             key={post.id}
@@ -118,31 +105,12 @@ export default function SupplierPost({
                 borderRadius="lg"
                 marginTop="5"
               />
-              <Box d="flex" alignItems="center" justifyContent="center" mt="3">
-                <Button
-                  onClick={handlePrevImage}
-                  size="sm"
-                  fontSize="xl"
-                  mr="3"
-                >
-                  &lt;
-                </Button>
-                <Text fontSize="sm" color={"gray.500"}>
-                  Imagen {currentImageIndex + 1} de {post.image.length}
-                </Text>
-                <Button
-                  onClick={handleNextImage}
-                  size="sm"
-                  fontSize="xl"
-                  ml="3"
-                >
-                  &gt;
-                </Button>
-              </Box>
             </Box>
           </Flex>
         ))
+      ) : (
+        <Text>No posts found for the given identifier.</Text>
       )}
-    </VStack>
+    </Grid>
   );
 }
