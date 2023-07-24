@@ -12,6 +12,7 @@ import {
   POST_PROFESIONAL,
   DELETE_POST,
   UPDATE_POST,
+  GET_ID_PROFESIONAL,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -29,6 +30,20 @@ const getAllSuppliers = () => {
   };
 };
 
+// !!por id profesional
+
+const getProfesionalIdOnline = (id) => {
+  const URL = `${API.DBONLINE}/profesional/${id}`;
+
+  return function(dispatch) {
+    axios
+      .get(URL)
+      .then((response) => {
+        dispatch({ type: GET_ID_PROFESIONAL, payload: response.data });
+      })
+      .catch((error) => console.error(error.message));
+  };
+};
 //! Todas las categorias con su ID
 const getAllCategories = () => {
   // const URL = `${API.LOCALHOST}/category`
@@ -405,8 +420,8 @@ const updateFeedbackError = (error) => {
 //!actions para actualizar post
 const updatePosts = (info, id) => {
   const URL = `https:backprofinder-production.up.railway.app/postProfesional/${id}`;
-console.log(id);
-  return async function (dispatch) {
+  console.log(id);
+  return async function(dispatch) {
     try {
       await axios.put(URL, info, {
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -465,7 +480,7 @@ const deletePost = (id) => async (dispatch) => {
 //         headers: { "Access-Control-Allow-Origin": "*" },
 //       });
 //       alert("Publicacion Exitosa!")
-     
+
 //     } catch (error) {
 //       console.error(error.response.data.error);
 //       alert(`${error.response.data.error}`);
@@ -494,4 +509,5 @@ export {
   updateFeedbackError,
   deletePost,
   updatePosts,
+  getProfesionalIdOnline,
 };

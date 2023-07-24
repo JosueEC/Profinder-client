@@ -9,6 +9,7 @@ import {
   GET_INFO_PROFESIONALS,
   DELETE_POST,
   UPDATE_POST,
+  GET_ID_PROFESIONAL,
 } from "../actionsTypes/actionsType";
 import { filterSuppliers } from "../filters/reduxFilters";
 
@@ -18,6 +19,7 @@ const initialState = {
   backup: [],
   categories: [],
   clients: [],
+  profesionalId: [],
   filteredCategories: [],
   filteredSuppliers: [],
   suppliersByname: [],
@@ -45,6 +47,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+      };
+    case GET_ID_PROFESIONAL:
+      return {
+        ...state,
+        profesionalId: action.payload,
       };
     //! esta es para traer los profesionales por el nombre de la ocupacion y renderizarlos en categories, se implementa en la searchBar
     case GET_OCUPATION_BY_NAME:
@@ -107,34 +114,34 @@ const reducer = (state = initialState, action) => {
         profesionales: action.payload,
       };
 
-      case UPDATE_POST: {
-        const updatedPost = action.payload;
-        const updatedProfesionales = state.profesionales.map((profesional) => {
-          if (profesional.id === updatedPost.id) {
-            return { ...profesional, ...updatedPost };
+    case UPDATE_POST: {
+      const updatedPost = action.payload;
+      const updatedProfesionales = state.profesionales.map((profesional) => {
+        if (profesional.id === updatedPost.id) {
+          return { ...profesional, ...updatedPost };
+        } else {
+          return profesional;
+        }
+      });
+      return { ...state, profesionales: updatedProfesionales };
+    }
+
+    case DELETE_POST: {
+      const { postId } = action.payload;
+      const updatedProfesionalesForDelete = state.profesionales.map(
+        (profesional) => {
+          if (profesional.posts.find((post) => post.id === postId)) {
+            const updatedPosts = profesional.posts.filter(
+              (post) => post.id !== postId
+            );
+            return { ...profesional, posts: updatedPosts };
           } else {
             return profesional;
           }
-        });
-        return { ...state, profesionales: updatedProfesionales };
-      }
-  
-      case DELETE_POST: {
-        const { postId } = action.payload;
-        const updatedProfesionalesForDelete = state.profesionales.map(
-          (profesional) => {
-            if (profesional.posts.find((post) => post.id === postId)) {
-              const updatedPosts = profesional.posts.filter(
-                (post) => post.id !== postId
-              );
-              return { ...profesional, posts: updatedPosts };
-            } else {
-              return profesional;
-            }
-          }
-        );
-        return { ...state, profesionales: updatedProfesionalesForDelete };
-      }
+        }
+      );
+      return { ...state, profesionales: updatedProfesionalesForDelete };
+    }
     //! caso por default
     default:
       return { ...state };
