@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getPostProfesional,
   deletePost,
-
 } from "../../../services/redux/actions/actions";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useNavigate, Link } from "react-router-dom";
@@ -22,7 +21,7 @@ import {
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
- // console.log(session);
+  // console.log(session);
 
   const profesionales = useSelector((state) => state.profesionales);
   const filteredPosts = profesionales.filter((post) => post.id === session.id);
@@ -58,8 +57,6 @@ const PostsSuppliers = () => {
 
   const navigate = useNavigate();
 
-
-
   const handleDeletePost = async (postId) => {
     console.log("ID del posteo a eliminar:", postId);
     try {
@@ -69,7 +66,6 @@ const PostsSuppliers = () => {
       console.error("Error al eliminar el post:", error);
     }
   };
-
 
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
@@ -83,13 +79,14 @@ const PostsSuppliers = () => {
           professional.posts.map((post) => (
             <Box
               key={post.id}
-              maxW={"500px"}
+              maxW={"450px"}
               w={"full"}
               boxShadow={"2xl"}
               rounded={"md"}
               overflow={"hidden"}
               p={6}
               marginLeft="10px"
+              bg="gray.200"
             >
               <Box justifyContent="center" marginTop="5">
                 {/* Título del post */}
@@ -104,17 +101,6 @@ const PostsSuppliers = () => {
                 </Text>
               </Box>
 
-              {/* Botón Leer más / Ver menos */}
-              {post.content.length > 100 && (
-                <Button
-                  colorScheme="blue"
-                  size="sm"
-                  mt={2}
-                  onClick={handleToggleContent}
-                >
-                  {showFullContent ? "Ver menos" : "Leer más"}
-                </Button>
-              )}
               <Box justifyContent="center">
                 {/* Imagen actual */}
                 <Grid
@@ -161,6 +147,17 @@ const PostsSuppliers = () => {
                     </Button>
                   </Box>
                 </Grid>
+                {/* Botón Leer más / Ver menos */}
+                {post.content.length > 100 && (
+                  <Button
+                    colorScheme="blue"
+                    size="sm"
+                    mt={2}
+                    onClick={handleToggleContent}
+                  >
+                    {showFullContent ? "Ver menos" : "Leer más"}
+                  </Button>
+                )}
 
                 {/* Contenido del post */}
                 <Text color={"gray.500"}>
