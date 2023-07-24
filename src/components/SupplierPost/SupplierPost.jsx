@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditIcon } from "@chakra-ui/icons";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { getPostProfesional } from "./../../services/redux/actions/actions";
 import {
   Box,
@@ -12,38 +14,35 @@ import {
   Button,
   Flex,
   useColorModeValue,
+  SimpleGrid,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
-export default function SupplierPost({
-  imagePost,
-  titularPost,
-  descriptionPost,
-  identificador,
-}) {
-  const profesionales = useSelector((state) => state.profesionales);
-  const dispatch = useDispatch();
+export default function SupplierPost() {
+  const { id } = useParams();
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
-
+  const dispatch = useDispatch();
+  const professional = useSelector((state) => state.profesionalId);
+  console.log(professional);
   useEffect(() => {
-    dispatch(getPostProfesional());
-  }, [dispatch]);
-
-  
-  const professional = profesionales.find(
-    (profesional) => profesional.id === identificador
-  );
-
-
+    dispatch(getPostProfesional(id));
+  }, [dispatch, id]);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  if (!professional || !professional[0]) {
+    return <Text>Loading...</Text>;
+  }
   return (
-    <Grid
-      templateColumns="repeat(3, 1fr)"
-      gap={4}
-      justifyContent="center"
-      alignItems="center"
-    >
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4} justifyContent="center" alignItems="center">
       {professional ? (
-        professional.posts.map((post) => (
+        professional[0].posts.map((post) => (
           <Flex
             key={post.id}
             flexDirection={{ base: "column", md: "row" }}
@@ -74,8 +73,9 @@ export default function SupplierPost({
                   color={"green.500"}
                   textTransform={"uppercase"}
                   fontWeight={700}
-                  fontSize={"xl"}
+                 
                   letterSpacing={1.1}
+                  fontSize={{ base: "xl", md: "2xl" }}
                 >
                   {post.title}
                 </Text>
@@ -94,23 +94,28 @@ export default function SupplierPost({
                 </Text>
               </Box>
 
-              <Image
-                justifyContent="center"
-                src={post.image[currentImageIndex]}
-                alt={`Image ${currentImageIndex}`}
-                boxSize={{ base: "300px", md: "auto" }}
-                maxW={{ base: "300px", md: "100%" }}
-                maxH="300px"
-                objectFit="contain"
-                borderRadius="lg"
-                marginTop="5"
-              />
+              <Slider {...settings}>
+                {post.image.map((img, index) => (
+                  <Image
+                    key={index}
+                    justifyContent="center"
+                    src={img}
+                    alt={`Image ${index}`}
+                    boxSize={{ base: "300px", md: "auto" }}
+                    maxW={{ base: "300px", md: "100%" }}
+                    maxH="300px"
+                    objectFit="contain"
+                    borderRadius="lg"
+                    marginTop="5"
+                  />
+                ))}
+              </Slider>
             </Box>
           </Flex>
         ))
       ) : (
         <Text>No posts found for the given identifier.</Text>
       )}
-    </Grid>
+  </SimpleGrid>
   );
 }
