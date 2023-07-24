@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditIcon } from "@chakra-ui/icons";
 import Slider from "react-slick";
@@ -18,17 +18,41 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
-export default function SupplierPost() {
-  const { id } = useParams();
+// Función auxiliar para obtener el ID de forma asíncrona
+async function fetchPostId() {
+  // Simulamos una pausa con setTimeout (puedes reemplazarlo con tu lógica de obtención de ID asincrónico)
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(/* aquí obtén el valor del ID asincrónicamente */);
+    }, 1000); // Tiempo de pausa de 1 segundo (puedes ajustarlo según tus necesidades)
+  });
+}
 
+export default function SupplierPost() {
+  const [id, setId] = useState(null); // Utilizamos useState para almacenar el valor del ID
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.profesionalId);
   console.log(professional);
+
   useEffect(() => {
-    dispatch(getPostProfesional(id));
+    // Función asincrónica para obtener el ID
+    async function getIdAsync() {
+      const postId = await fetchPostId();
+      setId(postId);
+    }
+
+    getIdAsync(); // Llamamos a la función para obtener el ID asincrónicamente
+  }, []);
+
+  useEffect(() => {
+    // Llamamos a la acción de Redux solo cuando tengamos el ID
+    if (id) {
+      dispatch(getPostProfesional(id));
+    }
   }, [dispatch, id]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -36,9 +60,11 @@ export default function SupplierPost() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
   if (!professional || !professional[0]) {
     return <Text>Loading...</Text>;
   }
+
   return (
     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4} justifyContent="center" alignItems="center">
       {professional ? (
