@@ -45,6 +45,7 @@ function App() {
     }
   }, []);
   const isHomePage = location.pathname === "/";
+  const isDashboardSuppliers = location.pathname.includes("/dashboardSuppliers");
   return (
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
@@ -138,7 +139,7 @@ function App() {
           element={<DashboardClientHelp />}
         />
       </Routes>
-      {!isHomePage && <Footer />}
+      {!isHomePage && !isDashboardSuppliers && <Footer />}
     </div>
   );
 }

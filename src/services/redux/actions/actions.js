@@ -430,7 +430,9 @@ console.log(id);
 
 //Action para "eliminar el post"
 const deletePost = (id) => async (dispatch) => {
+  console.log(id);
   const URL = `https://backprofinder-production.up.railway.app/postProfesional/delete/${id}`;
+
   try {
     if (!id) {
       throw new Error("ID inválido");
