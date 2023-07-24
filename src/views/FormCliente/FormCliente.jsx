@@ -71,7 +71,7 @@ function FormCliente(props) {
       align="center"
       justify="center"
       bg={useColorModeValue("gray.800", "gray.800")}
-      width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
+      // width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
     >
       <Box
         rounded="lg"
