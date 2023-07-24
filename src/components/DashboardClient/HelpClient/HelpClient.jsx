@@ -9,7 +9,7 @@ const HelpClient = () => {
 
 
   return (
-    <Box width="100%" bg={bgColor[colorMode]} border="1px solid black" borderRadius="md" p={4}>
+    <Box width="100%" bg={bgColor[colorMode]} >
       <Text fontSize="3xl" fontWeight="bold" textAlign="center" color={titleColor[colorMode]}>
         Ayuda y Q & A
       </Text>
