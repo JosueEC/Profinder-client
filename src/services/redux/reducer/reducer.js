@@ -14,6 +14,7 @@ import {
 import { filterSuppliers } from "../filters/reduxFilters";
 
 const initialState = {
+  location: [],
   suppliers: [],
   ocupations: [],
   backup: [],
@@ -141,6 +142,12 @@ const reducer = (state = initialState, action) => {
         }
       );
       return { ...state, profesionales: updatedProfesionalesForDelete };
+    }
+    case "GET_ALL_LOCATIONS": {
+      return {
+        ...state,
+        location: action.payload,
+      };
     }
     //! caso por default
     default:

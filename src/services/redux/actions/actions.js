@@ -458,6 +458,20 @@ const deletePost = (id) => async (dispatch) => {
   }
 };
 
+const getAllLocations = () => {
+  // const URL = `${API.LOCALHOST}/profesional`
+  const URL = `${API.DBONLINE}/location`;
+
+  return function(dispatch) {
+    axios
+      .get(URL)
+      .then((response) => {
+        dispatch({ type: "GET_ALL_LOCATIONS", payload: response.data });
+      })
+      .catch((error) => console.error(error.message));
+  };
+};
+
 // const deletePosts = (info) => {
 //   // const URL = `${API.LOCALHOST}/postprofesional`
 //   const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
@@ -510,4 +524,5 @@ export {
   deletePost,
   updatePosts,
   getProfesionalIdOnline,
+  getAllLocations
 };
