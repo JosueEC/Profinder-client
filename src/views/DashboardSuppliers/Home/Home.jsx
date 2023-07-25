@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -22,9 +22,10 @@ import {
   ViewIcon,
   EditIcon,
   QuestionIcon,
+  CheckCircleIcon,
+  StarIcon,
 } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
-//import { Link as RouterLink } from "react-router-dom";
 import DataSuppliers from "../DataSuppliers/DataSuppliers";
 import CustomChatBot from "../../../components/CustomChatBot/CustomChatBot";
 import FormServicio from "../../FormServicio/FormServicio";
@@ -33,6 +34,10 @@ import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
+import Certificates from "../Certificates/Certiificates";
+import { useSessionState } from "../../../services/zustand/useSession";
+import { useSelector } from "react-redux";
+import BtnPremium from "../BtnPremium/BtnPremium";
 
 const linkStyle = {
   display: "block",
@@ -42,18 +47,30 @@ const linkStyle = {
 };
 
 const DashboardSuppliers = () => {
+  const user = useSessionState((state) => state.session);
+  const profesionales = useSelector((state) => state.profesionales);
+  const filteredActive = profesionales.filter((post) => post.id === user.id);
+
+  // aca veo si hay usuario logueado
+  const userExists = filteredActive.length > 0;
+  // aca me quedo con la propiedad active
+  const isActive = userExists && filteredActive[0].active;
+
   const [currentPage, setCurrentPage] = useState("Inicio");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [showFooter, setShowFooter] = useState(false);
-
-  const currentPath = window.location.pathname;
-  //    setShowFooter(currentPath !== "/dashboardSuppliers");
+  const [isDataView, setIsDataView] = useState(true);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  //alternar la vista de la data
+  const handleToggleDataView = () => {
+    setIsDataView(!isDataView);
+  };
+
   const isTabletOrMobile = useMediaQuery({ maxWidth: 767 });
-  const [isMobile] = useMediaQuery("(max-width: 767px)");
+  const isMobile = useMediaQuery("(max-width: 767px)")[0];
 
   return (
     <Box
@@ -138,6 +155,24 @@ const DashboardSuppliers = () => {
             </ScrollLink>
 
             <ScrollLink
+              to="/dashboardSuppliers/certificados"
+              spy
+              smooth
+              duration={500}
+              style={linkStyle}
+            >
+              <Button
+                variant="outline"
+                onClick={() => handlePageChange("certificados")}
+                bg={currentPage === "certificados" ? "blue.500" : ""}
+                color={currentPage === "certificados" ? "white" : ""}
+                leftIcon={<CheckCircleIcon />}
+              >
+                Mis Certificados
+              </Button>
+            </ScrollLink>
+
+            <ScrollLink
               to="pasarela"
               spy
               smooth
@@ -149,7 +184,8 @@ const DashboardSuppliers = () => {
                 onClick={() => handlePageChange("PasarelaPagos")}
                 bg={currentPage === "PasarelaPagos" ? "blue.500" : ""}
                 color={currentPage === "PasarelaPagos" ? "white" : ""}
-                leftIcon={<ViewIcon />}
+                leftIcon={<StarIcon />}
+                isDisabled={isActive}
               >
                 Obtén Premium
               </Button>
@@ -286,6 +322,24 @@ const DashboardSuppliers = () => {
                 </ScrollLink>
 
                 <ScrollLink
+                  to="/dashboardSuppliers/certificados"
+                  spy
+                  smooth
+                  duration={500}
+                  style={linkStyle}
+                >
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange("certificados")}
+                    bg={currentPage === "certificados" ? "blue.500" : ""}
+                    color={currentPage === "certificados" ? "white" : ""}
+                    leftIcon={<CheckCircleIcon />}
+                  >
+                    Mis Certificados
+                  </Button>
+                </ScrollLink>
+
+                <ScrollLink
                   to="/dashboardSuppliers/pasarela"
                   spy
                   smooth
@@ -297,7 +351,8 @@ const DashboardSuppliers = () => {
                     onClick={() => handlePageChange("PasarelaPagos")}
                     bg={currentPage === "PasarelaPagos" ? "blue.500" : ""}
                     color={currentPage === "PasarelaPagos" ? "white" : ""}
-                    leftIcon={<ViewIcon />}
+                    leftIcon={<StarIcon />}
+                    isDisabled={isActive}
                   >
                     Obtén Premium
                   </Button>
@@ -335,18 +390,28 @@ const DashboardSuppliers = () => {
               size={isTabletOrMobile ? "lg" : "sm"}
               my={4}
               color="white"
-              fontFamily='body'
-
+              fontFamily="body"
             >
               MIS DATOS ONLINE
             </Heading>
             <Flex
-              direction={isTabletOrMobile ? "column" : "column"}
+              direction={isMobile ? "column" : "column"}
               justifyContent="space-around"
             >
-              <Data />
-              <DataSuppliers />
+              {/* Botón de toggle */}
+              {isMobile && (
+                <Button onClick={handleToggleDataView} mb={4}>
+                  {isDataView ? "Ver En Grafica" : "Ver En Data"}
+                </Button>
+              )}
+
+              {/*aca alterno la vista del toggle*/}
+              {isDataView ? <Data /> : <DataSuppliers />}
             </Flex>
+            {!isMobile && <DataSuppliers />}
+            <Box borderRadius="10px" p={3} mb={3} color="white">
+              <BtnPremium />
+            </Box>
           </Flex>
         )}
         {currentPage === "FormServicio" && (
@@ -378,6 +443,11 @@ const DashboardSuppliers = () => {
         {currentPage === "updatepost" && (
           <Box>
             <UpdatePost />
+          </Box>
+        )}
+        {currentPage === "certificados" && (
+          <Box>
+            <Certificates />
           </Box>
         )}
       </Box>
