@@ -290,23 +290,26 @@ function FormProvider() {
 
                 {/* Add any other form fields for Step 1 here */}
               </Stack>
+              <Flex direction="column" align="center" justify="center" mt={5}>
+                <Button
+                  colorScheme="teal.400"
+                  variant="outline"
+                  color="teal.400"
+                  mt={5}
+                  _hover={{ bg: "teal.500" }}
+                  loadingText="Ingresando"
+                  type="submit"
+                  size="lg"
+                  onClick={handleSubmit(onSubmitStep1)}
+                >
+                  Siguiente
+                </Button>
 
-              <Button
-                bg="teal.400"
-                color="white"
-                mt={5}
-                _hover={{ bg: "teal.500" }}
-                loadingText="Ingresando"
-                type="submit"
-                size="lg"
-                onClick={handleSubmit(onSubmitStep1)}
-              >
-                Siguiente
-              </Button>
-              <GoogleAuthButton
-                setValue={setValue}
-                getUserData={handleGoogleAuthSuccess}
-              />
+                <GoogleAuthButton
+                  setValue={setValue}
+                  getUserData={handleGoogleAuthSuccess}
+                />
+              </Flex>
             </form>
           </>
         ) : (
@@ -525,13 +528,14 @@ function FormProvider() {
                   mt={3}
                 >
                   <Button
-                    bg="teal.400"
-                    color="white"
-                    mt={5}
-                    _hover={{ bg: "teal.500" }}
-                    loadingText="Ingresando"
-                    type="button"
-                    size="lg"
+                   colorScheme="teal.400"
+                   variant="outline"
+                   color="teal.400"
+                   mt={5}
+                   _hover={{ bg: "teal.500" }}
+                   loadingText="Ingresando"
+                   type="submit"
+                   size="lg"
                     onClick={() => handleStepChange(1, step2Data)}
                   >
                     Atrás
