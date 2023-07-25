@@ -24,7 +24,7 @@ const HowDoesItWork = () => {
   // Set the border color for Finder in dark mode
 
   // Definir el color de fondo según el modo de color
-  const backgroundColor = colorMode === 'dark' ? 'gray.900' : 'gray.500';
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.500';
   const acordionColor = colorMode === 'dark' ? 'gray.600' : 'white';
   const [showDetails, setShowDetails] = useState(null) // section para profesionales
 
