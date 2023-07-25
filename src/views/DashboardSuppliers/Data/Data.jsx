@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Grid, Box, Text } from "@chakra-ui/react";
+import BtnPremium from "../BtnPremium/BtnPremium";
 
 const Data = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
@@ -8,58 +9,60 @@ const Data = () => {
   //console.log(profile);
   const numPosts = profile && profile.posts ? profile.posts.length : 0;
 
-
-
   return (
-    <Flex flexWrap="wrap" gap={3}>
-    <Box
-      flexBasis="200px"
-      textAlign="center"
-      bg="rgba(75, 192, 192, 0.6)"
-      borderRadius="10px"
-      p={3}
-      mb={3}
+    <Grid
+      templateColumns={{
+        base: "repeat(1, 1fr)",
+        md: "repeat(2, 1fr)",
+        lg: "repeat(3, 1fr)",
+      }}
+      gap={3}
     >
-      <Text fontSize="30px">Mis Posts</Text>
-      <Box fontSize="24px">{numPosts}</Box>
-    </Box>
+      <Box
+        textAlign="center"
+        bg="rgba(75, 192, 192, 0.6)"
+        borderRadius="10px"
+        p={3}
+        mb={3}
+        color="white"
+        fontSize={{ base: "20px", md: "24px" }}
+      >
+        <Text fontSize={{ base: "24px", md: "30px" }}>Mis Posts</Text>
+        <Box fontSize={{ base: "18px", md: "24px" }}>{numPosts}</Box>
+      </Box>
 
-    <Box
-      flexBasis="200px"
-      textAlign="center"
-      bg="rgba(3, 75, 75, 0.6)"
-      borderRadius="10px"
-      p={3}
-      mb={3}
-    >
-      <Text fontSize="30px">Servicios Terminados</Text>
-      <Box fontSize="24px">15</Box>
-    </Box>
+      <Box
+        textAlign="center"
+        bg="rgba(3, 75, 75, 0.6)"
+        borderRadius="10px"
+        p={3}
+        mb={3}
+        color="white"
+        fontSize={{ base: "20px", md: "24px" }}
+      >
+        <Text fontSize={{ base: "24px", md: "30px" }}>
+          Servicios Terminados
+        </Text>
+        <Box fontSize={{ base: "18px", md: "24px" }}>15</Box>
+      </Box>
 
-    <Box
-      flexBasis="200px"
-      textAlign="center"
-      bg="rgba(192, 75, 75, 0.6)"
-      borderRadius="10px"
-      p={3}
-      mb={3}
-    >
-      <Text fontSize="30px">Servicios Activos</Text>
-      <Box fontSize="24px">15</Box>
-    </Box>
-
-    <Box
-      flexBasis="200px"
-      textAlign="center"
-      bg="rgba(200, 200, 20, 0.6)"
-      borderRadius="10px"
-      p={3}
-      mb={3}
-    >
-      <Text fontSize="30px">Servicios Cancelados</Text>
-      <Box fontSize="24px">{numPosts}</Box>
-    </Box>
-  </Flex>
+      <Box
+        textAlign="center"
+        bg="rgba(192, 75, 75, 0.6)"
+        borderRadius="10px"
+        p={3}
+        mb={3}
+        color="white"
+        fontSize={{ base: "20px", md: "24px" }}
+      >
+        <Text fontSize={{ base: "24px", md: "30px" }}>Servicios Activos</Text>
+        <Box fontSize={{ base: "18px", md: "24px" }}>15</Box>
+      </Box>
+{/* 
+      <Box textAlign="center" borderRadius="10px" p={3} mb={3} color="white">
+        <BtnPremium />
+      </Box> */}
+    </Grid>
   );
 };
 

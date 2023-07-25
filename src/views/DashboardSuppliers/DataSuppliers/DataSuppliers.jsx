@@ -11,24 +11,22 @@ import { Alert, AlertIcon } from "@chakra-ui/react";
 
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
-  // const userSession = JSON.parse(localStorage.getItem("userSession"));
+ 
   const session = useSessionState((state) => state.session);
 
   const profile = dataSuppliers.find((user) => user.id === session.id);
-  //console.log(profile);
+
 
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     dispatch(getProfesionals());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    // Obtén la URL actual
 
     const currentUrl = window.location.href;
 
-    // Extrae los parámetros de la URL
     const urlParams = new URLSearchParams(currentUrl);
 
     // Obtén los datos que necesitas
@@ -62,10 +60,9 @@ const DataSuppliers = () => {
   }, []);
 
 
-  // hay que validar que exista la propiedad porque si no sale undefined, validar con todos los campos
+  // hay que validar que exista la propiedad si no sale undefined
   const numPosts = profile && profile.posts ? profile.posts.length : 0;
 
-  // const serviciosActivos = profile && profile.servicios_activos ? profile.servicios_activos : 0;
   const serviciosActivos = 20;
   const serviciosTerminados = 15;
   const serviciosCancelados = 2;
@@ -118,11 +115,9 @@ const DataSuppliers = () => {
 
   useEffect(() => {
     dispatch(getProfesionals());
-
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [dispatch]);
 
   const chartWidth = windowWidth > 600 ? 600 : windowWidth - 20;
   const chartHeight = chartWidth;
