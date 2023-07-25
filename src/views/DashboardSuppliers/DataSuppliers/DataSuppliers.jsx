@@ -7,6 +7,8 @@ import { Box, Flex } from "@chakra-ui/react";
 import { useSessionState } from "../../../services/zustand/useSession";
 import { Alert, AlertIcon } from "@chakra-ui/react";
 
+//!cambios pasarela
+
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
   // const userSession = JSON.parse(localStorage.getItem("userSession"));
