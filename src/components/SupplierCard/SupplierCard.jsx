@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
+import {useState} from 'react'
 import {
   Heading,
   Avatar,
@@ -16,6 +17,10 @@ import { Link } from 'react-router-dom'
 import Tag from '../../singleComponents/Tag'
 import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
 import StarRatingComponent from 'react-star-rating-component'
+import FavoriteButton from '../FavoriteButton/FavoriteButton'
+import { useDispatch } from 'react-redux'
+import { addFavorite,getFavorites,removeFavorite } from '../../services/redux/actions/actions'
+import { useLocation } from 'react-router-dom' 
 
 import { useSessionState } from './../../services/zustand/useSession'
 
@@ -30,8 +35,30 @@ export default function SocialProfileSimple ({
 
 }) {
   const session = useSessionState((state) => state.session)
+  // Dispatch
+  const dispatch = useDispatch();
+  // const location = useLocation();
+  // Favorites State
+  const [isFavorite, setIsFavorite] = useState(false);
+  const toggleFavorite =  (id) => {
+    // console.log("Estoy en toggleFavorite y muestro el id: " + id)
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    // const favoriteRoute = location.pathname.includes('/favorites');
+   
+    if(isFavorite){
+      console.log(`Se removerá de favoritos el profesional de id: ${id}`)
+      dispatch(removeFavorite(id));
+      dispatch(getFavorites())
+    } else{
+      console.log(`Se agregará a favoritos el profesional de id: ${id}`)
+      dispatch(addFavorite(id));
+      dispatch(getFavorites())
 
-  console.log(rating)
+    }
+  };
+  // Favorites
+
+  // console.log(rating)
 
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
@@ -39,7 +66,8 @@ export default function SocialProfileSimple ({
   return (
     <Box
       maxW='350px'
-      height='430px'
+      // height='430px'
+      height='460px'
       w='full'
       bg={bgElement}
       boxShadow='lg'
@@ -47,21 +75,26 @@ export default function SocialProfileSimple ({
       p={6}
       textAlign='center'
     >
-      <Avatar
-        border='1px'
-        size='xl'
-        src={image || NoAvatar}
-        loading='lazy'
-        alt='Avatar'
-        mb={4}
-        pos='relative'
-      />
+      {/* {session.status === false ? '' : (
+      )} */}
+      <Box display='flex' justifyContent='flex-end' >
+       <FavoriteButton isFavorite={isFavorite} onClick={()=>toggleFavorite(id)} />
+     </Box>
+        <Avatar
+          border='1px'
+          size='xl'
+          src={image || NoAvatar}
+          loading='lazy'
+          alt='Avatar'
+          mb={4}
+          pos='relative'
+        />
       <Heading
         fontSize='2xl'
         fontFamily='body'
         color={txtColor}
         mb={3}
-      >
+        >
         {name}
       </Heading>
       <Box>
