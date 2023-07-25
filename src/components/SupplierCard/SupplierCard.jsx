@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {
   Heading,
   Avatar,
@@ -20,7 +20,6 @@ import StarRatingComponent from 'react-star-rating-component'
 import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import { useDispatch } from 'react-redux'
 import { addFavorite,getFavorites,removeFavorite } from '../../services/redux/actions/actions'
-import { useLocation } from 'react-router-dom' 
 
 import { useSessionState } from './../../services/zustand/useSession'
 
@@ -35,26 +34,30 @@ export default function SocialProfileSimple ({
 
 }) {
   const session = useSessionState((state) => state.session)
+  console.log(session)
+  
+
   // Dispatch
   const dispatch = useDispatch();
   // const location = useLocation();
   // Favorites State
-  const [isFavorite, setIsFavorite] = useState(false);
-  const toggleFavorite =  (id) => {
-    // console.log("Estoy en toggleFavorite y muestro el id: " + id)
+  const [isFavorite, setIsFavorite] = useState(() => {
+    const favoriteStatus = localStorage.getItem(`favorite_${id}`);
+    return favoriteStatus === 'true';
+  });  const [isButtonDisable,setIsButtonDisable] = useState(false)
+  const toggleFavorite = async (id) => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-    // const favoriteRoute = location.pathname.includes('/favorites');
-   
-    if(isFavorite){
-      console.log(`Se removerá de favoritos el profesional de id: ${id}`)
-      dispatch(removeFavorite(id));
-      dispatch(getFavorites())
-    } else{
-      console.log(`Se agregará a favoritos el profesional de id: ${id}`)
-      dispatch(addFavorite(id));
-      dispatch(getFavorites())
-
+  
+    if (isFavorite) {
+      // console.log(`Se removerá de favoritos el profesional de id: ${id}`);
+      await dispatch(removeFavorite(id));
+      await dispatch(getFavorites());
+    } else {
+      // console.log(`Se agregará a favoritos el profesional de id: ${id}`);
+      await dispatch(addFavorite(id));
+      await dispatch(getFavorites());
     }
+    setIsButtonDisable(false);
   };
   // Favorites
 
@@ -62,6 +65,17 @@ export default function SocialProfileSimple ({
 
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
+
+  // UseEffect
+  useEffect(() => {
+    localStorage.setItem(`favorite_${id}`, isFavorite);
+  }, [id, isFavorite]);
+
+  // Efecto para recuperar el estado del localStorage al montar el componente
+  useEffect(() => {
+    const favoriteStatus = localStorage.getItem(`favorite_${id}`);
+    setIsFavorite(favoriteStatus === 'true');
+  }, [id]);
 
   return (
     <Box
@@ -75,11 +89,12 @@ export default function SocialProfileSimple ({
       p={6}
       textAlign='center'
     >
-      {/* {session.status === false ? '' : (
-      )} */}
+      {session.status === false || (session.usuario !== "c" && session.status === true )? '' : (
       <Box display='flex' justifyContent='flex-end' >
-       <FavoriteButton isFavorite={isFavorite} onClick={()=>toggleFavorite(id)} />
+       <FavoriteButton isFavorite={isFavorite} onClick={()=>toggleFavorite(id)} isDisabled={isButtonDisable} />
      </Box>
+
+      )}
         <Avatar
           border='1px'
           size='xl'
