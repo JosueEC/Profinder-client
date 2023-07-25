@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { StarIcon, SmallCloseIcon } from "@chakra-ui/icons";
 
-const FavoriteButton = ({isFavorite,onClick}) => {
+const FavoriteButton = ({isFavorite,onClick,isDisabled}) => {
   const buttonIcon = isFavorite ? <SmallCloseIcon /> : <StarIcon />;
   // console.log(onClick)
   return (
