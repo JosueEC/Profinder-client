@@ -5,6 +5,7 @@ import { getProfesionals } from "../../../services/redux/actions/actions";
 import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import { useSessionState } from "../../../services/zustand/useSession";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
@@ -15,7 +16,7 @@ const DataSuppliers = () => {
   //console.log(profile);
 
   const dispatch = useDispatch();
-
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     dispatch(getProfesionals());
   }, []);
@@ -39,7 +40,7 @@ const DataSuppliers = () => {
     // Verifica si collectionStatus es "approved"
     if (collectionStatus === "approved") {
       // Enviar los datos al backend en un JSON mediante una solicitud POST
-      alert("Eres premium");
+      setShowAlert(true);
       axios
         .post("https://backprofinder-production.up.railway.app/premium", {
           collectionStatus: collectionStatus,
@@ -48,6 +49,8 @@ const DataSuppliers = () => {
         .then((response) => {
           console.log("Respuesta del backend:", response.data);
           // Aquí puedes manejar la respuesta del backend, si es necesario
+          window.location.href =
+            "https://profinder-client.vercel.app/dashboardSuppliers";
         })
         .catch((error) => {
           console.error("Error al enviar datos al backend:", error);
@@ -55,6 +58,7 @@ const DataSuppliers = () => {
         });
     }
   }, []);
+
 
   // hay que validar que exista la propiedad porque si no sale undefined, validar con todos los campos
   const numPosts = profile && profile.posts ? profile.posts.length : 0;
@@ -122,6 +126,10 @@ const DataSuppliers = () => {
   const chartHeight = chartWidth;
   return (
     <Flex justifyContent="center" alignItems="center">
+      <Alert status="success" display={showAlert ? "flex" : "none"} mb={4}>
+      <AlertIcon />
+      ¡Eres premium!
+    </Alert>
       <Box width={`${chartWidth}px`} height={`${chartHeight}px`}>
         {" "}
         <Doughnut data={chartData} options={chartOptions} />
