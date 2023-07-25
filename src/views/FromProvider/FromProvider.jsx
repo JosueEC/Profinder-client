@@ -30,7 +30,7 @@ import SelectCategories from "../../singleComponents/SelectCategories";
 import { uploadFile } from "../../utils/Firebase/config";
 import { postSessionUser } from "../../services/redux/actions/actions";
 import { useCredentials } from "../../utils/customHooks/useCredentials";
-import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
+// import PrivacyNotice from "../../components/PrivacyNotice/PrivacyNotice";
 import GoogleAuthButton from "./../../singleComponents/GooglAuthButton";
 
 function FormProvider() {
@@ -158,7 +158,7 @@ function FormProvider() {
   };
 
   // Function to handle the success of Google authentication
-  const handleGoogleAuthSuccess = () => {
+  const handleGoogleAuthSuccess = (userData) => {
     setGoogleUserData(userData); // Actualiza el estado con los datos del usuario de Google
 
     setStep(2);
@@ -303,7 +303,10 @@ function FormProvider() {
               >
                 Siguiente
               </Button>
-              <GoogleAuthButton onSuccess={handleGoogleAuthSuccess} />
+              <GoogleAuthButton
+                setValue={setValue}
+                getUserData={handleGoogleAuthSuccess}
+              />
             </form>
           </>
         ) : (
