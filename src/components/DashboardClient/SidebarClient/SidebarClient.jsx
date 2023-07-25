@@ -1,7 +1,7 @@
 // import { AiOutlineUsergroupAdd} from 'react-icons/ai'
 import { Box, Stack, Text, useColorModeValue, IconButton, Collapse, useMediaQuery, Tooltip} from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
-import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon, SearchIcon} from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, EditIcon, StarIcon, QuestionOutlineIcon, ChatIcon} from '@chakra-ui/icons';
 import { useState } from 'react';
 
 const SidebarClient = () => {
@@ -57,6 +57,9 @@ const SidebarClient = () => {
           >
             <Text>Profesionales</Text>
           </NavLink> */}
+          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
+            <Text>Favoritos</Text>
+          </NavLink>
           <NavLink
             to="/dashboardClient/feedbackform"
             style={linkStyle}
@@ -80,9 +83,13 @@ const SidebarClient = () => {
               <EditIcon />
             </Tooltip>
           </NavLink>
-
           <NavLink to="/dashboardClient/recomended" style={linkStyle} activeClassName="active">
             <Tooltip label="Recomendados" aria-label="Recomendados">
+              <StarIcon />
+            </Tooltip>
+          </NavLink>
+          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName= "active">
+            <Tooltip label="Favoritos" aria-label="Favoritos">
               <StarIcon />
             </Tooltip>
           </NavLink>

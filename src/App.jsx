@@ -23,6 +23,7 @@ import DashboardClientTopPro from "./views/DashboardClient/DashboardClientTopPro
 import DashboardClientCategories from "./views/DashboardClient/DashboardClientCategories/DashboardClientCategories";
 import DashboardClientFeedbackForm from "./views/DashboardClient/DashboardClientFeedbackForm/DashboardClientFeedbackForm";
 import DashboardClientHelp from "./views/DashboardClient/DashboardClientHelp/DashboardClientHelp";
+import DashboardClientFavorite from "./views/DashboardClient/DashBoardClientFavorite/DashBoardClientFavorite";
 import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
@@ -71,6 +72,11 @@ function App() {
         <Route
           exact
           path="/dashboardAdmin/manageProfesional"
+          element={<DashboardAdmin />}
+        />
+        <Route
+          exact
+          path="/dashboardAdmin/managePost"
           element={<DashboardAdmin />}
         />
         {/* Dash Profesional */}
@@ -125,6 +131,7 @@ function App() {
           path="/dashboardClient/recomended"
           element={<DashboardClientTopPro />}
         />
+        <Route exact path="/dashboardClient/favorites" element={<DashboardClientFavorite/>}/>
         <Route
           exact
           path="/dashboardClient/categories"

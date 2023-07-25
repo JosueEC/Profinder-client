@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { loginSessionGoogle } from '../services/redux/actions/actions'
 import jwt_decode from 'jwt-decode'
 
-export default function GoogleAuthButton ({ setValue }) {
+export default function GoogleAuthButton ({ setValue, getUserData }) {
   const dispatch = useDispatch()
   const toast = useToast()
 
@@ -19,6 +19,15 @@ export default function GoogleAuthButton ({ setValue }) {
     setValue('name', userObject.name)
     setValue('email', userObject.email)
     setValue('password', `${userObject.given_name.toLowerCase()}GOOAT0`)
+
+    const userData = {
+      name: userObject.name,
+      email: userObject.email,
+      password: `${userObject.given_name.toLowerCase()}GOOAT0`
+    }
+
+    getUserData(userData)
+    
     userObject && toast({
       title: 'Cuenta vinculada',
       description: 'Completa los demas campos para finalizar el registro',

@@ -13,6 +13,9 @@ import {
   DELETE_POST,
   UPDATE_POST,
   GET_ID_PROFESIONAL,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
+  GET_FAVORITES
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -34,6 +37,7 @@ const getAllSuppliers = () => {
 
 const getProfesionalIdOnline = (id) => {
   const URL = `${API.DBONLINE}/profesional/${id}`;
+  // const URL = `${API.LOCALHOST}/profesional/${id}`;
 
   return function(dispatch) {
     axios
@@ -385,6 +389,7 @@ const updateFeedback = (feedbackData) => {
       // Llamar a la API o endpoint correspondiente para enviar el feedback
       const response = await axios.post(
         "https://backprofinder-production.up.railway.app/review",
+        // "http://localhost:3001/review",
         feedbackData
       );
 
@@ -458,20 +463,92 @@ const deletePost = (id) => async (dispatch) => {
   }
 };
 
-const getAllLocations = () => {
-  // const URL = `${API.LOCALHOST}/profesional`
-  const URL = `${API.DBONLINE}/location`;
 
-  return function(dispatch) {
-    axios
-      .get(URL)
-      .then((response) => {
-        dispatch({ type: "GET_ALL_LOCATIONS", payload: response.data });
-      })
-      .catch((error) => console.error(error.message));
-  };
+const addFavorite = (profesionalId) => async (dispatch) => {
+  try {
+    const userSession = window.localStorage.getItem("userSession");
+    if (!userSession) {
+      throw new Error("Usuario no autenticado");
+    }
+    const user = JSON.parse(userSession);
+    const userId = user.id;
+    // const URL = `http://localhost:3001/relation/${userId}`;
+    const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
+
+    await axios.post(URL, { profesionalId: profesionalId });
+    console.log(`Se agregará a favoritos el profesional de id: ${profesionalId}`);
+    dispatch({ type: ADD_FAVORITE, payload: profesionalId });
+  } catch (error) {
+    console.error(error.response.data.error);
+  }
 };
 
+const removeFavorite = (profesionalId) => async (dispatch) => {
+  try {
+    const userSession = window.localStorage.getItem("userSession");
+    if (!userSession) {
+      throw new Error("Usuario no autenticado");
+    }
+    const user = JSON.parse(userSession);
+    const userId = user.id;
+    // const URL = `http://localhost:3001/relation/${userId}`;
+    const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
+
+    await axios.put(URL, { profesionalId: profesionalId });
+    console.log(`Se removerá de favoritos el profesional de id: ${profesionalId}`);
+    dispatch({ type: REMOVE_FAVORITE, payload: profesionalId });
+  } catch (error) {
+    console.error(error.response.data.error);
+  }
+};
+
+const getFavorites = () => async (dispatch) => {
+  try {
+    const userSession = window.localStorage.getItem("userSession");
+    if (!userSession) {
+      throw new Error("Usuario no autenticado");
+    }
+    const user = JSON.parse(userSession);
+    const userId = user.id;
+
+    // const URL = `http://localhost:3001/relation/${userId}`;
+    const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
+    const response = await axios.get(URL);
+    const favoritesList = response.data; // Asegúrate de que response.data sea la lista de favoritos en el backend
+    // console.log(response.data)
+    // console.log(response.data.map((fav)=>fav.id))
+    dispatch({
+      type: GET_FAVORITES,
+      payload: favoritesList,
+    });
+  } catch (error) {
+    console.log(error.response.data.error);
+  }
+};
+
+// const getFavorites = (info) => {
+//   const userSession = window.localStorage.getItem("userSession");
+//   if (userSession) {
+//     const user = JSON.parse(userSession);
+//     info.id = user.id;
+//   }
+//   // const URL =`https://backprofinder-production.up.railway.app/relation/${info.id}`
+//   const URL =`http://localhost:3001/relation/${info.id}`
+//   return async function(dispatch) {
+//     try {
+//       let response = await axios.get(`${URL}`);
+//       //  console.log(response.data);
+//       if (response.data) {
+//         return dispatch({
+//           type: GET_INFO_PROFESIONALS,
+//           payload: response.data,
+//         });
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
 // const deletePosts = (info) => {
 //   // const URL = `${API.LOCALHOST}/postprofesional`
 //   const URL = 'https:backprofinder-production.up.railway.app/postProfesional';
@@ -524,5 +601,5 @@ export {
   deletePost,
   updatePosts,
   getProfesionalIdOnline,
-  getAllLocations
+  addFavorite,removeFavorite,getFavorites
 };
