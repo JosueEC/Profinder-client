@@ -97,7 +97,7 @@ const Navbar = () => {
               </MenuItem>
               <MenuItem
                 color={useColorModeValue("gray.900", "gray.100")}
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/aboutus")}
               >
                 Acerca de
               </MenuItem>

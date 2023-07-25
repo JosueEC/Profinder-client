@@ -155,7 +155,7 @@ export default function LoggedNavbar () {
                 <NavLink textLink='¿Como funciona?' routeLink='/comofunciona' />
                 <NavLink textLink='Profesionales' routeLink='/categories' />
                 <NavLink textLink='Contacto' routeLink='/feedback' />
-                <NavLink textLink='Acerca de' routeLink='/' />
+                <NavLink textLink='Acerca de' routeLink='/aboutus' />
               </Stack>
             </Box>
             )
