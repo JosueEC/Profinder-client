@@ -1,106 +1,100 @@
-import { Box, Flex, Link } from '@chakra-ui/layout'
-import { chakra } from '@chakra-ui/system'
+import { Box, Badge } from '@chakra-ui/layout'
+import { chakra, useColorModeValue } from '@chakra-ui/system'
 
 export default function PostRegister () {
+  const bgElement = useColorModeValue('white', 'gray.800')
+  const txtColor = useColorModeValue('gray.800', 'gray.100')
+
   return (
-    <Flex
-      bg='#edf3f8'
-      _dark={{
-        bg: '#3e3e3e'
+    <Box // card
+      bg={bgElement}
+      width='600px'
+      height={{
+        lg: '250px'
       }}
-      p={50}
-      w='full'
-      alignItems='center'
-      justifyContent='center'
+      mx={{
+        lg: 8
+      }}
+      display={{
+        lg: 'flex'
+      }}
+      maxW={{
+        lg: '5xl'
+      }}
+      shadow={{
+        lg: 'lg'
+      }}
+      rounded={{
+        lg: 'lg'
+      }}
     >
       <Box
-        bg='white'
-        _dark={{
-          bg: 'gray.800'
-        }}
-        mx={{
-          lg: 8
-        }}
-        display={{
-          lg: 'flex'
-        }}
-        maxW={{
-          lg: '5xl'
-        }}
-        shadow={{
-          lg: 'lg'
-        }}
-        rounded={{
-          lg: 'lg'
+        w={{
+          lg: '50%'
         }}
       >
         <Box
-          w={{
-            lg: '50%'
+          h={{
+            base: 64,
+            lg: 'full'
           }}
-        >
-          <Box
-            h={{
-              base: 64,
-              lg: 'full'
-            }}
-            rounded={{
-              lg: 'lg'
-            }}
-            bgSize='cover'
-            style={{
-              backgroundImage:
-            "url('https://images.unsplash.com/photo-1593642532400-2682810df593?ixlib=rb-1.2.1&ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80')"
-            }}
-          />
-        </Box>
+          rounded={{
+            lg: 'lg'
+          }}
+          bgSize='cover'
+          style={{
+            backgroundImage:
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxosowAZ8xrfmOtp2p3zpGR7IYzSJUDuGUQ&usqp=CAU')"
+          }}
+        />
+      </Box>
 
-        <Box
-          py={12}
-          px={6}
-          maxW={{
-            base: 'xl',
-            lg: '5xl'
-          }}
-          w={{
-            lg: '50%'
-          }}
+      <Box
+        py={5}
+        px={6}
+        maxW={{
+          base: 'xl',
+          lg: '5xl'
+        }}
+        w={{
+          lg: '50%'
+        }}
+      >
+        <Badge
+          colorScheme='green'
+          fontSize='1.1rem'
         >
-          <chakra.h2
-            fontSize={{
-              base: '2xl',
-              md: '3xl'
-            }}
-            color='gray.800'
-            _dark={{
-              color: 'white'
-            }}
-            fontWeight='bold'
-          >
-            Build Your New{' '}
-            <chakra.span
+          Activa
+        </Badge>
+        <chakra.h2
+          fontSize={{
+            base: '2xl',
+            md: '2xl'
+          }}
+          color='gray.800'
+          _dark={{
+            color: 'white'
+          }}
+          fontWeight='bold'
+        >
+          Asistente virtual para tareas administrativas
+          {/* <chakra.span
               color='brand.600'
               _dark={{
                 color: 'brand.400'
               }}
             >
               Idea
-            </chakra.span>
-          </chakra.h2>
-          <chakra.p
-            mt={4}
-            color='gray.600'
-            _dark={{
-              color: 'gray.400'
-            }}
-          >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi
-            reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim
-            expedita aperiam mollitia iure consectetur dicta tenetur, porro
-            consequuntur saepe accusantium consequatur.
-          </chakra.p>
+            </chakra.span> */}
+        </chakra.h2>
+        <chakra.p
+          mt={4}
+          color={txtColor}
+        >
+          Diseño prendas de moda innovadoras y vanguardistas para lucir con estilo.
+        </chakra.p>
 
-          <Box mt={8}>
+        {/* <Box mt={8}>
             <Link
               bg='gray.900'
               color='gray.100'
@@ -114,9 +108,9 @@ export default function PostRegister () {
             >
               Start Now
             </Link>
-          </Box>
-        </Box>
+          </Box> */}
       </Box>
-    </Flex>
+    </Box>
+
   )
 }
