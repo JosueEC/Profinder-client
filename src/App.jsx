@@ -28,11 +28,11 @@ import FormServicio from "../src/views/FormServicio/FormServicio";
 import PasarelaPagos from "./views/PasarelaPagos/PasarelaPagos";
 import PostsSuppliers from "./views/DashboardSuppliers/PostSuppliers/PostsSuppliers";
 import CustomChatBot from "./components/CustomChatBot/CustomChatBot";
-//import Sidebar from "./views/DashboardSuppliers/Sidebar/Sidebar";
 import SupplierPost from "./components/SupplierPost/SupplierPost";
 import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import AboutUs from "./views/AboutUs/AboutUs";
+import Certificates from "./views/DashboardSuppliers/Certificates/Certiificates";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -47,7 +47,7 @@ function App() {
     }
   }, []);
   const isHomePage = location.pathname === "/";
-  const isDashboardSuppliers = location.pathname.includes("/dashboardSuppliers");
+
   return (
     <div>
       {session.status ? <LoggedNavbar /> : <Navbar />}
@@ -85,12 +85,11 @@ function App() {
           path="/dashboardSuppliers/publicaciones"
           element={<FormServicio />}
         />
-         <Route
+        <Route
           exact
           path="dashboardSuppliers/updateprofile/:id"
           element={<FormUpdateProfile />}
         />
-        
         <Route
           exact
           path="/dashboardSuppliers/pasarela"
@@ -106,20 +105,22 @@ function App() {
           path="/dashboardSuppliers/help"
           element={<CustomChatBot />}
         />
-                <Route
+        <Route
           exact
           path="/dashboardSuppliers/updatepost/:id"
           element={<UpdatePost />}
         />
-        {/* <Route exact path="/dashboardSuppliers/sidebar" element={<Sidebar />} /> */}
-        {/* Dash cliente */}
+        <Route
+          exact
+          path="/dashboardSuppliers/certificados"
+          element={<Certificates />}
+        />
         <Route exact path="/dashboardClient" element={<DashboardClient />} />
         <Route
           exact
           path="/dashboardClient/editForm"
           element={<DashboardClientEditForm />}
         />
-    
         <Route
           exact
           path="/dashboardClient/recomended"
@@ -143,7 +144,7 @@ function App() {
           element={<DashboardClientHelp />}
         />
       </Routes>
-      {!isHomePage && !isDashboardSuppliers && <Footer />}
+      {!isHomePage  && <Footer />}
     </div>
   );
 }

@@ -31,12 +31,11 @@ export default function LoggedNavbar () {
   const navigate = useNavigate()
   const toast = useToast()
   const session = useSessionState(state => state.session)
-  console.log(session);
+
   const removeSessionState = useSessionState(state => state.removeSessionState)
   const profesionalesimg = useSelector((state) => state.profesionales);
 
-   const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
-   console.log(filteredImage);
+  const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
 
   function handleLogout () {
     removeSessionState()

@@ -32,7 +32,6 @@ export default function UsersTable () {
   return (
     <Flex // Container tabla
       w='full'
-      p={50}
       alignItems='center'
       justifyContent='center'
     >

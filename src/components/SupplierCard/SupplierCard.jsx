@@ -9,10 +9,11 @@ import {
   Stack,
   Button,
   useColorModeValue,
-  Icon
+  Icon,
+  Flex
 } from '@chakra-ui/react'
 import { AtSignIcon } from '@chakra-ui/icons'
-import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaStar } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Tag from '../../singleComponents/Tag'
 import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
@@ -34,6 +35,7 @@ export default function SocialProfileSimple ({
 
 }) {
   const session = useSessionState((state) => state.session)
+
   console.log(session)
   
 
@@ -66,7 +68,7 @@ export default function SocialProfileSimple ({
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
 
-  // UseEffect
+ // UseEffect
   useEffect(() => {
     localStorage.setItem(`favorite_${id}`, isFavorite);
   }, [id, isFavorite]);
@@ -112,16 +114,25 @@ export default function SocialProfileSimple ({
         >
         {name}
       </Heading>
-      <Box>
-        <StarRatingComponent
-          name='rating'
-          starCount={5}
-          value={rating}
-          starColor='#FFD700'
-          emptyStarColor='#CCCCCC'
-          editing={false}
-        />
-      </Box>
+      <Flex
+        direction='row'
+        justify='center'
+      >
+        {
+          [...new Array(5)].map((star, index) => {
+            
+            return index < rating?? 0
+              ? <FaStar
+                  color='yellow'
+                  fontSize='1.3rem'
+                />
+              : <FaStar
+                  color='white'
+                  fontSize='1.3rem'
+                />
+          })
+        }
+      </Flex>
 
       <Text fontWeight={600} color='gray.500' noOfLines={1}>
         <AtSignIcon mr={2} color='teal.400' />

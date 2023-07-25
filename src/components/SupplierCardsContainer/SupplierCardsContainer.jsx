@@ -27,6 +27,7 @@ export default function SupplierCardsContainer ({ visibleSuppliers }) {
                   name,
                   email,
                   image,
+                  rating,
                   ubication,
                   description,
                   professions
@@ -38,6 +39,7 @@ export default function SupplierCardsContainer ({ visibleSuppliers }) {
                       name={name}
                       email={email}
                       image={image}
+                      rating={rating}
                       ubication={ubication}
                       description={description}
                       professions={professions}

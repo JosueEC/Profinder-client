@@ -15,6 +15,7 @@ import {
   Flex,
   useColorModeValue,
   SimpleGrid,
+  Stack,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
@@ -34,7 +35,7 @@ export default function SupplierPost() {
   const [showFullContent, setShowFullContent] = useState(false);
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.profesionalId);
-  console.log(professional);
+  // console.log(professional);
 
   useEffect(() => {
     // Función asincrónica para obtener el ID
@@ -60,31 +61,33 @@ export default function SupplierPost() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  const handleToggleContent = () => {
+    setShowFullContent((prevValue) => !prevValue);
+  };
 
   if (!professional || !professional[0]) {
     return <Text>Loading...</Text>;
   }
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4} justifyContent="center" alignItems="center">
-      {professional ? (
-        professional[0].posts.map((post) => (
-          <Flex
-            key={post.id}
-            flexDirection={{ base: "column", md: "row" }}
-            alignItems={{ base: "center", md: "flex-start" }}
-          >
+    <Stack mt={12} justify="center" spacing={10} align="center">
+      <Grid
+        templateColumns={["3fr", "3fr", "3fr", "repeat(3, 1fr)"]}
+        gap={5}
+        justifyContent="center"
+      >
+        {professional ? (
+          professional[0].posts.map((post) => (
             <Box
-              maxW={{ base: "full", md: "500px" }}
-              w={{ base: "full", md: "500px" }}
+              key={post.id}
               bg={useColorModeValue("blackAlpha.800", "gray.800")}
+              maxW={"450px"}
+              w={"full"}
               boxShadow={"2xl"}
               rounded={"md"}
               overflow={"hidden"}
               p={6}
-              marginLeft={{ base: "0", md: "10px" }}
-              minH="200px"
-              maxH="500px"
+              marginLeft="10px"
             >
               <Box justifyContent="center">
                 <EditIcon
@@ -96,27 +99,13 @@ export default function SupplierPost() {
               </Box>
               <Box justifyContent="center" marginTop="5">
                 <Text
-                  color={"green.500"}
+                  color={"teal.500"}
                   textTransform={"uppercase"}
                   fontWeight={700}
-                 
                   letterSpacing={1.1}
                   fontSize={{ base: "xl", md: "2xl" }}
                 >
                   {post.title}
-                </Text>
-              </Box>
-              <Box
-                justifyContent="center"
-                maxHeight="150px"
-                overflow="hidden"
-                marginTop="5"
-              >
-                <Text
-                  color={"gray.500"}
-                  noOfLines={showFullContent ? undefined : 4}
-                >
-                  {post.content}
                 </Text>
               </Box>
 
@@ -136,12 +125,33 @@ export default function SupplierPost() {
                   />
                 ))}
               </Slider>
+              <Box>
+                {post.content.length > 100 && (
+                  <Button
+                    bg="teal.400"
+                    color="white"
+                    _hover={{ bg: "teal.500" }}
+                    size="sm"
+                    mt={2}
+                    onClick={handleToggleContent}
+                  >
+                    {showFullContent ? "Ver menos" : "Leer más"}
+                  </Button>
+                )}
+
+                {/* Contenido del post */}
+                <Text color={"gray.200"}>
+                  {showFullContent
+                    ? post.content
+                    : post.content.substring(0, 100)}
+                </Text>
+              </Box>
             </Box>
-          </Flex>
-        ))
-      ) : (
-        <Text>No posts found for the given identifier.</Text>
-      )}
-  </SimpleGrid>
+          ))
+        ) : (
+          <Text>No posts found for the given identifier.</Text>
+        )}
+      </Grid>
+    </Stack>
   );
 }
