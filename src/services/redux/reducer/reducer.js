@@ -162,7 +162,7 @@ const reducer = (state = initialState, action) => {
       const { profesionalId } = action.payload;
       return {
         ...state,
-        favorites: state.favorites.filter((id) => id !== profesionalId),
+        favorites: [...state.favorites.filter((id) => id !== profesionalId)],
       };
     }
     // Obtener los profesionales favoritos del cliente
