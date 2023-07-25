@@ -73,6 +73,11 @@ function App() {
           path="/dashboardAdmin/manageProfesional"
           element={<DashboardAdmin />}
         />
+        <Route
+          exact
+          path="/dashboardAdmin/managePost"
+          element={<DashboardAdmin />}
+        />
         {/* Dash Profesional */}
         <Route
           exact
