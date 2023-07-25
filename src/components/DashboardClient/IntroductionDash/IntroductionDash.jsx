@@ -11,7 +11,7 @@ const IntroductionDash = () => {
       width="100%"
       bg={useColorModeValue('gray.500', 'gray.800')}
       boxShadow="base"
-      borderRadius="md"
+    
       p={4}
     >
       <Center>

@@ -42,7 +42,9 @@ function EditClient() {
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-
+  const placeholderTextColorLight = "gray.200";
+  const placeholderTextColor = colorMode === "light" ? placeholderTextColorLight : undefined;
+  
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
   useEffect(() => {
@@ -250,6 +252,7 @@ function EditClient() {
                   onChange={handleNameChange}
                   bg={bgColor}
                   color={textColor}
+                  placeholderTextColor={placeholderTextColor}
                 />
               </Box>
             </FormControl>
@@ -259,11 +262,13 @@ function EditClient() {
                 <Input
                   variant="unstyled"
                   type="email"
+                  
                   placeholder="Correo electrónico"
                   value={email}
                   onChange={handleEmailChange}
                   bg={bgColor}
                   color={textColor}
+                  placeholderTextColor={placeholderTextColor}
                 />
               </Box>
             </FormControl>
@@ -278,6 +283,7 @@ function EditClient() {
                   onChange={handlePhoneChange}
                   bg={bgColor}
                   color={textColor}
+                  placeholderTextColor={placeholderTextColor}
                 />
               </Box>
             </FormControl>
@@ -299,6 +305,7 @@ function EditClient() {
               <Box>
                 <FormLabel>País</FormLabel>
                 <Select
+                
                   placeholder="País"
                   value={countryId}
                   onChange={handleCountryChange}
@@ -337,11 +344,13 @@ function EditClient() {
               <Box>
                 <FormLabel>Descripción</FormLabel>
                 <Textarea
+                
                   placeholder="Descripción"
                   value={description}
                   onChange={handleDescriptionChange}
                   bg={bgColor}
                   color={textColor}
+                  placeholderTextColor={placeholderTextColor}
                 />
               </Box>
             </FormControl>

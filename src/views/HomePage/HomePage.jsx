@@ -9,6 +9,8 @@ import FeaturesGrid from '../../components/Home/FeaturesGrid/FeaturesGrid'
 import TestimonialCarrousel from '../../components/Home/TestimonialCarrousel/TestimonialCarrousel'
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks'
 import CategoriesSection from '../../components/Home/CategoriesSection/CategoriesSection'
+import Map from '../../components/Home/MapSection/Map';
+
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -81,8 +83,16 @@ const HomePage = () => {
 
         <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
         <TopPro />
+        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
       </Box>
-
+    
+      {/* <Box 
+      
+      backgroundColor={backgroundColor}>
+      <Map />
+      
+      </Box>
+       */}
       <Footer />
     </Box>
   );

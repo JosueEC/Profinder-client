@@ -5,27 +5,28 @@ import { getProfesionals } from "../../../services/redux/actions/actions";
 import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import { useSessionState } from "../../../services/zustand/useSession";
+import { Alert, AlertIcon } from "@chakra-ui/react";
+
+//!cambios pasarela
 
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
-  // const userSession = JSON.parse(localStorage.getItem("userSession"));
+ 
   const session = useSessionState((state) => state.session);
 
   const profile = dataSuppliers.find((user) => user.id === session.id);
-  //console.log(profile);
+
 
   const dispatch = useDispatch();
-
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     dispatch(getProfesionals());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    // Obtén la URL actual
 
     const currentUrl = window.location.href;
 
-    // Extrae los parámetros de la URL
     const urlParams = new URLSearchParams(currentUrl);
 
     // Obtén los datos que necesitas
@@ -39,7 +40,7 @@ const DataSuppliers = () => {
     // Verifica si collectionStatus es "approved"
     if (collectionStatus === "approved") {
       // Enviar los datos al backend en un JSON mediante una solicitud POST
-      alert("Eres premium");
+      setShowAlert(true);
       axios
         .post("https://backprofinder-production.up.railway.app/premium", {
           collectionStatus: collectionStatus,
@@ -48,6 +49,8 @@ const DataSuppliers = () => {
         .then((response) => {
           console.log("Respuesta del backend:", response.data);
           // Aquí puedes manejar la respuesta del backend, si es necesario
+          window.location.href =
+            "https://profinder-client.vercel.app/dashboardSuppliers";
         })
         .catch((error) => {
           console.error("Error al enviar datos al backend:", error);
@@ -56,10 +59,10 @@ const DataSuppliers = () => {
     }
   }, []);
 
-  // hay que validar que exista la propiedad porque si no sale undefined, validar con todos los campos
+
+  // hay que validar que exista la propiedad si no sale undefined
   const numPosts = profile && profile.posts ? profile.posts.length : 0;
 
-  // const serviciosActivos = profile && profile.servicios_activos ? profile.servicios_activos : 0;
   const serviciosActivos = 20;
   const serviciosTerminados = 15;
   const serviciosCancelados = 2;
@@ -112,16 +115,18 @@ const DataSuppliers = () => {
 
   useEffect(() => {
     dispatch(getProfesionals());
-
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [dispatch]);
 
   const chartWidth = windowWidth > 600 ? 600 : windowWidth - 20;
   const chartHeight = chartWidth;
   return (
     <Flex justifyContent="center" alignItems="center">
+      <Alert status="success" display={showAlert ? "flex" : "none"} mb={4}>
+      <AlertIcon />
+      ¡Eres premium!
+    </Alert>
       <Box width={`${chartWidth}px`} height={`${chartHeight}px`}>
         {" "}
         <Doughnut data={chartData} options={chartOptions} />

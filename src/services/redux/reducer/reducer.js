@@ -9,11 +9,15 @@ import {
   GET_INFO_PROFESIONALS,
   DELETE_POST,
   UPDATE_POST,
-  GET_ID_PROFESIONAL,
+  GET_ID_PROFESIONAL, 
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
+  GET_FAVORITES
 } from "../actionsTypes/actionsType";
 import { filterSuppliers } from "../filters/reduxFilters";
 
 const initialState = {
+  location: [],
   suppliers: [],
   ocupations: [],
   backup: [],
@@ -33,6 +37,7 @@ const initialState = {
     genre: "Genero",
   },
   session: [],
+  favorites: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -141,6 +146,35 @@ const reducer = (state = initialState, action) => {
         }
       );
       return { ...state, profesionales: updatedProfesionalesForDelete };
+    }
+    // Agregar un profesional como favorito
+    case ADD_FAVORITE: {
+      const { profesionalId } = action.payload;
+      if (!state.favorites.includes(profesionalId)) {
+        return {
+          ...state,
+          favorites: [...state.favorites, profesionalId],
+        };
+      }
+      return state;
+    }
+    // Remover un profesional como favorito
+    case REMOVE_FAVORITE: {
+      const { profesionalId } = action.payload;
+      return {
+        ...state,
+        favorites: [...state.favorites.filter((id) => id !== profesionalId)],
+      };
+    }
+    // Obtener los profesionales favoritos del cliente
+    case GET_FAVORITES: {
+      const favoritesList = action.payload;
+      // console.log("" + favoritesList)
+      console.log(favoritesList.map((fav)=>fav.id))
+      return {
+        ...state,
+        favorites: favoritesList,
+      };
     }
     //! caso por default
     default:

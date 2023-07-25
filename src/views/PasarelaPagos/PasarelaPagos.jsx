@@ -25,7 +25,7 @@ function PasarelaPagos() {
   const session = useSessionState((state) => state.session);
 
   const profile = dataSuppliers.find((user) => user.id === session.id);
-  console.log(session.id);
+ // console.log(session.id);
 
   const dispatch = useDispatch();
 

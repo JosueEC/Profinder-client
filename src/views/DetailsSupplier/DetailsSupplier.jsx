@@ -39,6 +39,7 @@ const ArticleList = () => {
 
   useEffect(() => {
     dispatch(getProfesionalIdOnline(id));
+    window.scrollTo(0, 0);
   }, [dispatch, id]);
 
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -57,139 +58,135 @@ const ArticleList = () => {
 
   return (
     <>
-  
-    <Spacer h="100px" />
-    <Container
-      key={profesionalId.id}
-      color="gray.300"
-      bg={useColorModeValue("gray.800", "gray.500")}
-      maxW="100%"
-      py="5"
-      px={{ base: "2", md: "8", lg: "10rem" }}
-      align={"center"}
-      justify={"center"}
-    >
-      <ScaleFade initialScale={0.9} in>
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          justify="center"
-          align="center"
-          mt={8}
-          gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
-          maxW={{ base: "full", md: "900px" }}
-          w={{ base: "full", md: "900px" }}
-        >
-          <Box>
+      {/* <Spacer h="100px" /> */}
+      <Container
+        key={profesionalId.id}
+        // color="gray.300"
+        bg={useColorModeValue("gray.800", "gray.500")}
+        maxW="100%"
+        // py="5"
+        px={{ base: "2", md: "8", lg: "10rem" }}
+        align={"center"}
+        justify={"center"}
+      >
+        <ScaleFade initialScale={0.9} in>
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            justify="center"
+            align="center"
+            // mt={8}
+            gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
+            maxW={{ base: "full", md: "900px" }}
+            w={{ base: "full", md: "900px" }}
+          >
+           <Box flex={{ base: "1", md: "2" }}>
             <Link to="/categories">
               <Button
                 bg="teal.400"
                 color="white"
                 _hover={{ bg: "teal.500" }}
                 size="lg"
-                marginTop="5"
                 w="100%"
-              >
+                order={{ base: 2, md: 1 }} 
+                alignSelf={{ base: "center", md: "auto" }}          >
                 Volver
               </Button>
             </Link>
           </Box>
-          {profesionalId.map(
-            ({
-              id,
-              name,
-              email,
-              image,
-              ubication,
-              description,
-              professions,
-              years_exp,
-              genre,
-              phone,
-              posts,
-            }) => (
-              <Box
-                key={id}
-                rounded={"md"}
-                boxShadow={"2xl"}
-                align={"center"}
-                _hover={hoverStyles}
-                mb={{ base: "3rem", md: "0" }}
-                flex={{ base: "1", md: "2" }}
-                bg={useColorModeValue("blackAlpha.800", "gray.800")}
-              >
-                <Image
-                  src={image || NoAvatar}
-                  loading="lazy"
-                  alt="Image"
-                  boxSize={{ base: "300px", md: "auto" }}
-                  maxW={{ base: "300px", md: "100%" }}
-                  maxH="300px"
-                  objectFit="contain"
-                  marginTop="5"
-                  borderRadius="10px"
-                />
-                <Stack
-                  direction="column"
-                  
-                  p={8}
-                  align="center"
-                  textTransform={"uppercase"}
-                  fontWeight={700}
-                  fontSize={{ base: "lg", md: "2xl" }}
-                  letterSpacing={1.1}
-                  textAlign="center"
-                  spacing={{ base: "1rem", md: "3rem", lg: "3rem" }}
+            {profesionalId.map(
+              ({
+                id,
+                name,
+                email,
+                image,
+                ubication,
+                description,
+                professions,
+                years_exp,
+                genre,
+                phone,
+                posts,
+              }) => (
+                <Box
+                  key={id}
+                  rounded={{ base: "none", md: "md" }} 
+                  boxShadow={"2xl"}
+                  align={"center"}
+                  _hover={hoverStyles}
+                  maxW={{ base: "100%", md: "500px" }}
+                  mx={{ base: "auto", md: "0" }} 
+                  mb={{ base: "3rem", md: "0" }}
+                  flex={{ base: "1", md: "2" }}
+                  bg={useColorModeValue("blackAlpha.800", "gray.800")}
                 >
-                  <Heading as="h1" textTransform="uppercase">
-                    {name || "Sin nombre"}
-                  </Heading>
-                  <InfoLabel textLabel={genre} iconLabel={FaUserAlt} />
-                  <Box>
-                    <Text fontSize="16px">Años de experiencia:</Text>
-                    <InfoLabel
-                      fontSize="20px"
-                      textLabel={years_exp}
-                      iconLabel={FaMailBulk}
-                    />
-                  </Box>
-
-                  <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
-                  <InfoLabel textLabel={phone} iconLabel={FaPhone} />
-                  <Button
-                    onClick={handleChatToggle}
-                    bg={useColorModeValue("teal.500", "teal.400")}
-                    color="white"
-                    _hover={{ bg: "teal.600" }}
-                    leftIcon={<Icon as={FaRegPaperPlane} />}
+                  <Image
+                    src={image || NoAvatar}
+                    loading="lazy"
+                    alt="Image"
+                    boxSize={{ base: "300px", md: "auto" }}
+                    maxW={{ base: "300px", md: "100%" }}
+                    maxH="300px"
+                    objectFit="contain"
+                    marginTop="5"
+                    borderRadius="10px"
+                  />
+                  <Stack
+                    direction="column"
+                    spacing={2}
+                    p={8}
+                    align="center"
+                    textTransform={"uppercase"}
+                    fontWeight={700}
+                    fontSize={{ base: "lg", md: "2xl" }}
+                    letterSpacing={1.1}
+                    textAlign="center"
                   >
-                    Contactar
-                  </Button>
-                </Stack>
-              </Box>
-            )
-          )}
-          <Box flex={{ base: "1", md: "1" }}>
-            {isChatOpen && <ClieProfChatBot profesionalId={profesionalId} />}
-          </Box>
-        </Flex>
+                    <Heading as="h1" textTransform="uppercase">
+                      {name || "Sin nombre"}
+                    </Heading>
+                    <InfoLabel textLabel={genre} iconLabel={FaUserAlt} />
+
+                    <InfoLabel textLabel={email} iconLabel={FaMailBulk} />
+                    <InfoLabel textLabel={phone} iconLabel={FaPhone} />
+                    <Box>
+                      <Text fontSize="16px">Años de experiencia:</Text>
+                      <InfoLabel fontSize="20px" textLabel={years_exp} />
+                    </Box>
+                    <Button
+                      onClick={handleChatToggle}
+                      bg={useColorModeValue("teal.500", "teal.400")}
+                      color="white"
+                      _hover={{ bg: "teal.600" }}
+                      leftIcon={<Icon as={FaRegPaperPlane} />}
+                    >
+                      Contactar
+                    </Button>
+                  </Stack>
+                </Box>
+              )
+            )}
+            <Box flex={{ base: "1", md: "1" }}>
+              {isChatOpen && <ClieProfChatBot profesionalId={profesionalId} />}
+            </Box>
+          </Flex>
+          <Divider my={{ base: 8, md: 16 }} />
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
+          >
+            <Heading as="h2" textTransform="uppercase" color="blackAlpha.800">
+              Trabajos Recientes
+            </Heading>
+            <Divider my={2} />
+            <Wrap spacing="50px" justify="center">
+              <SupplierPost profesionalId={id} key={profesionalId.id} />
+            </Wrap>
+          </Flex>
+        </ScaleFade>
         <Divider my={{ base: 8, md: 16 }} />
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
-        >
-          <Heading as="h2" textTransform="uppercase" color="blackAlpha.800">
-            Trabajos Recientes
-          </Heading>
-          <Divider my={2} />
-          <Wrap spacing="50px" justify="center">
-            <SupplierPost profesionalId={id} key={profesionalId.id} />
-          </Wrap>
-        </Flex>
-      </ScaleFade>
-      <Divider my={{ base: 8, md: 16 }} />
-    </Container>
+      </Container>
     </>
   );
 };
