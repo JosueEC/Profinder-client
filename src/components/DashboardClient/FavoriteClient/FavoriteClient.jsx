@@ -14,7 +14,7 @@ export default function FavoriteClient() {
       dispatch(getFavorites());
   }, [dispatch]);
   // console.log(favorites)
-  console.log(favorites.map((fav)=> fav.id))
+  // console.log(favorites.map((fav)=> fav.id))
   return (
     <Stack mt={12} align='center' justify='center'>
       <Flex
@@ -22,11 +22,12 @@ export default function FavoriteClient() {
         align='center'
         justify='center'
         mt='-40px'
-        mb='3rem'
         wrap='wrap'
         gap={8}
         px={4}
         py={12}
+        h='100%'
+        overflowY='auto' 
       >
         {favorites.length > 0  ? 
         (
