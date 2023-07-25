@@ -95,7 +95,7 @@ export default function TestimonialCarrousel() {
     <Box h='100%' w='100%' backgroundColor={backgroundColor}>
       <Container py={16} as={Flex} justify='center' align='center' direction='column' w='100%' maxW='100%'>
         <Stack spacing={0} align='center' mb={12}>
-          <Heading color={useColorModeValue('gray.100', 'white')}>Nuestros usuarios opinan!</Heading>
+          <Heading color={useColorModeValue('gray.100', 'white')}>NUESTROS USUARIOS OPINAN!</Heading>
           <Text color={textColor}>
             Tenemos usuarios alrededor de todo el mundo
           </Text>

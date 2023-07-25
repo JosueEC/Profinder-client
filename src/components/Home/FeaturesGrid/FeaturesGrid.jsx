@@ -47,7 +47,7 @@ export default function FeaturesGrid() {
   return (
     <Box p={4} h='100%' width='100%' backgroundColor={backgroundColor}>
       <Stack spacing={4} as={Container} maxW='3xl' textAlign='center' color="gray.100">
-        <Heading fontSize='3xl'>Una solucion para cada necesidad.</Heading>
+        <Heading fontSize='3xl'>UNA SOLUCIÓN PARA CADA NECESIDAD.</Heading>
         <Text color={textColor} fontSize='xl'>
           Esta página ofrece muchas ventajas. Nuestro servicio se encarga de hacer el match perfecto para la solucion a tus problemas.
         </Text>
