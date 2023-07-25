@@ -85,7 +85,7 @@ const HomePage = () => {
         <TopPro />
         <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
       </Box>
-      <Box height="1rem" backgroundColor={backgroundColor} />
+    
       {/* <Box 
       
       backgroundColor={backgroundColor}>
