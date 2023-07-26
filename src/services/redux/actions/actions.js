@@ -336,7 +336,7 @@ const getAllClients = () => {
     axios
       .get(URL)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch({ type: "GET_ALL_CLIENTS", payload: response.data });
       })
       .catch((error) => {
