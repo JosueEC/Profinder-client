@@ -4,6 +4,7 @@ import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
 import { useClientDash } from '../../../../services/zustand/useClientDash'
 import { useEffect } from 'react'
+import { Spinner } from '@chakra-ui/spinner'
 import { CLIENT } from '../../constants'
 import FiltersClient from '../FiltersDashboard/FiltersClient'
 import UserRegisterClient from '../../singleComponents/UserRegisterClient'
@@ -92,7 +93,7 @@ export default function UsersTable () {
                 )
               })}
             </Stack>)
-          : (<h2>Cargando...</h2>)
+          : (<Spinner />)
       }
     </Flex>
   )
