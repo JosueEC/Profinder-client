@@ -374,24 +374,27 @@ function FormProvider() {
 
                 <FormControl>
                   <FormLabel>Telefono</FormLabel>
-                  <Input
-                    type="number"
-                    {...register("phone", {
-                      required: "El campo teléfono es requerido",
-                      pattern: {
-                        value: /^\d+$/,
-                        message: "El teléfono solo debe contener números",
-                      },
-                      minLength: {
-                        value: 10,
-                        message: "El teléfono debe tener al menos 10 dígitos",
-                      },
-                      maxLength: {
-                        value: 10,
-                        message: "El teléfono no puede tener más de 10 dígitos",
-                      },
-                    })}
-                  />
+                  <NumberInput defaultValue={0} min={0} max={100}>
+                    <NumberInputField
+                      {...register("phone", {
+                        required: "El campo teléfono es requerido",
+                        pattern: {
+                          value: /^\d+$/,
+                          message: "El teléfono solo debe contener números",
+                        },
+                        minLength: {
+                          value: 10,
+                          message: "El teléfono debe tener al menos 10 dígitos",
+                        },
+                        maxLength: {
+                          value: 10,
+                          message:
+                            "El teléfono no puede tener más de 10 dígitos",
+                        },
+                      })}
+                    />
+                  </NumberInput>
+
                   {errors.phone && (
                     <span style={{ color: "red" }}>{errors.phone.message}</span>
                   )}
@@ -528,14 +531,14 @@ function FormProvider() {
                   mt={3}
                 >
                   <Button
-                   colorScheme="teal.400"
-                   variant="outline"
-                   color="teal.400"
-                   mt={5}
-                   _hover={{ bg: "teal.500" }}
-                   loadingText="Ingresando"
-                   type="submit"
-                   size="lg"
+                    colorScheme="teal.400"
+                    variant="outline"
+                    color="teal.400"
+                    mt={5}
+                    _hover={{ bg: "teal.500" }}
+                    loadingText="Ingresando"
+                    type="submit"
+                    size="lg"
                     onClick={() => handleStepChange(1, step2Data)}
                   >
                     Atrás
