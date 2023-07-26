@@ -12,7 +12,7 @@ const Data = () => {
       ? profile.reviews.length
       : 0
     : 0;
-
+const rating = profile?.rating ? profile.rating : 0;
    
 
   //console.log(numReviews);
@@ -66,7 +66,7 @@ const Data = () => {
         fontSize={{ base: "20px", md: "24px" }}
       >
         <Text fontSize={{ base: "24px", md: "30px" }}>Nivel de Satisfaccion</Text>
-        <Box fontSize={{ base: "18px", md: "24px" }}>{profile.rating}</Box>
+        <Box fontSize={{ base: "18px", md: "24px" }}>{rating}</Box>
       </Box>
       {/* 
       <Box textAlign="center" borderRadius="10px" p={3} mb={3} color="white">
