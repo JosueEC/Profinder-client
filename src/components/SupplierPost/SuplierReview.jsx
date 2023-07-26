@@ -18,6 +18,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 //! aca esta lo mismo
 async function fetchPostId() {
@@ -29,8 +30,8 @@ async function fetchPostId() {
   });
 }
 
-export default function SupplierPost() {
-  const [id, setId] = useState(null); // Utilizamos useState para almacenar el valor del ID
+export default function SupplierReview() {
+  const [id, setId] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
   const dispatch = useDispatch();
@@ -38,22 +39,19 @@ export default function SupplierPost() {
   // console.log(professional);
 
   useEffect(() => {
-    // Función asincrónica para obtener el ID
     async function getIdAsync() {
       const postId = await fetchPostId();
       setId(postId);
     }
 
-    getIdAsync(); // Llamamos a la función para obtener el ID asincrónicamente
+    getIdAsync();
+    return ()=> dispatch(cleanDetail())
   }, []);
 
   useEffect(() => {
-    // Llamamos a la acción de Redux solo cuando tengamos el ID
     if (id) {
       dispatch(getPostProfesional(id));
-    
     }
-    
     return ()=> dispatch(cleanDetail())
   }, [dispatch, id]);
 
@@ -75,14 +73,14 @@ export default function SupplierPost() {
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
       <Grid
-        templateColumns={["3fr", "3fr", "3fr", "repeat(3, 1fr)"]}
+        templateColumns={["3fr", "1fr", "1fr", "repeat(1, 1fr)"]}
         gap={5}
         justifyContent="center"
       >
         {professional ? (
-          professional[0].posts.map((post) => (
+          professional[0].reviews.map((review) => (
             <Box
-              key={post.id}
+              key={id}
               bg={useColorModeValue("blackAlpha.800", "gray.800")}
               maxW={"450px"}
               w={"full"}
@@ -100,53 +98,22 @@ export default function SupplierPost() {
                   cursor="pointer"
                 />
               </Box>
-              <Box justifyContent="center" marginTop="5">
-                <Text
-                  color={"teal.500"}
-                  textTransform={"uppercase"}
-                  fontWeight={700}
-                  letterSpacing={1.1}
-                  fontSize={{ base: "xl", md: "2xl" }}
-                >
-                  {post.title}
-                </Text>
-              </Box>
+              <Flex direction="row" justify="center">
+                {[...new Array(5)].map((star, index) => {
+                  return index < review.rating ?? 0 ? (
+                    <FaStar color="yellow" fontSize="1.3rem" />
+                  ) : (
+                    <FaStar color="white" fontSize="1.3rem" />
+                  );
+                })}
+              </Flex>
 
-              <Slider {...settings}>
-                {post.image.map((img, index) => (
-                  <Image
-                    key={index}
-                    justifyContent="center"
-                    src={img}
-                    alt={`Image ${index}`}
-                    boxSize={{ base: "300px", md: "auto" }}
-                    maxW={{ base: "300px", md: "100%" }}
-                    maxH="300px"
-                    objectFit="contain"
-                    borderRadius="lg"
-                    marginTop="5"
-                  />
-                ))}
-              </Slider>
               <Box>
-                {post.content.length > 100 && (
-                  <Button
-                    bg="teal.400"
-                    color="white"
-                    _hover={{ bg: "teal.500" }}
-                    size="sm"
-                    mt={2}
-                    onClick={handleToggleContent}
-                  >
-                    {showFullContent ? "Ver menos" : "Leer más"}
-                  </Button>
-                )}
-
                 {/* Contenido del post */}
                 <Text color={"gray.200"}>
                   {showFullContent
-                    ? post.content
-                    : post.content.substring(0, 100)}
+                    ? review.content
+                    : review.content.substring(0, 100)}
                 </Text>
               </Box>
             </Box>

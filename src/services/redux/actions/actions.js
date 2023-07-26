@@ -15,7 +15,7 @@ import {
   GET_ID_PROFESIONAL,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
-  GET_FAVORITES
+  GET_FAVORITES,
 } from "../actionsTypes/actionsType";
 
 //! Action para obtener a todos los Proveedores/Profesionales
@@ -463,7 +463,6 @@ const deletePost = (id) => async (dispatch) => {
   }
 };
 
-
 const addFavorite = (profesionalId) => async (dispatch) => {
   try {
     const userSession = window.localStorage.getItem("userSession");
@@ -476,7 +475,9 @@ const addFavorite = (profesionalId) => async (dispatch) => {
     const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
 
     await axios.post(URL, { profesionalId: profesionalId });
-    console.log(`Se agregará a favoritos el profesional de id: ${profesionalId}`);
+    console.log(
+      `Se agregará a favoritos el profesional de id: ${profesionalId}`
+    );
     dispatch({ type: ADD_FAVORITE, payload: profesionalId });
   } catch (error) {
     console.error(error.response.data.error);
@@ -494,7 +495,9 @@ const removeFavorite = (profesionalId) => async (dispatch) => {
     const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
 
     await axios.put(URL, { profesionalId: profesionalId });
-    console.log(`Se removerá de favoritos el profesional de id: ${profesionalId}`);
+    console.log(
+      `Se removerá de favoritos el profesional de id: ${profesionalId}`
+    );
     dispatch({ type: REMOVE_FAVORITE, payload: profesionalId });
   } catch (error) {
     console.error(error.response.data.error);
@@ -578,7 +581,15 @@ const getFavorites = () => async (dispatch) => {
 //   };
 // };
 
+const cleanDetail = () => {
+  return {
+    type: "CLEAN_DETAIL",
+    payload: [],
+  };
+};
+
 export {
+  cleanDetail,
   getAllSuppliers,
   getAllCategories,
   getAllClients,
@@ -600,5 +611,7 @@ export {
   deletePost,
   updatePosts,
   getProfesionalIdOnline,
-  addFavorite,removeFavorite,getFavorites
+  addFavorite,
+  removeFavorite,
+  getFavorites,
 };
