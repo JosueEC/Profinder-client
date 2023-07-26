@@ -156,6 +156,8 @@ function FormUpdateProfile() {
     localStorage.setItem("userSession", JSON.stringify(sessionData));
     const userSesion = localStorage.getItem("userSession");
     console.log(userSesion);
+
+    window.alert("Tus datos han sido Actualizados");
   };
 
   return (
