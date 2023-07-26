@@ -8,16 +8,16 @@ import DropdownMenu from './DropdownMenu'
 
 export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation, titleCategory, titleOcupation }) {
   const filters = useSelector(state => state.filters)
-  const dispatch = useDispatch()
   const categories = useSelector(state => state.categories)
   const [categoryName, setCategoryName] = useState(filters.category)
   const [ocupationName, setOcupationName] = useState(filters.ocupation)
   const [ocupationsArray, setOcupationsArray] = useState([])
+  const dispatch = useDispatch()
 
   function handleClickCategory (event) {
     const { name } = event.target
     setCategoryName(name)
-    setOcupationName('Ocupacion')
+    setOcupationName('Selecciona una categoria')
     if (name !== 'Todas') {
       const array = categories.find(item => item.name === name)
       setOcupationsArray(array.Ocupations)
@@ -46,7 +46,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation,
         onClick={handleClickCategory}
       />
       <DropdownMenu
-      width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
+        width={{ base: "90%", sm: "80%", md: "60%", lg: "500px" }}
         titleMenu={titleOcupation || ocupationName}
         menuItems={ocupationsArray}
         onClick={handleClickOcupation}
