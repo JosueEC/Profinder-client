@@ -109,7 +109,6 @@ const DataSuppliers = () => {
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
-
   useEffect(() => {
     dispatch(getProfesionals());
     window.addEventListener("resize", handleResize);

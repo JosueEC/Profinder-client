@@ -26,7 +26,7 @@ const Data = () => {
     >
       <Box
         textAlign="center"
-        bg="rgba(75, 192, 192, 0.6)"
+        bg="rgba(220, 30, 220, 0.6)"
         borderRadius="10px"
         p={3}
         mb={3}

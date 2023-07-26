@@ -48,7 +48,6 @@ function FormUpdateProfile() {
       image: [],
       genre: "",
       years_exp: "",
-      password: session.password,
       countryId: "",
       locationId: "",
       phone: "",
@@ -56,6 +55,13 @@ function FormUpdateProfile() {
       ocupations: [],
     },
   });
+  const validatePositiveNumber = (value) => {
+    const regex = /^\d+$/;
+    if (!regex.test(value) || Number(value) <= 0) {
+      return "Ingrese un número positivo válido";
+    }
+    return true;
+  };
 
   const dispatch = useDispatch();
 
@@ -134,7 +140,6 @@ function FormUpdateProfile() {
       image: imageData,
       genre: genre,
       years_exp: data.years_exp,
-      password: data.password,
       CountryId: selectedCountryObj?.id,
       LocationId: selectedLocationObj?.id,
       phone: data.phone,
@@ -156,6 +161,8 @@ function FormUpdateProfile() {
     localStorage.setItem("userSession", JSON.stringify(sessionData));
     const userSesion = localStorage.getItem("userSession");
     console.log(userSesion);
+
+    window.alert("Tus datos han sido Actualizados");
   };
 
   return (
@@ -277,13 +284,17 @@ function FormUpdateProfile() {
               <FormLabel>Años de experiencia</FormLabel>
               <NumberInput defaultValue={0} min={0} max={100}>
                 <NumberInputField
-                  {...register("years_exp", { required: true })}
+                  {...register("years_exp", {
+                    required: "El campo años de experiencia es requerido",
+                    validate: validatePositiveNumber,
+                  })}
                 />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
+              {errors.years_exp && <p>{errors.years_exp.message}</p>}
             </FormControl>
 
             <FormControl>
@@ -293,22 +304,6 @@ function FormUpdateProfile() {
                 fnSelectOcupation={envioOcupaciones}
               />
             </FormControl>
-
-            <FormControl>
-              <FormLabel>Contraseña</FormLabel>
-              <Input
-                type="password"
-                {...register("password", {
-                  required: "El campo contraseña es requerido",
-                  minLength: {
-                    value: 8,
-                    message: "La contraseña debe tener minimo 8 caracteres",
-                  },
-                })}
-              />
-              {errors.password && <p>{errors.password.message}</p>}
-            </FormControl>
-
             <FormControl>
               <FormLabel />
               {isLoading ? (
