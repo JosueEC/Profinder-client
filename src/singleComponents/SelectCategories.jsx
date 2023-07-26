@@ -17,7 +17,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation,
   function handleClickCategory (event) {
     const { name } = event.target
     setCategoryName(name)
-    setOcupationName('Selecciona una categoria')
+    setOcupationName(name === 'Todas' ? 'Selecciona una categoria': 'Ocupacion')
     if (name !== 'Todas') {
       const array = categories.find(item => item.name === name)
       setOcupationsArray(array.Ocupations)
