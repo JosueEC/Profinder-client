@@ -38,7 +38,7 @@ export default function UserLogin () {
   const toast = useToast()
   const dispatch = useDispatch()
 
-  const bgColor = useColorModeValue('gray.100', 'gray.900')
+  const bgColor = useColorModeValue('gray.100', 'gray.800')
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
 
