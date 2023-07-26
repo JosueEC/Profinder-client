@@ -12,16 +12,14 @@ const Data = () => {
       ? profile.reviews.length
       : 0
     : 0;
-const rating = profile?.rating ? profile.rating : 0;
-   
+  const rating = profile?.rating ? profile.rating : 0;
 
   //console.log(numReviews);
-
   return (
     <Grid
       templateColumns={{
         base: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)", 
+        md: "repeat(2, 1fr)",
         lg: "repeat(3, 1fr)",
       }}
       gap={3}
@@ -65,7 +63,9 @@ const rating = profile?.rating ? profile.rating : 0;
         color="white"
         fontSize={{ base: "20px", md: "24px" }}
       >
-        <Text fontSize={{ base: "24px", md: "30px" }}>Nivel de Satisfaccion</Text>
+        <Text fontSize={{ base: "24px", md: "30px" }}>
+          Nivel de Satisfaccion
+        </Text>
         <Box fontSize={{ base: "18px", md: "24px" }}>{rating}</Box>
       </Box>
       {/* 

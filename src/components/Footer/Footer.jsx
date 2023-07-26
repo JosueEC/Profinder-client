@@ -34,7 +34,7 @@ function Footer() {
             <Heading as="h2" fontWeight="bold" fontSize="xl" color="blue.400">
               Información
             </Heading>
-            <Link to="./">
+            <Link to="./aboutus">
               <Text color="gray.400">Sobre nosotros</Text>
             </Link>
             <Link to="./feedback">
