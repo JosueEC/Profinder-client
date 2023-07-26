@@ -78,6 +78,7 @@ export default function SupplierReview() {
         {professional ? (
           professional[0].reviews.map((review) => (
             <Box
+              key={id}
               bg={useColorModeValue("blackAlpha.800", "gray.800")}
               maxW={"450px"}
               w={"full"}

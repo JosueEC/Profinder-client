@@ -145,11 +145,11 @@ function FormServicio() {
       minH="100vh"
       align="center"
       justify="center"
-      bg={useColorModeValue("gray.800", "gray.800")}
+  
     >
       <Box
         rounded="lg"
-        bg={useColorModeValue("blackAlpha.800", "gray800")}
+        bg={useColorModeValue("blackAlpha.800", "blackAlpha.800")}
         boxShadow="lg"
         p={8}
         color="gray.300"
@@ -252,10 +252,8 @@ function FormServicio() {
                     Enviar
                   </Button>
                   <Box display="inline" fontSize="lg" color="red.500" ml={2}>
-                    {/* Mostrar el mensaje */}
                     {profile.active === false &&
                       "Se terminaron tus publicaciones"}{" "}
-                    {/* Mostrar mensaje alternativo */}
                   </Box>
                 </>
               ) : null}

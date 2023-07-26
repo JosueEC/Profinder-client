@@ -81,7 +81,7 @@ function PasarelaPagos() {
         boxShadow={"2xl"}
         rounded={"md"}
         overflow={"hidden"}
-        maxW={"500px"}
+        maxW={{ base: "full", md: "500px" }}
         w={{ base: "full", md: "auto" }}
         py={6}
       >
@@ -143,7 +143,7 @@ function PasarelaPagos() {
         boxShadow={"2xl"}
         rounded={"md"}
         overflow={"hidden"}
-        maxW={"500px"}
+        maxW={{ base: "full", md: "500px" }}
         w={{ base: "full", md: "auto" }}
         py={6}
       >
