@@ -24,7 +24,7 @@ export default function NoResults () {
         color='gray.500'
         fontSize='xl'
       >
-        Ningun resultado coincide con tu busqueda. Intentalo de nuevo.
+        No encontramos ningun resultado. Intentalo de nuevo.
       </Text>
     </Box>
   )

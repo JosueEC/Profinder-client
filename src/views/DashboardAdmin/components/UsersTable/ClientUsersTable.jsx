@@ -4,10 +4,10 @@ import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
 import { useClientDash } from '../../../../services/zustand/useClientDash'
 import { useEffect } from 'react'
-import { Spinner } from '@chakra-ui/spinner'
 import { CLIENT } from '../../constants'
 import FiltersClient from '../FiltersDashboard/FiltersClient'
 import UserRegisterClient from '../../singleComponents/UserRegisterClient'
+import NoResults from '../../../../singleComponents/NoResults'
 
 export default function UsersTable () {
   const {
@@ -36,65 +36,66 @@ export default function UsersTable () {
       alignItems='center'
       justifyContent='center'
     >
-      {
-        (client)
-          ? (
-            <Stack // Tabla
-              direction={{
-                base: 'column'
-              }}
-              w='full'
-              bg={bgElement}
-              shadow='lg'
-            >
-              <FiltersClient />
-              <SimpleGrid // Encabezado tabla
-                spacingY={3}
-                columns={{
-                  base: 1,
-                  md: 4
-                }}
-                w={{
-                  base: 120,
-                  md: 'full'
-                }}
-                textTransform='uppercase'
-                bg={bgAccent}
-                color={txtColor}
-                py={{
-                  base: 1,
-                  md: 4
-                }}
-                px={{
-                  base: 2,
-                  md: 10
-                }}
-                visibility={{
-                  base: 'hidden',
-                  md: 'visible'
-                }}
-                fontSize='md'
-              >
-                <span>Foto</span>
-                <span>Nombre</span>
-                <span>correo electronico</span>
-              </SimpleGrid>
-              {client.map(({ id, name, email, image, active, softDelete }) => {
-                return (
-                  <UserRegisterClient
-                    key={id}
-                    id={id}
-                    name={name}
-                    email={email}
-                    image={image}
-                    active={active}
-                    softDelete={softDelete}
-                  />
+      <Stack // Tabla
+        direction={{
+          base: 'column'
+        }}
+        w='full'
+        bg={bgElement}
+        shadow='lg'
+      >
+        <FiltersClient />
+        <SimpleGrid // Encabezado tabla
+          spacingY={3}
+          columns={{
+            base: 1,
+            md: 4
+          }}
+          w={{
+            base: 120,
+            md: 'full'
+          }}
+          textTransform='uppercase'
+          bg={bgAccent}
+          color={txtColor}
+          py={{
+            base: 1,
+            md: 4
+          }}
+          px={{
+            base: 2,
+            md: 10
+          }}
+          visibility={{
+            base: 'hidden',
+            md: 'visible'
+          }}
+          fontSize='md'
+        >
+          <span>Foto</span>
+          <span>Nombre</span>
+          <span>correo electronico</span>
+        </SimpleGrid>
+        {
+            (client.length !== 0)
+              ? (
+                  client.map(({ id, name, email, image, active, softDelete }) => {
+                    return (
+                      <UserRegisterClient
+                        key={id}
+                        id={id}
+                        name={name}
+                        email={email}
+                        image={image}
+                        active={active}
+                        softDelete={softDelete}
+                      />
+                    )
+                  })
                 )
-              })}
-            </Stack>)
-          : (<Spinner />)
-      }
+              : (<NoResults />)
+          }
+      </Stack>
     </Flex>
   )
 }

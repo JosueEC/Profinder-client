@@ -2,8 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Flex } from '@chakra-ui/layout'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { Spinner } from '@chakra-ui/spinner'
 import PostRegister from '../../singleComponents/PostRegister'
+import NoResults from '../../../../singleComponents/NoResults'
 
 export default function PostUsersTable ({ posts }) {
   const bgColor = useColorModeValue('gray.100', 'gray.900')
@@ -19,7 +19,7 @@ export default function PostUsersTable ({ posts }) {
       justifyContent='center'
     >
       {
-        (posts)
+        (posts.length !== 0)
           ? (
               posts.map(({ id, title, image, content, softDelete }) => {
                 return (
@@ -33,9 +33,7 @@ export default function PostUsersTable ({ posts }) {
                 )
               })
             )
-          : (
-            <Spinner size='xl' />
-            )
+          : (<NoResults />)
       }
     </Flex>
   )
