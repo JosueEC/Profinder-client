@@ -75,7 +75,7 @@ const TestimonialAvatar = ({ src, name, title }) => {
       <Avatar src={src} alt={name} mb={2} />
       <Stack spacing={-1} align='center'>
         <Text fontWeight={600}>
-          <Text as='span' color='gray.100'>
+          <Text as='span' color={useColorModeValue('gray.800', 'gray.100')}>
             {name}
           </Text>
         </Text>

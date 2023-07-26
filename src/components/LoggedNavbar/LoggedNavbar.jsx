@@ -35,7 +35,8 @@ export default function LoggedNavbar () {
   const removeSessionState = useSessionState(state => state.removeSessionState)
   const profesionalesimg = useSelector((state) => state.profesionales);
 
-  const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
+  // const filteredImage = profesionalesimg.filter((image) => image.id === session.id);
+  // console.log(filteredImage)
 
   function handleLogout () {
     removeSessionState()
@@ -120,7 +121,7 @@ export default function LoggedNavbar () {
               >
                 <Avatar
                   size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                  src={filteredImage.image && session.image || SinFoto}
+                  src={ session.image || SinFoto}
                 />
               </MenuButton> 
               <MenuList>

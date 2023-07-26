@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Button, Center, Flex, Heading, Image, Stack, Text, useColorModeValue, Icon, useColorMode } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Heading, Image, Stack, Text, useColorModeValue, Icon, useColorMode, Link } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { getAllSuppliers } from '../../../services/redux/actions/actions';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSessionState } from "./../../../services/zustand/useSession";
 
 const Card = ({ supplier, cardBgColor, textColor }) => {
   const ratingStars = Array.from({ length: supplier.rating }, (_, index) => (
     <Icon key={index} as={StarIcon} color="teal.400" />
   ));
-
+  const session = useSessionState((state) => state.session);  
   const { colorMode } = useColorMode();
   const backgroundColor = colorMode === 'dark' ? undefined : 'gray.100';
   
@@ -40,9 +41,20 @@ const Card = ({ supplier, cardBgColor, textColor }) => {
               {ratingStars}
             </Flex>
           </Text>
+          <Stack mt={8} direction="row" spacing={4} align="center" justify="center">
+        {session.status === false ? (
+          <Button as={RouterLink} to={`/userLogin`} mt={4} colorScheme="teal" size="sm">
+          Inicia Sesión
+        </Button>
+        ) : (
           <Button as={RouterLink} to={`/detail/${supplier.id}`} mt={4} colorScheme="teal" size="sm">
             Ver detalle
           </Button>
+        )}
+      </Stack>
+          {/* <Button as={RouterLink} to={`/detail/${supplier.id}`} mt={4} colorScheme="teal" size="sm">
+            Ver detalle
+          </Button> */}
         </Stack>
       </Flex>
     </Box>
