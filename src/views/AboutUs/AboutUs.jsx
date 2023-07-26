@@ -83,7 +83,7 @@ const peopleData = [
 
 const AboutUs = () => {
     const { colorMode } = useColorMode();
-    const bgColor = useColorModeValue('gray.400', 'gray.800');
+    const bgColor = useColorModeValue('gray.100', 'gray.800');
 
     const [isLargerThanSm] = useMediaQuery("(min-width: 30em)");
     const [isLargerThanMd] = useMediaQuery("(min-width: 48em)");
@@ -104,10 +104,10 @@ const AboutUs = () => {
   
         return (
           <Box py={{ base: 8, md: 18 }} px={4} textAlign="center" bg={bgColor}>
-            <Heading fontSize={{ base: "3xl", md: "4xl" }} color="teal.600" mb={4}>
-              Conoce a nuestro equipo
+            <Heading fontSize={{ base: "3xl", md: "4xl" }} color="teal.400" mb={4}>
+              CONOCE A NUESTRO EQUIPO
             </Heading>
-            <Text color="gray.600" fontSize={{ base: "lg", md: "xl" }} maxW="600px" mx="auto" mb={8}>
+            <Text color={useColorModeValue('blue.900', 'blue.400')} fontSize={{ base: "lg", md: "xl" }} maxW="600px" mx="auto" mb={8}>
               Esta página está elaborada por un equipo interdiciplinario, comprometido a realizar desarrollo FullStack de calidad
             </Text>
       
