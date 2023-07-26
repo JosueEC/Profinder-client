@@ -21,7 +21,7 @@ const HomePage = () => {
   }, [dispatch]);
 
   // Define the general background color according to the color mode
-  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.500';
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.100';
 
   // Define the colors for the dividers in both modes
   const dividerColor = colorMode === 'dark' ? 'gray.100' : 'black';
@@ -83,7 +83,7 @@ const HomePage = () => {
 
         <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
         <TopPro />
-        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
+        {/* <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" /> */}
       </Box>
     
       {/* <Box 
