@@ -148,11 +148,11 @@ function App() {
             path="/dashboardClient/recomended"
             element={<DashboardClientTopPro />}
           />
-          <Route
+          {/* <Route
             exact
             path="/dashboardClient/favorites"
             element={<DashboardClientFavorite />}
-          />
+          /> */}
           <Route
             exact
             path="/dashboardClient/categories"
