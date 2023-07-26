@@ -69,7 +69,7 @@ const ArticleList = () => {
   return (
     <>
       <Spacer h="100px" bg={useColorModeValue("gray.800", "gray.500")} />
-     
+
       <Container
         key={profesionalId.id}
         // color="gray.300"
@@ -80,19 +80,17 @@ const ArticleList = () => {
         px={{ base: "2", md: "8", lg: "10rem" }}
         align={"center"}
         justify={"center"}
-
       >
-         {profesionalId.length === 0 ? (
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="lg"
-            />
-          ) : (
-        <ScaleFade initialScale={0.9} in>
-         
+        {profesionalId.length === 0 ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="lg"
+          />
+        ) : (
+          <ScaleFade initialScale={0.9} in>
             <Box>
               <Flex
                 direction={{ base: "column", md: "row" }}
@@ -103,21 +101,21 @@ const ArticleList = () => {
                 maxW={{ base: "full", md: "900px" }}
                 w={{ base: "full", md: "900px" }}
               >
-                {/* <Box flex={{ base: "1", md: "2" }}>
-              <Link to="/categories">
-                <Button
-                  bg="teal.400"
-                  color="white"
-                  _hover={{ bg: "teal.500" }}
-                  size="lg"
-                  w="100%"
-                  order={{ base: 2, md: 1 }}
-                  alignSelf={{ base: "center", md: "auto" }}
-                >
-                  Volver
-                </Button>
-              </Link>
-            </Box> */}
+                <Box flex={{ base: "1", md: "2" }}>
+                  <Link to="/categories">
+                    <Button
+                      bg="teal.400"
+                      color="white"
+                      _hover={{ bg: "teal.500" }}
+                      size="lg"
+                      w="100%"
+                      order={{ base: 2, md: 1 }}
+                      alignSelf={{ base: "center", md: "auto" }}
+                    >
+                      Volver
+                    </Button>
+                  </Link>
+                </Box>
                 {profesionalId.map(
                   ({
                     id,
@@ -201,27 +199,31 @@ const ArticleList = () => {
               </Wrap>
               <Divider my={{ base: 8, md: 16 }} />
             </Box>
-       
+
             <Box>
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
-          >
-              <Heading as="h2" textTransform="uppercase" color="blackAlpha.800">
-                Trabajos Recientes
-              </Heading>
-              <Divider my={2} />
-              <Wrap spacing="50px" justify="center">
-                <SupplierPost profesionalId={id} key={profesionalId.id} />
-              </Wrap>
-          </Flex>
-            </Box>  
-        </ScaleFade>)}
-        <Divider my={{ base: 8, md: 16 }} /> 
-       
-      </Container> 
+              <Flex
+                direction="column"
+                align="center"
+                justify="center"
+                gap={{ base: "1rem", md: "3rem", lg: "3rem" }}
+              >
+                <Heading
+                  as="h2"
+                  textTransform="uppercase"
+                  color="blackAlpha.800"
+                >
+                  Trabajos Recientes
+                </Heading>
+                <Divider my={2} />
+                <Wrap spacing="50px" justify="center">
+                  <SupplierPost profesionalId={id} key={profesionalId.id} />
+                </Wrap>
+              </Flex>
+            </Box>
+          </ScaleFade>
+        )}
+        <Divider my={{ base: 8, md: 16 }} />
+      </Container>
     </>
   );
 };
