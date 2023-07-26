@@ -163,14 +163,11 @@ function FormProvider() {
 
     setStep(2);
   };
-
   const onSubmitStep1 = (data) => {
-    // data contiene los valores del formulario cuando se realiza el envío
     if (data.name && data.email && data.password) {
       // Todos los campos requeridos están completos, pasa al Step 2
       setStep(2);
     } else {
-      // Algunos campos requeridos no están completos, muestra un mensaje de error o realiza alguna acción
       console.log("Por favor completa todos los campos requeridos del Step 1.");
     }
   };
@@ -179,7 +176,6 @@ function FormProvider() {
     handleSubmit(async (formData) => {
       try {
         setStep2Data(formData);
-
         await onSubmit(formData);
       } catch (error) {
         console.error(error);
@@ -220,8 +216,7 @@ function FormProvider() {
               REGISTRATE
             </Heading>
 
-            {/* Display the form fields for Step 1 */}
-            <form onSubmit={onSubmitStep1}>
+            <form onSubmit={handleSubmit(onSubmitStep1)}>
               <Stack spacing={4}>
                 <FormControl marginTop="5">
                   <FormLabel>Nombre y apellido</FormLabel>
@@ -324,58 +319,12 @@ function FormProvider() {
                 >
                   REGISTRATE
                 </Heading>
-                {/* <FormControl marginTop="5">
-              <FormLabel>Nombre y apellido</FormLabel>
-              <Input
-                type="text"
-                {...register("name", {
-                  required: "El campo nombre y apellido es requerido",
-                  pattern: {
-                    value: /^[a-zA-ZñÑ\s]+$/,
-                    message: "El nombre y apellido no puede contener expresiones especiales o símbolos",
-                  },
-                  minLength: {
-                    value: 2,
-                    message: "El nombre y apellido deben tener al menos 2 caracteres",
-                  },
-                  maxLength: {
-                    value: 100,
-                    message: "El nombre y apellido no puede tener más de 100 caracteres",
-                  },
-                })}
-                value={
-                  googleUserData ? googleUserData.name : "" // Autocompletar el nombre con los datos de Google si están disponibles
-                }
-              />
-              {errors.name && (
-                <span style={{ color: "red" }}>{errors.name.message}</span>
-              )}
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                {...register("email", {
-                  required: "El campo email es requerido",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-                    message: "El formato del email es incorrecto",
-                  },
-                })}
-                value={
-                  googleUserData ? googleUserData.email : "" // Autocompletar el email con los datos de Google si están disponibles
-                }
-              />
-              {errors.email && (
-                <span style={{ color: "red" }}>{errors.email.message}</span>
-              )}
-            </FormControl> */}
 
                 <FormControl>
                   <FormLabel>Telefono</FormLabel>
                   <Input
-                    type="number"
+                    type="tel"
+                    placeholder="phone number"
                     {...register("phone", {
                       required: "El campo teléfono es requerido",
                       pattern: {
@@ -499,28 +448,6 @@ function FormProvider() {
                   />
                 </FormControl>
 
-                {/* <FormControl>
-              <FormLabel>Contraseña</FormLabel>
-              <Input
-                type="password"
-                {...register("password", {
-                  required: "El campo contraseña es requerido",
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-                    message:
-                      "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
-                  },
-                })}
-
-                value={
-                  googleUserData ? "passwordautogenerada" : "" // Puedes generar una contraseña automática si tienes los datos de Google, o dejar en blanco si prefieres que el usuario ingrese su propia contraseña
-                }
-              />
-              {errors.password && (
-                <span style={{ color: "red" }}>{errors.password.message}</span>
-              )}
-            </FormControl> */}
-
                 <ButtonGroup
                   flexWrap="wrap-reverse"
                   justifyContent="center"
@@ -528,14 +455,14 @@ function FormProvider() {
                   mt={3}
                 >
                   <Button
-                   colorScheme="teal.400"
-                   variant="outline"
-                   color="teal.400"
-                   mt={5}
-                   _hover={{ bg: "teal.500" }}
-                   loadingText="Ingresando"
-                   type="submit"
-                   size="lg"
+                    colorScheme="teal.400"
+                    variant="outline"
+                    color="teal.400"
+                    mt={5}
+                    _hover={{ bg: "teal.500" }}
+                    loadingText="Ingresando"
+                    type="submit"
+                    size="lg"
                     onClick={() => handleStepChange(1, step2Data)}
                   >
                     Atrás

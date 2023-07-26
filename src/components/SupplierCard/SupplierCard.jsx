@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import {useState,useEffect} from 'react'
+// import {useState,useEffect} from 'react'
 import {
   Heading,
   Avatar,
@@ -17,9 +17,9 @@ import { FaMapMarkerAlt, FaStar } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Tag from '../../singleComponents/Tag'
 import NoAvatar from '../../assets/defaultImages/sinfoto.webp'
-import FavoriteButton from '../FavoriteButton/FavoriteButton'
-import { useDispatch } from 'react-redux'
-import { addFavorite,getFavorites,removeFavorite } from '../../services/redux/actions/actions'
+// import FavoriteButton from '../FavoriteButton/FavoriteButton'
+// import { useDispatch } from 'react-redux'
+// import { addFavorite,getFavorites,removeFavorite } from '../../services/redux/actions/actions'
 
 import { useSessionState } from './../../services/zustand/useSession'
 
@@ -35,31 +35,60 @@ export default function SocialProfileSimple ({
 }) {
   const session = useSessionState((state) => state.session)
 
-  console.log(session)
+  // console.log(session)
   
 
   // Dispatch
-  const dispatch = useDispatch();
-  // const location = useLocation();
-  // Favorites State
-  const [isFavorite, setIsFavorite] = useState(() => {
-    const favoriteStatus = localStorage.getItem(`favorite_${id}`);
-    return favoriteStatus === 'true';
-  });  const [isButtonDisable,setIsButtonDisable] = useState(false)
-  const toggleFavorite = async (id) => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  // const dispatch = useDispatch();
+  // // const location = useLocation();
+  // // Favorites State
+  // const [isFavorite, setIsFavorite] = useState(() => {
+  //   const favoriteStatus = localStorage.getItem(`favorite_${id}`);
+  //   return favoriteStatus === 'true';
+  // });  const [isButtonDisable,setIsButtonDisable] = useState(false)
+
+  // const toggleFavorite = async (id) => {
+  //   // Deshabilitar el botón temporalmente para evitar múltiples clics rápidos
+  //   setIsButtonDisable(true);
   
-    if (isFavorite) {
-      // console.log(`Se removerá de favoritos el profesional de id: ${id}`);
-      await dispatch(removeFavorite(id));
-      await dispatch(getFavorites());
-    } else {
-      // console.log(`Se agregará a favoritos el profesional de id: ${id}`);
-      await dispatch(addFavorite(id));
-      await dispatch(getFavorites());
-    }
-    setIsButtonDisable(false);
-  };
+  //   // Obtener el userId del estado de sesión
+  //   const userId = session.id;
+  
+  //   // Obtener el estado actual de isFavorite desde el localStorage
+  //   const currentIsFavorite = localStorage.getItem(`favorite_${userId}_${id}`) === "true";
+  
+  //   // Cambiar el estado con o sin retraso según el valor actual de isFavorite
+  //   if (currentIsFavorite) {
+  //     // Si isFavorite === true, aplicar el retraso de 1500 milisegundos
+  //     setTimeout(() => {
+  //       setIsFavorite(false);
+  
+  //       // Actualizar el localStorage con el nuevo estado de favorito específico para este cliente
+  //       localStorage.setItem(`favorite_${userId}_${id}`, "false");
+  //     }, 1500);
+  //   } else {
+  //     // Si isFavorite === false, cambiar el estado inmediatamente sin retraso
+  //     setIsFavorite(true);
+  
+  //     // Actualizar el localStorage con el nuevo estado de favorito específico para este cliente
+  //     localStorage.setItem(`favorite_${userId}_${id}`, "true");
+  //   }
+  
+  //   // Ejecutar la acción correspondiente (addFavorite o removeFavorite) con un retraso de 1 segundo
+  //   setTimeout(async () => {
+  //     if (currentIsFavorite) {
+  //       await dispatch(removeFavorite(id));
+  //     } else {
+  //       await dispatch(addFavorite(id));
+  //     }
+  
+  //     // Luego de realizar la acción, obtener los favoritos actualizados
+  //     await dispatch(getFavorites());
+  
+  //     // Habilitar nuevamente el botón después de que se realicen las acciones
+  //     setIsButtonDisable(false);
+  //   }, 900);
+  // };
   // Favorites
 
   // console.log(rating)
@@ -67,22 +96,22 @@ export default function SocialProfileSimple ({
   const bgElement = useColorModeValue('white', 'gray.800')
   const txtColor = useColorModeValue('gray.600', 'gray.100')
 
- // UseEffect
-  useEffect(() => {
-    localStorage.setItem(`favorite_${id}`, isFavorite);
-  }, [id, isFavorite]);
+//  UseEffect
+  // useEffect(() => {
+  //   localStorage.setItem(`favorite_${id}`, isFavorite);
+  // }, [id, isFavorite]);
 
-  // Efecto para recuperar el estado del localStorage al montar el componente
-  useEffect(() => {
-    const favoriteStatus = localStorage.getItem(`favorite_${id}`);
-    setIsFavorite(favoriteStatus === 'true');
-  }, [id]);
+  // // Efecto para recuperar el estado del localStorage al montar el componente
+  // useEffect(() => {
+  //   const favoriteStatus = localStorage.getItem(`favorite_${id}`);
+  //   setIsFavorite(favoriteStatus === 'true');
+  // }, [id]);
 
   return (
     <Box
       maxW='350px'
-      // height='430px'
-      height='460px'
+      height='430px'
+      // height='460px'
       w='full'
       bg={bgElement}
       boxShadow='lg'
@@ -90,12 +119,12 @@ export default function SocialProfileSimple ({
       p={6}
       textAlign='center'
     >
-      {session.status === false || (session.usuario !== "c" && session.status === true )? '' : (
+      {/* {session.status === false || (session.usuario !== "c" && session.status === true )? '' : (
       <Box display='flex' justifyContent='flex-end' >
        <FavoriteButton isFavorite={isFavorite} onClick={()=>toggleFavorite(id)} isDisabled={isButtonDisable} />
      </Box>
 
-      )}
+      )} */}
         <Avatar
           border='1px'
           size='xl'
