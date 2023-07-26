@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Flex } from '@chakra-ui/layout'
-import PostRegister from '../../singleComponents/PostRegister'
 import { useColorModeValue } from '@chakra-ui/color-mode'
+import { Spinner } from '@chakra-ui/spinner'
+import PostRegister from '../../singleComponents/PostRegister'
 
-export default function PostUsersTable () {
+export default function PostUsersTable ({ posts }) {
   const bgColor = useColorModeValue('gray.100', 'gray.900')
 
   return (
@@ -15,12 +18,25 @@ export default function PostUsersTable () {
       alignItems='center'
       justifyContent='center'
     >
-      <PostRegister />
-      <PostRegister />
-      <PostRegister />
-      <PostRegister />
-      <PostRegister />
-      <PostRegister />
+      {
+        (posts)
+          ? (
+              posts.map(({ id, title, image, content, softDelete }) => {
+                return (
+                  <PostRegister
+                    key={id}
+                    title={title}
+                    image={image}
+                    content={content}
+                    softDelete={softDelete}
+                  />
+                )
+              })
+            )
+          : (
+            <Spinner size='xl' />
+            )
+      }
     </Flex>
   )
 }
