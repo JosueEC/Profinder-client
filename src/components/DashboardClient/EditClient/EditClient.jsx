@@ -16,7 +16,9 @@ import {
   Alert,
   AlertIcon,
   CloseButton,
-  useColorMode
+  useColorMode,
+  Heading,
+  useColorModeValue
 } from "@chakra-ui/react";
 
 import {
@@ -28,8 +30,8 @@ import { uploadFiles3 } from "../../../utils/Firebase/config";
 function EditClient() {
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
-  const bgColor = colorMode === "dark" ? "gray.800" : "gray.500";
-  const textColor = colorMode === "dark" ? "gray.100" : "blue.1000";
+  const bgColor = colorMode === "dark" ? "gray.800" : "gray.100";
+  const textColor = colorMode === "dark" ? "gray.100" : "blue.900";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -206,8 +208,12 @@ function EditClient() {
   }, [client]);
 
   return (
+    
     <Center p={4} h="100vh" w="100%" bg={bgColor}>
+      
       <Box mx="auto" maxW="5xl" w="100%">
+      <Heading color={useColorModeValue('gray.900', 'white')} align='center'>EDITA TU PERFIL</Heading>
+      <br />
         <Center>
           <VStack
             as="form"
