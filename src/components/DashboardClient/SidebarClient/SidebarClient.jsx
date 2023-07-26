@@ -20,6 +20,7 @@ const SidebarClient = () => {
     _hover: {
       bg: useColorModeValue('gray.200', 'gray.700'),
     },
+    
   };
 
   return (
@@ -27,7 +28,7 @@ const SidebarClient = () => {
       md: "100px",
       lg:"200px"
     }} 
-    h="100vh" bg={useColorModeValue('gray.100', 'gray.900')} py={4} px={2} >
+    h="100vh" bg={useColorModeValue("gray.200", "gray.900")} py={4} px={2}  >
       {!isLargerThanMd ? (
         // Flex y tenía el iconButton y todo Collapse
         <IconButton
@@ -37,6 +38,7 @@ const SidebarClient = () => {
           onClick={toggleCollapse}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           alignSelf="flex-end"
+         
         />
       ) : (
         <Stack spacing={4}>
@@ -57,9 +59,9 @@ const SidebarClient = () => {
           >
             <Text>Profesionales</Text>
           </NavLink> */}
-          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
+          {/* <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
             <Text>Favoritos</Text>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/dashboardClient/feedbackform"
             style={linkStyle}
@@ -88,11 +90,11 @@ const SidebarClient = () => {
               <StarIcon />
             </Tooltip>
           </NavLink>
-          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName= "active">
+          {/* <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName= "active">
             <Tooltip label="Favoritos" aria-label="Favoritos">
               <StarIcon />
             </Tooltip>
-          </NavLink>
+          </NavLink> */}
           {/* <NavLink to="/categories" style={linkStyle} activeClassName="active">
             <Tooltip label="Profesionales" aria-label="Profesionales">
               <SearchIcon/>

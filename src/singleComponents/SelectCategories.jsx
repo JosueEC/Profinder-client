@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getAllCategories } from '../services/redux/actions/actions'
+import { cleanDetail, getAllCategories } from '../services/redux/actions/actions'
 import { Stack } from '@chakra-ui/layout'
 import DropdownMenu from './DropdownMenu'
 
@@ -35,6 +35,7 @@ export default function SelectCategories ({ fnSelectCategory, fnSelectOcupation,
 
   useEffect(() => {
     dispatch(getAllCategories())
+
   }, [])
 
   return (

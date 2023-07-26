@@ -13,7 +13,7 @@ const Paginator = ({ currentPage, setCurrentPage, totalPages }) => {
       <Button
         key="prev"
         onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        disabled={currentPage === totalPages}
         colorScheme="teal"
         leftIcon={<ChevronLeftIcon />}
       />

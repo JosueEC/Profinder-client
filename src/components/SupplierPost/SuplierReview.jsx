@@ -4,7 +4,10 @@ import { EditIcon } from "@chakra-ui/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getPostProfesional } from "./../../services/redux/actions/actions";
+import {
+  cleanDetail,
+  getPostProfesional,
+} from "./../../services/redux/actions/actions";
 import {
   Box,
   Text,
@@ -71,13 +74,14 @@ export default function SupplierReview() {
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
       <Grid
-        templateColumns={["3fr", "1fr", "1fr", "repeat(3, 1fr)"]}
+        templateColumns={["3fr", "1fr", "1fr", "repeat(1, 1fr)"]}
         gap={5}
         justifyContent="center"
       >
         {professional ? (
           professional[0].reviews.map((review) => (
             <Box
+              key={id}
               bg={useColorModeValue("blackAlpha.800", "gray.800")}
               maxW={"450px"}
               w={"full"}

@@ -4,7 +4,10 @@ import { EditIcon } from "@chakra-ui/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getPostProfesional } from "./../../services/redux/actions/actions";
+import {
+  cleanDetail,
+  getPostProfesional,
+} from "./../../services/redux/actions/actions";
 import {
   Box,
   Text,
@@ -30,11 +33,11 @@ async function fetchPostId() {
 }
 
 export default function SupplierPost() {
+  const dispatch = useDispatch();
+  const professional = useSelector((state) => state.profesionalId);
   const [id, setId] = useState(null); // Utilizamos useState para almacenar el valor del ID
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
-  const dispatch = useDispatch();
-  const professional = useSelector((state) => state.profesionalId);
   // console.log(professional);
 
   useEffect(() => {

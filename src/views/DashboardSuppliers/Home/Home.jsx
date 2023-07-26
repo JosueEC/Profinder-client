@@ -22,7 +22,6 @@ import {
   ViewIcon,
   EditIcon,
   QuestionIcon,
-  CheckCircleIcon,
   StarIcon,
 } from "@chakra-ui/icons";
 import { Link as ScrollLink } from "react-scroll";
@@ -34,7 +33,6 @@ import PasarelaPagos from "../../PasarelaPagos/PasarelaPagos";
 import Data from "../Data/Data";
 import FormUpdateProfile from "../formUpdateProfile/FormUpdateProfile";
 import UpdatePost from "../UpdatePost/UpdatePost";
-import Certificates from "../Certificates/Certiificates";
 import { useSessionState } from "../../../services/zustand/useSession";
 import { useSelector } from "react-redux";
 import BtnPremium from "../BtnPremium/BtnPremium";
@@ -151,24 +149,6 @@ const DashboardSuppliers = () => {
                 leftIcon={<EditIcon />}
               >
                 Editar mi Perfil
-              </Button>
-            </ScrollLink>
-
-            <ScrollLink
-              to="/dashboardSuppliers/certificados"
-              spy
-              smooth
-              duration={500}
-              style={linkStyle}
-            >
-              <Button
-                variant="outline"
-                onClick={() => handlePageChange("certificados")}
-                bg={currentPage === "certificados" ? "blue.500" : ""}
-                color={currentPage === "certificados" ? "white" : ""}
-                leftIcon={<CheckCircleIcon />}
-              >
-                Mis Certificados
               </Button>
             </ScrollLink>
 
@@ -322,24 +302,6 @@ const DashboardSuppliers = () => {
                 </ScrollLink>
 
                 <ScrollLink
-                  to="/dashboardSuppliers/certificados"
-                  spy
-                  smooth
-                  duration={500}
-                  style={linkStyle}
-                >
-                  <Button
-                    variant="outline"
-                    onClick={() => handlePageChange("certificados")}
-                    bg={currentPage === "certificados" ? "blue.500" : ""}
-                    color={currentPage === "certificados" ? "white" : ""}
-                    leftIcon={<CheckCircleIcon />}
-                  >
-                    Mis Certificados
-                  </Button>
-                </ScrollLink>
-
-                <ScrollLink
                   to="/dashboardSuppliers/pasarela"
                   spy
                   smooth
@@ -443,11 +405,6 @@ const DashboardSuppliers = () => {
         {currentPage === "updatepost" && (
           <Box>
             <UpdatePost />
-          </Box>
-        )}
-        {currentPage === "certificados" && (
-          <Box>
-            <Certificates />
           </Box>
         )}
       </Box>
