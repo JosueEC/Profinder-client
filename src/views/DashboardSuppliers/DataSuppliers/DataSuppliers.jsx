@@ -126,7 +126,7 @@ const DataSuppliers = () => {
   const chartHeight = chartWidth;
   return (
     <Flex justifyContent="center" alignItems="center" flexDir="column">
-      {showAlert && (
+      {showAlert && dataSuppliers.active === true ?(
         <Alert
           status="success"
           variant="subtle"
@@ -146,7 +146,7 @@ const DataSuppliers = () => {
             ilimitadas!
           </AlertDescription>
         </Alert>
-      )}
+      ): null}
       <Box width={`${chartWidth}px`} height={`${chartHeight}px`}>
         {" "}
         <Doughnut data={chartData} options={chartOptions} />

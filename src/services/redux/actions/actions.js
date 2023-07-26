@@ -584,7 +584,6 @@ const getFavorites = () => async (dispatch) => {
 const cleanDetail = () => {
   return {
     type: "CLEAN_DETAIL",
-    payload: [],
   };
 };
 
