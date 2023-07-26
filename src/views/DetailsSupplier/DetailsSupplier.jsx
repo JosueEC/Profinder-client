@@ -31,6 +31,7 @@ import SupplierPost from "../../components/SupplierPost/SupplierPost";
 import ClieProfChatBot from "./ChatClieProf";
 
 import { getProfesionalIdOnline } from "../../services/redux/actions/actions";
+import SupplierReview from "../../components/SupplierPost/SuplierReview";
 
 const ArticleList = () => {
   const { id } = useParams();
@@ -79,20 +80,21 @@ const ArticleList = () => {
             maxW={{ base: "full", md: "900px" }}
             w={{ base: "full", md: "900px" }}
           >
-           <Box flex={{ base: "1", md: "2" }}>
-            <Link to="/categories">
-              <Button
-                bg="teal.400"
-                color="white"
-                _hover={{ bg: "teal.500" }}
-                size="lg"
-                w="100%"
-                order={{ base: 2, md: 1 }} 
-                alignSelf={{ base: "center", md: "auto" }}          >
-                Volver
-              </Button>
-            </Link>
-          </Box>
+            <Box flex={{ base: "1", md: "2" }}>
+              <Link to="/categories">
+                <Button
+                  bg="teal.400"
+                  color="white"
+                  _hover={{ bg: "teal.500" }}
+                  size="lg"
+                  w="100%"
+                  order={{ base: 2, md: 1 }}
+                  alignSelf={{ base: "center", md: "auto" }}
+                >
+                  Volver
+                </Button>
+              </Link>
+            </Box>
             {profesionalId.map(
               ({
                 id,
@@ -109,12 +111,12 @@ const ArticleList = () => {
               }) => (
                 <Box
                   key={id}
-                  rounded={{ base: "none", md: "md" }} 
+                  rounded={{ base: "none", md: "md" }}
                   boxShadow={"2xl"}
                   align={"center"}
                   _hover={hoverStyles}
                   maxW={{ base: "100%", md: "500px" }}
-                  mx={{ base: "auto", md: "0" }} 
+                  mx={{ base: "auto", md: "0" }}
                   mb={{ base: "3rem", md: "0" }}
                   flex={{ base: "1", md: "2" }}
                   bg={useColorModeValue("blackAlpha.800", "gray.800")}
@@ -169,6 +171,9 @@ const ArticleList = () => {
               {isChatOpen && <ClieProfChatBot profesionalId={profesionalId} />}
             </Box>
           </Flex>
+          <Wrap spacing="50px" justify="center" align="center">
+            <SupplierReview profesionalId={id} key={profesionalId.id} />
+          </Wrap>
           <Divider my={{ base: 8, md: 16 }} />
           <Flex
             direction="column"

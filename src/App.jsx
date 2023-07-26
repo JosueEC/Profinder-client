@@ -33,6 +33,7 @@ import UpdatePost from "./views/DashboardSuppliers/UpdatePost/UpdatePost";
 import FormUpdateProfile from "./views/DashboardSuppliers/formUpdateProfile/FormUpdateProfile";
 import AboutUs from "./views/AboutUs/AboutUs";
 import Certificates from "./views/DashboardSuppliers/Certificates/Certiificates";
+import SupplierReview from "./components/SupplierPost/SuplierReview";
 
 function App() {
   const setSessionState = useSessionState((state) => state.setSessionState);
@@ -60,7 +61,8 @@ function App() {
         <Route exact path="/registerProvider" element={<FromProvider />} />
         <Route exact path="/registerCliente" element={<FormCliente />} />
         <Route exact path="/detail/:id" element={<DetailSupplier />} />
-        <Route exact path="/detail/suplier/:id" element={<SupplierPost />} />
+        <Route exact path="/detail/suplier1/:id" element={<SupplierReview />} />
+        <Route exact path="/detail/suplier2/:id" element={<SupplierPost />} />
         <Route exact path="/userLogin" element={<UserLogin />} />
         <Route exact path="/resetPassword" element={<ResetPassword />} />
         <Route exact path="/userRegister" element={<UserRegister />} />
@@ -131,7 +133,11 @@ function App() {
           path="/dashboardClient/recomended"
           element={<DashboardClientTopPro />}
         />
-        <Route exact path="/dashboardClient/favorites" element={<DashboardClientFavorite/>}/>
+        <Route
+          exact
+          path="/dashboardClient/favorites"
+          element={<DashboardClientFavorite />}
+        />
         <Route
           exact
           path="/dashboardClient/categories"
@@ -149,7 +155,7 @@ function App() {
           element={<DashboardClientHelp />}
         />
       </Routes>
-      {!isHomePage  && <Footer />}
+      {!isHomePage && <Footer />}
     </div>
   );
 }
