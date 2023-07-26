@@ -8,9 +8,8 @@ import { getFavorites } from '../../../services/redux/actions/actions';
 export default function FavoriteClient() {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites); 
-  // console.log(favorites)
+  // // console.log(favorites)
   useEffect(() => {
-
       dispatch(getFavorites());
   }, [dispatch]);
   // console.log(favorites)

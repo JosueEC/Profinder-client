@@ -491,7 +491,6 @@ const removeFavorite = (profesionalId) => async (dispatch) => {
     }
     const user = JSON.parse(userSession);
     const userId = user.id;
-    // const URL = `http://localhost:3001/relation/${userId}`;
     const URL = `https://backprofinder-production.up.railway.app/relation/${userId}`;
 
     await axios.put(URL, { profesionalId: profesionalId });

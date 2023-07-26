@@ -57,9 +57,9 @@ const SidebarClient = () => {
           >
             <Text>Profesionales</Text>
           </NavLink> */}
-          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
+          {/* <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName='active'>
             <Text>Favoritos</Text>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/dashboardClient/feedbackform"
             style={linkStyle}
@@ -88,11 +88,11 @@ const SidebarClient = () => {
               <StarIcon />
             </Tooltip>
           </NavLink>
-          <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName= "active">
+          {/* <NavLink to="/dashboardClient/favorites" style={linkStyle} activeClassName= "active">
             <Tooltip label="Favoritos" aria-label="Favoritos">
               <StarIcon />
             </Tooltip>
-          </NavLink>
+          </NavLink> */}
           {/* <NavLink to="/categories" style={linkStyle} activeClassName="active">
             <Tooltip label="Profesionales" aria-label="Profesionales">
               <SearchIcon/>

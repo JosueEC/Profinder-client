@@ -149,6 +149,7 @@ const reducer = (state = initialState, action) => {
     }
     // Agregar un profesional como favorito
     case ADD_FAVORITE: {
+      console.log(action.payload)
       const { profesionalId } = action.payload;
       if (!state.favorites.includes(profesionalId)) {
         return {
@@ -160,7 +161,10 @@ const reducer = (state = initialState, action) => {
     }
     // Remover un profesional como favorito
     case REMOVE_FAVORITE: {
-      const { profesionalId } = action.payload;
+      // 
+      console.log("Que me llega en remove")
+      console.log(action.payload)
+      const  profesionalId = action.payload;
       return {
         ...state,
         favorites: [...state.favorites.filter((id) => id !== profesionalId)],
@@ -170,6 +174,7 @@ const reducer = (state = initialState, action) => {
     case GET_FAVORITES: {
       const favoritesList = action.payload;
       // console.log("" + favoritesList)
+      console.log("---")
       console.log(favoritesList.map((fav)=>fav.id))
       return {
         ...state,
