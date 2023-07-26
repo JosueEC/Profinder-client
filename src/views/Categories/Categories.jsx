@@ -12,6 +12,7 @@ import Paginator from "./../../components/Paginator/Paginator";
 import styles from "./Categories.module.css";
 
 const Categories = () => {
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const suppliers = useSelector((state) => state.suppliers);
