@@ -42,11 +42,11 @@ const peopleData = [
   }, {
     name: 'José Alberto Brito Sevilla',
     email: 'josealbritose@gmail.com',
-    linkedinURL: 'https://www.linkedin.com/in/johndoe/',
+    linkedinURL: 'https://www.linkedin.com/in/jos%C3%A9-brito-72224025b/',
     githubURL: 'https://github.com/josebritop',
     title: 'Software Engineer',
     country: 'Argentina',
-    imageUrl: 'path/to/john_doe_image.jpg',
+    imageUrl: 'https://media.licdn.com/dms/image/D4D03AQEMMFSpnebLHQ/profile-displayphoto-shrink_800_800/0/1690386599543?e=1695859200&v=beta&t=kfi6ziSmzzW7IXjTA-RfciqVUmymEsW12BPgbCvw_ZA',
    
   }, {
     name: 'Cristian Cuesta',
