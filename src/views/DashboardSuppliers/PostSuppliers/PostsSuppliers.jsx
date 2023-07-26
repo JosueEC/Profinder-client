@@ -22,7 +22,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const PostsSuppliers = () => {
   const session = useSessionState((state) => state.session);
-  // console.log(session);
+  console.log(session);
 
   const profesionales = useSelector((state) => state.profesionales);
   //console.log(profesionales);

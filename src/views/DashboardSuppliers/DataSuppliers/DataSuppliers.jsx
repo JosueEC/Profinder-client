@@ -64,14 +64,13 @@ const DataSuppliers = () => {
 
   const serviciosActivos = 20;
   const serviciosTerminados = 15;
-  const serviciosCancelados = 2;
   // aca van los datos de la gráfica
   const chartData = {
     labels: [
       "Posts",
-      "Servicios Activos",
-      "Servicios Terminados",
-      "servicios Cancelados",
+      "Mi Calificacion",
+      "Feedback Recibido",
+      
     ],
     datasets: [
       {
@@ -79,13 +78,12 @@ const DataSuppliers = () => {
           numPosts,
           serviciosActivos,
           serviciosTerminados,
-          serviciosCancelados,
         ],
         backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
+          "rgba(220, 30, 220, 0.6)",
           "rgba(192, 75, 75, 0.6)",
           "rgba(3, 75, 75, 0.6)",
-          "rgba(200, 200, 20, 0.6)",
+      
         ],
         borderWidth: 1,
       },
