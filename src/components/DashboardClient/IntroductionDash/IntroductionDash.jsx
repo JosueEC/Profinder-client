@@ -10,7 +10,7 @@ const IntroductionDash = () => {
     <Box
       width="100%"
       bg={useColorModeValue('gray.100', 'gray.800')}
-      boxShadow="base"
+     
     
       p={4}
     >

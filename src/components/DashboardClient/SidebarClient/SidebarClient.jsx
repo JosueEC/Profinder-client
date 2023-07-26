@@ -38,6 +38,7 @@ const SidebarClient = () => {
           onClick={toggleCollapse}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           alignSelf="flex-end"
+         
         />
       ) : (
         <Stack spacing={4}>
