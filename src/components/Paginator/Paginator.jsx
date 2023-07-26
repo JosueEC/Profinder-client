@@ -2,6 +2,7 @@ import { Button, HStack } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const Paginator = ({ currentPage, setCurrentPage, totalPages }) => {
+  const maxButtons = 50;
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
