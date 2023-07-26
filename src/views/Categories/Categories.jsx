@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stack, useColorModeValue } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { getAllSuppliers } from '../../services/redux/actions/actions'
+import { cleanDetail, getAllSuppliers } from '../../services/redux/actions/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import SupplierCardsContainer from '../../components/SupplierCardsContainer/SupplierCardsContainer'
 import FiltersPanel from '../../components/FiltersPanel/FiltersPanel'
@@ -18,8 +18,10 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(getAllSuppliers())
-  }, [])
-
+    
+    return ()=> dispatch(cleanDetail())
+  }, [dispatch])
+ 
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const visibleSuppliers = suppliers.slice(startIndex, endIndex)

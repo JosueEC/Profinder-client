@@ -4,7 +4,7 @@ import { EditIcon } from "@chakra-ui/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getPostProfesional } from "./../../services/redux/actions/actions";
+import { cleanDetail, getPostProfesional } from "./../../services/redux/actions/actions";
 import {
   Box,
   Text,
@@ -51,7 +51,10 @@ export default function SupplierPost() {
     // Llamamos a la acción de Redux solo cuando tengamos el ID
     if (id) {
       dispatch(getPostProfesional(id));
+    
     }
+    
+    return ()=> dispatch(cleanDetail())
   }, [dispatch, id]);
 
   const settings = {

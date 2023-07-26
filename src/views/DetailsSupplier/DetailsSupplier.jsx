@@ -30,7 +30,10 @@ import InfoLabel from "../../singleComponents/InfoLabel";
 import SupplierPost from "../../components/SupplierPost/SupplierPost";
 import ClieProfChatBot from "./ChatClieProf";
 
-import { getProfesionalIdOnline } from "../../services/redux/actions/actions";
+import {
+  cleanDetail,
+  getProfesionalIdOnline,
+} from "../../services/redux/actions/actions";
 import SupplierReview from "../../components/SupplierPost/SuplierReview";
 
 const ArticleList = () => {
@@ -38,12 +41,15 @@ const ArticleList = () => {
   const profesionalId = useSelector((state) => state.profesionalId);
   const dispatch = useDispatch();
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   useEffect(() => {
     dispatch(getProfesionalIdOnline(id));
+    
     window.scrollTo(0, 0);
+    return () => dispatch(cleanDetail());
   }, [dispatch, id]);
 
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const handleChatToggle = () => {
     setIsChatOpen(!isChatOpen);
   };
@@ -59,13 +65,14 @@ const ArticleList = () => {
 
   return (
     <>
-      {/* <Spacer h="100px" /> */}
+      <Spacer h="100px" bg={useColorModeValue("gray.800", "gray.500")} />
       <Container
         key={profesionalId.id}
         // color="gray.300"
         bg={useColorModeValue("gray.800", "gray.500")}
         maxW="100%"
         // py="5"
+
         px={{ base: "2", md: "8", lg: "10rem" }}
         align={"center"}
         justify={"center"}
@@ -80,7 +87,7 @@ const ArticleList = () => {
             maxW={{ base: "full", md: "900px" }}
             w={{ base: "full", md: "900px" }}
           >
-            <Box flex={{ base: "1", md: "2" }}>
+            {/* <Box flex={{ base: "1", md: "2" }}>
               <Link to="/categories">
                 <Button
                   bg="teal.400"
@@ -94,7 +101,7 @@ const ArticleList = () => {
                   Volver
                 </Button>
               </Link>
-            </Box>
+            </Box> */}
             {profesionalId.map(
               ({
                 id,
