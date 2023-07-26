@@ -92,14 +92,6 @@ export default function PostRegister ({ title, image, content, softDelete }) {
           noOfLines={2}
         >
           {title}
-          {/* <chakra.span
-              color='brand.600'
-              _dark={{
-                color: 'brand.400'
-              }}
-            >
-              Idea
-            </chakra.span> */}
         </chakra.h2>
         <chakra.p
           mt={4}
@@ -108,22 +100,6 @@ export default function PostRegister ({ title, image, content, softDelete }) {
         >
           {content}
         </chakra.p>
-
-        {/* <Box mt={8}>
-            <Link
-              bg='gray.900'
-              color='gray.100'
-              px={5}
-              py={3}
-              fontWeight='semibold'
-              rounded='lg'
-              _hover={{
-                bg: 'gray.800'
-              }}
-            >
-              Start Now
-            </Link>
-          </Box> */}
       </Box>
     </Box>
 

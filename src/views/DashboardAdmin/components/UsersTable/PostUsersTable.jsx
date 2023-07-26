@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { lazy, Suspense } from 'react'
 import { Flex } from '@chakra-ui/layout'
+import { Skeleton } from '@chakra-ui/skeleton'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import PostRegister from '../../singleComponents/PostRegister'
-import NoResults from '../../../../singleComponents/NoResults'
+import { Spinner } from '@chakra-ui/spinner'
+const PostRegister = lazy(() => import('../../singleComponents/PostRegister'))
+const NoResults = lazy(() => import('../../../../singleComponents/NoResults'))
 
 export default function PostUsersTable ({ posts }) {
   const bgColor = useColorModeValue('gray.100', 'gray.900')
@@ -23,17 +26,23 @@ export default function PostUsersTable ({ posts }) {
           ? (
               posts.map(({ id, title, image, content, softDelete }) => {
                 return (
-                  <PostRegister
-                    key={id}
-                    title={title}
-                    image={image}
-                    content={content}
-                    softDelete={softDelete}
-                  />
+                  <Suspense key={id} fallback={<Skeleton startColor='gray.200' height='150px' />}>
+                    <PostRegister
+                      key={id}
+                      title={title}
+                      image={image}
+                      content={content}
+                      softDelete={softDelete}
+                    />
+                  </Suspense>
                 )
               })
             )
-          : (<NoResults />)
+          : (
+            <Suspense fallback={<Spinner />}>
+              <NoResults />
+            </Suspense>
+            )
       }
     </Flex>
   )

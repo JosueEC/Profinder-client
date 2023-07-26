@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+import { useEffect, lazy, Suspense } from 'react'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Flex, SimpleGrid, Stack } from '@chakra-ui/layout'
-import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
-import { useEffect } from 'react'
+import { Skeleton } from '@chakra-ui/skeleton'
+import { Spinner } from '@chakra-ui/spinner'
 import { URL } from '../../constants'
-import FiltersDashboard from '../FiltersDashboard/FiltersDashboard'
-import UserRegister from '../../singleComponents/UserRegister'
-import NoResults from '../../../../singleComponents/NoResults'
+import { useProfesionalDash } from '../../../../services/zustand/useProfesionalDash'
+const FiltersDashboard = lazy(() => import('../FiltersDashboard/FiltersDashboard'))
+const NoResults = lazy(() => import('../../../../singleComponents/NoResults.jsx'))
+const UserRegister = lazy(() => import('../../singleComponents/UserRegister'))
 
 export default function UsersTable () {
   const bgColor = useColorModeValue('white', 'gray.800')
@@ -44,7 +46,9 @@ export default function UsersTable () {
         bg={bgColor}
         shadow='lg'
       >
-        <FiltersDashboard />
+        <Suspense fallback={<Skeleton startColor='gray.200' height='80px' />}>
+          <FiltersDashboard />
+        </Suspense>
         <SimpleGrid // Encabezado tabla
           spacingY={3}
           columns={{
@@ -81,19 +85,25 @@ export default function UsersTable () {
             ? (
                 profesional.map(({ id, name, email, image, active, softDelete }) => {
                   return (
-                    <UserRegister
-                      key={id}
-                      id={id}
-                      name={name}
-                      email={email}
-                      image={image}
-                      active={active}
-                      softDelete={softDelete}
-                    />
+                    <Suspense key={id} fallback={<Skeleton startColor='gray.200' height='40px' />}>
+                      <UserRegister
+                        key={id}
+                        id={id}
+                        name={name}
+                        email={email}
+                        image={image}
+                        active={active}
+                        softDelete={softDelete}
+                      />
+                    </Suspense>
                   )
                 })
               )
-            : (<NoResults />)
+            : (
+              <Suspense fallback={<Spinner />}>
+                <NoResults />
+              </Suspense>
+              )
         }
       </Stack>)
     </Flex>
