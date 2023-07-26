@@ -305,7 +305,8 @@ const getProfesionals = () => {
 
 //! Actualizar Profesionales
 const updateProfesionals = (data, id) => {
-  // console.log(id);  // el id llega bien***** falta la data
+   console.log(id);
+   console.log(data);  // el id llega bien***** falta la data
   // const URL = `${API.LOCALHOST}/profesional/${id}`
   const URL = `${API.DBONLINE}/profesional/${id}`;
 
