@@ -11,7 +11,7 @@ import { Alert, AlertIcon } from "@chakra-ui/react";
 
 const DataSuppliers = () => {
   const dataSuppliers = useSelector((state) => state.profesionales);
-
+  console.log(dataSuppliers);
   const session = useSessionState((state) => state.session);
 
   const profile = dataSuppliers.find((user) => user.id === session.id);
@@ -53,6 +53,14 @@ const DataSuppliers = () => {
           setFormValues({});
           alert(`${message}`);
         })
+        .then((response) => {
+          console.log("Respuesta del backend:", response.data);
+          // Aquí puedes manejar la respuesta del backend, si es necesario
+          // window.location.href = "http://127.0.0.1:5173/dashboardSuppliers";
+          // "https://profinder-client.vercel.app/dashboardSuppliers";
+          setFormValues({});
+          alert(`${response.data.message}`);
+        })
         .catch((error) => {
           console.error("Error al enviar datos al backend:", error);
         });
@@ -66,24 +74,14 @@ const DataSuppliers = () => {
   const serviciosTerminados = 15;
   // aca van los datos de la gráfica
   const chartData = {
-    labels: [
-      "Posts",
-      "Mi Calificacion",
-      "Feedback Recibido",
-      
-    ],
+    labels: ["Posts", "Mi Calificacion", "Feedback Recibido"],
     datasets: [
       {
-        data: [
-          numPosts,
-          serviciosActivos,
-          serviciosTerminados,
-        ],
+        data: [numPosts, serviciosActivos, serviciosTerminados],
         backgroundColor: [
           "rgba(220, 30, 220, 0.6)",
           "rgba(192, 75, 75, 0.6)",
           "rgba(3, 75, 75, 0.6)",
-      
         ],
         borderWidth: 1,
       },
@@ -110,7 +108,6 @@ const DataSuppliers = () => {
     setWindowWidth(window.innerWidth);
   };
   useEffect(() => {
-    dispatch(getProfesionals());
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
@@ -125,7 +122,7 @@ const DataSuppliers = () => {
   const chartHeight = chartWidth;
   return (
     <Flex justifyContent="center" alignItems="center" flexDir="column">
-      {showAlert && dataSuppliers.active === true ?(
+      {showAlert && dataSuppliers.active === true ? (
         <Alert
           status="success"
           variant="subtle"
@@ -145,7 +142,7 @@ const DataSuppliers = () => {
             ilimitadas!
           </AlertDescription>
         </Alert>
-      ): null}
+      ) : null}
       <Box width={`${chartWidth}px`} height={`${chartHeight}px`}>
         {" "}
         <Doughnut data={chartData} options={chartOptions} />
