@@ -152,18 +152,25 @@ const ArticleList = () => {
                   Trabajos Recientes
                 </Heading>
                 <Divider my={2} />
+                {profesionalId[0].posts.length > 0 ? ( 
                   <Wrap spacing="50px" justify="center">
                     <SupplierPost profesionalId={id} key={profesionalId.id} />
                   </Wrap>
-              </Flex>
+                  ) : (
+                  <Text color='white'>No hay trabajos recientes</Text>
+                )}
+             </Flex>
             </Box>
             <Box>
-              <Heading as="h2" textTransform="uppercase" color={textColorSection}> Reseñas del profesional</Heading>
+              <Heading as="h2" textTransform="uppercase" color={textColorSection}> Reseñas</Heading>
               <Divider my={2} />
-              
-              <Flex justifyContent='center' alignItems='center' >
-                <SupplierReview profesionalId={id} key={profesionalId.id} />
-              </Flex>
+              {profesionalId[0].reviews.length > 0 ? ( 
+                <Flex justifyContent='center' alignItems='center' >
+                  <SupplierReview profesionalId={id} key={profesionalId.id} />
+                </Flex>
+                ) : (
+                <Text color='white'>No hay reseñas de los usuarios</Text>
+              )}
             </Box>
           </ScaleFade>
         )}
