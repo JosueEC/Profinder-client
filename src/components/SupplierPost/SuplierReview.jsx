@@ -73,7 +73,7 @@ export default function SupplierReview() {
   }
 
   return (
-    <Stack mt={12} justify="center" spacing={10} align="center">
+    <Stack mt={12} justify="center" spacing={10} align="center" border='2px solid white'>
       <Wrap
         spacing={5}
         justify="center"
@@ -85,17 +85,16 @@ export default function SupplierReview() {
               <Box
                 bg={bgColor}
                 maxW={"450px"}
-                minW={"300px"} // Ancho mínimo deseado
-                minH={"100px"}
-                maxH={"200px"} // Alto mínimo deseado
-                w={"full"}
+                minW={"450px"}
+                minH={"120px"}
+                maxH={"200px"}
+                // w={"full"}
                 boxShadow={"2xl"}
                 rounded={"md"}
                 overflow={"hidden"}
                 p={6}
                 marginLeft="10px"
               >
-                {/* Contenido del review */}
                 <Flex direction="row" justify="center">
                   {[...new Array(5)].map((star, index) => {
                     return index < review.rating ?? 0 ? (
@@ -106,7 +105,6 @@ export default function SupplierReview() {
                   })}
                 </Flex>
                 <Box>
-                  {/* Contenido del post */}
                   <Text color={"gray.200"}>
                     {showFullContent
                       ? review.content
