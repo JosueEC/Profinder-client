@@ -11,7 +11,7 @@ import {
 import {
   Box,
   Text,
-  VStack,
+  VStack,WrapItem, Wrap,
   Image,
   Grid,
   Button,
@@ -40,6 +40,7 @@ export default function SupplierReview() {
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.profesionalId);
   // console.log(professional);
+  const bgColor = useColorModeValue("blackAlpha.800", "gray.800")
 
   useEffect(() => {
     async function getIdAsync() {
@@ -73,56 +74,52 @@ export default function SupplierReview() {
 
   return (
     <Stack mt={12} justify="center" spacing={10} align="center">
-      <Grid
-        templateColumns={["3fr", "1fr", "1fr", "repeat(1, 1fr)"]}
-        gap={5}
-        justifyContent="center"
+      <Wrap
+        spacing={5}
+        justify="center"
+        // align="center"
       >
         {professional ? (
           professional[0].reviews.map((review) => (
-            <Box
-              key={id}
-              bg={useColorModeValue("blackAlpha.800", "gray.800")}
-              maxW={"450px"}
-              w={"full"}
-              boxShadow={"2xl"}
-              rounded={"md"}
-              overflow={"hidden"}
-              p={6}
-              marginLeft="10px"
-            >
-              <Box justifyContent="center">
-                <EditIcon
-                  position="absolute"
-                  top="20px"
-                  right="20px"
-                  cursor="pointer"
-                />
+            <WrapItem key={review.id}>
+              <Box
+                bg={bgColor}
+                maxW={"450px"}
+                minW={"300px"} // Ancho mínimo deseado
+                minH={"100px"}
+                maxH={"200px"} // Alto mínimo deseado
+                w={"full"}
+                boxShadow={"2xl"}
+                rounded={"md"}
+                overflow={"hidden"}
+                p={6}
+                marginLeft="10px"
+              >
+                {/* Contenido del review */}
+                <Flex direction="row" justify="center">
+                  {[...new Array(5)].map((star, index) => {
+                    return index < review.rating ?? 0 ? (
+                      <FaStar color="yellow" fontSize="1.3rem" key={index} />
+                    ) : (
+                      <FaStar color="white" fontSize="1.3rem" key={index} />
+                    );
+                  })}
+                </Flex>
+                <Box>
+                  {/* Contenido del post */}
+                  <Text color={"gray.200"}>
+                    {showFullContent
+                      ? review.content
+                      : review.content.substring(0, 100)}
+                  </Text>
+                </Box>
               </Box>
-              <Flex direction="row" justify="center">
-                {[...new Array(5)].map((star, index) => {
-                  return index < review.rating ?? 0 ? (
-                    <FaStar color="yellow" fontSize="1.3rem" />
-                  ) : (
-                    <FaStar color="white" fontSize="1.3rem" />
-                  );
-                })}
-              </Flex>
-
-              <Box>
-                {/* Contenido del post */}
-                <Text color={"gray.200"}>
-                  {showFullContent
-                    ? review.content
-                    : review.content.substring(0, 100)}
-                </Text>
-              </Box>
-            </Box>
+            </WrapItem>
           ))
         ) : (
           <Text>No posts found for the given identifier.</Text>
         )}
-      </Grid>
+      </Wrap>
     </Stack>
   );
 }
