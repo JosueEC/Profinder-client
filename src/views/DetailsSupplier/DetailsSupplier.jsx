@@ -96,7 +96,7 @@ const ArticleList = () => {
           <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="lg" />) : 
         (<ScaleFade initialScale={0.9} in>
           <Box>
-            <Flex direction={{ base: "column"}}  justify="center" align="center" gap={{ base: "1rem", md: "1rem", lg: "1rem" }} maxW={{ base: "full", md: "900px" }} width="100%" border='2px solid red' >
+            <Flex direction={{ base: "column"}}  justify="center" align="center" gap={{ base: "1rem", md: "1rem", lg: "1rem" }} maxW={{ base: "full", md: "900px" }} width="100%">
                 <Box flex={{ base: "1", md: "2" }} alignSelf='flex-start'>
                   <Link to="/categories">
                     <Button
