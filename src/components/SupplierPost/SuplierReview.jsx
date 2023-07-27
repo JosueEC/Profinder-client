@@ -73,7 +73,7 @@ export default function SupplierReview() {
   }
 
   return (
-    <Stack mt={12} justify="center" spacing={10} align="center" border='2px solid white'>
+    <Stack mt={12} justify="center" spacing={10} align="center">
       <Wrap
         spacing={5}
         justify="center"
