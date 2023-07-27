@@ -40,7 +40,7 @@ const peopleData = [
     imageUrl: 'https://media.licdn.com/dms/image/D4D03AQFM8yYaQS8S4Q/profile-displayphoto-shrink_800_800/0/1666745756157?e=1695859200&v=beta&t=1JB53SXVkTq6Rshgwkt9_RU-eWXx5zAq5riuREjKrZU',
    
   }, {
-    name: 'José Alberto Brito Sevilla',
+    name: 'José Brito',
     email: 'josealbritose@gmail.com',
     linkedinURL: 'https://www.linkedin.com/in/jos%C3%A9-brito-72224025b/',
     githubURL: 'https://github.com/josebritop',
@@ -50,7 +50,7 @@ const peopleData = [
    
   }, {
     name: 'Cristian Cuesta',
-    email: 'john.doe@example.com',
+    email: 'ccdavid007@gmail.com',
     linkedinURL: 'https://www.linkedin.com/in/cristiancuestabenitez/',
     githubURL: 'https://github.com/CristianCuesta14',
     title: 'Software Engineer',
