@@ -7,9 +7,15 @@ import {
   Input,
   Textarea,
   Flex,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import emailjs from "@emailjs/browser";
-import { validateName, validateEmail, validateMessage } from "./validations";
+import {
+  validateName,
+  validateEmail,
+  validateMessage,
+} from "./validations";
 
 const FeedbackForm = () => {
   const form = useRef();
@@ -27,6 +33,11 @@ const FeedbackForm = () => {
   });
 
   const offensiveWords = ["malparido"];
+
+  const { colorMode } = useColorMode();
+  const bgColor = useColorModeValue("gray.100", "gray.800");
+  const cardBgColor = colorMode === "light" ? "white" : "gray.700";
+  const textColor = colorMode === "light" ? "black" : "white";
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -89,20 +100,26 @@ const FeedbackForm = () => {
     });
   };
 
+  // Función para alternar el modo oscuro
+  const toggleDarkMode = () => {
+    setDarkMode((prevDarkMode) => !prevDarkMode);
+  };
+
   return (
     <Flex
-      height="70vh" // Ocupa toda la altura de la pantalla
-      alignItems="center" // Centra verticalmente el contenido
-      justifyContent="center" // Centra horizontalmente el contenido
-      bg="gray.100" // Puedes ajustar el color de fondo según tus necesidades
+      height="70vh"
+      alignItems="center"
+      justifyContent="center"
+      bg={bgColor} // Usa gray.800 para el modo oscuro y gray.100 para el modo claro
+      color={textColor} // Cambia el color del texto para el modo oscuro
     >
       <Box
         maxWidth="500px"
-        width="100%" // Hace que el formulario ocupe el 100% del ancho disponible
+        width="100%"
         padding="20px"
         boxShadow="md"
         borderRadius="md"
-        bg="white" // Puedes ajustar el color de fondo según tus necesidades
+        bg={cardBgColor} // Usa gray.700 para el modo oscuro y white para el modo claro
       >
         <form ref={form} onSubmit={handleSubmit}>
           <FormControl>
@@ -115,10 +132,12 @@ const FeedbackForm = () => {
               isInvalid={!!formErrors.nameError}
             />
           </FormControl>
-          {formErrors.nameError && <Box color="red">{formErrors.nameError}</Box>}
+          {formErrors.nameError && (
+            <Box color="red">{formErrors.nameError}</Box>
+          )}
 
           <FormControl mt={4}>
-            <FormLabel>Correo Electronico</FormLabel>
+            <FormLabel>Correo Electrónico</FormLabel>
             <Input
               type="email"
               name="email"
@@ -144,10 +163,19 @@ const FeedbackForm = () => {
             <Box color="red">{formErrors.messageError}</Box>
           )}
 
-          <Button type="submit" mt={4} colorScheme="blue" isFullWidth size="lg">
+          <Button
+            type="submit"
+            mt={4}
+            colorScheme="blue"
+            isFullWidth
+            size="lg"
+            onClick={handleSubmit}
+          >
             Enviar
           </Button>
         </form>
+
+        
       </Box>
     </Flex>
   );
