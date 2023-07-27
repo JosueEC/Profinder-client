@@ -19,6 +19,7 @@ import {
   useColorModeValue,
   SimpleGrid,
   Stack,
+  useColorMode
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
@@ -34,11 +35,14 @@ async function fetchPostId() {
 
 export default function SupplierPost() {
   const dispatch = useDispatch();
+  const { colorMode } = useColorMode();
+  const bgColor = useColorModeValue('white', 'gray.800');
   const professional = useSelector((state) => state.profesionalId);
   const [id, setId] = useState(null); // Utilizamos useState para almacenar el valor del ID
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullContent, setShowFullContent] = useState(false);
   // console.log(professional);
+  const cardBgColor = colorMode === 'light' ? 'white' : bgColor;
 
   useEffect(() => {
     // Función asincrónica para obtener el ID
@@ -73,7 +77,7 @@ export default function SupplierPost() {
   }
 
   return (
-    <Stack mt={12} justify="center" spacing={10} align="center">
+    <Stack mt={12} justify="center" spacing={10} align="center" >
       <Grid
         templateColumns={["3fr", "3fr", "3fr", "repeat(3, 1fr)"]}
         gap={5}
@@ -83,7 +87,8 @@ export default function SupplierPost() {
           professional[0].posts.map((post) => (
             <Box
               key={post.id}
-              bg={useColorModeValue("blackAlpha.800", "gray.800")}
+              bg={bgColor}
+              
               maxW={"450px"}
               w={"full"}
               boxShadow={"2xl"}
@@ -143,7 +148,7 @@ export default function SupplierPost() {
                 )}
 
                 {/* Contenido del post */}
-                <Text color={"gray.200"}>
+                <Text color={useColorModeValue('gray.900','gray.100')}>
                   {showFullContent
                     ? post.content
                     : post.content.substring(0, 100)}
