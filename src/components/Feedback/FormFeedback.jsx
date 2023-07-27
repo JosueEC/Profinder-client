@@ -6,6 +6,7 @@ import {
   FormLabel,
   Input,
   Textarea,
+  Flex,
 } from "@chakra-ui/react";
 import emailjs from "@emailjs/browser";
 import { validateName, validateEmail, validateMessage } from "./validations";
@@ -89,58 +90,66 @@ const FeedbackForm = () => {
   };
 
   return (
-    <Box
-      maxWidth="500px"
-      margin="0 auto"
-      padding="20px"
-      boxShadow="md"
-      borderRadius="md"
+    <Flex
+      height="70vh" // Ocupa toda la altura de la pantalla
+      alignItems="center" // Centra verticalmente el contenido
+      justifyContent="center" // Centra horizontalmente el contenido
+      bg="gray.100" // Puedes ajustar el color de fondo según tus necesidades
     >
-      <form ref={form} onSubmit={handleSubmit}>
-        <FormControl>
-          <FormLabel>Nombre</FormLabel>
-          <Input
-            type="text"
-            name="name"
-            value={formValues.name}
-            onChange={handleInputChange}
-            isInvalid={!!formErrors.nameError}
-          />
-        </FormControl>
-        {formErrors.nameError && <Box color="red">{formErrors.nameError}</Box>}
+      <Box
+        maxWidth="500px"
+        width="100%" // Hace que el formulario ocupe el 100% del ancho disponible
+        padding="20px"
+        boxShadow="md"
+        borderRadius="md"
+        bg="white" // Puedes ajustar el color de fondo según tus necesidades
+      >
+        <form ref={form} onSubmit={handleSubmit}>
+          <FormControl>
+            <FormLabel>Nombre</FormLabel>
+            <Input
+              type="text"
+              name="name"
+              value={formValues.name}
+              onChange={handleInputChange}
+              isInvalid={!!formErrors.nameError}
+            />
+          </FormControl>
+          {formErrors.nameError && <Box color="red">{formErrors.nameError}</Box>}
 
-        <FormControl mt={4}>
-          <FormLabel>Correo Electronico</FormLabel>
-          <Input
-            type="email"
-            name="email"
-            value={formValues.email}
-            onChange={handleInputChange}
-            isInvalid={!!formErrors.emailError}
-          />
-        </FormControl>
-        {formErrors.emailError && (
-          <Box color="red">{formErrors.emailError}</Box>
-        )}
+          <FormControl mt={4}>
+            <FormLabel>Correo Electronico</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleInputChange}
+              isInvalid={!!formErrors.emailError}
+            />
+          </FormControl>
+          {formErrors.emailError && (
+            <Box color="red">{formErrors.emailError}</Box>
+          )}
 
-        <FormControl mt={4}>
-          <FormLabel>Mensaje</FormLabel>
-          <Textarea
-            name="message"
-            value={formValues.message}
-            onChange={handleInputChange}
-            isInvalid={!!formErrors.messageError}
-          />
-        </FormControl>
-        {formErrors.messageError && (
-          <Box color="red">{formErrors.messageError}</Box>
-        )}
+          <FormControl mt={4}>
+            <FormLabel>Mensaje</FormLabel>
+            <Textarea
+              name="message"
+              value={formValues.message}
+              onChange={handleInputChange}
+              isInvalid={!!formErrors.messageError}
+            />
+          </FormControl>
+          {formErrors.messageError && (
+            <Box color="red">{formErrors.messageError}</Box>
+          )}
 
-        <Button type="submit" mt={4} colorScheme="blue" isFullWidth size="lg">
-          Enviar
-        </Button>
-      </form>
-    </Box>
+          <Button type="submit" mt={4} colorScheme="blue" isFullWidth size="lg">
+            Enviar
+          </Button>
+        </form>
+      </Box>
+    </Flex>
   );
 };
 
