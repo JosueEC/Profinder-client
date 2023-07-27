@@ -161,7 +161,7 @@ const ArticleList = () => {
                 )}
              </Flex>
             </Box>
-            <>
+            <Box>
               <Heading as="h2" textTransform="uppercase" color={textColorSection}> Reseñas</Heading>
               <Divider my={2} />
               {profesionalId[0].reviews.length > 0 ? ( 
@@ -171,7 +171,7 @@ const ArticleList = () => {
                 ) : (
                 <Text color='white'>No hay reseñas de los usuarios</Text>
               )}
-            </>
+            </Box>
           </ScaleFade>
         )}
         <Divider my={{ base: 8, md: 16 }} />
