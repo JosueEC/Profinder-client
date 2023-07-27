@@ -12,6 +12,9 @@ const SidebarClient = () => {
     setIsOpen(!isOpen);
   };
 
+  if(isLargerThanMd && isOpen){
+    setIsOpen(!isOpen)
+  }
   const linkStyle = {
     display: 'block',
     padding: '10px',
