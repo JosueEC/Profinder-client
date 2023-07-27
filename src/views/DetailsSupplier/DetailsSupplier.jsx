@@ -19,6 +19,7 @@ import {
   Avatar,
   Spacer,
   Spinner,
+  useColorMode
 } from "@chakra-ui/react";
 import {
   FaUserAlt,
@@ -42,6 +43,8 @@ const ArticleList = () => {
   const { id } = useParams();
   const profesionalId = useSelector((state) => state.profesionalId);
   const dispatch = useDispatch();
+  const { colorMode } = useColorMode();
+
 
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -67,11 +70,12 @@ const ArticleList = () => {
   // const bgColorTwo = useColorModeValue("blackAlpha.800", "gray.800")
   // const bgColorThree = useColorModeValue("teal.500", "teal.400")
 
-  const bgColor = useColorModeValue("gray.500","gray.800")
+  const bgColor = useColorModeValue("gray.100","gray.800")
   const bgColorTwo = useColorModeValue("gray.800","blackAlpha.800")
   const bgColorThree = useColorModeValue("teal.400","teal.500")
   const textColor = useColorModeValue('gray.100', 'white');
   const textColorSection = useColorModeValue('gray.900', 'gray.100');
+  const dividerColor = colorMode === 'dark' ? 'gray.100' : 'black';
 
   if (!profesionalId) {
     return <div>Loading...</div>;
@@ -151,7 +155,7 @@ const ArticleList = () => {
                 <Heading as="h2" textTransform="uppercase" color={textColorSection}>
                   Trabajos Recientes
                 </Heading>
-                <Divider my={2} />
+                <Divider my={2} borderColor={dividerColor}/>
                 {profesionalId[0].posts.length > 0 ? ( 
                   <Wrap spacing="50px" justify="center">
                     <SupplierPost profesionalId={id} key={profesionalId.id} />
@@ -161,9 +165,9 @@ const ArticleList = () => {
                 )}
              </Flex>
             </Box>
-            <Box>
+            <>
               <Heading as="h2" textTransform="uppercase" color={textColorSection}> Reseñas</Heading>
-              <Divider my={2} />
+              <Divider my={2} borderColor={dividerColor} />
               {profesionalId[0].reviews.length > 0 ? ( 
                <Flex justifyContent="center" alignItems="center" flexDirection={{ base: "column", md: "row" }}>
                   <SupplierReview profesionalId={id} key={profesionalId.id} />
@@ -171,10 +175,10 @@ const ArticleList = () => {
                 ) : (
                 <Text color='white'>No hay reseñas de los usuarios</Text>
               )}
-            </Box>
+            </>
           </ScaleFade>
         )}
-        <Divider my={{ base: 8, md: 16 }} />
+        <Divider padding="10px" borderColor={dividerColor} />
       </Container>
     </>
   );
