@@ -146,7 +146,7 @@ const ArticleList = () => {
             </Box>
 
             <Box>
-              {/* Profesional posteos */}
+              {/* Profesional posteos correocliente@gmail.com Ell12345*/}
               <Flex direction="column" align="center" justify="center" gap={{ base: "1rem"}} my={{ base: 8, md: 16 }}>
                 <Heading as="h2" textTransform="uppercase" color={textColorSection}>
                   Trabajos Recientes
@@ -161,17 +161,17 @@ const ArticleList = () => {
                 )}
              </Flex>
             </Box>
-            <Box>
+            <>
               <Heading as="h2" textTransform="uppercase" color={textColorSection}> Reseñas</Heading>
               <Divider my={2} />
               {profesionalId[0].reviews.length > 0 ? ( 
-                <Flex justifyContent='center' alignItems='center' >
+               <Flex justifyContent="center" alignItems="center" flexDirection={{ base: "column", md: "row" }}>
                   <SupplierReview profesionalId={id} key={profesionalId.id} />
                 </Flex>
                 ) : (
                 <Text color='white'>No hay reseñas de los usuarios</Text>
               )}
-            </Box>
+            </>
           </ScaleFade>
         )}
         <Divider my={{ base: 8, md: 16 }} />
