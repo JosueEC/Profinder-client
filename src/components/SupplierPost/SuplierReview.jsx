@@ -40,7 +40,7 @@ export default function SupplierReview() {
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.profesionalId);
   // console.log(professional);
-  const bgColor = useColorModeValue("blackAlpha.800", "gray.800")
+  const bgColor = useColorModeValue("white", "gray.800")
 
   useEffect(() => {
     async function getIdAsync() {
@@ -105,7 +105,7 @@ export default function SupplierReview() {
                   })}
                 </Flex>
                 <Box>
-                  <Text color={"gray.200"}>
+                  <Text color={useColorModeValue('gray.900','gray.100')}>
                     {showFullContent
                       ? review.content
                       : review.content.substring(0, 100)}

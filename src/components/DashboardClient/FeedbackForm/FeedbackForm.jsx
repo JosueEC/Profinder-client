@@ -174,6 +174,7 @@ function FeedbackForm() {
                   onChange={handleContentChange}
                   size="lg"
                   rows={6}
+                  resize="none"
                 />
               </Box>
             </FormControl>
