@@ -108,7 +108,7 @@ const AboutUs = () => {
               CONOCE A NUESTRO EQUIPO
             </Heading>
             <Text color={useColorModeValue('blue.900', 'blue.400')} fontSize={{ base: "lg", md: "xl" }} maxW="600px" mx="auto" mb={8}>
-              Esta página está elaborada por un equipo interdiciplinario, comprometido a realizar desarrollo FullStack de calidad
+              Esta página está elaborada por un equipo interdisciplinario, comprometido a realizar desarrollo FullStack de calidad.
             </Text>
       
             <Grid templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6}>
