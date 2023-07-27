@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   FormControl,
@@ -350,13 +351,14 @@ function EditClient() {
               <Box>
                 <FormLabel>Descripción</FormLabel>
                 <Textarea
-                
+                  resize='none'
                   placeholder="Descripción"
                   value={description}
                   onChange={handleDescriptionChange}
                   bg={bgColor}
                   color={textColor}
                   placeholderTextColor={placeholderTextColor}
+                  maxLength={100}
                 />
               </Box>
             </FormControl>
