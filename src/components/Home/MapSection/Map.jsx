@@ -27,7 +27,7 @@ const Map = () => {
         </Box>
 
         <Box flex="1">
-         {/* <MapSection />  */}
+         { <MapSection />  }
         </Box>
 
         <Box p={4} flex="1" display="flex" flexDirection="row" flexWrap="wrap">
