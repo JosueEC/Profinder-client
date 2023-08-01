@@ -86,13 +86,13 @@ const HomePage = () => {
         {/* <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" /> */}
       </Box>
     
-      {/* <Box 
+      { <Box 
       
       backgroundColor={backgroundColor}>
       <Map />
       
       </Box>
-       */}
+       }
       <Footer />
     </Box>
   );
