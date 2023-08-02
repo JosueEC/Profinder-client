@@ -34,7 +34,7 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         height={{
-          sm: 'auto',
+          base: 'auto',
           md: '70.5em',
           lg: '58em',
         }}
@@ -74,7 +74,7 @@ const HomePage = () => {
         alignItems="center"
         height={{
           sm: 'auto',
-          md: '110em',
+          md: '115em',
           lg: '100em',
         }}
         backgroundColor={backgroundColor}
@@ -92,8 +92,8 @@ const HomePage = () => {
       justifyContent="center"
       alignItems="center"
       height={{
-        sm: 'auto',
-        md: '55.5em',
+        base: 'auto',
+        md: 'auto',
         lg: '45em',
       }}
       
