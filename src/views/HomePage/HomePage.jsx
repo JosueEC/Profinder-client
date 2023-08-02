@@ -94,7 +94,7 @@ const HomePage = () => {
       height={{
         base: 'auto',
         md: 'auto',
-        lg: '45em',
+        lg: '55.5em',
       }}
       
       backgroundColor={backgroundColor}>

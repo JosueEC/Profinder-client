@@ -56,14 +56,15 @@ const MapSection = () => {
 
   return (
     <Box
-  position="relative"
-  height="400px"
-  width={{ base: '400px', md: '400px', xl: '600px' }} // Ajusta los valores según tus necesidades
-  border="1px solid #ddd"
-  borderRadius="8px"
-  boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
-  overflow="hidden"
->
+      position="relative"
+      // height="400px"
+      height={{base:"300px", md: "400px", xl: "500px"}}
+      width={{ base: '335px' ,md: '500px', xl: '800px' }} // Ajusta los valores según tus necesidades
+      border="1px solid #ddd"
+      borderRadius="8px"
+      boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
+      overflow="hidden"
+    >
   {/* El componente MapContainer debe tener un tamaño definido para que el mapa sea visible */}
   <MapContainer center={initialPosition} zoom={2.45} style={{ height: '100%' }} onClick={handleMapClick}>
    
