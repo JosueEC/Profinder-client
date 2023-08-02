@@ -313,7 +313,7 @@ const updateProfesionals = (data, id) => {
     data.id = userSession.id;
   }
 //  const URL = `${API.LOCALHOST}/profesional/profile/${data.id}`
- const URL = `${API.DBONLINE}/profesional/${data.id}`;
+    const URL = `${API.DBONLINE}/profesional/profile/${data.id}`;
 
  return async function(dispatch) {
    try {
