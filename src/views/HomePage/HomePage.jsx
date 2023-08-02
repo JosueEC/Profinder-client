@@ -34,7 +34,7 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         height={{
-          sm: 'auto',
+          base: 'auto',
           md: '70.5em',
           lg: '58em',
         }}
@@ -74,7 +74,7 @@ const HomePage = () => {
         alignItems="center"
         height={{
           sm: 'auto',
-          md: '110em',
+          md: '115em',
           lg: '100em',
         }}
         backgroundColor={backgroundColor}
@@ -83,16 +83,25 @@ const HomePage = () => {
 
         <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" />
         <TopPro />
-        {/* <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" /> */}
+       <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" /> 
       </Box>
     
-      { <Box 
+      <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      height={{
+        base: 'auto',
+        md: 'auto',
+        lg: '55.5em',
+      }}
       
       backgroundColor={backgroundColor}>
       <Map />
       
       </Box>
-       }
+       
       <Footer />
     </Box>
   );

@@ -23,7 +23,7 @@ export default function HowItWorks() {
 
   // Definir el color de fondo según el modo de color
   const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.100';
-  const colorText = useColorModeValue('black', 'white');
+  const colorText = useColorModeValue('blue.800', 'gray.100');
 
   return (
     <Flex

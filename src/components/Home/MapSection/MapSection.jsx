@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import {Box} from '@chakra-ui/react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -54,20 +55,19 @@ const MapSection = () => {
  
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        height: '400px',
-        width: '600px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        overflow: 'hidden',
-      }}
+    <Box
+      position="relative"
+      // height="400px"
+      height={{base:"300px", md: "400px", xl: "500px"}}
+      width={{ base: '335px' ,md: '500px', xl: '800px' }} // Ajusta los valores según tus necesidades
+      border="1px solid #ddd"
+      borderRadius="8px"
+      boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
+      overflow="hidden"
     >
-      {/* El componente MapContainer debe tener un tamaño definido para que el mapa sea visible */}
-      <MapContainer center={initialPosition} zoom={2.45} style={{ height: '100%' }} onClick={handleMapClick}>
-       
+  {/* El componente MapContainer debe tener un tamaño definido para que el mapa sea visible */}
+  <MapContainer center={initialPosition} zoom={2.45} style={{ height: '100%' }} onClick={handleMapClick}>
+   
         {/* Agrega los marcadores y popups para el equipo de programadores */}
         <Marker position={[6.6483, -74.2479]} icon={customFemaleIcon}>
           <Popup autoClose={false}>
@@ -156,8 +156,9 @@ const MapSection = () => {
             </Popup>
           </Marker>
         ))}
-      </MapContainer>
-    </div>
+       {/* Resto de tu código del MapContainer */}
+  </MapContainer>
+</Box>
   );
 };
 
