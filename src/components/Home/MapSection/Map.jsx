@@ -5,14 +5,15 @@ import MapSection from './MapSection';
 
 const Map = () => {
   const { colorMode } = useColorMode();
-  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.500';
+  const backgroundColor = colorMode === 'dark' ? 'gray.800' : 'gray.100';
   const titleColor = colorMode === 'dark' ? 'teal.400' : 'teal.400';
   const descriptionColor = colorMode === 'dark' ? 'blue.400' : 'blue.800';
   const exampleDescriptionColor = colorMode === 'dark' ? 'blue.400' : 'blue.800';
+  const headingColor = colorMode === 'dark' ?   'gray.100' : 'blue.800';
 
   return (
     <Box backgroundColor={backgroundColor} p={4}>
-      <Heading fontSize={{ base: '3xl', sm: '4xl' }} fontWeight="bold" textAlign="center" color="gray.100" mb={4}>
+      <Heading fontSize={{ base: '3xl', sm: '4xl' }} fontWeight="bold" textAlign="center" color={headingColor} mb={4}>
        NUESTROS PROFESIONALES POR EL MUNDO!
       </Heading>
 
