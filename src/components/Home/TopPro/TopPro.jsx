@@ -79,7 +79,7 @@ const TopPro = ({ cardBgColor,  linkColor }) => {
     <Center p={4}  h="100%" w="100%"   backgroundColor={backgroundColor}>
       <Box mx="auto" maxW="5xl" w="100%" >
         <Box textAlign="center">
-          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color={useColorModeValue('gray.900', 'white')} borderColor='blue.900'>
+          <Heading fontSize={{ base: '2xl', sm: '4xl' }} fontWeight="bold" mt={15} color={useColorModeValue('blue.800', 'gray.100')} borderColor='blue.900'>
             PROFESIONALES MEJOR PUNTUADOS
           </Heading>
           <Text mt={4} color={textColor} >
