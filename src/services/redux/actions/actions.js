@@ -305,27 +305,32 @@ const getProfesionals = () => {
 
 //! Actualizar Profesionales
 const updateProfesionals = (data, id) => {
-   console.log(id);
-   console.log(data);  // el id llega bien***** falta la data
-  // const URL = `${API.LOCALHOST}/profesional/${id}`
-  const URL = `${API.DBONLINE}/profesional/${id}`;
+  console.log(id);
+  console.log(data);  // el id llega bien***** falta la data
+  const userSession = JSON.parse(localStorage.getItem("userSession"));
+  //console.log(userSession);
+  if (userSession) {
+    data.id = userSession.id;
+  }
+//  const URL = `${API.LOCALHOST}/profesional/profile/${data.id}`
+ const URL = `${API.DBONLINE}/profesional/${data.id}`;
 
-  return async function(dispatch) {
-    try {
-      const response = await axios.put(URL, data);
-      if (response && response.data) {
-        // console.log(response.data);
-        dispatch({
-          type: UPDATE_PROFESIONAL,
-          payload: response.data,
-        });
-      } else {
-        console.log("La respuesta no contiene datos:", response);
-      }
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
-  };
+ return async function(dispatch) {
+   try {
+     const response = await axios.put(URL, data);
+     if (response && response.data) {
+       // console.log(response.data);
+       dispatch({
+         type: UPDATE_PROFESIONAL,
+         payload: response.data,
+       });
+     } else {
+       console.log("La respuesta no contiene datos:", response);
+     }
+   } catch (error) {
+     console.log(error.response.data.error);
+   }
+ };
 };
 
 // Action para obtener todos los clientes
