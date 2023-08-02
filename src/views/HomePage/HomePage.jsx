@@ -86,13 +86,22 @@ const HomePage = () => {
        <Divider height="3px" borderColor={dividerColor} width="80%" mx="auto" /> 
       </Box>
     
-      { <Box 
+      <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      height={{
+        sm: 'auto',
+        md: '55.5em',
+        lg: '45em',
+      }}
       
       backgroundColor={backgroundColor}>
       <Map />
       
       </Box>
-       }
+       
       <Footer />
     </Box>
   );

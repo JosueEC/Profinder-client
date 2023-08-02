@@ -58,7 +58,7 @@ const MapSection = () => {
     <Box
   position="relative"
   height="400px"
-  width={{ base: '400px', md: '600px', xl: '600px' }} // Ajusta los valores según tus necesidades
+  width={{ base: '400px', md: '400px', xl: '600px' }} // Ajusta los valores según tus necesidades
   border="1px solid #ddd"
   borderRadius="8px"
   boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"

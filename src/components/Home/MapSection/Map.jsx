@@ -13,7 +13,7 @@ const Map = () => {
 
   return (
     <Box backgroundColor={backgroundColor} p={4}>
-      <Heading fontSize={{ base: '3xl', sm: '4xl' }} fontWeight="bold" textAlign="center" color={headingColor} mb={4}>
+      <Heading fontSize={{ base: '3xl', sm: '4xl' }} fontWeight="bold" textAlign="center" color={headingColor} mb={50}>
        NUESTROS PROFESIONALES POR EL MUNDO!
       </Heading>
 
